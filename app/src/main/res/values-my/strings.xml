@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Nox Board</string>
+    <string name="settings_title">Nox Board ဆက်တင်များ</string>
+    <string name="appearance_section">အပြင်အဆင်</string>
+    <string name="keyboard_themes">ကီးဘုတ် သီးမ်များ (Themes)</string>
+    <string name="layout_sizing_section">လက်ကွက်နှင့် အရွယ်အစား</string>
+    <string name="adjust_size">ကီးဘုတ်အရွယ်အစား ချိန်ညှိခြင်း</string>
+    <string name="rearrange_keys">ခလုတ်နေရာများ ပြန်လည်ပြင်ဆင်ခြင်း</string>
+    <string name="feedback_spells_section">တုန်ခါမှုနှင့် အသံစနစ်</string>
+    <string name="key_preview">ခလုတ် Preview ပြသခြင်း</string>
+    <string name="key_preview_desc">ခလုတ်နှိပ်ပါက အပေါ်တွင် Popup ပြပေးမည်</string>
+    <string name="vibrate">ခလုတ်နှိပ်လျှင် တုန်ခါစေရန်</string>
+    <string name="sound">ခလုတ်နှိပ်လျှင် အသံထွက်စေရန်</string>
+    <string name="sound_desc">အသံအမျိုးအစားနှင့် အတိုးအကျယ် ချိန်ညှိရန် နှိပ်ပါ</string>
+    <string name="app_language">ဆော့ဖ်ဝဲ ဘာသာစကား</string>
+    <string name="app_language_desc">ဆက်တင်အတွက် အသုံးပြုမည့် ဘာသာစကား ရွေးချယ်ရန်</string>
+    <string name="select_language">ဘာသာစကား ရွေးချယ်ရန်</string>
+    <string name="cancel">မလုပ်တော့ပါ</string>
+    <string name="menu_contact">ဆက်သွယ်ရန်</string>
+    <string name="menu_policy">ကိုယ်ရေးအချက်အလက် မူဝါဒ</string>
+    <string name="menu_terms">စည်းကမ်းချက်များ</string>
+    <string name="menu_about">ဆော့ဖ်ဝဲအကြောင်း</string>
+    <string name="menu_version">ဗားရှင်း ၁.၀.၀</string>
+
+    <!-- Settings Screen: Subtitles & Sections -->
+    <string name="theme_desc">အရောင်၊ ဘောင်နှင့် နောက်ခံပုံများ ပြင်ဆင်ရန်</string>
+    <string name="adjust_size_desc">အမြင့်နှင့် အကျယ်</string>
+    <string name="rearrange_keys_desc">ခလုတ်များ နေရာချထားမှု</string>
+    <string name="controls_feedback">ထိန်းချုပ်မှုနှင့် တုံ့ပြန်မှုများ</string>
+    <string name="num_row">ဂဏန်းတန်း သီးသန့်ထားရန်</string>
+    <string name="num_row_desc">စာလုံးများအပေါ်တွင် ဂဏန်းများ ပြသရန်</string>
+    <string name="key_preview_desc_short">ခလုတ်နှိပ်လျှင် အပေါ်သို့ ကြွတက်လာစေရန်</string>
+    <string name="typing_style">စာရိုက်နည်းစနစ် (Typing Style)</string>
+    <string name="typing_style_desc">Unicode, Visual Smart, Zawgyi</string>
+    <string name="double_tap_shortcuts">နှစ်ခါနှိပ် စနစ်များ (Double-Tap)</string>
+    <string name="double_tap_shortcuts_desc">ခလုတ်တစ်ခုချင်းစီအတွက် အဖွင့်/အပိတ် လုပ်ရန်</string>
+    <string name="spacebar_cursor">Spacebar ဖြင့် ကာဆာရွှေ့ရန်</string>
+    <string name="spacebar_cursor_desc">Spacebar ကို ပွတ်ဆွဲပြီး ကာဆာရွှေ့ရန်</string>
+    <string name="sound_desc_short">လက်နှိပ်စက်၊ ရေစက်ကျသံ နှင့် အခြားအသံများ</string>
+    <string name="text_correction_suggestions">စာလုံးအမှန်ပြင်ခြင်းနှင့် အကြံပြုခြင်း</string>
+    <string name="show_suggestion_strip">ခန့်မှန်းစာလုံးများ ပြသရန်</string>
+    <string name="show_suggestion_strip_desc">စာရိုက်နေစဉ် ခန့်မှန်းစာလုံးများ ပြပေးမည်</string>
+    <string name="incognito_mode">လုံခြုံရေး မုဒ် (Incognito Mode)</string>
+    <string name="incognito_mode_desc">စကားလုံးအသစ်များ မှတ်သားခြင်းကို ရပ်တန့်မည်</string>
+    <string name="auto_correction">အလိုအလျောက် အမှန်ပြင်ရန်</string>
+    <string name="auto_correction_desc">စာရိုက်နေစဉ် အလိုအလျောက် အမှန်ပြင်ပေးမည်</string>
+    <string name="auto_capitalization">အင်္ဂလိပ်စာလုံးကြီး အလိုအလျောက်ပြောင်းရန်</string>
+    <string name="auto_capitalization_desc">စာကြောင်းအစတွင် အကြီးစာလုံး ပြောင်းပေးမည်</string>
+    <string name="auto_space">ပုဒ်ဖြတ်ပြီးနောက် Space အလိုလိုခြားရန်</string>
+    <string name="auto_space_desc">ပုဒ်ဖြတ်ပုဒ်ရပ်များနောက်တွင် Space ခြားပေးမည်</string>
+    <string name="double_space_period">Space နှစ်ခါနှိပ်လျှင် ပုဒ်မချရန်</string>
+    <string name="double_space_period_desc">Spacebar နှစ်ခါနှိပ်ပါက ပုဒ်မ အလိုလိုချပေးမည်</string>
+    <string name="block_offensive">ဆဲရေးတိုင်းထွာမှုများ ပိတ်ပင်ရန်</string>
+    <string name="block_offensive_desc">ရိုင်းစိုင်းသော စကားလုံးများအား အကြံပြုမည်မဟုတ်ပါ</string>
+    <string name="clear_dict">မှတ်သားထားသမျှ အားလုံးဖျက်ရန်</string>
+    <string name="clear_dict_desc">သင်ရိုက်ဖူးသမျှ စကားလုံးများအားလုံး ဖျက်ပစ်မည်</string>
+
+    <!-- Sound Settings Screen -->
+    <string name="sound_settings_title">အသံ ဆက်တင်များ</string>
+    <string name="keypress_sound_effects">ခလုတ်နှိပ်သံများ</string>
+    <string name="sound_volume_title">အသံ အတိုးအကျယ်</string>
+    <string name="sound_packs_theme">အသံ အမျိုးအစားများ</string>
+
+    <string name="sound_default_click">မူလအသံ (Default)</string>
+    <string name="sound_mechanical">ကီးဘုတ်စက်သံ (Mechanical)</string>
+    <string name="sound_typewriter">လက်နှိပ်စက်သံ (Typewriter)</string>
+    <string name="sound_wooden">သစ်သားခေါက်သံ (Wooden Tap)</string>
+    <string name="sound_bubble">ရေစက်ကျသံ (Water Drop)</string>
+    <string name="sound_ios">iOS အသံ (iPhone Click)</string>
+    <string name="sound_soft_thud">ခပ်အုပ်အုပ်အသံ (Soft Thud)</string>
+    <string name="sound_scifi">အီလက်ထရောနစ်သံ (Sci-Fi Beep)</string>
+
+    <!-- Spacebar Control Screen -->
+    <string name="spacebar_control_title">Spacebar ကာဆာ ထိန်းချုပ်မှု</string>
+    <string name="reset_btn">မူလအတိုင်း</string>
+    <string name="spacebar_preview_text">ဤနေရာတွင် Spacebar ကို ဖိဆွဲပြီး ကာဆာရွှေ့ကြည့်ပါ</string>
+    <string name="spacebar_cursor_control_title">Spacebar ကာဆာ ထိန်းချုပ်မှု</string>
+    <string name="spacebar_cursor_control_desc">ကာဆာရွှေ့ရန် Spacebar ကို ဘယ်ညာပွတ်ဆွဲပါ</string>
+    <string name="movement_speed">ရွေ့လျားမည့် အမြန်နှုန်း</string>
+    <string name="speed_slow">နှေး</string>
+    <string name="speed_fast">မြန်</string>
+    <string name="press_delay_title">ဖိထားရမည့် အချိန် (Press Delay)</string>
+    <string name="press_delay_desc">ဘယ်လောက်ဖိထားပြီးမှ ဆွဲလို့ရမည်ကို သတ်မှတ်ရန်</string>
+
+    <!-- Double Tap Shortcuts Screen -->
+    <string name="double_tap_shortcuts_instruction">စာလုံးတစ်ခုကို နှစ်ခါဆက်တိုက်နှိပ်လျှင် အခြားစာလုံးတစ်ခုသို့ အလိုအလျောက် ပြောင်းလဲပေးမည့် စနစ်များကို အဖွင့်/အပိတ် လုပ်နိုင်ပါသည်။</string>
+
+    <!-- Typing Style Dialog -->
+    <string name="typing_style_prompt">ဥပမာ - \'ဖြေ\' ကို ဘယ်လိုရိုက်လေ့ရှိလဲ?</string>
+    <string name="typing_style_unicode">စံကိုက် ယူနီကုဒ် (Standard Unicode)</string>
+    <string name="typing_style_visual">အမြင်အတိုင်းရိုက် စနစ် (Visual Smart)</string>
+    <string name="typing_style_zawgyi">ဇော်ဂျီ စနစ် (Zawgyi Style)</string>
+
+    <!-- Clear Dictionary Dialog -->
+    <string name="clear_dict_dialog_title">အဘိဓာန် ရှင်းလင်းရန်</string>
+    <string name="clear_dict_dialog_msg">သင်ရိုက်ဖူးသမျှ မှတ်သားထားသော စကားလုံးများအားလုံးကို ဖျက်ပစ်မည်မှာ သေချာပါသလား? ဖျက်ပြီးပါက ပြန်ယူ၍မရနိုင်ပါ။</string>
+    <string name="delete_btn">ဖျက်မည်</string>
+    <string name="dict_cleared_toast">အဘိဓာန် ရှင်းလင်းပြီးပါပြီ</string>
+
+    <!-- Keyboard Resize Screen -->
+    <string name="adjust_size_title">အရွယ်အစား ချိန်ညှိရန်</string>
+    <string name="reset">မူလအတိုင်း</string>
+    <string name="save">သိမ်းမည်</string>
+    <string name="width_and_alignment">အကျယ်နှင့် နေရာချထားမှု</string>
+    <string name="width_label">အကျယ်: </string>
+    <string name="align_left">ဘယ်</string>
+    <string name="align_center">အလယ်</string>
+    <string name="align_right">ညာ</string>
+    <string name="length_and_elevation">အမြင့်နှင့် အောက်ခြေအကွာအဝေး</string>
+    <string name="height_label">အမြင့်: </string>
+    <string name="float_label">အောက်ခြေ: </string>
+    <string name="key_styles_and_gaps">ခလုတ်ဒီဇိုင်းနှင့် အကွာအဝေး</string>
+    <string name="corners_label">ထောင့်ဝိုင်း: </string>
+    <string name="key_gap_label">ခလုတ်ကြား: </string>
+    <string name="font_size">စာလုံး အရွယ်အစား</string>
+    <string name="row_gaps_spacing">စာကြောင်းများကြား အကွာအဝေး</string>
+    <string name="row_all">အားလုံး</string>
+    <string name="row_num">ဂဏန်းတန်း</string>
+    <string name="row_1">တန်း ၁</string>
+    <string name="row_2">တန်း ၂</string>
+    <string name="row_3">တန်း ၃</string>
+    <string name="row_4">တန်း ၄</string>
+    <string name="gap_label">အကွာအဝေး: </string>
+    <string name="adjust_width_overlay">အကျယ် ချိန်ညှိရန်</string>
+    <string name="adjust_height_overlay">အမြင့် ချိန်ညှိရန်</string>
+    <string name="adjust_float_overlay">အောက်ခြေ ချိန်ညှိရန်</string>
+
+    <!-- Keyboard Rearrange Screen -->
+    <string name="rearrange_keys_title">ခလုတ်များ ပြင်ဆင်ရန်</string>
+    <string name="reset_to_default_toast">မူလအတိုင်း ပြန်ထားပါသည် (သိမ်းမည်ကို နှိပ်ပါ)</string>
+    <string name="layout_saved_toast">လက်ကွက်ကို သိမ်းဆည်းပြီးပါပြီ!</string>
+    <string name="tab_myanmar">မြန်မာ</string>
+    <string name="tab_english">English</string>
+    <string name="tab_symbols">သင်္ကေတများ</string>
+    <string name="enter_swap_mode">ခလုတ်နေရာ လဲလှယ်ရန်</string>
+    <string name="select_2_keys_to_swap">လဲလှယ်မည့် ခလုတ် (၂) ခု ရွေးချယ်ပါ</string>
+    <string name="confirm_swap">နေရာလဲမည်</string>
+    <string name="edit_key_title">ခလုတ်ပြင်ရန် - %s</string>
+    <string name="select_a_key_to_edit">ပြင်ဆင်လိုသော ခလုတ်ကို ရွေးပါ</string>
+    <string name="normal_text">ပုံမှန် (Normal)</string>
+    <string name="shift_text">အထက် (Shift)</string>
+    <string name="key_space_weight">ခလုတ်အကျယ် (Weight): %.1ff</string>
+    <string name="inner_width_scale_x">အတွင်းအကျယ် (Scale X): %d%%</string>
+    <string name="inner_height_scale_y">အတွင်းအမြင့် (Scale Y): %d%%</string>
+    <string name="align_x">ဘယ်/ညာ ရွှေ့ရန် (Align X): %d%%</string>
+    <string name="align_y">အထက်/အောက် ရွှေ့ရန် (Align Y): %d%%</string>
+    <string name="move_key_position">ခလုတ်ကို ရွှေ့ရန်</string>
+    <string name="del_key">ခလုတ်ဖျက်ရန်</string>
+    <string name="del_row">တစ်တန်းလုံးဖျက်ရန်</string>
+    <string name="new_key">ခလုတ်အသစ်</string>
+    <string name="new_row">စာကြောင်းအသစ်</string>
+    <string name="select_char_action">စာလုံး/လုပ်ဆောင်ချက် ရွေးချယ်ရန်</string>
+    <string name="char_myanmar">မြန်မာ</string>
+    <string name="char_english">English</string>
+    <string name="char_numbers">ဂဏန်းများ</string>
+    <string name="char_action_keys">အထူးခလုတ်များ</string>
+    <string name="close">ပိတ်မည်</string>
+
+    <!-- About Screen -->
+    <string name="about_app_info">ဆော့ဖ်ဝဲအကြောင်း</string>
+    <string name="about_version">ဗားရှင်း %s (Release)</string>
+    <string name="about_privacy_security">လုံခြုံရေးနှင့် ပုဂ္ဂိုလ်ရေးဆိုင်ရာ</string>
+    <string name="about_offline_keyboard">100% အင်တာနက်မလိုသော ကီးဘုတ်</string>
+    <string name="about_offline_desc">အင်တာနက်အသုံးပြုခွင့် တောင်းခံထားခြင်းမရှိပါ</string>
+    <string name="about_zero_data">အချက်အလက်များ ရယူခြင်းမရှိပါ</string>
+    <string name="about_zero_data_desc">သင်ရိုက်သမျှစာများ ဖုန်းထဲတွင်သာ လုံခြုံစွာရှိနေမည်</string>
+    <string name="about_acknowledgement">အသိအမှတ်ပြုမှုများ</string>
+    <string name="about_developed_by">Noven မှ ဖန်တီးသည်</string>
+    <string name="about_developed_desc">ခေတ်မီနည်းပညာများဖြင့် ဖန်တီးထားသော စိတ်ကြိုက်ပြင်ဆင်နိုင်သည့် မြန်မာကီးဘုတ်</string>
+    <string name="about_support_troubleshooting">အကူအညီနှင့် ပြဿနာဖြေရှင်းရန်</string>
+    <string name="about_contact_support">ဆက်သွယ်ရန်</string>
+    <string name="about_contact_desc">အကူအညီလိုလျှင် သို့မဟုတ် အကြံပြုလိုလျှင် အီးမေးလ်ပို့ပါ</string>
+    <string name="about_system_logs">စနစ်အမှားနှင့် မှတ်တမ်းများ (Logs)</string>
+    <string name="about_system_logs_desc">ပြဿနာများကို ဖြေရှင်းရန် Error Log များ ကြည့်ရှုမည်</string>
+    <string name="about_legal">ဥပဒေရေးရာ</string>
+    <string name="about_terms">အသုံးပြုမှု စည်းကမ်းချက်များ</string>
+    <string name="about_terms_desc">လိုက်နာရမည့် စည်းမျဉ်းများနှင့် သဘောတူညီချက်များ</string>
+    <string name="about_open_source">Open Source လိုင်စင်များ</string>
+    <string name="about_open_source_desc">အသုံးပြုထားသော ပြင်ပဆော့ဖ်ဝဲနှင့် လိုင်စင်များ</string>
+
+    <!-- Keyboard Theme Screen -->
+    <string name="theme_screen_title">ကီးဘုတ် သီးမ်များ (Themes)</string>
+    <string name="my_themes">ကျွန်ုပ်၏ သီးမ်များ</string>
+    <string name="create_new_theme">အသစ်ဖန်တီးရန်</string>
+    <string name="default_theme">မူလ သီးမ် (Default)</string>
+    <string name="preset_themes">အသင့်ပါဝင်သော သီးမ်များ</string>
+    <string name="delete_theme_title">သီးမ်ကို ဖျက်ရန်</string>
+    <string name="delete_theme_msg">ဤသီးမ်ကို ဖျက်ပစ်မည်မှာ သေချာပါသလား?</string>
+    <string name="share_theme_failed">ဝေမျှရန် ပြင်ဆင်ခြင်း မအောင်မြင်ပါ</string>
+    <string name="share_theme_via">သီးမ်ကို ဝေမျှရန်</string>
+    <string name="load_preset_failed">သီးမ်အား ယူဆောင်ခြင်း မအောင်မြင်ပါ</string>
+    <string name="import_success">သီးမ်ကို အောင်မြင်စွာ ထည့်သွင်းပြီးပါပြီ!</string>
+    <string name="import_failed">သီးမ် ထည့်သွင်းခြင်း မအောင်မြင်ပါ။</string>
+
+    <!-- Custom Theme Screen -->
+    <string name="create_theme_title">သီးမ် ဖန်တီးရန်</string>
+    <string name="tab_background">နောက်ခံ</string>
+    <string name="tab_keys">ခလုတ်</string>
+    <string name="tab_text">စာသား</string>
+    <string name="tab_highlights">အထူးပြု</string>
+    <string name="tab_keypad">ဂဏန်းကွက်</string>
+    <string name="tab_effects">အထူးပြုလုပ်ချက်</string>
+    <string name="bg_color">နောက်ခံ အရောင်</string>
+    <string name="bg_wallpaper">နောက်ခံ ပုံ (Wallpaper)</string>
+    <string name="pick_image">ပုံရွေးရန်</string>
+    <string name="remove">ဖယ်ရှားမည်</string>
+    <string name="image_scale">ပုံအရွယ်အစား (Scale)</string>
+    <string name="offset_x">ဘယ်/ညာ ရွှေ့ရန် (Offset X)</string>
+    <string name="offset_y">အထက်/အောက် ရွှေ့ရန် (Offset Y)</string>
+    <string name="customize_specific_keys">သီးသန့်ခလုတ်များကို ပြင်ဆင်ရန်</string>
+    <string name="tap_keys_to_change_color">အရောင်ပြောင်းလိုသော ခလုတ်များကို အပေါ်တွင် နှိပ်ပါ</string>
+    <string name="editing_keys">ခလုတ် %d ခုကို ပြင်ဆင်နေသည်</string>
+    <string name="clear">ဖျက်မည်</string>
+    <string name="background_text">နောက်ခံ</string>
+    <string name="text_icon">စာသား / အိုင်ကွန်</string>
+    <string name="tap_any_key_preview">အပေါ်ရှိ ကီးဘုတ်မှ ပြင်ဆင်လိုသော ခလုတ်များကို နှိပ်ပါ</string>
+    <string name="normal_keys_color">ပုံမှန်ခလုတ်များ၏ အရောင်</string>
+    <string name="text_icon_color">စာသားနှင့် အိုင်ကွန် အရောင်</string>
+    <string name="highlights_bg_color">အထူးခလုတ်များ၏ နောက်ခံအရောင်</string>
+    <string name="highlights_text_color">အထူးခလုတ်များ၏ စာသား/အိုင်ကွန် အရောင်</string>
+    <string name="tint_emoji_vault">Emoji နှင့် Vault အိုင်ကွန်များကို အရောင်သွင်းရန်</string>
+    <string name="tint_emoji_vault_desc">အထူးခလုတ်အရောင်ကို Emoji နှင့် Vault တွင်ပါ အသုံးပြုမည်</string>
+    <string name="keypad_bg">ဂဏန်းကွက် နောက်ခံအရောင်</string>
+    <string name="keypad_normal_keys">ဂဏန်းကွက် ပုံမှန်ခလုတ်များ</string>
+    <string name="keypad_text_color">ဂဏန်းကွက် စာသားအရောင်</string>
+    <string name="keypad_special_keys">ဂဏန်းကွက် အထူးခလုတ်များ</string>
+    <string name="keypad_special_text">ဂဏန်းကွက် အထူးစာသားအရောင်</string>
+    <string name="texture_effect">Texture Effect (အစက်အပြောက်များ)</string>
+    <string name="texture_effect_desc">ကီးဘုတ်နောက်ခံနှင့် ခလုတ်များတွင် အစက်အပြောက်လေးများ ထည့်မည်</string>
+    <string name="customize_specific_effects">သီးသန့် Effect များကို ပြင်ဆင်ရန်</string>
+    <string name="tap_keys_to_change_effects">Effect ပြောင်းလိုသော ခလုတ်များကို အပေါ်တွင် နှိပ်ပါ</string>
+    <string name="key_press_color">ခလုတ်နှိပ်အရောင် (Active)</string>
+    <string name="popup_bg">Popup နောက်ခံအရောင်</string>
+    <string name="popup_text_color">Popup စာသားအရောင်</string>
+    <string name="global_key_press_color">အထွေထွေ ခလုတ်နှိပ်အရောင်</string>
+    <string name="global_popup_bg">အထွေထွေ Popup နောက်ခံ</string>
+    <string name="global_popup_text">အထွေထွေ Popup စာသား</string>
+    <string name="gradient_mode">Gradient Mode (အရောင်စပ်ရန်)</string>
+    <string name="start_color">အစ အရောင်</string>
+    <string name="end_color">အဆုံး အရောင်</string>
+    <string name="opacity_slider">Opacity (အကြည် / အနောက်)</string>
+    <string name="hue_slider">Hue (အရောင်ရွေးရန်)</string>
+    <string name="saturation_slider">Saturation (အရောင် ရင့် / နု)</string>
+    <string name="brightness_slider">Brightness (အလင်း / အမှောင်)</string>
+    <string name="custom_color_title">Custom %s</string>
+    <string name="done">ပြီးပြီ</string>
+
+    <string name="share_app">App ကို မျှဝေရန်</string>
+    <string name="share_app_desc">စိတ်ကြိုက်ပြင်ဆင်နိုင်သော မြန်မာကီးဘုတ် Nox Board ကို စမ်းသုံးကြည့်လိုက်ပါ! https://play.google.com/store/apps/details?id=%1$s</string>
+    <string name="share_app_via">Nox Board ကို မျှဝေရန်</string>
+    <string name="sound_mech_clicky">စက်ခလုတ်: Clicky (MX Blue)</string>
+    <string name="sound_mech_thocky">စက်ခလုတ်: Thocky (Ink Black)</string>
+    <string name="sound_mech_linear">စက်ခလုတ်: Linear (MX Red)</string>
+    <string name="sound_mech_tactile">စက်ခလုတ်: Tactile (MX Brown)</string>
+    <string name="sound_mech_silent">စက်ခလုတ်: အသံတိတ် (Silent Red)</string>
+    <string name="about_privacy_title">ကိုယ်ရေးကိုယ်တာ လုံခြုံမှုအတွက် ရာနှုန်းပြည့် အာမခံပါသည်</string>
+    <string name="about_privacy_desc">သင်ရိုက်လိုက်သမျှစာတွေက သင့်ဖုန်းထဲမှာပဲ ရှိနေမှာပါ။ Nox Board ဟာ အင်တာနက်လုံးဝမလိုဘဲ အလုပ်လုပ်ပါတယ်။ သင့်ရဲ့ ကိုယ်ရေးကိုယ်တာ အချက်အလက်တွေကို လုံးဝမယူတဲ့အပြင် အင်တာနက်အသုံးပြုခွင့် (Internet Permission) လည်း လုံးဝမတောင်းထားပါဘူး။</string>
+    <string name="setup_title">Nox Board</string>
+    <string name="setup_subtitle">လုံခြုံ၊ ပွင့်လင်းပြီး စိတ်ကြိုက်ပြင်ဆင်နိုင်သော ကီးဘုတ်</string>
+    <string name="setup_privacy_title">ရာနှုန်းပြည့် လုံခြုံမှု</string>
+    <string name="setup_privacy_desc">၁၀၀% အော့ဖ်လိုင်း (အချက်အလက်များ လုံးဝမယူပါ)</string>
+    <string name="setup_step1_done">၁။ Nox Board အား ဖွင့်ပြီးပါပြီ</string>
+    <string name="setup_step1_action">၁။ Nox Board ကို Settings တွင် ဖွင့်ရန်</string>
+    <string name="setup_step2_action">၂။ Nox Board ကို ရွေးချယ်ရန်</string>
+    <string name="setup_open_source">Open Source</string>
+</resources>

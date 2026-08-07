@@ -1,0 +1,266 @@
+<resources>
+    <string name="app_name">Nox Board</string>
+    <string name="settings_title">Nox Board Settings</string>
+    <string name="appearance_section">Appearance</string>
+    <string name="keyboard_themes">Keyboard Themes</string>
+    <string name="layout_sizing_section">Layout &amp; Sizing</string>
+    <string name="adjust_size">Adjust Keyboard Size &amp; Layout</string>
+    <string name="rearrange_keys">Rearrange Key Positions</string>
+    <string name="feedback_spells_section">Feedback &amp; Spells</string>
+    <string name="key_preview">Key Preview (Hover)</string>
+    <string name="key_preview_desc">Show popup above pressed key</string>
+    <string name="vibrate">Vibrate on keypress</string>
+    <string name="sound">Sound on keypress</string>
+    <string name="sound_desc">Tap to customize sounds &amp; volume</string>
+    <string name="app_language">App Language</string>
+    <string name="app_language_desc">Select language for the settings app</string>
+    <string name="select_language">Select Language</string>
+    <string name="cancel">Cancel</string>
+    <string name="menu_contact">Contact Us</string>
+    <string name="menu_policy">Privacy Policy</string>
+    <string name="menu_terms">Terms of Service</string>
+    <string name="menu_about">About App</string>
+    <string name="menu_version">Version 1.0.0</string>
+
+    <!-- Settings Screen: Subtitles & Sections -->
+    <string name="theme_desc">Customize colors, borders &amp; wallpapers</string>
+    <string name="adjust_size_desc">Height &amp; Width</string>
+    <string name="rearrange_keys_desc">Key placements</string>
+    <string name="controls_feedback">Controls &amp; Feedback</string>
+    <string name="num_row">Dedicated Number Row</string>
+    <string name="num_row_desc">Show numbers above letters</string>
+    <string name="key_preview_desc_short">Pop-up when pressed</string>
+    <string name="typing_style">Typing Style</string>
+    <string name="typing_style_desc">Unicode, Visual Smart, Zawgyi</string>
+    <string name="double_tap_shortcuts">Double-Tap Shortcuts</string>
+    <string name="double_tap_shortcuts_desc">Enable/disable for individual keys</string>
+    <string name="spacebar_cursor">Spacebar Cursor Control</string>
+    <string name="spacebar_cursor_desc">Swipe spacebar to move cursor</string>
+    <string name="sound_desc_short">Mechanical, bubble &amp; iOS themes</string>
+    <string name="text_correction_suggestions">Text Correction &amp; Suggestions</string>
+    <string name="show_suggestion_strip">Show Suggestion Strip</string>
+    <string name="show_suggestion_strip_desc">Display predicted words while typing</string>
+    <string name="incognito_mode">Incognito Mode</string>
+    <string name="incognito_mode_desc">Stop learning and saving new words</string>
+    <string name="auto_correction">Auto-Correction</string>
+    <string name="auto_correction_desc">Correct words while typing</string>
+    <string name="auto_capitalization">Auto-Capitalization</string>
+    <string name="auto_capitalization_desc">Capitalize the first word of each sentence</string>
+    <string name="auto_space">Auto-Space after Punctuation</string>
+    <string name="auto_space_desc">Automatically insert space after punctuation</string>
+    <string name="double_space_period">Double-space period</string>
+    <string name="double_space_period_desc">Double tap spacebar to insert a period</string>
+    <string name="block_offensive">Block Offensive Words</string>
+    <string name="block_offensive_desc">Do not suggest potentially offensive words</string>
+    <string name="clear_dict">Clear Personal Dictionary</string>
+    <string name="clear_dict_desc">Delete all learned words and data</string>
+
+    <!-- Sound Settings Screen -->
+    <string name="sound_settings_title">Sound Settings</string>
+    <string name="keypress_sound_effects">Keypress Sound Effects</string>
+    <string name="sound_volume_title">Sound Volume</string>
+    <string name="sound_packs_theme">Sound Packs Theme</string>
+
+    <string name="sound_default_click">Default Click</string>
+    <string name="sound_mechanical">Mechanical Switch</string>
+    <string name="sound_typewriter">Classic Typewriter</string>
+    <string name="sound_wooden">Wooden Tap</string>
+    <string name="sound_bubble">Water Drop</string>
+    <string name="sound_ios">iPhone Click</string>
+    <string name="sound_soft_thud">Soft Thud</string>
+    <string name="sound_scifi">Sci-Fi Beep</string>
+
+    <!-- Spacebar Control Screen -->
+    <string name="spacebar_control_title">Spacebar Cursor</string>
+    <string name="reset_btn">Reset</string>
+    <string name="spacebar_preview_text">Press and hold spacebar here to move cursor</string>
+    <string name="spacebar_cursor_control_title">Spacebar Cursor Control</string>
+    <string name="spacebar_cursor_control_desc">Swipe spacebar to move cursor</string>
+    <string name="movement_speed">Movement Speed</string>
+    <string name="speed_slow">Slow</string>
+    <string name="speed_fast">Fast</string>
+    <string name="press_delay_title">Press Delay (Hold Time)</string>
+    <string name="press_delay_desc">How long to press before sliding</string>
+
+    <!-- Double Tap Shortcuts Screen -->
+    <string name="double_tap_shortcuts_instruction">Enable or disable automatic character conversion when a key is double-tapped.</string>
+
+    <!-- Typing Style Dialog -->
+    <string name="typing_style_prompt">For example, how do you usually type \'ဖြေ\'?</string>
+    <string name="typing_style_unicode">Standard Unicode</string>
+    <string name="typing_style_visual">Visual Smart (Hybrid)</string>
+    <string name="typing_style_zawgyi">Zawgyi Style</string>
+
+    <!-- Clear Dictionary Dialog -->
+    <string name="clear_dict_dialog_title">Clear Dictionary</string>
+    <string name="clear_dict_dialog_msg">Are you sure you want to delete all learned words? This action cannot be undone.</string>
+    <string name="delete_btn">Delete</string>
+    <string name="dict_cleared_toast">Dictionary Cleared</string>
+
+    <!-- Keyboard Resize Screen -->
+    <string name="adjust_size_title">Adjust Size</string>
+    <string name="reset">Reset</string>
+    <string name="save">Save</string>
+    <string name="width_and_alignment">Width &amp; Alignment</string>
+    <string name="width_label">Width: </string>
+    <string name="align_left">Left</string>
+    <string name="align_center">Center</string>
+    <string name="align_right">Right</string>
+    <string name="length_and_elevation">Length &amp; Elevation</string>
+    <string name="height_label">Height: </string>
+    <string name="float_label">Float: </string>
+    <string name="key_styles_and_gaps">Key Styles &amp; Gaps</string>
+    <string name="corners_label">Corners: </string>
+    <string name="key_gap_label">Key Gap: </string>
+    <string name="font_size">Font Size</string>
+    <string name="row_gaps_spacing">Row Gaps (Spacing)</string>
+    <string name="row_all">All</string>
+    <string name="row_num">Num Row</string>
+    <string name="row_1">Row 1</string>
+    <string name="row_2">Row 2</string>
+    <string name="row_3">Row 3</string>
+    <string name="row_4">Row 4</string>
+    <string name="gap_label">Gap: </string>
+    <string name="adjust_width_overlay">Adjust Width</string>
+    <string name="adjust_height_overlay">Adjust Length/Height</string>
+    <string name="adjust_float_overlay">Adjust Floating Height</string>
+
+    <!-- Keyboard Rearrange Screen -->
+    <string name="rearrange_keys_title">Rearrange Keys</string>
+    <string name="reset_to_default_toast">Reset to Default (Press Save to apply)</string>
+    <string name="layout_saved_toast">Layout Saved!</string>
+    <string name="tab_myanmar">Myanmar</string>
+    <string name="tab_english">English</string>
+    <string name="tab_symbols">Symbols</string>
+    <string name="enter_swap_mode">Enter Swap Mode</string>
+    <string name="select_2_keys_to_swap">Select 2 keys to swap</string>
+    <string name="confirm_swap">Confirm Swap</string>
+    <string name="edit_key_title">Edit Key: %s</string>
+    <string name="select_a_key_to_edit">Select a key to edit</string>
+    <string name="normal_text">Normal</string>
+    <string name="shift_text">Shift</string>
+    <string name="key_space_weight">Key Space (Weight): %.1ff</string>
+    <string name="inner_width_scale_x">Inner Width (Scale X): %d%%</string>
+    <string name="inner_height_scale_y">Inner Height (Scale Y): %d%%</string>
+    <string name="align_x">Align X (Left ↔ Right): %d%%</string>
+    <string name="align_y">Align Y (Top ↕ Bottom): %d%%</string>
+    <string name="move_key_position">Move Key Position</string>
+    <string name="del_key">Del Key</string>
+    <string name="del_row">Del Row</string>
+    <string name="new_key">New Key</string>
+    <string name="new_row">New Row</string>
+    <string name="select_char_action">Select Character/Action</string>
+    <string name="char_myanmar">Myanmar</string>
+    <string name="char_english">English</string>
+    <string name="char_numbers">Numbers</string>
+    <string name="char_action_keys">Action Keys</string>
+    <string name="close">Close</string>
+
+    <!-- About Screen -->
+    <string name="about_app_info">App Info</string>
+    <string name="about_version">Version %s (Release)</string>
+    <string name="about_privacy_security">PRIVACY &amp; SECURITY</string>
+    <string name="about_offline_keyboard">100% Offline Keyboard</string>
+    <string name="about_offline_desc">No internet permission required</string>
+    <string name="about_zero_data">Zero Data Collection</string>
+    <string name="about_zero_data_desc">Your keystrokes stay safely on your device</string>
+    <string name="about_acknowledgement">ACKNOWLEDGEMENT</string>
+    <string name="about_developed_by">Developed by Noven</string>
+    <string name="about_developed_desc">A highly customizable Myanmar keyboard built with modern technologies.</string>
+    <string name="about_support_troubleshooting">SUPPORT &amp; TROUBLESHOOTING</string>
+    <string name="about_contact_support">Contact Support</string>
+    <string name="about_contact_desc">Email us for help or feedback</string>
+    <string name="about_system_logs">System Diagnostics &amp; Logs</string>
+    <string name="about_system_logs_desc">View error logs to report bugs</string>
+    <string name="about_legal">LEGAL</string>
+    <string name="about_terms">Terms of Service</string>
+    <string name="about_terms_desc">Usage rules &amp; agreements</string>
+    <string name="about_open_source">Open Source Licenses</string>
+    <string name="about_open_source_desc">Third-party software &amp; libraries</string>
+
+    <!-- Keyboard Theme Screen -->
+    <string name="theme_screen_title">Keyboard Themes</string>
+    <string name="my_themes">My Themes</string>
+    <string name="create_new_theme">Create New</string>
+    <string name="default_theme">Default Theme</string>
+    <string name="preset_themes">Preset Themes</string>
+    <string name="delete_theme_title">Delete Theme</string>
+    <string name="delete_theme_msg">Are you sure you want to delete this theme?</string>
+    <string name="share_theme_failed">Failed to prepare theme for sharing</string>
+    <string name="share_theme_via">Share Theme via</string>
+    <string name="load_preset_failed">Failed to load preset theme</string>
+    <string name="import_success">Theme Imported Successfully!</string>
+    <string name="import_failed">Failed to import theme.</string>
+
+    <!-- Custom Theme Screen -->
+    <string name="create_theme_title">Create Theme</string>
+    <string name="tab_background">Background</string>
+    <string name="tab_keys">Keys</string>
+    <string name="tab_text">Text</string>
+    <string name="tab_highlights">Highlights</string>
+    <string name="tab_keypad">Keypad</string>
+    <string name="tab_effects">Effects</string>
+    <string name="bg_color">Background Color</string>
+    <string name="bg_wallpaper">Background Wallpaper</string>
+    <string name="pick_image">Pick Image</string>
+    <string name="remove">Remove</string>
+    <string name="image_scale">Image Scale</string>
+    <string name="offset_x">Offset X (Left/Right)</string>
+    <string name="offset_y">Offset Y (Up/Down)</string>
+    <string name="customize_specific_keys">Customize Specific Keys</string>
+    <string name="tap_keys_to_change_color">Tap keys on preview to change color</string>
+    <string name="editing_keys">Editing %d Keys</string>
+    <string name="clear">Clear</string>
+    <string name="background_text">Background</string>
+    <string name="text_icon">Text / Icon</string>
+    <string name="tap_any_key_preview">Tap any key on the keyboard preview above</string>
+    <string name="normal_keys_color">Normal Keys Color</string>
+    <string name="text_icon_color">Text &amp; Icon Color</string>
+    <string name="highlights_bg_color">Highlights Background Color</string>
+    <string name="highlights_text_color">Highlights Text &amp; Icon Color</string>
+    <string name="tint_emoji_vault">Tint Emoji &amp; Vault Icons</string>
+    <string name="tint_emoji_vault_desc">Apply highlight color to Emoji and Vault keys</string>
+    <string name="keypad_bg">Keypad Background</string>
+    <string name="keypad_normal_keys">Keypad Normal Keys</string>
+    <string name="keypad_text_color">Keypad Text Color</string>
+    <string name="keypad_special_keys">Keypad Special Keys</string>
+    <string name="keypad_special_text">Keypad Special Text Color</string>
+    <string name="texture_effect">Texture Effect (Noise / Grain)</string>
+    <string name="texture_effect_desc">Add a subtle dotted texture to background and keys</string>
+    <string name="customize_specific_effects">Customize Specific Effects</string>
+    <string name="tap_keys_to_change_effects">Tap keys to change their specific effects</string>
+    <string name="key_press_color">Key Press Color (Active)</string>
+    <string name="popup_bg">Popup Background</string>
+    <string name="popup_text_color">Popup Text Color</string>
+    <string name="global_key_press_color">Global Key Press Color</string>
+    <string name="global_popup_bg">Global Popup Background</string>
+    <string name="global_popup_text">Global Popup Text Color</string>
+    <string name="gradient_mode">Gradient Mode</string>
+    <string name="start_color">Start Color</string>
+    <string name="end_color">End Color</string>
+    <string name="opacity_slider">Opacity (Transparent / Solid)</string>
+    <string name="hue_slider">Hue (Pick Color)</string>
+    <string name="saturation_slider">Saturation (Vivid / Pale)</string>
+    <string name="brightness_slider">Brightness (Light / Dark)</string>
+    <string name="custom_color_title">Custom %s</string>
+    <string name="done">Done</string>
+
+    <string name="share_app">Share App</string>
+    <string name="share_app_desc">Check out Nox Board, a highly customizable Myanmar keyboard! https://play.google.com/store/apps/details?id=%1$s</string>
+    <string name="share_app_via">Share Nox Board via</string>
+    <string name="sound_mech_clicky">Mech: Clicky (MX Blue)</string>
+    <string name="sound_mech_thocky">Mech: Thocky (Ink Black)</string>
+    <string name="sound_mech_linear">Mech: Linear (MX Red)</string>
+    <string name="sound_mech_tactile">Mech: Tactile (MX Brown)</string>
+    <string name="sound_mech_silent">Mech: Silent (Silent Red)</string>
+    <string name="about_privacy_title">Absolute Privacy Guaranteed</string>
+    <string name="about_privacy_desc">What you type stays on your device. Nox Board operates 100% offline, collects zero personal data, and requires no internet permission.</string>
+    <string name="setup_title">Nox Board</string>
+    <string name="setup_subtitle">Secure, Open-Source &amp; Customizable</string>
+    <string name="setup_privacy_title">Absolute Privacy</string>
+    <string name="setup_privacy_desc">100% Offline (No Data Collected)</string>
+    <string name="setup_step1_done">1. Nox Board is Enabled</string>
+    <string name="setup_step1_action">1. Enable in Settings</string>
+    <string name="setup_step2_action">2. Select Nox Board</string>
+    <string name="setup_open_source">Open Source</string>
+</resources>
