@@ -28,6 +28,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
+import com.noxtan.noxboard.R
 
 @Composable
 fun KeyboardPreviewArea(
@@ -60,7 +62,7 @@ fun KeyboardPreviewArea(
             )
             .alpha(if (isSlidingActive) 0f else 1f)
             .focusRequester(focusRequester),
-        textStyle = MaterialTheme.typography.bodyLarge.copy(color = Color.White, fontSize = 16.sp),
+        textStyle = MaterialTheme.typography.bodyLarge.copy(color = MaterialTheme.colorScheme.onSurface, fontSize = 16.sp),
         cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
         decorationBox = { innerTextField ->
             Box(
@@ -89,7 +91,7 @@ fun KeyboardPreviewArea(
                 ) {
                     if (isImeVisible) {
                         if (textState.isEmpty()) {
-                            Text("ဒီမှာ စာရိုက်စမ်းသပ်ပါ...", color = Color.Gray, fontSize = 15.sp)
+                            Text(stringResource(R.string.preview_test_typing), color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 15.sp)
                         }
                         innerTextField()
                     } else {

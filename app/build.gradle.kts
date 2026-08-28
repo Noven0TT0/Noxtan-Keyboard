@@ -15,17 +15,39 @@ android {
         minSdk = 24
         targetSdk = 37
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        externalNativeBuild {
+            cmake {
+                cppFlags += "-std=c++17"
+            }
+        }
+
+        // စမတ်ဖုန်းအစစ်များတွင် အသုံးပြုသော ARM 64-bit နှင့် 32-bit သီးသန့်သာ ထုတ်မည် (App Size အလွန်သေးသွားစေရန်)
+        ndk {
+            abiFilters.addAll(listOf("arm64-v8a", "armeabi-v7a"))
+        }
+    }
+
+    // ဒီအပိုင်းကို အသစ်ထည့်ပါ (buildTypes ရဲ့ အောက်၊ compileOptions ရဲ့ အပေါ်မှာ ထည့်ပါ)
+    externalNativeBuild {
+        cmake {
+            path = file("src/main/cpp/CMakeLists.txt")
+            version = "4.1.2"
+        }
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            // မသုံးသော Code များနှင့် မသုံးသော Resource များကို အကုန်ချုံ့ပြီး ဖြုတ်ပစ်မည် (R8 Optimizer)
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
     compileOptions {
@@ -34,6 +56,7 @@ android {
     }
     buildFeatures {
         compose = true
+        aidl = true
     }
 }
 
@@ -47,6 +70,8 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.foundation.layout)
+    implementation(libs.androidx.material3)
+    implementation(libs.androidx.foundation.layout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -54,7 +79,6 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
-    implementation(libs.androidx.emoji2.emojipicker)
     implementation(libs.androidx.compose.material.icons.extended)
     implementation(libs.androidx.appcompat)
 
@@ -62,4 +86,5 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
     implementation(libs.aboutlibraries.compose.m3)
+    implementation(libs.compose.icons.simpleicons)
 }

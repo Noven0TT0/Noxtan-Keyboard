@@ -12,7 +12,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.CloudOff
 import androidx.compose.material.icons.filled.Code
-import androidx.compose.material.icons.filled.Keyboard
 import androidx.compose.material.icons.filled.Shield
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -26,10 +25,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import com.noxtan.noxboard.KeyboardSetupHelper
 import com.noxtan.noxboard.R
-import androidx.compose.material.icons.filled.CloudOff
 
 @Composable
 fun KeyboardSetupScreen(
@@ -101,12 +98,12 @@ fun KeyboardSetupScreen(
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(androidx.compose.material.icons.Icons.Default.Shield, contentDescription = null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(20.dp))
                     Spacer(modifier = Modifier.width(12.dp))
-                    Text(androidx.compose.ui.res.stringResource(R.string.setup_privacy_title), color = Color.White, fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                    Text(androidx.compose.ui.res.stringResource(R.string.setup_privacy_title), color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.Bold, fontSize = 14.sp)
                 }
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(androidx.compose.material.icons.Icons.Default.CloudOff, contentDescription = null, tint = Color(0xFF4CAF50), modifier = Modifier.size(20.dp))
                     Spacer(modifier = Modifier.width(12.dp))
-                    Text(androidx.compose.ui.res.stringResource(R.string.setup_privacy_desc), color = Color.LightGray, fontSize = 13.sp)
+                    Text(androidx.compose.ui.res.stringResource(R.string.setup_privacy_desc), color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 13.sp)
                 }
             }
         }

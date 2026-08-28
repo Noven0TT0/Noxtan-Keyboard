@@ -33,6 +33,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import com.noxtan.noxboard.R
+import compose.icons.SimpleIcons
+import compose.icons.simpleicons.Github
+import compose.icons.simpleicons.Telegram
+import compose.icons.simpleicons.Messenger
+import compose.icons.simpleicons.Signal
 
 @Composable
 fun AboutScreen(
@@ -163,13 +168,31 @@ fun AboutScreen(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            AboutSection(title = "MORE FROM US") {
+            AboutSection(title = "COMMUNITY") {
+                AboutListItem(
+                    icon = SimpleIcons.Telegram,
+                    title = "Telegram Community",
+                    subtitle = "Join our group to discuss, share and get updates",
+                    onClick = {
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/+Ph4_sY3-uutjN2Rk"))
+                        try {
+                            context.startActivity(intent)
+                        } catch (e: Exception) {
+                            android.widget.Toast.makeText(context, "Telegram is not installed", android.widget.Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                )
+            }
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            AboutSection(title = "MORE APP FROM US") {
                 AboutListItem(
                     iconRes = R.drawable.ic_noxtan_player,
-                    title = "Nox Video Player",
-                    subtitle = "A powerful and smooth media player",
+                    title = "Noxtan Video Player",
+                    subtitle = stringResource(R.string.about_nox_player_desc),
                     onClick = {
-                        val url = "https://t.me/your_channel_link"
+                        val url = "https://github.com/Noven0TT0/Noxtan-Player/releases"
                         context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
                     }
                 )
@@ -185,12 +208,24 @@ fun AboutScreen(
                     onClick = onNavigateToOpenSource
                 )
                 HorizontalDivider(color = MaterialTheme.colorScheme.surface, modifier = Modifier.padding(start = 64.dp))
+
+                AboutListItem(
+                    icon = Icons.Default.Security,
+                    title = "Privacy Policy",
+                    subtitle = stringResource(R.string.about_privacy_policy_desc),
+                    onClick = {
+                        val intent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse("https://noven0tt0.github.io/Noxtan-Keyboard/privacy_policy.html"))
+                        context.startActivity(intent)
+                    }
+                )
+                HorizontalDivider(color = MaterialTheme.colorScheme.surface, modifier = Modifier.padding(start = 64.dp))
+
                 AboutListItem(
                     icon = Icons.Default.Code,
                     title = "Developer",
                     subtitle = "NoxTan (View GitHub)",
                     onClick = {
-                        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/noxtan")))
+                        context.startActivity(Intent(Intent.ACTION_VIEW, android.net.Uri.parse("https://github.com/Noven0TT0")))
                     }
                 )
             }
@@ -203,7 +238,7 @@ fun AboutScreen(
             ) {
                 IconButton(
                     onClick = {
-                        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/noxtan")))
+                        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Noven0TT0/Noxtan-Keyboard")))
                     },
                     modifier = Modifier
                         .size(56.dp)
@@ -211,10 +246,10 @@ fun AboutScreen(
                         .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f))
                 ) {
                     Icon(
-                        painter = androidx.compose.ui.res.painterResource(id = R.drawable.ic_github),
+                        imageVector = SimpleIcons.Github,
                         contentDescription = "GitHub",
-                        tint = Color.Unspecified,
-                        modifier = Modifier.size(56.dp)
+                        tint = Color.White,
+                        modifier = Modifier.size(46.dp)
                     )
                 }
             }
@@ -344,7 +379,7 @@ fun ContactSupportDialog(onDismiss: () -> Unit, context: android.content.Context
                 ) {
                     ContactIconBtn(
                         name = "Telegram",
-                        iconRes = R.drawable.ic_telegram,
+                        icon = SimpleIcons.Telegram,
                         onClick = {
                             onDismiss()
                             val intent = Intent(Intent.ACTION_VIEW, Uri.parse("tg://resolve?domain=Noven0TT0"))
@@ -354,7 +389,7 @@ fun ContactSupportDialog(onDismiss: () -> Unit, context: android.content.Context
 
                     ContactIconBtn(
                         name = "Messenger",
-                        iconRes = R.drawable.ic_messenger,
+                        icon = SimpleIcons.Messenger,
                         onClick = {
                             onDismiss()
                             val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://m.me/your_fb_page"))
@@ -364,7 +399,7 @@ fun ContactSupportDialog(onDismiss: () -> Unit, context: android.content.Context
 
                     ContactIconBtn(
                         name = "Signal",
-                        iconRes = R.drawable.ic_signal,
+                        icon = SimpleIcons.Signal,
                         onClick = {
                             onDismiss()
                             val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://signal.me/#p/+1234567890"))
@@ -374,7 +409,7 @@ fun ContactSupportDialog(onDismiss: () -> Unit, context: android.content.Context
 
                     ContactIconBtn(
                         name = "Email",
-                        iconRes = R.drawable.ic_email,
+                        icon = Icons.Default.Email,
                         onClick = {
                             onDismiss()
                             val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:noxtan.dev@proton.me"))
@@ -393,7 +428,7 @@ fun ContactSupportDialog(onDismiss: () -> Unit, context: android.content.Context
 }
 
 @Composable
-fun ContactIconBtn(name: String, iconRes: Int, onClick: () -> Unit) {
+fun ContactIconBtn(name: String, icon: ImageVector, onClick: () -> Unit) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -401,12 +436,11 @@ fun ContactIconBtn(name: String, iconRes: Int, onClick: () -> Unit) {
             .clickable(onClick = onClick)
             .padding(4.dp)
     ) {
-        androidx.compose.foundation.Image(
-            painter = androidx.compose.ui.res.painterResource(id = iconRes),
+        Icon(
+            imageVector = icon,
             contentDescription = name,
-            modifier = Modifier
-                .size(52.dp)
-                .clip(RoundedCornerShape(16.dp))
+            tint = Color.White,
+            modifier = Modifier.size(40.dp)
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(

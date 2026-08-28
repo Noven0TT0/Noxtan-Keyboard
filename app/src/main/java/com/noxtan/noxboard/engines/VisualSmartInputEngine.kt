@@ -81,23 +81,73 @@ class VisualSmartInputEngine : MyanmarInputEngine {
 
         wasLastTapIgnored = false
 
+        if (text == "ိ" || text == "ီ") {
+            val textBefore4 = ic.getTextBeforeCursor(4, 0)?.toString() ?: ""
+            val misplacedChars = setOf('ု', 'ူ', 'ံ', '့', 'း')
+            var count = 0
+            for (i in textBefore4.length - 1 downTo 0) {
+                if (misplacedChars.contains(textBefore4[i])) count++ else break
+            }
+            if (count > 0) {
+                val charsToMove = textBefore4.takeLast(count)
+                ic.deleteSurroundingText(count, 0)
+                ic.commitText(text + charsToMove, 1)
+                return
+            }
+        }
+
+        if (text == "ု" || text == "ူ") {
+            val textBefore4 = ic.getTextBeforeCursor(4, 0)?.toString() ?: ""
+            val misplacedChars = setOf('ံ', '့', 'း')
+            var count = 0
+            for (i in textBefore4.length - 1 downTo 0) {
+                if (misplacedChars.contains(textBefore4[i])) count++ else break
+            }
+            if (count > 0) {
+                val charsToMove = textBefore4.takeLast(count)
+                ic.deleteSurroundingText(count, 0)
+                ic.commitText(text + charsToMove, 1)
+                return
+            }
+        }
+
         if (text == "ာ") {
-            val textBeforeCursor = ic.getTextBeforeCursor(4, 0)?.toString() ?: ""
+            val textBeforeCursor = ic.getTextBeforeCursor(6, 0)?.toString() ?: ""
             var shouldBeMaukcha = false
+
             if (textBeforeCursor.isNotEmpty()) {
                 var hasMedial = false
+                var isStacked = false
                 var rootConsonant: String? = null
                 val medials = setOf("ျ", "ြ", "ွ", "ှ")
+
                 for (i in textBeforeCursor.length - 1 downTo 0) {
                     val char = textBeforeCursor[i].toString()
-                    if (medials.contains(char)) hasMedial = true
-                    else if (myanmarConsonants.contains(char)) { rootConsonant = char; break }
+
+                    if (medials.contains(char)) {
+                        hasMedial = true
+                    } else if (myanmarConsonants.contains(char)) {
+                        rootConsonant = char
+                        if (i > 0 && textBeforeCursor[i - 1] == '္') {
+                            val isKinsi = i > 1 && textBeforeCursor[i - 2] == '်'
+                            if (!isKinsi) {
+                                isStacked = true
+                            }
+                        }
+                        break
+                    }
                 }
-                if (rootConsonant != null && maukchaConsonants.contains(rootConsonant) && !hasMedial) {
+
+                if (rootConsonant != null && maukchaConsonants.contains(rootConsonant) && !hasMedial && !isStacked) {
                     shouldBeMaukcha = true
                 }
             }
-            if (shouldBeMaukcha) ic.commitText("ါ", 1) else ic.commitText("ာ", 1)
+
+            if (shouldBeMaukcha) {
+                ic.commitText("ါ", 1)
+            } else {
+                ic.commitText("ာ", 1)
+            }
             return
         }
 

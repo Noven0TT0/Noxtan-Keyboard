@@ -262,5 +262,23 @@
     <string name="setup_step1_done">1. Nox Board is Enabled</string>
     <string name="setup_step1_action">1. Enable in Settings</string>
     <string name="setup_step2_action">2. Select Nox Board</string>
+    <string name="about_nox_player_desc">Your media. Your privacy. Played flawlessly.</string>
+    <string name="about_privacy_policy_desc">Read our data policy</string>
     <string name="setup_open_source">Open Source</string>
+    <string name="unsaved_changes_title">Unsaved Changes</string>
+    <string name="unsaved_changes_msg">Do you want to leave without saving? Your changes will be lost.</string>
+    <string name="discard">Discard</string>
+    <string name="edit_theme_title">Edit Theme</string>
+    <string name="spacebar_text_selection">Text Selection</string>
+    <string name="spacebar_cursor_control">Cursor Control</string>
+    <string name="preview_test_typing">Test typing here...</string>
+    <string name="contact_support_prompt">How would you like to contact us?</string>
+    <string name="delete_slot_confirmation">Are you sure you want to delete Slot %1$s size settings?</string>
+    <string name="move_row_up_down">Move Entire Row (Up/Down)</string>
+    <string name="save_tab_changes_prompt">Do you want to save changes in the current tab?</string>
+    <string name="delete_layout_slot_confirmation">Are you sure you want to delete Layout Slot %1$s?</string>
+    <string name="limit_weight">Limit: 0.5 to 5.0</string>
+    <string name="limit_scale">Limit: 50% to 100%</string>
+    <string name="limit_align">Limit: 0% to 100%</string>
+    <string name="log_viewer_privacy_notice">These logs do NOT contain your typed text or passwords. They only record technical errors and system crashes.</string>
 </resources>

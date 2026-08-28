@@ -75,6 +75,17 @@ class NoxBoardPrefs(context: Context) {
         private const val KEY_CUSTOM_LAYOUT_ENGLISH = "custom_layout_english"
         private const val KEY_CUSTOM_LAYOUT_SYMBOLS = "custom_layout_symbols"
         private const val KEY_DOUBLE_TAP_STATES = "double_tap_states"
+        private const val KEY_DUAL_SWIPE_ENABLED = "dual_swipe_enabled"
+        private const val KEY_DUAL_SWIPE_UP = "dual_swipe_up"
+        private const val KEY_DUAL_SWIPE_DOWN = "dual_swipe_down"
+        private const val KEY_DUAL_SWIPE_LEFT = "dual_swipe_left"
+        private const val KEY_DUAL_SWIPE_RIGHT = "dual_swipe_right"
+
+        private const val KEY_TRIPLE_SWIPE_ENABLED = "triple_swipe_enabled"
+        private const val KEY_TRIPLE_SWIPE_UP = "triple_swipe_up"
+        private const val KEY_TRIPLE_SWIPE_DOWN = "triple_swipe_down"
+        private const val KEY_TRIPLE_SWIPE_LEFT = "triple_swipe_left"
+        private const val KEY_TRIPLE_SWIPE_RIGHT = "triple_swipe_right"
         private const val KEY_TEXTURE_EFFECT = "texture_effect_enabled"
         private const val KEY_ICON_STYLE_EMOJI = "icon_style_emoji"
         private const val KEY_ICON_STYLE_ENTER = "icon_style_enter"
@@ -127,7 +138,7 @@ class NoxBoardPrefs(context: Context) {
 
     var doubleTapStates: String
         get() {
-            val defaultJson = """{"ဆ":false,"ဖ":false,"ထ":false,"ခ":false,"ည":false,"ဏ":false,"ဂ":false,"ဝ":false,"ဟ":false,"သ":false,"ု":false,"ူ":false}"""
+            val defaultJson = """{"ဆ":false,"ဖ":false,"ထ":false,"ခ":false,"ည":false,"ဏ":false,"ဂ":false,"ဝ":false,"ဟ":false,"သ":false,"ု":true,"ူ":false,"ရ":false}"""
             return prefs.getString(KEY_DOUBLE_TAP_STATES, defaultJson) ?: defaultJson
         }
         set(value) = prefs.edit().putString(KEY_DOUBLE_TAP_STATES, value).apply()
@@ -201,11 +212,11 @@ class NoxBoardPrefs(context: Context) {
         set(value) = prefs.edit().putString(KEY_CUSTOM_SPECIAL_KEY_COLOR, value).apply()
 
     var customActiveKeyColor: String
-        get() = prefs.getString(KEY_CUSTOM_ACTIVE_KEY_COLOR, "#7C4DFF") ?: "#7C4DFF"
+        get() = prefs.getString(KEY_CUSTOM_ACTIVE_KEY_COLOR, "#877C4DFF") ?: "#877C4DFF"
         set(value) = prefs.edit().putString(KEY_CUSTOM_ACTIVE_KEY_COLOR, value).apply()
 
     var customPopupBgColor: String
-        get() = prefs.getString(KEY_CUSTOM_POPUP_BG_COLOR, "#12101C") ?: "#12101C"
+        get() = prefs.getString(KEY_CUSTOM_POPUP_BG_COLOR, "#1E1A2B") ?: "#1E1A2B"
         set(value) = prefs.edit().putString(KEY_CUSTOM_POPUP_BG_COLOR, value).apply()
 
     var customPopupTextColor: String
@@ -264,11 +275,11 @@ class NoxBoardPrefs(context: Context) {
         set(value) = prefs.edit().putString(KEY_KEYBOARD_ALIGNMENT, value).apply()
 
     var keyCornerRadius: Float
-        get() = prefs.getFloat(KEY_KEY_CORNER_RADIUS, 10f)
+        get() = prefs.getFloat(KEY_KEY_CORNER_RADIUS, 5f)
         set(value) = prefs.edit().putFloat(KEY_KEY_CORNER_RADIUS, value).apply()
 
     var keyPadding: Float
-        get() = prefs.getFloat(KEY_KEY_PADDING, 1f)
+        get() = prefs.getFloat(KEY_KEY_PADDING, 3f)
         set(value) = prefs.edit().putFloat(KEY_KEY_PADDING, value).apply()
 
     var bottomPadding: Float
@@ -376,15 +387,24 @@ class NoxBoardPrefs(context: Context) {
         set(value) = prefs.edit().putString("custom_numpad_special_text_color", value).apply()
 
     var activeLayoutMyanmar: String
-        get() = prefs.getString(KEY_ACTIVE_LAYOUT_MYANMAR, "default") ?: "default"
+        get() {
+            val saved = prefs.getString(KEY_ACTIVE_LAYOUT_MYANMAR, "MODERN") ?: "MODERN"
+            return if (saved == "default") "MODERN" else saved
+        }
         set(value) = prefs.edit().putString(KEY_ACTIVE_LAYOUT_MYANMAR, value).apply()
 
     var activeLayoutEnglish: String
-        get() = prefs.getString(KEY_ACTIVE_LAYOUT_ENGLISH, "default") ?: "default"
+        get() {
+            val saved = prefs.getString(KEY_ACTIVE_LAYOUT_ENGLISH, "MODERN") ?: "MODERN"
+            return if (saved == "default") "MODERN" else saved
+        }
         set(value) = prefs.edit().putString(KEY_ACTIVE_LAYOUT_ENGLISH, value).apply()
 
     var activeLayoutSymbols: String
-        get() = prefs.getString(KEY_ACTIVE_LAYOUT_SYMBOLS, "default") ?: "default"
+        get() {
+            val saved = prefs.getString(KEY_ACTIVE_LAYOUT_SYMBOLS, "MODERN") ?: "MODERN"
+            return if (saved == "default") "MODERN" else saved
+        }
         set(value) = prefs.edit().putString(KEY_ACTIVE_LAYOUT_SYMBOLS, value).apply()
 
     var savedLayoutsMyanmar: String
@@ -411,4 +431,106 @@ class NoxBoardPrefs(context: Context) {
     var iconStyleBackspace: String get() = prefs.getString(KEY_ICON_STYLE_BACKSPACE, "DEFAULT") ?: "DEFAULT"; set(value) = prefs.edit().putString(KEY_ICON_STYLE_BACKSPACE, value).apply()
     var iconStyleSymbols: String get() = prefs.getString(KEY_ICON_STYLE_SYMBOLS, "DEFAULT") ?: "DEFAULT"; set(value) = prefs.edit().putString(KEY_ICON_STYLE_SYMBOLS, value).apply()
     var iconStyleHideKeyboard: String get() = prefs.getString(KEY_ICON_STYLE_HIDE_KEYBOARD, "DEFAULT") ?: "DEFAULT"; set(value) = prefs.edit().putString(KEY_ICON_STYLE_HIDE_KEYBOARD, value).apply()
+    var isDualSwipeEnabled: Boolean
+        get() = prefs.getBoolean(KEY_DUAL_SWIPE_ENABLED, false)
+        set(value) = prefs.edit().putBoolean(KEY_DUAL_SWIPE_ENABLED, value).apply()
+
+    var dualSwipeUp: String
+        get() = prefs.getString(KEY_DUAL_SWIPE_UP, "NONE") ?: "NONE"
+        set(value) = prefs.edit().putString(KEY_DUAL_SWIPE_UP, value).apply()
+
+    var dualSwipeDown: String
+        get() = prefs.getString(KEY_DUAL_SWIPE_DOWN, "NONE") ?: "NONE"
+        set(value) = prefs.edit().putString(KEY_DUAL_SWIPE_DOWN, value).apply()
+
+    var dualSwipeLeft: String
+        get() = prefs.getString(KEY_DUAL_SWIPE_LEFT, "COPY") ?: "COPY"
+        set(value) = prefs.edit().putString(KEY_DUAL_SWIPE_LEFT, value).apply()
+
+    var dualSwipeRight: String
+        get() = prefs.getString(KEY_DUAL_SWIPE_RIGHT, "PASTE") ?: "PASTE"
+        set(value) = prefs.edit().putString(KEY_DUAL_SWIPE_RIGHT, value).apply()
+
+    var isTripleSwipeEnabled: Boolean
+        get() = prefs.getBoolean(KEY_TRIPLE_SWIPE_ENABLED, false)
+        set(value) = prefs.edit().putBoolean(KEY_TRIPLE_SWIPE_ENABLED, value).apply()
+
+    var tripleSwipeUp: String
+        get() = prefs.getString(KEY_TRIPLE_SWIPE_UP, "NONE") ?: "NONE"
+        set(value) = prefs.edit().putString(KEY_TRIPLE_SWIPE_UP, value).apply()
+
+    var tripleSwipeDown: String
+        get() = prefs.getString(KEY_TRIPLE_SWIPE_DOWN, "HIDE") ?: "HIDE"
+        set(value) = prefs.edit().putString(KEY_TRIPLE_SWIPE_DOWN, value).apply()
+
+    var tripleSwipeLeft: String
+        get() = prefs.getString(KEY_TRIPLE_SWIPE_LEFT, "UNDO") ?: "UNDO"
+        set(value) = prefs.edit().putString(KEY_TRIPLE_SWIPE_LEFT, value).apply()
+
+    var tripleSwipeRight: String
+        get() = prefs.getString(KEY_TRIPLE_SWIPE_RIGHT, "REDO") ?: "REDO"
+        set(value) = prefs.edit().putString(KEY_TRIPLE_SWIPE_RIGHT, value).apply()
+
+    var customShortcutRow: String
+        get() {
+            val saved = prefs.getString("custom_shortcut_row", "VAULT,CLIPBOARD,SELECT_ALL,UNDO,REDO,HIDE") ?: "VAULT,CLIPBOARD,SELECT_ALL,UNDO,REDO,HIDE"
+            return saved.replace("EMOJI", "SELECT_ALL").replace("LEFT,RIGHT", "UNDO,REDO")
+        }
+        set(value) = prefs.edit().putString("custom_shortcut_row", value).apply()
+
+    var customSpecialKeyBorderColor: String
+        get() = prefs.getString("custom_special_key_border_color", "#00000000") ?: "#00000000"
+        set(value) = prefs.edit().putString("custom_special_key_border_color", value).apply()
+
+    var keyMotionStyle: String
+        get() = prefs.getString("key_motion_style", "NONE") ?: "NONE"
+        set(value) = prefs.edit().putString("key_motion_style", value).apply()
+
+    var isEnglishEnabled: Boolean
+        get() = prefs.getBoolean("is_english_enabled", true)
+        set(value) = prefs.edit().putBoolean("is_english_enabled", value).apply()
+
+    var recentEmojis: String
+        get() = prefs.getString("recent_emojis", "") ?: ""
+        set(value) = prefs.edit().putString("recent_emojis", value).apply()
+
+    var isMyanmarEnabled: Boolean
+        get() = prefs.getBoolean("is_myanmar_enabled", true)
+        set(value) = prefs.edit().putBoolean("is_myanmar_enabled", value).apply()
+
+    var isThaiEnabled: Boolean
+        get() = prefs.getBoolean("is_thai_enabled", false)
+        set(value) = prefs.edit().putBoolean("is_thai_enabled", value).apply()
+
+    var defaultLanguage: String
+        get() = prefs.getString("default_language", "MYANMAR") ?: "MYANMAR"
+        set(value) = prefs.edit().putString("default_language", value).apply()
+
+    var isFloating: Boolean
+        get() = prefs.getBoolean("is_floating", false)
+        set(value) = prefs.edit().putBoolean("is_floating", value).apply()
+
+    var floatingPortraitX: Float
+        get() = prefs.getFloat("floating_portrait_x", -1f)
+        set(value) = prefs.edit().putFloat("floating_portrait_x", value).apply()
+
+    var floatingPortraitY: Float
+        get() = prefs.getFloat("floating_portrait_y", -1f)
+        set(value) = prefs.edit().putFloat("floating_portrait_y", value).apply()
+
+    var floatingLandscapeX: Float
+        get() = prefs.getFloat("floating_landscape_x", -1f)
+        set(value) = prefs.edit().putFloat("floating_landscape_x", value).apply()
+
+    var floatingLandscapeY: Float
+        get() = prefs.getFloat("floating_landscape_y", -1f)
+        set(value) = prefs.edit().putFloat("floating_landscape_y", value).apply()
+
+    var floatingWidthDp: Float
+        get() = prefs.getFloat("floating_width_dp", -1f)
+        set(value) = prefs.edit().putFloat("floating_width_dp", value).apply()
+
+    var floatingHeightDp: Float
+        get() = prefs.getFloat("floating_height_dp", -1f)
+        set(value) = prefs.edit().putFloat("floating_height_dp", value).apply()
 }

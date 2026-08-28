@@ -62,10 +62,12 @@ object KeyboardLayout {
         return rootArray.toString()
     }
 
-    fun getMyanmarLayout(context: Context, showNumberRow: Boolean): List<List<Key>> {
+    fun getMyanmarLayout(context: Context, showNumberRow: Boolean, forceLayoutId: String? = null): List<List<Key>> {
         val prefs = NoxBoardPrefs(context)
-        val active = prefs.activeLayoutMyanmar
-        if (active != "default") {
+        val active = forceLayoutId ?: prefs.activeLayoutMyanmar
+        val isClassic = active == "CLASSIC"
+
+        if (active != "default" && active != "MODERN" && active != "CLASSIC" && active != "SYSTEM") {
             try {
                 val arr = org.json.JSONArray(prefs.savedLayoutsMyanmar)
                 for (i in 0 until arr.length()) {
@@ -82,18 +84,21 @@ object KeyboardLayout {
             } catch (e: Exception) {}
         }
         val custom = prefs.customLayoutMyanmar
-        if (custom.isNotEmpty() && active == "default") {
+        if (custom.isNotEmpty() && (active == "default" || active == "MODERN")) {
             parseLayoutFromJson(custom)?.let { layout ->
                 return applyNumberRowToCustom(layout, showNumberRow, isEnglish = false)
             }
         }
-        return MyanmarLayout.getLayout(showNumberRow)
+
+        return MyanmarLayout.getLayout(showNumberRow, isClassic)
     }
 
-    fun getEnglishLayout(context: Context, showNumberRow: Boolean): List<List<Key>> {
+    fun getEnglishLayout(context: Context, showNumberRow: Boolean, forceLayoutId: String? = null): List<List<Key>> {
         val prefs = NoxBoardPrefs(context)
-        val active = prefs.activeLayoutEnglish
-        if (active != "default") {
+        val active = forceLayoutId ?: prefs.activeLayoutEnglish
+        val isClassic = active == "CLASSIC"
+
+        if (active != "default" && active != "MODERN" && active != "CLASSIC" && active != "SYSTEM") {
             try {
                 val arr = org.json.JSONArray(prefs.savedLayoutsEnglish)
                 for (i in 0 until arr.length()) {
@@ -110,32 +115,41 @@ object KeyboardLayout {
             } catch (e: Exception) {}
         }
         val custom = prefs.customLayoutEnglish
-        if (custom.isNotEmpty() && active == "default") {
+        if (custom.isNotEmpty() && (active == "default" || active == "MODERN")) {
             parseLayoutFromJson(custom)?.let { layout ->
                 return applyNumberRowToCustom(layout, showNumberRow, isEnglish = true)
             }
         }
-        return EnglishLayout.getLayout(showNumberRow)
+
+        return EnglishLayout.getLayout(showNumberRow, isClassic)
+    }
+
+    fun getThaiLayout(context: Context, showNumberRow: Boolean, forceLayoutId: String? = null): List<List<Key>> {
+        return com.noxtan.noxboard.layouts.ThaiLayout.getLayout(showNumberRow)
     }
 
     private fun applyNumberRowToCustom(layout: List<List<Key>>, showNumberRow: Boolean, isEnglish: Boolean): List<List<Key>> {
         if (layout.isEmpty()) return layout
         val result = layout.map { it.toMutableList() }.toMutableList()
 
+        if (result.isNotEmpty() && result[0].any { it.code in -102..-100 || it.code == -14 }) {
+            result.removeAt(0)
+        }
+
         if (showNumberRow) {
             val normals = if (isEnglish) listOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "0") else listOf("၁", "၂", "၃", "၄", "၅", "၆", "၇", "၈", "၉", "၀")
             val shifts = if (isEnglish) listOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "0") else listOf("၁", "၂", "၃", "၄", "၅", "၆", "၇", "၈", "၉", "၀")
-            result[0] = normals.indices.map { i -> Key(normals[i], shifts[i], 0, 1f) }.toMutableList()
-        } else {
-            result[0] = listOf(Key("", "", -100, 10.0f)).toMutableList()
+
+            val numRow = normals.indices.map { i -> Key(normals[i], shifts[i], 0, 1f) }.toMutableList()
+            result.add(0, numRow)
         }
 
         return result
     }
 
-    fun getSymbolLayout(context: Context, page: Int): List<List<Key>> {
+    fun getSymbolLayout(context: Context, page: Int, forceLayoutId: String? = null): List<List<Key>> {
         val prefs = NoxBoardPrefs(context)
-        val active = prefs.activeLayoutSymbols
+        val active = forceLayoutId ?: prefs.activeLayoutSymbols
 
         var customLayout: List<List<Key>>? = null
         if (active != "default") {
@@ -175,7 +189,7 @@ object KeyboardLayout {
 
         return SymbolLayout.getLayout(page)
     }
-    fun getNumpadLayout(isEnglish: Boolean = false): List<Key> = NumpadLayout.getLayout(isEnglish)
+    fun getNumpadLayout(mode: com.noxtan.noxboard.KeyboardMode): List<Key> = NumpadLayout.getLayout(mode)
 
     private val accentMap = mapOf(
         "q" to listOf("q", "1"),

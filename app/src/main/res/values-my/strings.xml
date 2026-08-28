@@ -263,5 +263,23 @@
     <string name="setup_step1_done">၁။ Nox Board အား ဖွင့်ပြီးပါပြီ</string>
     <string name="setup_step1_action">၁။ Nox Board ကို Settings တွင် ဖွင့်ရန်</string>
     <string name="setup_step2_action">၂။ Nox Board ကို ရွေးချယ်ရန်</string>
+    <string name="about_nox_player_desc">သင့်ရဲ့ Media၊ သင့်ရဲ့ လုံခြုံရေး။ အထစ်အငေါ့ကင်းစွာ ဖွင့်လှစ်လိုက်ပါ။</string>
+    <string name="about_privacy_policy_desc">ကျွန်ုပ်တို့၏ အချက်အလက်ဆိုင်ရာ မူဝါဒကို ဖတ်ရှုရန်</string>
     <string name="setup_open_source">Open Source</string>
+    <string name="unsaved_changes_title">မသိမ်းဆည်းရသေးပါ</string>
+    <string name="unsaved_changes_msg">သင်ပြင်ဆင်ထားသည်များကို မသိမ်းဆည်းဘဲ ထွက်သွားလိုပါသလား? ပြင်ဆင်ထားသမျှ ပျောက်ပျက်သွားပါလိမ့်မည်။</string>
+    <string name="discard">မသိမ်းပါ</string>
+    <string name="edit_theme_title">အပြင်အဆင် ပြင်ရန်</string>
+    <string name="spacebar_text_selection">စာသား ရွေးချယ်ရန်</string>
+    <string name="spacebar_cursor_control">ကာဆာ ရွှေ့ရန်</string>
+    <string name="preview_test_typing">ဒီမှာ စာရိုက်စမ်းသပ်ပါ...</string>
+    <string name="contact_support_prompt">ဘယ်ကနေတဆင့် ဆက်သွယ်ချင်ပါသလဲ?</string>
+    <string name="delete_slot_confirmation">ဤ Slot %1$s အရွယ်အစား ဆက်တင်ကို လုံးဝဖျက်ပစ်လိုပါသလား?</string>
+    <string name="move_row_up_down">စာကြောင်းတစ်ခုလုံး အထက်/အောက် ရွှေ့ရန် (Move Row)</string>
+    <string name="save_tab_changes_prompt">လက်ရှိ Tab တွင် ပြင်ဆင်ထားမှုများကို သိမ်းဆည်းမည်လား?</string>
+    <string name="delete_layout_slot_confirmation">ဤ Layout Slot %1$s လက်ကွက်ဆက်တင်ကို လုံးဝဖျက်ပစ်လိုပါသလား?</string>
+    <string name="limit_weight">ကန့်သတ်ချက်ဘောင်: 0.5 မှ 5.0 ကြား</string>
+    <string name="limit_scale">ကန့်သတ်ချက်ဘောင်: 50% မှ 100% ကြား</string>
+    <string name="limit_align">ကန့်သတ်ချက်ဘောင်: 0% မှ 100% ကြား</string>
+    <string name="log_viewer_privacy_notice">ဤ Log များတွင် သင်ရိုက်ကူးထားသော စာသားများ၊ စကားဝှက်များ လုံးဝမပါဝင်ပါ။ App ၏ နည်းပညာပိုင်းဆိုင်ရာ အမှားအယွင်းများကိုသာ မှတ်တမ်းတင်ထားခြင်းဖြစ်ပါသည်။</string>
 </resources>

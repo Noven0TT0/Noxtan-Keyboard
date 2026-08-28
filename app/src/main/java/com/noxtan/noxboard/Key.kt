@@ -12,5 +12,6 @@ data class Key(
     var alignX: Float = 0.5f,
     var alignY: Float = 0.5f,
     var customIcon: String? = null,
-    var rect: RectF = RectF()
+    var rect: RectF = RectF(),
+    var motionProgress: Float = 0f
 )

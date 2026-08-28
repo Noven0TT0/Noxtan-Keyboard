@@ -24,9 +24,11 @@ class MainActivity : AppCompatActivity() {
             window.isNavigationBarContrastEnforced = false
         }
 
+        val isDarkMode = (resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK) == android.content.res.Configuration.UI_MODE_NIGHT_YES
+
         enableEdgeToEdge(
-            statusBarStyle = SystemBarStyle.dark(Color.Transparent.toArgb()),
-            navigationBarStyle = SystemBarStyle.dark(Color.Transparent.toArgb())
+            statusBarStyle = if (isDarkMode) SystemBarStyle.dark(android.graphics.Color.TRANSPARENT) else SystemBarStyle.light(android.graphics.Color.TRANSPARENT, android.graphics.Color.TRANSPARENT),
+            navigationBarStyle = if (isDarkMode) SystemBarStyle.dark(android.graphics.Color.TRANSPARENT) else SystemBarStyle.light(android.graphics.Color.TRANSPARENT, android.graphics.Color.TRANSPARENT)
         )
 
         setContent {

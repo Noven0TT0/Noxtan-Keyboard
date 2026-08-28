@@ -9,18 +9,19 @@ data class KeyboardTheme(
     var keyColor: Int = "#1E1A2B".toColorInt(),
     var keyGradient: IntArray? = null,
     var keyBorderColor: Int = Color.TRANSPARENT,
+    var specialKeyBorderColor: Int = Color.TRANSPARENT,
     var specialKeyColor: Int = "#12101C".toColorInt(),
     var specialKeyGradient: IntArray? = null,
     var specialTextColor: Int = Color.WHITE,
     var specialTextGradient: IntArray? = null,
-    var activeKeyColor: Int = "#7C4DFF".toColorInt(),
+    var activeKeyColor: Int = "#877C4DFF".toColorInt(),
     var activeKeyGradient: IntArray? = null,
     var textColor: Int = Color.WHITE,
     var textGradient: IntArray? = null,
 
     var isTextureEffectEnabled: Boolean = false,
 
-    var popupBackgroundColor: Int = "#12101C".toColorInt(),
+    var popupBackgroundColor: Int = "#1E1A2B".toColorInt(),
     var popupBgGradient: IntArray? = null,
     var popupKeyColor: Int = "#2D2D2D".toColorInt(),
     var popupSpecialKeyColor: Int = "#3A3A3C".toColorInt(),
@@ -30,8 +31,8 @@ data class KeyboardTheme(
 
     var keyboardHeightDp: Float = 235f,
     var bottomPaddingDp: Float = 54f,
-    var keyPaddingDp: Float = 1f,
-    var keyCornerRadiusDp: Float = 10f,
+    var keyPaddingDp: Float = 3f,
+    var keyCornerRadiusDp: Float = 5f,
     var textSizeSp: Float = 16f,
 
     var numpadBackgroundColor: Int = "#000000".toColorInt(),

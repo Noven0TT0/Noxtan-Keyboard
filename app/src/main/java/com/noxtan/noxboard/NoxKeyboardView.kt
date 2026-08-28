@@ -47,16 +47,30 @@ private var iconBackspace: Drawable? = null
 private var iconSymbols: Drawable? = null
 private var iconHideKeyboard: Drawable? = null
 
-enum class KeyboardMode { MYANMAR, ENGLISH, SYMBOLS_1, SYMBOLS_2, NUMBER }
+enum class KeyboardMode { MYANMAR, ENGLISH, THAI, SYMBOLS_1, SYMBOLS_2, NUMBER }
 
 class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(context, attrs) {
-    var onSuggestionBoundsChanged: ((RectF?) -> Unit)? = null
-
     var hasSelection = false
 
     var theme = KeyboardTheme()
+    var onModeChanged: ((KeyboardMode) -> Unit)? = null
     var currentMode = KeyboardMode.MYANMAR
+        set(value) {
+            field = value
+            onModeChanged?.invoke(value)
+        }
     var useCustomIconColors = false
+
+    var previewLayoutId: String? = null
+        set(value) {
+            if (field != value) {
+                field = value
+                updateLayoutData()
+                requestLayout()
+                calculateKeyLayout(width, height)
+                invalidate()
+            }
+        }
 
     private val customIconCache = mutableMapOf<String, Drawable?>()
     private fun getCustomIcon(name: String?): Drawable? {
@@ -68,6 +82,7 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
         return drawable
     }
     var isEditMode = false
+    var hasActiveSuggestions = false
     var editSelectedKeyPos: Pair<Int, Int>? = null
     var editSelectedKeyPositions: Set<Pair<Int, Int>> = emptySet()
     var editSwapKey1Pos: Pair<Int, Int>? = null
@@ -82,6 +97,7 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
     private var numpadKeys = listOf<Key>()
 
     private var isShifted = false
+    private var previousLanguageMode = KeyboardMode.MYANMAR
     var isInlineNumberRowVisible = true
     var userForceShowNumberRow = false
     var isNumpadMode = false
@@ -105,6 +121,18 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
     private var isSpaceSelecting = false
     private var isSpaceDoubleTapped = false
     private val SPACE_DOUBLE_TAP_TIMEOUT = 300L
+    private class PointerRecord(
+        var key: Key,
+        var isCommitted: Boolean = false,
+        val time: Long = System.currentTimeMillis()
+    )
+    private val activePointers = mutableMapOf<Int, PointerRecord>()
+    private var spacePointerId = -1
+
+    private var multiTouchStartX = 0f
+    private var multiTouchStartY = 0f
+    private var isMultiTouchSwiping = false
+    private var maxPointerCount = 1
 
     private val repeatHandler = Handler(Looper.getMainLooper())
     private var repeatRunnable: Runnable? = null
@@ -166,7 +194,7 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
 
     init {
         updateLayoutData()
-        numpadKeys = KeyboardLayout.getNumpadLayout()
+        numpadKeys = KeyboardLayout.getNumpadLayout(currentMode)
         initPaints()
         initIcons()
         initPreviewPopup()
@@ -238,7 +266,9 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
             if (isTabletOrFoldable && !isLandscape) theme.keyboardHeightDp * 1.2f else theme.keyboardHeightDp
         }
 
-        return if (isLandscape && !isTabletOrFoldable) 200f else baseHeight
+        val result = if (isLandscape && !isTabletOrFoldable) 200f else baseHeight
+        android.util.Log.d("NoxHeightDebug", "getEffectiveKeyboardHeightDp -> result: $result, theme.keyboardHeight: ${theme.keyboardHeightDp}")
+        return result
     }
 
     fun getEffectiveTextSizeSp(): Float {
@@ -254,19 +284,60 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
     }
 
     fun getEffectiveBottomPaddingDp(): Float {
+        if (NoxBoardPrefs(context).isFloating) return 0f // <--- ဒါလေး အသစ်ထည့်ပါ
+
         val config = resources.configuration
         val isLandscape = config.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
         val isTabletOrFoldable = config.smallestScreenWidthDp >= 600
 
-        if (isLandscape && !isTabletOrFoldable) {
-            val resourceId = resources.getIdentifier("config_navBarInteractionMode", "integer", "android")
-            val isGestureNav = if (resourceId > 0) resources.getInteger(resourceId) == 2 else false
-            return if (isGestureNav) 16f else 4f
+        val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as android.view.WindowManager
+        val display = windowManager.defaultDisplay
+        val metrics = android.util.DisplayMetrics()
+        display.getMetrics(metrics)
+        val realMetrics = android.util.DisplayMetrics()
+        display.getRealMetrics(realMetrics)
+
+        var statusBarHeight = 0
+        val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
+        if (resourceId > 0) {
+            statusBarHeight = resources.getDimensionPixelSize(resourceId)
         }
-        return if (isEmojiMode) 54f else theme.bottomPaddingDp
+
+        val navDiffPx = (realMetrics.heightPixels - metrics.heightPixels) - statusBarHeight
+        val navDiffDp = navDiffPx / metrics.density
+
+        val isGestureNav = navDiffDp < 32f
+
+        val userPadding = theme.bottomPaddingDp
+
+        val autoPadding = if (userPadding == 54f) {
+            if (isGestureNav) 54f else 0f
+        } else {
+            userPadding
+        }
+
+        return if (isLandscape && !isTabletOrFoldable) {
+            if (isGestureNav) 16f else 0f
+        } else {
+            autoPadding
+        }
     }
 
     fun applySettings(prefs: NoxBoardPrefs) {
+        val isCurrentValid = when (currentMode) {
+            KeyboardMode.MYANMAR -> prefs.isMyanmarEnabled
+            KeyboardMode.ENGLISH -> prefs.isEnglishEnabled
+            KeyboardMode.THAI -> prefs.isThaiEnabled
+            else -> true
+        }
+        if (!isCurrentValid) {
+            currentMode = when (prefs.defaultLanguage) {
+                "THAI" -> KeyboardMode.THAI
+                "ENGLISH" -> KeyboardMode.ENGLISH
+                else -> KeyboardMode.MYANMAR
+            }
+        }
+
         val density = resources.displayMetrics.density
         useCustomIconColors = prefs.useCustomIconColors
 
@@ -302,6 +373,7 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
         safeParse(prefs.customSpecialTextColor) { c, g -> theme.specialTextColor = c; theme.specialTextGradient = g }
         theme.isTextureEffectEnabled = prefs.isTextureEffectEnabled
         try { theme.keyBorderColor = prefs.customKeyBorderColor.toColorInt() } catch (e: Exception) { theme.keyBorderColor = Color.TRANSPARENT }
+        try { theme.specialKeyBorderColor = prefs.customSpecialKeyBorderColor.toColorInt() } catch (e: Exception) { theme.specialKeyBorderColor = Color.TRANSPARENT }
 
         individualKeyColorsMap.clear(); try { val j = org.json.JSONObject(prefs.individualKeyColors); j.keys().forEach { individualKeyColorsMap[it] = parseColorString(j.getString(it)) } } catch (e: Exception) {}
         individualKeyTextColorsMap.clear(); try { val j = org.json.JSONObject(prefs.individualKeyTextColors); j.keys().forEach { individualKeyTextColorsMap[it] = parseColorString(j.getString(it)) } } catch (e: Exception) {}
@@ -327,6 +399,82 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
 
         individualKeyPopupTextColorsMap.clear()
         try { val j = JSONObject(prefs.individualKeyPopupTextColors); j.keys().forEach { individualKeyPopupTextColorsMap[it] = parseColorString(j.getString(it)) } } catch (e: Exception) {}
+
+        if (prefs.activeTheme == "DEFAULT") {
+            individualKeyColorsMap.clear()
+            individualKeyTextColorsMap.clear()
+            individualKeyActiveColorsMap.clear()
+            individualKeyPopupBgColorsMap.clear()
+            individualKeyPopupTextColorsMap.clear()
+
+            val isSystemInDarkMode = (context.resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK) == android.content.res.Configuration.UI_MODE_NIGHT_YES
+            if (!isSystemInDarkMode) {
+                theme.backgroundColor = android.graphics.Color.parseColor("#EAEBEE")
+                theme.backgroundGradient = null
+                theme.keyColor = android.graphics.Color.parseColor("#FFFFFF")
+                theme.keyGradient = null
+                theme.textColor = android.graphics.Color.parseColor("#000000")
+                theme.textGradient = null
+                theme.specialKeyColor = android.graphics.Color.parseColor("#D2D4D9")
+                theme.specialKeyGradient = null
+                theme.specialTextColor = android.graphics.Color.parseColor("#000000")
+                theme.specialTextGradient = null
+                theme.activeKeyColor = android.graphics.Color.parseColor("#C3C6CC")
+                theme.activeKeyGradient = null
+                theme.popupBackgroundColor = android.graphics.Color.parseColor("#D2D4D9")
+                theme.popupBgGradient = null
+                theme.popupTextColor = android.graphics.Color.parseColor("#000000")
+                theme.popupTextGradient = null
+                theme.popupKeyColor = android.graphics.Color.parseColor("#FFFFFF")
+                theme.popupSpecialKeyColor = android.graphics.Color.parseColor("#D2D4D9")
+                theme.popupActiveKeyColor = android.graphics.Color.parseColor("#C3C6CC")
+                theme.numpadBackgroundColor = android.graphics.Color.parseColor("#EAEBEE")
+                theme.numpadBgGradient = null
+                theme.numpadKeyColor = android.graphics.Color.parseColor("#FFFFFF")
+                theme.numpadKeyGradient = null
+                theme.numpadTextColor = android.graphics.Color.parseColor("#000000")
+                theme.numpadTextGradient = null
+                theme.numpadSpecialKeyColor = android.graphics.Color.parseColor("#D2D4D9")
+                theme.numpadSpecialKeyGradient = null
+                theme.numpadSpecialTextColor = android.graphics.Color.parseColor("#000000")
+                theme.numpadSpecialTextGradient = null
+                theme.keyBorderColor = android.graphics.Color.TRANSPARENT
+                theme.specialKeyBorderColor = android.graphics.Color.TRANSPARENT
+
+            } else {
+                theme.backgroundColor = android.graphics.Color.parseColor("#000000")
+                theme.backgroundGradient = null
+                theme.keyColor = android.graphics.Color.parseColor("#1E1A2B")
+                theme.keyGradient = null
+                theme.textColor = android.graphics.Color.parseColor("#FFFFFF")
+                theme.textGradient = null
+                theme.specialKeyColor = android.graphics.Color.parseColor("#12101C")
+                theme.specialKeyGradient = null
+                theme.specialTextColor = android.graphics.Color.parseColor("#FFFFFF")
+                theme.specialTextGradient = null
+                theme.activeKeyColor = android.graphics.Color.parseColor("#877C4DFF")
+                theme.activeKeyGradient = null
+                theme.popupBackgroundColor = android.graphics.Color.parseColor("#1E1A2B")
+                theme.popupBgGradient = null
+                theme.popupTextColor = android.graphics.Color.parseColor("#FFFFFF")
+                theme.popupTextGradient = null
+                theme.popupKeyColor = android.graphics.Color.parseColor("#1E1A2B")
+                theme.popupSpecialKeyColor = android.graphics.Color.parseColor("#12101C")
+                theme.popupActiveKeyColor = android.graphics.Color.parseColor("#877C4DFF")
+                theme.numpadBackgroundColor = android.graphics.Color.parseColor("#000000")
+                theme.numpadBgGradient = null
+                theme.numpadKeyColor = android.graphics.Color.parseColor("#1E1A2B")
+                theme.numpadKeyGradient = null
+                theme.numpadTextColor = android.graphics.Color.parseColor("#FFFFFF")
+                theme.numpadTextGradient = null
+                theme.numpadSpecialKeyColor = android.graphics.Color.parseColor("#12101C")
+                theme.numpadSpecialKeyGradient = null
+                theme.numpadSpecialTextColor = android.graphics.Color.parseColor("#FFFFFF")
+                theme.numpadSpecialTextGradient = null
+                theme.keyBorderColor = Color.TRANSPARENT
+                theme.specialKeyBorderColor = Color.TRANSPARENT
+            }
+        }
 
         bgPaint.color = theme.backgroundColor
 
@@ -409,11 +557,12 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
 
         if (applyTint) {
             if (paint.shader != null) {
-                val saveCount = canvas.saveLayer(rect, null)
+                val layerPaint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.DITHER_FLAG or Paint.FILTER_BITMAP_FLAG)
+                val saveCount = canvas.saveLayer(rect, layerPaint)
                 androidx.core.graphics.drawable.DrawableCompat.setTintList(drawable, null)
                 drawable.draw(canvas)
 
-                val overlayPaint = Paint().apply {
+                val overlayPaint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.DITHER_FLAG or Paint.FILTER_BITMAP_FLAG).apply {
                     shader = paint.shader
                     xfermode = android.graphics.PorterDuffXfermode(android.graphics.PorterDuff.Mode.SRC_IN)
                 }
@@ -465,10 +614,10 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
         }
         val universalKeyHeight = (baseUsableHeight - standardTotalGaps) / 5f
 
-        val isStandardMode = currentMode == KeyboardMode.MYANMAR || currentMode == KeyboardMode.ENGLISH
+        val isStandardMode = currentMode == KeyboardMode.MYANMAR || currentMode == KeyboardMode.ENGLISH || currentMode == KeyboardMode.THAI
         var currentTotalGaps = 0f
         for (i in 1 until keys.size) {
-            val baseGap = if (isStandardMode && !isTopRowRemoved && i == 1) 8f * density else 0f
+            val baseGap = 0f
             val userGap = if (isEmojiMode) 0f else (theme.individualRowGapsMap[i] ?: theme.globalRowGapDp) * density
             currentTotalGaps += (baseGap + userGap)
         }
@@ -492,10 +641,10 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
             }
             val universalKeyHeight = (baseUsableHeight - standardTotalGaps) / 5f
 
-            val isStandardMode = currentMode == KeyboardMode.MYANMAR || currentMode == KeyboardMode.ENGLISH
+            val isStandardMode = currentMode == KeyboardMode.MYANMAR || currentMode == KeyboardMode.ENGLISH || currentMode == KeyboardMode.THAI
             var currentTotalGaps = 0f
             for (i in 1 until keys.size) {
-                val baseGap = if (isStandardMode && !isTopRowRemoved && i == 1) 8f * density else 0f
+                val baseGap = 0f
                 val userGap = if (isEmojiMode) 0f else (theme.individualRowGapsMap[i] ?: theme.globalRowGapDp) * density
                 currentTotalGaps += (baseGap + userGap)
             }
@@ -513,7 +662,7 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
         }
 
         val widthPx = MeasureSpec.getSize(widthMeasureSpec)
-        Log.d("NoxDebug", "onMeasure -> Mode: $currentMode, KeysSize: ${keys.size}, HeightPx: $totalHeightPx")
+        android.util.Log.d("NoxHeightDebug", "onMeasure -> Mode: $currentMode, KeysSize: ${keys.size}, HeightPx: $totalHeightPx, Density: $density, isEditMode: $isEditMode")
 
         setMeasuredDimension(widthPx, totalHeightPx)
     }
@@ -524,7 +673,7 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
         val density = resources.displayMetrics.density
         val bottomPadding = getResolvedBottomPadding()
 
-        val isStandardMode = currentMode == KeyboardMode.MYANMAR || currentMode == KeyboardMode.ENGLISH
+        val isStandardMode = currentMode == KeyboardMode.MYANMAR || currentMode == KeyboardMode.ENGLISH || currentMode == KeyboardMode.THAI
 
         if (isEmojiMode && keys.isNotEmpty()) {
             val lastRowIndex = keys.size - 1
@@ -548,7 +697,7 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
 
         val rowGaps = FloatArray(keys.size) { 0f }
         for (i in 1 until keys.size) {
-            val baseGap = if (isStandardMode && !isTopRowRemoved && i == 1) 8f else 0f
+            val baseGap = 0f
             val userGap = if (isEmojiMode) 0f else (theme.individualRowGapsMap[i] ?: theme.globalRowGapDp)
             rowGaps[i] = (baseGap + userGap) * density
         }
@@ -559,12 +708,15 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
 
         val offsetY = h - bottomPadding - usableHeight
 
-        Log.d("NoxDebug", "calculateKeyLayout -> ViewHeight(h): $h, UsableHeight: $usableHeight, OffsetY: $offsetY")
+        android.util.Log.d("NoxHeightDebug", "calculateKeyLayout -> ViewHeight(h): $h, UsableHeight: $usableHeight, BottomPaddingPx: $bottomPadding, OffsetY: $offsetY")
 
         val config = resources.configuration
         val isLandscape = config.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
         val isTabletOrFoldable = config.smallestScreenWidthDp >= 600
-        val effectiveWidthPercent = if (isLandscape) {
+        val isFloating = prefs.isFloating
+        val effectiveWidthPercent = if (isFloating) {
+            theme.keyboardWidthPercent
+        } else if (isLandscape) {
             if (isTabletOrFoldable) minOf(theme.keyboardWidthPercent, 70f)
             else minOf(theme.keyboardWidthPercent, 90f)
         } else {
@@ -637,8 +789,8 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
         }
 
         val popupWidth = layoutWidth * 0.88f
-        val firstRowTop = if (isStandardMode && !isTopRowRemoved && keys.size > 1) offsetY + keyHeight + rowGaps[1] else offsetY
-        val actualHeight = (offsetY + usableHeight) - firstRowTop
+        val firstRowTop = offsetY
+        val actualHeight = usableHeight
 
         val popupHeight = actualHeight * 0.95f
         val popupLeft = offsetX + (layoutWidth - popupWidth) / 2f
@@ -656,24 +808,6 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
                 val y = popupTop + row * numCellHeight
                 numpadKeys[numIndex++].rect = RectF(x, y, x + numCellWidth, y + numCellHeight)
             }
-        }
-
-        try {
-            val firstRow = keys.firstOrNull()
-            if (isEmojiMode) {
-                onSuggestionBoundsChanged?.invoke(null)
-            } else if (firstRow != null && firstRow.isNotEmpty() && firstRow.first().code in -102..-100) {
-                val padding = theme.keyPaddingDp * resources.displayMetrics.density
-                val left = firstRow.first().rect.left + padding
-                val right = firstRow.last().rect.right - padding
-                val top = firstRow.first().rect.top + padding
-                val bottom = firstRow.first().rect.bottom - padding
-                onSuggestionBoundsChanged?.invoke(RectF(left, top, right, bottom))
-            } else {
-                onSuggestionBoundsChanged?.invoke(null)
-            }
-        } catch (e: Exception) {
-            android.util.Log.e("NoxDebug", "Suggestion bounds error: ${e.message}", e)
         }
 
     }
@@ -706,63 +840,65 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
     }
 
     internal fun initPaints() {
-        bgPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        val flags = Paint.ANTI_ALIAS_FLAG or Paint.SUBPIXEL_TEXT_FLAG
+
+        bgPaint = Paint(flags).apply {
             color = theme.backgroundColor
             style = Paint.Style.FILL
         }
 
-        keyPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = theme.keyColor; style = Paint.Style.FILL }
+        keyPaint = Paint(flags).apply { color = theme.keyColor; style = Paint.Style.FILL }
 
-        keyBorderPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        keyBorderPaint = Paint(flags).apply {
             color = theme.keyBorderColor
             style = Paint.Style.STROKE
-            strokeWidth = 3f * resources.displayMetrics.density
+            strokeWidth = 1f * resources.displayMetrics.density
         }
         initNoisePaint()
 
-        specialKeyPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = theme.specialKeyColor; style = Paint.Style.FILL }
-        activeKeyPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = theme.activeKeyColor; style = Paint.Style.FILL }
+        specialKeyPaint = Paint(flags).apply { color = theme.specialKeyColor; style = Paint.Style.FILL }
+        activeKeyPaint = Paint(flags).apply { color = theme.activeKeyColor; style = Paint.Style.FILL }
 
-        individualKeyPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.FILL }
+        individualKeyPaint = Paint(flags).apply { style = Paint.Style.FILL }
 
-        textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        textPaint = Paint(flags).apply {
             color = theme.textColor
             textAlign = Paint.Align.CENTER
             textSize = getEffectiveTextSizeSp()
         }
 
-        popupBgPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = theme.popupBackgroundColor; style = Paint.Style.FILL }
-        popupKeyPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = theme.popupKeyColor; style = Paint.Style.FILL }
-        popupSpecialKeyPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = theme.popupSpecialKeyColor; style = Paint.Style.FILL }
-        popupActiveKeyPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = theme.popupActiveKeyColor; style = Paint.Style.FILL }
+        popupBgPaint = Paint(flags).apply { color = theme.popupBackgroundColor; style = Paint.Style.FILL }
+        popupKeyPaint = Paint(flags).apply { color = theme.popupKeyColor; style = Paint.Style.FILL }
+        popupSpecialKeyPaint = Paint(flags).apply { color = theme.popupSpecialKeyColor; style = Paint.Style.FILL }
+        popupActiveKeyPaint = Paint(flags).apply { color = theme.popupActiveKeyColor; style = Paint.Style.FILL }
 
-        popupTextPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        popupTextPaint = Paint(flags).apply {
             color = theme.popupTextColor
             textAlign = Paint.Align.CENTER
             textSize = getEffectiveTextSizeSp()
         }
 
-        numpadBgPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = theme.numpadBackgroundColor; style = Paint.Style.FILL }
-        numpadKeyPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = theme.numpadKeyColor; style = Paint.Style.FILL }
-        numpadTextPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        numpadBgPaint = Paint(flags).apply { color = theme.numpadBackgroundColor; style = Paint.Style.FILL }
+        numpadKeyPaint = Paint(flags).apply { color = theme.numpadKeyColor; style = Paint.Style.FILL }
+        numpadTextPaint = Paint(flags).apply {
             color = theme.numpadTextColor
             textAlign = Paint.Align.CENTER
             textSize = getEffectiveTextSizeSp()
         }
 
-        numpadSpecialKeyPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = theme.numpadSpecialKeyColor; style = Paint.Style.FILL }
-        numpadSpecialTextPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        numpadSpecialKeyPaint = Paint(flags).apply { color = theme.numpadSpecialKeyColor; style = Paint.Style.FILL }
+        numpadSpecialTextPaint = Paint(flags).apply {
             color = theme.numpadSpecialTextColor
             textAlign = Paint.Align.CENTER
             textSize = getEffectiveTextSizeSp()
         }
 
-        accentTextPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        accentTextPaint = Paint(flags).apply {
             textAlign = Paint.Align.CENTER
             textSize = getEffectiveTextSizeSp()
         }
 
-        borderPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        borderPaint = Paint(flags).apply {
             color = "#B388FF".toColorInt()
             style = Paint.Style.STROKE
             strokeWidth = 6f
@@ -772,20 +908,26 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
 
     private fun initNoisePaint() {
         if (noisePaint != null) return
-        val size = 200
+        val size = 300
         val bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
         val pixels = IntArray(size * size)
         val random = java.util.Random()
         for (i in pixels.indices) {
-            val alpha = random.nextInt(15) + 5
+            val alpha = random.nextInt(10) + 3
             val color = if (random.nextBoolean()) Color.argb(alpha, 255, 255, 255) else Color.argb(alpha, 0, 0, 0)
             pixels[i] = color
         }
         bitmap.setPixels(pixels, 0, size, 0, 0, size, size)
         val shader = android.graphics.BitmapShader(bitmap, android.graphics.Shader.TileMode.REPEAT, android.graphics.Shader.TileMode.REPEAT)
+
+        val matrix = android.graphics.Matrix()
+        matrix.setScale(1.5f, 1.5f)
+        shader.setLocalMatrix(matrix)
+
         noisePaint = Paint().apply {
             this.shader = shader
             isAntiAlias = true
+            isFilterBitmap = true
         }
     }
 
@@ -810,7 +952,7 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
 
         iconNumpad = getIcon(p.iconStyleNumpad, R.drawable.ic_numpad)
         iconPass = getIcon(p.iconStyleVault, R.drawable.ic_pass)
-        iconSetting = getIcon(p.iconStyleSetting, R.drawable.ic_setting)
+        iconSetting = getIcon(p.iconStyleSetting, R.drawable.ic_tools_menu)
 
         iconShiftInactive = getIcon(p.iconStyleShift, R.drawable.ic_shift_inactive)
         iconShiftActive = getIcon(p.iconStyleShift.replace("inactive", "active"), R.drawable.ic_shift_active)
@@ -826,29 +968,33 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
     private fun updateLayoutData() {
         val showNumberRow = prefs.isNumberRowEnabled && isInlineNumberRowVisible
 
-        var rawKeys = when (currentMode) {
-            KeyboardMode.MYANMAR -> KeyboardLayout.getMyanmarLayout(context, showNumberRow)
-            KeyboardMode.ENGLISH -> KeyboardLayout.getEnglishLayout(context, showNumberRow)
-            KeyboardMode.SYMBOLS_1 -> KeyboardLayout.getSymbolLayout(context, 1)
-            KeyboardMode.SYMBOLS_2 -> KeyboardLayout.getSymbolLayout(context, 2)
+        keys = when (currentMode) {
+            KeyboardMode.MYANMAR -> KeyboardLayout.getMyanmarLayout(context, showNumberRow, previewLayoutId)
+            KeyboardMode.ENGLISH -> KeyboardLayout.getEnglishLayout(context, showNumberRow, previewLayoutId)
+            KeyboardMode.THAI -> KeyboardLayout.getThaiLayout(context, showNumberRow, previewLayoutId)
+            KeyboardMode.SYMBOLS_1 -> KeyboardLayout.getSymbolLayout(context, 1, previewLayoutId)
+            KeyboardMode.SYMBOLS_2 -> KeyboardLayout.getSymbolLayout(context, 2, previewLayoutId)
             KeyboardMode.NUMBER -> com.noxtan.noxboard.layouts.NumberLayout.getLayout()
         }
 
         isTopRowRemoved = false
-        if (!prefs.isSuggestionEnabled && prefs.isIncognitoModeEnabled) {
-            if (rawKeys.isNotEmpty() && rawKeys[0].isNotEmpty() && rawKeys[0].first().code in -102..-100) {
-                rawKeys = rawKeys.drop(1)
-                isTopRowRemoved = true
-            }
-        }
-
-        keys = rawKeys
-        numpadKeys = KeyboardLayout.getNumpadLayout(isEnglish = currentMode != KeyboardMode.MYANMAR)
+        numpadKeys = KeyboardLayout.getNumpadLayout(currentMode)
     }
 
     fun setSuggestionsActive(active: Boolean) {
+        var needUpdate = false
+
+        if (hasActiveSuggestions != active) {
+            hasActiveSuggestions = active
+            needUpdate = true
+        }
+
         if (active && isInlineNumberRowVisible && !userForceShowNumberRow) {
             isInlineNumberRowVisible = false
+            needUpdate = true
+        }
+
+        if (needUpdate) {
             updateLayoutData()
             requestLayout()
             calculateKeyLayout(width, height)
@@ -859,6 +1005,11 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         calculateKeyLayout(w, h)
+    }
+
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        super.onLayout(changed, left, top, right, bottom)
+        calculateKeyLayout(width, height)
     }
 
     fun setEnterKeyAction(actionId: Int) {
@@ -969,7 +1120,7 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
 
         val density = resources.displayMetrics.density
         val bottomPadding = getResolvedBottomPadding()
-        val isStandardMode = currentMode == KeyboardMode.MYANMAR || currentMode == KeyboardMode.ENGLISH
+        val isStandardMode = currentMode == KeyboardMode.MYANMAR || currentMode == KeyboardMode.ENGLISH || currentMode == KeyboardMode.THAI
 
         val baseUsableHeight = getEffectiveKeyboardHeightDp() * density
         var standardTotalGaps = 8f * density
@@ -980,7 +1131,7 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
 
         var currentTotalGaps = 0f
         for (i in 1 until keys.size) {
-            val baseGap = if (isStandardMode && !isTopRowRemoved && i == 1) 8f else 0f
+            val baseGap = 0f
             val userGap = theme.individualRowGapsMap[i] ?: theme.globalRowGapDp
             currentTotalGaps += (baseGap + userGap) * density
         }
@@ -1042,34 +1193,7 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
         val padding = if (isEmojiMode) 1f * density else theme.keyPaddingDp * density
         val cornerRadius = if (isEmojiMode) 10f * density else theme.keyCornerRadiusDp * density
 
-        if (isEditMode) {
-            val firstRow = keys.firstOrNull()
-            if (firstRow != null && firstRow.isNotEmpty() && firstRow.first().code in -102..-100) {
-                val sLeft = firstRow.first().rect.left + padding
-                val sTop = firstRow.first().rect.top + padding
-                val sRight = firstRow.last().rect.right - padding
-                val sBottom = firstRow.first().rect.bottom - padding
-                val sRect = RectF(sLeft, sTop, sRight, sBottom)
-
-                val customSugColor = individualKeyColorsMap["Suggestion"]
-                individualKeyPaint.color = customSugColor?.color ?: theme.specialKeyColor
-                val gradToUse = customSugColor?.gradient ?: theme.specialKeyGradient
-
-                if (gradToUse != null) {
-                    individualKeyPaint.shader = android.graphics.LinearGradient(
-                        0f, 0f, width.toFloat(), height.toFloat(),
-                        gradToUse, null, android.graphics.Shader.TileMode.CLAMP
-                    )
-                } else {
-                    individualKeyPaint.shader = null
-                }
-                canvas.drawRoundRect(sRect, cornerRadius, cornerRadius, individualKeyPaint)
-
-                if (theme.keyBorderColor != Color.TRANSPARENT) {
-                    canvas.drawRoundRect(sRect, cornerRadius, cornerRadius, keyBorderPaint)
-                }
-            }
-        }
+        val baseEffectiveTextSize = getEffectiveTextSizeSp()
 
         for ((rowIndex, row) in keys.withIndex()) {
             if (isEmojiMode && rowIndex < keys.size - 1) continue
@@ -1099,7 +1223,6 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
                 )
 
                 val keyId = when {
-                    (isStandardMode && !isTopRowRemoved && rowIndex == 0) -> "Suggestion"
                     key.code in -102..-100 -> "Suggestion"
                     key.code == 32 -> "Space"
                     key.code == 10 -> "Enter"
@@ -1132,7 +1255,69 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
                 val isEditSelected = isEditMode && (editSelectedKeyPos == currentPos || editSelectedKeyPositions.contains(currentPos))
                 val isSwapSelected = isEditMode && (editSwapKey1Pos == currentPos || editSwapKey2Pos == currentPos)
 
-                if (key == activeKey && !isSuggestionPlaceholder) {
+                val isPressedKey = (key == activeKey || activePointers.values.any { it.key == key }) && !isSuggestionPlaceholder
+
+                val targetProgress = if (isPressedKey) 1f else 0f
+                if (prefs.keyMotionStyle == "NONE") {
+                    key.motionProgress = targetProgress
+                } else {
+                    if (key.motionProgress != targetProgress) {
+                        val factor = if (targetProgress > key.motionProgress) 0.38f else 0.16f
+                        key.motionProgress += (targetProgress - key.motionProgress) * factor
+                        if (kotlin.math.abs(targetProgress - key.motionProgress) < 0.005f) {
+                            key.motionProgress = targetProgress
+                        } else {
+                            invalidate()
+                        }
+                    }
+                }
+
+                if (key.motionProgress > 0f) {
+                    canvas.save()
+                    val cx = tempRect.centerX()
+                    val cy = tempRect.centerY()
+                    val p = key.motionProgress
+
+                    val isSpace = key.code == 32
+
+                    when (prefs.keyMotionStyle) {
+                        "SHRINK" -> {
+                            val s = if (isSpace) 1f - (0.10f * p) else 1f - (0.22f * p)
+                            canvas.scale(s, s, cx, cy)
+                        }
+                        "POP" -> {
+                            val s = if (isSpace) 1f + (0.08f * p) else 1f + (0.24f * p)
+                            canvas.scale(s, s, cx, cy)
+                        }
+                        "TILT" -> {
+                            val deg = if (isSpace) -3f * p else -14f * p
+                            canvas.rotate(deg, cx, cy)
+                        }
+                        "SINK" -> {
+                            val dist = if (isSpace) (4f * density) * p else (9f * density) * p
+                            canvas.translate(0f, dist)
+                        }
+                        "SQUISH" -> {
+                            if (isSpace) {
+                                canvas.scale(1f + (0.05f * p), 1f - (0.10f * p), cx, cy)
+                            } else {
+                                canvas.scale(1f + (0.20f * p), 1f - (0.25f * p), cx, cy)
+                            }
+                        }
+                        "FLOAT" -> {
+                            val dist = if (isSpace) (-4f * density) * p else (-10f * density) * p
+                            canvas.translate(0f, dist)
+                        }
+                        "SKEW" -> {
+                            val sk = if (isSpace) -0.08f * p else -0.28f * p
+                            canvas.translate(cx, cy)
+                            canvas.skew(sk, 0f)
+                            canvas.translate(-cx, -cy)
+                        }
+                    }
+                }
+
+                if ((key == activeKey || activePointers.values.any { it.key == key }) && !isSuggestionPlaceholder) {
                     val customActiveColor = individualKeyActiveColorsMap[keyId]
                     if (customActiveColor != null) {
                         val oldColor = activeKeyPaint.color
@@ -1193,9 +1378,13 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
                     canvas.drawRoundRect(tempRect, cornerRadius, cornerRadius, paintToUse)
                 }
 
-
-                if (theme.keyBorderColor != Color.TRANSPARENT && !isSuggestionPlaceholder) {
-                    canvas.drawRoundRect(tempRect, cornerRadius, cornerRadius, keyBorderPaint)
+                val borderColor = if (isSpecialKey) theme.specialKeyBorderColor else theme.keyBorderColor
+                if (borderColor != Color.TRANSPARENT && !isSuggestionPlaceholder) {
+                    keyBorderPaint.color = borderColor
+                    val inset = keyBorderPaint.strokeWidth / 2f
+                    val innerRect = RectF(tempRect).apply { inset(inset, inset) }
+                    val innerCornerRadius = (cornerRadius - inset).coerceAtLeast(0f)
+                    canvas.drawRoundRect(innerRect, innerCornerRadius, innerCornerRadius, keyBorderPaint)
                 }
 
                 if (theme.isTextureEffectEnabled && !isSuggestionPlaceholder) {
@@ -1267,6 +1456,19 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
                 val textToDraw = when {
                     key.code == 10 -> enterKeyLabel
                     key.code == -2 -> "⌫"
+                    key.code == -1000 -> when (key.normalText) {
+                        "UNDO" -> "↩"
+                        "REDO" -> "↪"
+                        "COPY" -> "Copy"
+                        "PASTE" -> "Paste"
+                        "CUT" -> "Cut"
+                        "SELECT_ALL" -> "All"
+                        "CURSOR_LEFT_WORD" -> "⇤"
+                        "CURSOR_RIGHT_WORD" -> "⇥"
+                        "CURSOR_START" -> "⇱"
+                        "CURSOR_END" -> "⇲"
+                        else -> key.normalText
+                    }
                     isEmojiAbc -> "ABC"
                     isEmojiKaKha -> "ကခဂ"
                     isEmojiDelete -> "⌫"
@@ -1323,11 +1525,25 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
                     }
                 }
 
+                val isEmojiText = textToDraw.any {
+                    val code = it.code
+                    code in 0x1F000..0x1FAFF || code in 0x2600..0x27BF || code in 0x2B50..0x2BFF || Character.isSurrogate(it)
+                }
+                if (isEmojiText) {
+                    textPaint.shader = null
+                }
+
                 val isBottomEmojiKey = isEmojiMode && rowIndex == keys.size - 1
-                val effectiveTextSize = getEffectiveTextSizeSp() * (if (isBottomEmojiKey) 0.85f else 1f)
+                val effectiveTextSize = baseEffectiveTextSize * (if (isBottomEmojiKey) 0.85f else 1f)
 
                 if (key.code == 10) {
                     textPaint.textSize = effectiveTextSize * 1.1f
+                    textPaint.isFakeBoldText = true
+                } else if (key.code == -1000 && (key.normalText == "UNDO" || key.normalText == "REDO")) {
+                    textPaint.textSize = effectiveTextSize * 1.4f
+                    textPaint.isFakeBoldText = true
+                } else if (key.code == -1000 && key.normalText.length > 2) {
+                    textPaint.textSize = effectiveTextSize * 0.75f
                     textPaint.isFakeBoldText = true
                 } else if (key.code == -4 || key.normalText == "ABC" || key.normalText == "#12" || isEmojiAbc || isEmojiKaKha) {
                     if (key.code == -4 && iconSymbols != null && !isEmojiMode) {
@@ -1338,6 +1554,8 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
                     }
                 } else if (isEmojiDelete) {
                     textPaint.textSize = effectiveTextSize * 0.8f
+                } else {
+                    textPaint.textSize = effectiveTextSize // <-- ရိုးရိုးစာလုံးတွေအတွက်ပါ Size ဝင်သွားအောင်
                 }
 
                 when (key.code) {
@@ -1361,7 +1579,10 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
                             individualKeyPaint.style = Paint.Style.FILL
 
                             val isTextDark = (android.graphics.Color.red(textPaint.color) < 128)
-                            individualKeyPaint.color = if (isTextDark) android.graphics.Color.parseColor("#22000000") else android.graphics.Color.parseColor("#33FFFFFF")
+                            individualKeyPaint.color =
+                                if (isTextDark) android.graphics.Color.parseColor("#22000000") else android.graphics.Color.parseColor(
+                                    "#33FFFFFF"
+                                )
 
                             canvas.drawCircle(cx, cy, xRadius, individualKeyPaint)
                             individualKeyPaint.color = oldColor
@@ -1371,7 +1592,12 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
                             val oldFakeBold = textPaint.isFakeBoldText
                             textPaint.textSize = 12f * density
                             textPaint.isFakeBoldText = true
-                            canvas.drawText("✕", cx, cy - (textPaint.descent() + textPaint.ascent()) / 2, textPaint)
+                            canvas.drawText(
+                                "✕",
+                                cx,
+                                cy - (textPaint.descent() + textPaint.ascent()) / 2,
+                                textPaint
+                            )
                             textPaint.textSize = oldTextSize
                             textPaint.isFakeBoldText = oldFakeBold
                         }
@@ -1479,7 +1705,93 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
                 textPaint.isFakeBoldText = originalBold
                 textPaint.color = originalTextColor
                 textPaint.shader = originalShader
+
+                if (key.motionProgress > 0f) {
+                    canvas.restore()
+                }
             }
+        }
+
+        if (isSpaceCursorActivated) {
+            val dimPaint = Paint().apply {
+                color = android.graphics.Color.argb(180, 0, 0, 0)
+                style = Paint.Style.FILL
+            }
+            canvas.drawRect(0f, offsetY, width.toFloat(), height.toFloat(), dimPaint)
+
+            val mainText = if (isSpaceSelecting) {
+                context.getString(R.string.spacebar_text_selection)
+            } else {
+                context.getString(R.string.spacebar_cursor_control)
+            }
+
+            val overlayTextPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+                color = android.graphics.Color.WHITE
+                textAlign = Paint.Align.CENTER
+                textSize = getEffectiveTextSizeSp() * 0.9f
+                isFakeBoldText = true
+            }
+
+            val centerX = width / 2f
+            val centerY = offsetY + (usableHeight / 2f)
+
+            val textWidth = overlayTextPaint.measureText(mainText)
+            val paddingX = 36f * density
+            val paddingY = 16f * density
+            val iconSpace = 32f * density
+
+            val pillWidth = textWidth + paddingX * 2
+            val pillHeight = paddingY * 2 + iconSpace
+
+            val pillRect = RectF(
+                centerX - pillWidth / 2f,
+                centerY - pillHeight / 2f,
+                centerX + pillWidth / 2f,
+                centerY + pillHeight / 2f
+            )
+
+            val pillBgPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+                color = android.graphics.Color.parseColor("#1C1C1E")
+                style = Paint.Style.FILL
+            }
+            canvas.drawRoundRect(pillRect, 20f * density, 20f * density, pillBgPaint)
+
+            val pillBorderPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+                color = theme.activeKeyColor
+                style = Paint.Style.STROKE
+                strokeWidth = 1.5f * density
+                alpha = 200
+            }
+            canvas.drawRoundRect(pillRect, 20f * density, 20f * density, pillBorderPaint)
+
+            val iconPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+                color = theme.activeKeyColor
+                style = Paint.Style.STROKE
+                strokeWidth = 2.5f * density
+                strokeCap = Paint.Cap.ROUND
+                strokeJoin = Paint.Join.ROUND
+            }
+
+            val iconCenterY = centerY - 8f * density
+            val cursorHeight = 16f * density
+
+            canvas.drawLine(centerX, iconCenterY - cursorHeight / 2f, centerX, iconCenterY + cursorHeight / 2f, iconPaint)
+
+            val arrowSize = 5f * density
+            val arrowOffset = 14f * density
+            val path = Path()
+
+            path.moveTo(centerX - arrowOffset + arrowSize, iconCenterY - arrowSize)
+            path.lineTo(centerX - arrowOffset, iconCenterY)
+            path.lineTo(centerX - arrowOffset + arrowSize, iconCenterY + arrowSize)
+
+            path.moveTo(centerX + arrowOffset - arrowSize, iconCenterY - arrowSize)
+            path.lineTo(centerX + arrowOffset, iconCenterY)
+            path.lineTo(centerX + arrowOffset - arrowSize, iconCenterY + arrowSize)
+
+            canvas.drawPath(path, iconPaint)
+
+            canvas.drawText(mainText, centerX, centerY + pillHeight / 2f - paddingY * 1.1f, overlayTextPaint)
         }
 
         if (isNumpadMode) {
@@ -1498,8 +1810,9 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
                 canvas.drawRoundRect(popupRect, 25f, 25f, keyBorderPaint)
             }
 
-            val numPadding = 8f * density
-            val numCorner = 12f * density
+            val numPadding = minOf(4f * density, theme.keyPaddingDp * density)
+            val numCorner = minOf(8f * density, theme.keyCornerRadiusDp * density)
+            val baseNumpadTextSize = getEffectiveTextSizeSp()
 
             for (key in numpadKeys) {
                 tempRect.set(
@@ -1529,6 +1842,15 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
                 val textPaintToUse = if (isSpecial) numpadSpecialTextPaint else numpadTextPaint
                 val textGradientToUse = if (isSpecial) theme.numpadSpecialTextGradient else theme.numpadTextGradient
 
+                val maxTextWidth = tempRect.width() * 0.85f
+                val defaultSize = if (key.normalText.length > 1) baseNumpadTextSize * 0.82f else baseNumpadTextSize
+                textPaintToUse.textSize = defaultSize
+
+                val textWidth = textPaintToUse.measureText(key.normalText)
+                if (textWidth > maxTextWidth && textWidth > 0f) {
+                    textPaintToUse.textSize = (defaultSize * (maxTextWidth / textWidth)).coerceAtLeast(8f * density)
+                }
+
                 val x = tempRect.centerX()
                 val y = tempRect.centerY() - (textPaintToUse.descent() + textPaintToUse.ascent()) / 2
 
@@ -1539,6 +1861,7 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
                     textPaintToUse.shader = null
                 }
                 canvas.drawText(key.normalText, x, y, textPaintToUse)
+                textPaintToUse.textSize = baseNumpadTextSize
             }
         }
 
@@ -1661,21 +1984,97 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        val x = event.x
-        val y = event.y
+        val action = event.actionMasked
+        val pointerIndex = event.actionIndex
+        val pointerId = event.getPointerId(pointerIndex)
+        val x = event.getX(pointerIndex)
+        val y = event.getY(pointerIndex)
 
-        when (event.action) {
-            MotionEvent.ACTION_DOWN -> {
+        if (action == MotionEvent.ACTION_DOWN) {
+            maxPointerCount = 1
+            isMultiTouchSwiping = false
+            multiTouchStartX = event.getX(0)
+            multiTouchStartY = event.getY(0)
+        } else if (action == MotionEvent.ACTION_POINTER_DOWN) {
+            maxPointerCount = maxOf(maxPointerCount, event.pointerCount)
+            if (event.pointerCount == 2 && !isMultiTouchSwiping) {
+                multiTouchStartX = event.getX(0)
+                multiTouchStartY = event.getY(0)
+            }
+        }
+
+        if (maxPointerCount >= 2 && !isMultiTouchSwiping && event.pointerCount >= 2) {
+            if (action == MotionEvent.ACTION_MOVE) {
+                val dx = event.getX(0) - multiTouchStartX
+                val dy = event.getY(0) - multiTouchStartY
+                val threshold = 55f * resources.displayMetrics.density
+
+                if (kotlin.math.abs(dx) > threshold || kotlin.math.abs(dy) > threshold) {
+                    isMultiTouchSwiping = true
+
+                    cancelLongPressDetector()
+                    stopRepeatDelete()
+                    activeKey = null
+                    activePointers.clear()
+                    hidePreview()
+                    invalidate()
+
+                    val direction = if (kotlin.math.abs(dx) > kotlin.math.abs(dy)) {
+                        if (dx > 0) "RIGHT" else "LEFT"
+                    } else {
+                        if (dy > 0) "DOWN" else "UP"
+                    }
+
+                    val actionToTrigger = if (maxPointerCount >= 3 && prefs.isTripleSwipeEnabled) {
+                        when (direction) {
+                            "UP" -> prefs.tripleSwipeUp
+                            "DOWN" -> prefs.tripleSwipeDown
+                            "LEFT" -> prefs.tripleSwipeLeft
+                            "RIGHT" -> prefs.tripleSwipeRight
+                            else -> "NONE"
+                        }
+                    } else if (maxPointerCount >= 2 && prefs.isDualSwipeEnabled) {
+                        when (direction) {
+                            "UP" -> prefs.dualSwipeUp
+                            "DOWN" -> prefs.dualSwipeDown
+                            "LEFT" -> prefs.dualSwipeLeft
+                            "RIGHT" -> prefs.dualSwipeRight
+                            else -> "NONE"
+                        }
+                    } else {
+                        "NONE"
+                    }
+
+                    if (actionToTrigger != "NONE") {
+                        listener?.onKey(-1000, actionToTrigger)
+                        triggerHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+                    }
+                }
+            }
+        }
+
+        if (isMultiTouchSwiping) {
+            if (action == MotionEvent.ACTION_UP) {
+                isMultiTouchSwiping = false
+            }
+            return true
+        }
+
+        when (action) {
+            MotionEvent.ACTION_DOWN, MotionEvent.ACTION_POINTER_DOWN -> {
+                if (event.pointerCount > 1) {
+                    cancelLongPressDetector()
+                }
+
                 val pressedKey = findKeyAt(x, y)
                 if (pressedKey != null) {
+                    activePointers[pointerId] = PointerRecord(pressedKey)
                     activeKey = pressedKey
                     invalidate()
 
                     showPreview(pressedKey)
 
                     if (isEditMode) return true
-
-                    showPreview(pressedKey)
 
                     if (pressedKey.code != -9) {
                         triggerHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
@@ -1689,12 +2088,18 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
                     }
 
                     if (pressedKey.code == 32) {
+                        spacePointerId = pointerId
                         if (hasSelection) {
                             val density = resources.displayMetrics.density
                             val rightHitTarget = pressedKey.rect.right - (45f * density)
                             if (x > rightHitTarget) {
                                 listener?.onKey(-35, "CANCEL_SELECT")
                                 triggerHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+
+                                activePointers.remove(pointerId)
+                                if (activePointers.isEmpty()) activeKey = null
+                                invalidate()
+
                                 return true
                             }
                         }
@@ -1718,101 +2123,102 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
                             isSpaceDoubleTapped = false
                             lastSpaceDownTime = currentTime
                         }
-                    } else {
-                        isSpaceDown = false
                     }
 
                     if (isDeleteKey(pressedKey)) {
                         handleKeyPress(pressedKey)
                         startRepeatDelete()
-                    } else if (pressedKey.code == 0) {
+                    } else if (pressedKey.code == 0 && event.pointerCount == 1) {
                         startLongPressDetector(pressedKey)
                     }
                 }
             }
             MotionEvent.ACTION_MOVE -> {
-                if (isSpaceDown && isSpaceCursorControlEnabled && !isSpaceCursorCanceled) {
-                    val currentTime = System.currentTimeMillis()
-                    val dx = x - spaceDragStartX
-                    val dy = y - spaceDragStartY
+                for (i in 0 until event.pointerCount) {
+                    val pId = event.getPointerId(i)
+                    val pX = event.getX(i)
+                    val pY = event.getY(i)
 
-                    if (isSpaceCursorActivated) {
-                        if (abs(dx) > spaceDragThreshold) {
-                            isSpaceDragging = true
-                            val movementCode = if (isSpaceSelecting) {
-                                if (dx > 0) -32 else -31
-                            } else {
-                                if (dx > 0) -22 else -21
-                            }
-                            val success = listener?.onKey(movementCode, "") ?: false
-                            if (success) triggerHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    if (isSpaceDown && isSpaceCursorControlEnabled && !isSpaceCursorCanceled && pId == spacePointerId) {
+                        val currentTime = System.currentTimeMillis()
+                        val dx = pX - spaceDragStartX
+                        val dy = pY - spaceDragStartY
 
-                            spaceDragStartX = x
-                            spaceDragStartY = y
-                        } else if (abs(dy) > spaceDragThreshold) {
-                            isSpaceDragging = true
-                            val movementCode = if (isSpaceSelecting) {
-                                if (dy > 0) -34 else -33
-                            } else {
-                                if (dy > 0) -24 else -23
-                            }
-                            val success = listener?.onKey(movementCode, "") ?: false
-                            if (success) triggerHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                        if (isSpaceCursorActivated) {
+                            if (abs(dx) > spaceDragThreshold) {
+                                isSpaceDragging = true
+                                val movementCode = if (isSpaceSelecting) {
+                                    if (dx > 0) -32 else -31
+                                } else {
+                                    if (dx > 0) -22 else -21
+                                }
+                                val success = listener?.onKey(movementCode, "") ?: false
+                                if (success) triggerHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
 
-                            spaceDragStartX = x
-                            spaceDragStartY = y
-                        } else if (abs(dy) > spaceDragThreshold) {
-                            isSpaceDragging = true
-                            val movementCode = if (isSpaceSelecting) {
-                                if (dy > 0) -34 else -33
-                            } else {
-                                if (dy > 0) -24 else -23
+                                spaceDragStartX = pX
+                                spaceDragStartY = pY
+                            } else if (abs(dy) > spaceDragThreshold) {
+                                isSpaceDragging = true
+                                val movementCode = if (isSpaceSelecting) {
+                                    if (dy > 0) -34 else -33
+                                } else {
+                                    if (dy > 0) -24 else -23
+                                }
+                                val success = listener?.onKey(movementCode, "") ?: false
+                                if (success) triggerHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+
+                                spaceDragStartX = pX
+                                spaceDragStartY = pY
                             }
-                            listener?.onKey(movementCode, "")
-                            triggerHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
-                            spaceDragStartX = x
-                            spaceDragStartY = y
-                        }
-                    } else {
-                        if (currentTime - spaceDownTimeForDrag >= spaceDragDelayMs) {
-                            isSpaceCursorActivated = true
-                            spaceDragStartX = x
-                            spaceDragStartY = y
-                            triggerHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
                         } else {
-                            if (abs(dx) > spaceDragThreshold || abs(dy) > spaceDragThreshold) {
-                                isSpaceCursorCanceled = true
+                            if (currentTime - spaceDownTimeForDrag >= spaceDragDelayMs) {
+                                isSpaceCursorActivated = true
+                                spaceDragStartX = pX
+                                spaceDragStartY = pY
+                                triggerHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+
+                                if (isSpaceSelecting && isSpaceDoubleTapped) {
+                                    listener?.onKey(-36, "REMOVE_SPACE_FOR_SELECT")
+                                }
+                                invalidate()
+                            } else {
+                                if (abs(dx) > spaceDragThreshold || abs(dy) > spaceDragThreshold) {
+                                    isSpaceCursorCanceled = true
+                                }
                             }
-                        }
-                    }
-                } else {
-                    if (isAccentMode) {
-                        val currentAccent = findAccentKeyAt(x)
-                        if (currentAccent != activeAccentKey) {
-                            activeAccentKey = currentAccent
-                            invalidate()
                         }
                     } else {
-                        val currentKey = findKeyAt(x, y)
-                        if (currentKey != activeKey) {
-                            cancelLongPressDetector()
-                            if (isDeleteKey(activeKey) && !isDeleteKey(currentKey)) {
-                                stopRepeatDelete()
+                        if (isAccentMode) {
+                            val currentAccent = findAccentKeyAt(pX)
+                            if (currentAccent != activeAccentKey) {
+                                activeAccentKey = currentAccent
+                                invalidate()
                             }
-                            activeKey = currentKey
-                            invalidate()
-                            showPreview(currentKey)
+                        } else {
+                            val currentKey = findKeyAt(pX, pY)
+                            val record = activePointers[pId]
+                            if (record != null && currentKey != record.key && currentKey != null) {
+                                val previousKey = record.key
+                                record.key = currentKey
+                                cancelLongPressDetector()
+                                if (isDeleteKey(previousKey) && !isDeleteKey(currentKey)) {
+                                    stopRepeatDelete()
+                                }
+                                activeKey = currentKey
+                                showPreview(currentKey)
+                                invalidate()
+                            }
                         }
                     }
                 }
             }
-            MotionEvent.ACTION_UP -> {
+            MotionEvent.ACTION_UP, MotionEvent.ACTION_POINTER_UP -> {
                 performClick()
 
                 if (isEditMode) {
                     hidePreview()
 
-                    val finalKey = activeKey
+                    val finalKey = activePointers[pointerId]?.key
                     val releasedKey = findKeyAt(x, y)
                     if (finalKey != null && finalKey == releasedKey) {
                         for ((rIndex, row) in keys.withIndex()) {
@@ -1823,7 +2229,8 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
                             }
                         }
                     }
-                    activeKey = null
+                    activePointers.remove(pointerId)
+                    if (activePointers.isEmpty()) activeKey = null
                     invalidate()
                     return true
                 }
@@ -1838,28 +2245,58 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
                     activeAccentKey = null
                     accentKeys.clear()
                 } else {
-                    val finalKey = activeKey
-                    if (finalKey != null) {
-                        if (finalKey.code == 32) {
-                            if (isSpaceDragging) {
-                            } else if (isSpaceDoubleTapped) {
-                                listener?.onKey(-97, "DOUBLE_SPACE_PERIOD")
-                            } else {
+                    val record = activePointers[pointerId]
+                    if (record != null) {
+                        val finalKey = record.key
+
+                        if (!record.isCommitted) {
+                            if (!isDeleteKey(finalKey)) {
+                                val olderUncommitted = activePointers.values
+                                    .filter { it.time < record.time && !it.isCommitted }
+                                    .sortedBy { it.time }
+
+                                for (older in olderUncommitted) {
+                                    val olderKey = older.key
+                                    if (olderKey.code >= 0 && olderKey.code != 32 && !isDeleteKey(olderKey)) {
+                                        handleKeyPress(olderKey)
+                                        older.isCommitted = true
+                                    }
+                                }
+                            }
+
+                            if (finalKey.code == 32) {
+                                if (!isSpaceDragging && !isSpaceCursorActivated) {
+                                    if (isSpaceDoubleTapped) {
+                                        listener?.onKey(-97, "DOUBLE_SPACE_PERIOD")
+                                    } else {
+                                        handleKeyPress(finalKey)
+                                    }
+                                }
+                                isSpaceDown = false
+                                isSpaceCursorActivated = false
+                                isSpaceCursorCanceled = false
+                                isSpaceDragging = false
+                                isSpaceSelecting = false
+                                isSpaceDoubleTapped = false
+                                spacePointerId = -1
+                            } else if (!isDeleteKey(finalKey)) {
                                 handleKeyPress(finalKey)
                             }
-                        } else if (!isDeleteKey(finalKey)) {
-                            handleKeyPress(finalKey)
+                            record.isCommitted = true
                         }
                     }
                 }
-                stopRepeatDelete()
-                isSpaceDown = false
-                isSpaceCursorActivated = false
-                isSpaceCursorCanceled = false
-                isSpaceDragging = false
-                isSpaceSelecting = false
-                isSpaceDoubleTapped = false
-                activeKey = null
+
+                if (isDeleteKey(activePointers[pointerId]?.key)) {
+                    stopRepeatDelete()
+                }
+
+                activePointers.remove(pointerId)
+                if (activePointers.isEmpty()) {
+                    activeKey = null
+                } else {
+                    activeKey = activePointers.values.lastOrNull()?.key
+                }
                 invalidate()
             }
             MotionEvent.ACTION_CANCEL -> {
@@ -1872,8 +2309,10 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
                 isSpaceCursorCanceled = false
                 isSpaceDragging = false
                 isSpaceDoubleTapped = false
+                spacePointerId = -1
                 activeKey = null
                 activeAccentKey = null
+                activePointers.clear()
                 accentKeys.clear()
                 invalidate()
             }
@@ -1974,19 +2413,30 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
             if (y < height - bottomMargin) return null
         }
 
-        val listToCheck = if (isNumpadMode) numpadKeys else keys.flatten()
-        for (key in listToCheck) {
-            val cellW = key.rect.width()
-            val cellH = key.rect.height()
-            val drawnW = cellW * key.scaleX
-            val drawnH = cellH * key.scaleY
-            val emptyW = cellW - drawnW
-            val emptyH = cellH - drawnH
-            val startX = key.rect.left + (emptyW * key.alignX)
-            val startY = key.rect.top + (emptyH * key.alignY)
-            val scaledRect = RectF(startX, startY, startX + drawnW, startY + drawnH)
+        if (isNumpadMode) {
+            for (key in numpadKeys) {
+                val cellW = key.rect.width()
+                val cellH = key.rect.height()
+                val drawnW = cellW * key.scaleX
+                val drawnH = cellH * key.scaleY
+                val startX = key.rect.left + ((cellW - drawnW) * key.alignX)
+                val startY = key.rect.top + ((cellH - drawnH) * key.alignY)
 
-            if (scaledRect.contains(x, y)) return key
+                if (x >= startX && x <= startX + drawnW && y >= startY && y <= startY + drawnH) return key
+            }
+        } else {
+            for (row in keys) {
+                for (key in row) {
+                    val cellW = key.rect.width()
+                    val cellH = key.rect.height()
+                    val drawnW = cellW * key.scaleX
+                    val drawnH = cellH * key.scaleY
+                    val startX = key.rect.left + ((cellW - drawnW) * key.alignX)
+                    val startY = key.rect.top + ((cellH - drawnH) * key.alignY)
+
+                    if (x >= startX && x <= startX + drawnW && y >= startY && y <= startY + drawnH) return key
+                }
+            }
         }
         return null
     }
@@ -2004,19 +2454,10 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
         }
 
         if (isEmojiMode) {
-            if (key.code == -3) {
-                currentMode = KeyboardMode.ENGLISH
+            if (key.code == -3 || key.code == -4 || key.normalText == "္" || key.normalText == "#12" || key.normalText == "ABC") {
+                listener?.onKey(-99, "CLOSE_EMOJI")
                 updateLayoutData()
                 calculateKeyLayout(width, height)
-                listener?.onKey(-99, "CLOSE_EMOJI")
-                invalidate()
-                return
-            }
-            if (key.code == -4 || key.normalText == "္" || key.normalText == "#12" || key.normalText == "ABC") {
-                currentMode = KeyboardMode.MYANMAR
-                updateLayoutData()
-                calculateKeyLayout(width, height)
-                listener?.onKey(-99, "CLOSE_EMOJI")
                 invalidate()
                 return
             }
@@ -2028,23 +2469,31 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
 
         when (key.code) {
             -3 -> {
-                isCapsLock = false
-                isShifted = false
-                currentMode = if (currentMode == KeyboardMode.MYANMAR) KeyboardMode.ENGLISH else KeyboardMode.MYANMAR
-                updateLayoutData()
-                requestLayout()
-                calculateKeyLayout(width, height)
-                invalidate()
-
+                switchLanguage()
                 listener?.onKey(-3, "")
             }
             -4 -> {
                 isCapsLock = false
                 isShifted = false
-                currentMode = if (currentMode == KeyboardMode.SYMBOLS_1 || currentMode == KeyboardMode.SYMBOLS_2) {
-                    KeyboardMode.ENGLISH
+                if (currentMode == KeyboardMode.SYMBOLS_1 || currentMode == KeyboardMode.SYMBOLS_2) {
+                    var targetMode = previousLanguageMode
+                    val valid = when(targetMode) {
+                        KeyboardMode.MYANMAR -> prefs.isMyanmarEnabled
+                        KeyboardMode.ENGLISH -> prefs.isEnglishEnabled
+                        KeyboardMode.THAI -> prefs.isThaiEnabled
+                        else -> false
+                    }
+                    if (!valid) {
+                        targetMode = when(prefs.defaultLanguage) {
+                            "THAI" -> KeyboardMode.THAI
+                            "ENGLISH" -> KeyboardMode.ENGLISH
+                            else -> KeyboardMode.MYANMAR
+                        }
+                    }
+                    currentMode = targetMode
                 } else {
-                    KeyboardMode.SYMBOLS_1
+                    previousLanguageMode = currentMode
+                    currentMode = KeyboardMode.SYMBOLS_1
                 }
                 updateLayoutData()
                 requestLayout()
@@ -2107,6 +2556,26 @@ class NoxKeyboardView(context: Context, attrs: AttributeSet? = null) : View(cont
                 }
             }
         }
+    }
+
+    fun switchLanguage() {
+        isCapsLock = false
+        isShifted = false
+
+        val enabledModes = mutableListOf<KeyboardMode>()
+        if (prefs.isMyanmarEnabled) enabledModes.add(KeyboardMode.MYANMAR)
+        if (prefs.isEnglishEnabled) enabledModes.add(KeyboardMode.ENGLISH)
+        if (prefs.isThaiEnabled) enabledModes.add(KeyboardMode.THAI)
+        if (enabledModes.isEmpty()) enabledModes.add(KeyboardMode.ENGLISH)
+
+        val currentIndex = enabledModes.indexOf(currentMode)
+        val nextIndex = if (currentIndex == -1) 0 else (currentIndex + 1) % enabledModes.size
+        currentMode = enabledModes[nextIndex]
+
+        updateLayoutData()
+        requestLayout()
+        calculateKeyLayout(width, height)
+        invalidate()
     }
 
     fun setAutoShift(enable: Boolean) {

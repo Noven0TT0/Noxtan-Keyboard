@@ -68,4 +68,54 @@ class TrieEngine {
     fun clear() {
         root.children.clear()
     }
+
+    fun searchFuzzy(targetWord: String, maxDist: Int = 1, limit: Int = 5): List<String> {
+        if (targetWord.isBlank()) return emptyList()
+        val results = mutableListOf<Pair<String, Int>>()
+        val currentRow = IntArray(targetWord.length + 1) { it }
+
+        for ((char, childNode) in root.children) {
+            searchRecursive(childNode, char, targetWord, currentRow, results, maxDist)
+        }
+
+        return results.sortedByDescending { it.second }
+            .take(limit)
+            .map { it.first }
+    }
+
+    private fun searchRecursive(
+        node: TrieNode,
+        char: Char,
+        targetWord: String,
+        previousRow: IntArray,
+        results: MutableList<Pair<String, Int>>,
+        maxDist: Int
+    ) {
+        val columns = targetWord.length + 1
+        val currentRow = IntArray(columns)
+        currentRow[0] = previousRow[0] + 1
+
+        var minDistance = currentRow[0]
+
+        for (c in 1 until columns) {
+            val insertCost = currentRow[c - 1] + 1
+            val deleteCost = previousRow[c] + 1
+            val replaceCost = if (targetWord[c - 1] == char) previousRow[c - 1] else previousRow[c - 1] + 1
+
+            currentRow[c] = minOf(insertCost, deleteCost, replaceCost)
+            if (currentRow[c] < minDistance) {
+                minDistance = currentRow[c]
+            }
+        }
+
+        if (currentRow[targetWord.length] <= maxDist && node.isEndOfWord) {
+            results.add(Pair(node.savedWord, node.frequency))
+        }
+
+        if (minDistance <= maxDist) {
+            for ((childChar, childNode) in node.children) {
+                searchRecursive(childNode, childChar, targetWord, currentRow, results, maxDist)
+            }
+        }
+    }
 }
