@@ -3,7 +3,19 @@ package com.noxtan.noxboard.ui.screens
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -11,13 +23,37 @@ import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Backspace
-import androidx.compose.material.icons.filled.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material.icons.filled.Celebration
+import androidx.compose.material.icons.filled.DeleteOutline
+import androidx.compose.material.icons.filled.DirectionsCar
+import androidx.compose.material.icons.filled.EmojiSymbols
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Flag
+import androidx.compose.material.icons.filled.FlashOn
+import androidx.compose.material.icons.filled.Lightbulb
+import androidx.compose.material.icons.filled.Pets
+import androidx.compose.material.icons.filled.Restaurant
+import androidx.compose.material.icons.filled.Schedule
+import androidx.compose.material.icons.filled.SentimentSatisfied
+import androidx.compose.material.icons.filled.SentimentSatisfiedAlt
+import androidx.compose.material.icons.filled.SportsSoccer
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
@@ -145,9 +181,10 @@ fun EmojiPanel(
         mutableStateOf(prefs.recentEmojis.split(",").filter { it.isNotEmpty() })
     }
 
-    val bgColor = MaterialTheme.colorScheme.background
-    val surfaceColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
-    val onSurface = MaterialTheme.colorScheme.onSurface
+    val bgColor = try { Color(android.graphics.Color.parseColor(prefs.customBackgroundColor)) } catch(e:Exception){ Color.Black }
+    val surfaceColor = try { Color(android.graphics.Color.parseColor(prefs.customSpecialKeyColor)) } catch(e:Exception){ Color.DarkGray }
+    val onSurface = try { Color(android.graphics.Color.parseColor(prefs.customTextColor)) } catch(e:Exception){ Color.White }
+    val primaryColor = try { Color(android.graphics.Color.parseColor(prefs.customActiveKeyColor)) } catch(e:Exception){ Color.Blue }
 
     val gridState = rememberLazyGridState()
     val coroutineScope = rememberCoroutineScope()
@@ -246,11 +283,14 @@ fun EmojiPanel(
             dbRecents.remove(emoji)
             dbRecents.add(0, emoji)
             prefs.recentEmojis = dbRecents.take(36).joinToString(",")
+
+            /*
             if (!displayRecents.contains(emoji)) {
                 val newDisplay = displayRecents.toMutableList()
                 newDisplay.add(0, emoji)
                 displayRecents = newDisplay.take(36)
             }
+            */
         }
     }
 

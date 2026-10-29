@@ -28426,8 +28426,6 @@ sorry, what, 11
 everything, is, 11
 moving, to, 11
 so, any, 11
-unicorn, 11
-popcorn, 11
 guess, not, 11
 it, more, 11
 always, remember, 11
@@ -30407,3 +30405,6016 @@ proton, 11
 proton, mail, 11
 proton, vpn, 11
 godzilla, 11
+
+of, the, 1000
+in, the, 995
+to, the, 990
+on, the, 985
+and, the, 980
+for, the, 975
+at, the, 970
+with, the, 965
+from, the, 960
+by, the, 955
+it, is, 950
+to, be, 945
+is, a, 940
+will, be, 935
+has, been, 930
+have, been, 925
+do, not, 920
+did, not, 915
+are, you, 910
+if, you, 905
+want, to, 900
+going, to, 895
+out, of, 890
+because, of, 885
+kind, of, 880
+sort, of, 875
+lot, of, 870
+part, of, 865
+end, of, 860
+front, of, 855
+top, of, 850
+bottom, of, 845
+side, of, 840
+back, to, 835
+next, to, 830
+due, to, 825
+able, to, 820
+supposed, to, 815
+used, to, 810
+need, to, 805
+try, to, 800
+trying, to, 795
+want, a, 790
+need, a, 785
+have, a, 780
+get, a, 775
+take, a, 770
+make, a, 765
+find, a, 760
+is, the, 755
+was, the, 750
+are, the, 745
+were, the, 740
+in, a, 735
+on, a, 730
+with, a, 725
+as, a, 720
+for, a, 715
+at, a, 710
+from, a, 705
+by, a, 700
+i, am, 695
+i, was, 690
+i, have, 685
+i, had, 680
+i, will, 675
+i, can, 670
+i, could, 665
+i, would, 660
+i, should, 655
+he, is, 650
+he, was, 645
+she, is, 640
+she, was, 635
+it, was, 630
+we, are, 625
+we, were, 620
+they, are, 615
+they, were, 610
+there, is, 605
+there, are, 600
+there, was, 595
+there, were, 590
+this, is, 585
+that, is, 580
+these, are, 575
+those, are, 570
+what, is, 565
+where, is, 560
+who, is, 555
+when, is, 550
+how, is, 545
+why, is, 540
+how, are, 535
+what, are, 530
+where, are, 525
+who, are, 520
+why, are, 515
+when, are, 510
+how, much, 505
+a, lot, of, 990
+out, of, the, 985
+one, of, the, 980
+some, of, the, 975
+part, of, the, 970
+end, of, the, 965
+rest, of, the, 960
+most, of, the, 955
+all, of, the, 950
+none, of, the, 945
+both, of, the, 940
+each, of, the, 935
+many, of, the, 930
+any, of, the, 925
+half, of, the, 920
+top, of, the, 915
+bottom, of, the, 910
+front, of, the, 905
+back, of, the, 900
+side, of, the, 895
+middle, of, the, 890
+member, of, the, 885
+members, of, the, 880
+in, front, of, 875
+on, top, of, 870
+at, the, end, 865
+in, the, middle, 860
+for, a, while, 855
+for, a, long, 850
+in, a, row, 845
+as, well, as, 840
+as, soon, as, 835
+as, long, as, 830
+as, far, as, 825
+as, much, as, 820
+such, as, the, 815
+due, to, the, 810
+according, to, the, 805
+prior, to, the, 800
+next, to, the, 795
+close, to, the, 790
+down, to, the, 785
+up, to, the, 780
+in, order, to, 775
+with, respect, to, 770
+in, regard, to, 765
+in, relation, to, 760
+looking, forward, to, 755
+look, forward, to, 750
+want, to, be, 745
+going, to, be, 740
+supposed, to, be, 735
+used, to, be, 730
+need, to, be, 725
+able, to, be, 720
+going, to, do, 715
+want, to, do, 710
+need, to, do, 705
+trying, to, do, 700
+have, to, do, 695
+supposed, to, do, 690
+what, to, do, 685
+how, to, do, 680
+i, want, to, 675
+i, need, to, 670
+i, have, to, 665
+i, tried, to, 660
+i, am, going, 655
+i, was, going, 650
+i, don't, know, 645
+i, didn't, know, 640
+i, don't, think, 635
+i, didn't, think, 630
+i, don't, want, 625
+i, can't, wait, 620
+i, would, like, 615
+i, feel, like, 610
+it, looks, like, 605
+it, sounds, like, 600
+it, seems, like, 595
+it, feels, like, 590
+what, do, you, 585
+how, do, you, 580
+why, do, you, 575
+where, do, you, 570
+when, do, you, 565
+who, do, you, 560
+what, are, you, 555
+how, are, you, 550
+where, are, you, 545
+why, are, you, 540
+what, did, you, 535
+how, did, you, 530
+why, did, you, 525
+where, did, you, 520
+when, did, you, 515
+who, did, you, 510
+what, is, the, 505
+where, is, the, 500
+when, is, the, 495
+at, the, end, of, 995
+in, the, middle, of, 990
+the, rest, of, the, 985
+the, end, of, the, 980
+the, top, of, the, 975
+the, back, of, the, 970
+the, bottom, of, the, 965
+the, front, of, the, 960
+a, great, deal, of, 955
+a, lot, of, people, 950
+a, lot, of, time, 945
+a, lot, of, money, 940
+a, lot, of, things, 935
+for, the, first, time, 930
+in, a, lot, of, 925
+is, one, of, the, 920
+was, one, of, the, 915
+as, one, of, the, 910
+be, one, of, the, 905
+to, be, able, to, 900
+going, to, have, to, 895
+i, don't, want, to, 890
+i, didn't, want, to, 885
+i, don't, know, if, 880
+i, don't, know, what, 875
+i, don't, know, how, 870
+i, don't, know, why, 865
+i, just, want, to, 860
+i, would, like, to, 855
+i, am, going, to, 850
+i, was, going, to, 845
+what, do, you, mean, 840
+what, do, you, think, 835
+what, do, you, want, 830
+what, are, you, doing, 825
+what, are, you, going, 820
+how, are, you, doing, 815
+what, did, you, do, 810
+what, did, you, say, 805
+what, are, we, going, 800
+where, are, we, going, 795
+what, is, going, on, 790
+do, you, want, to, 785
+do, you, have, a, 780
+do, you, know, what, 775
+do, you, know, how, 770
+let, me, know, if, 765
+please, let, me, know, 760
+can, you, tell, me, 755
+could, you, please, send, 750
+thank, you, so, much, 745
+thank, you, very, much, 740
+thanks, so, much, for, 735
+i, look, forward, to, 730
+we, look, forward, to, 725
+i, am, looking, forward, 720
+i, can't, wait, to, 715
+have, a, great, day, 710
+have, a, good, day, 705
+have, a, good, weekend, 700
+hope, you, have, a, 695
+i, hope, you, are, 690
+just, wanted, to, check, 685
+just, checking, in, on, 680
+just, following, up, on, 675
+if, you, have, any, 670
+please, feel, free, to, 665
+feel, free, to, reach, 660
+reach, out, if, you, 655
+let, me, know, when, 650
+let, me, know, what, 645
+as, soon, as, possible, 640
+as, much, as, i, 635
+for, a, long, time, 630
+in, a, row, now, 625
+to, make, sure, that, 620
+i, just, wanted, to, 615
+it, was, nice, to, 610
+it, is, nice, to, 605
+nice, to, meet, you, 600
+nice, to, see, you, 595
+great, to, see, you, 590
+hope, to, see, you, 585
+can't, wait, to, see, 580
+can't, wait, to, hear, 575
+i, will, let, you, 570
+i, will, send, you, 565
+i, will, give, you, 560
+i, will, call, you, 555
+let's, catch, up, soon, 550
+let's, get, together, soon, 545
+do, you, want, me, 540
+would, you, like, to, 535
+would, you, like, me, 530
+are, you, going, to, 525
+i, thought, you, were, 520
+i, am, so, glad, 515
+i, am, so, happy, 510
+i, am, so, sorry, 505
+i, am, very, sorry, 500
+on, my, way, 999
+be, right, back, 998
+talk, to, you, 997
+see, you, later, 996
+let, me, know, 995
+let's, hang, out, 994
+what's, up, with, 993
+how's, it, going, 992
+how, is, it, 991
+how, was, your, 990
+how, was, the, 989
+did, you, get, 988
+did, you, see, 987
+did, you, hear, 986
+i, saw, that, 985
+i, heard, that, 984
+that's, a, good, 983
+that's, a, great, 982
+that's, a, bad, 981
+it's, a, good, 980
+it's, a, great, 979
+is, that, okay, 978
+is, that, ok, 977
+sounds, good, to, 976
+sounds, great, to, 975
+looks, good, to, 974
+that, sounds, good, 973
+that, sounds, great, 972
+that, looks, good, 971
+make, sure, to, 970
+make, sure, you, 969
+don't, forget, to, 968
+i, forgot, to, 967
+i, forgot, that, 966
+just, let, me, 965
+can, you, please, 964
+could, you, please, 963
+will, you, be, 962
+are, we, still, 961
+can, we, get, 960
+should, we, go, 959
+where, should, we, 958
+what, should, we, 957
+when, should, we, 956
+how, about, we, 955
+how, about, you, 954
+what, about, you, 953
+what, about, the, 952
+where, did, you, 951
+how, long, will, 950
+how, long, does, 949
+how, much, is, 948
+how, much, does, 947
+is, there, a, 946
+is, there, any, 945
+are, there, any, 944
+can, i, get, 943
+can, i, have, 942
+may, i, have, 941
+i, would, love, 940
+i, would, hate, 939
+i, really, want, 938
+i, really, need, 937
+i, really, hope, 936
+i, really, think, 935
+i, don't, care, 934
+i, don't, mind, 933
+do, you, mind, 932
+would, you, mind, 931
+if, that's, okay, 930
+if, that's, ok, 929
+if, it's, okay, 928
+if, it's, ok, 927
+it, doesn't, matter, 926
+that, doesn't, matter, 925
+doesn't, matter, to, 924
+makes, no, difference, 923
+makes, sense, to, 922
+that, makes, sense, 921
+it, makes, sense, 920
+i, completely, agree, 919
+i, totally, agree, 918
+i, don't, agree, 917
+i, disagree, with, 916
+i, agree, with, 915
+i, am, sure, 914
+i, am, not, 913
+i, am, perfectly, 912
+i, am, absolutely, 911
+are, you, sure, 910
+are, you, serious, 909
+are, you, kidding, 908
+you, have, got, 907
+you, have, to, 906
+you, need, to, 905
+you, should, be, 904
+you, could, be, 903
+you, would, be, 902
+you, will, be, 901
+you, can, be, 900
+thank, you, 899
+thanks, again, 898
+many, thanks, 897
+best, regards, 896
+kind, regards, 895
+warm, regards, 894
+sincerely, yours, 893
+yours, truly, 892
+good, morning, 891
+good, afternoon, 890
+good, evening, 889
+good, night, 888
+sweet, dreams, 887
+sleep, well, 886
+have, fun, 885
+take, care, 884
+safe, travels, 883
+drive, safely, 882
+get, home, 881
+get, there, 880
+let's, go, 879
+come, on, 878
+hurry, up, 877
+slow, down, 876
+wait, up, 875
+hold, on, 874
+hang, on, 873
+just, wait, 872
+give, me, 871
+show, me, 870
+tell, me, 869
+help, me, 868
+call, me, 867
+text, me, 866
+email, me, 865
+message, me, 864
+let, us, 863
+keep, in, 862
+in, touch, 861
+keep, touch, 860
+reach, out, 859
+follow, up, 858
+checking, in, 857
+touch, base, 856
+circle, back, 855
+move, forward, 854
+going, forward, 853
+look, into, 852
+figure, out, 851
+find, out, 850
+turn, out, 849
+turn, into, 848
+turn, off, 847
+turn, on, 846
+put, on, 845
+put, off, 844
+take, off, 843
+take, on, 842
+bring, up, 841
+bring, down, 840
+go, up, 839
+go, down, 838
+come, up, 837
+come, down, 836
+get, up, 835
+get, down, 834
+sit, down, 833
+stand, up, 832
+wake, up, 831
+go, sleep, 830
+go, bed, 829
+go, work, 828
+at, work, 827
+at, home, 826
+at, school, 825
+in, class, 824
+on, vacation, 823
+out, town, 822
+out, office, 821
+back, soon, 820
+back, later, 819
+be, right, 818
+right, away, 817
+right, now, 816
+right, here, 815
+over, here, 814
+over, there, 813
+up, here, 812
+down, here, 811
+up, there, 810
+down, there, 809
+in, here, 808
+out, there, 807
+out, here, 806
+up, front, 805
+in, back, 804
+on, time, 803
+in, time, 802
+about, time, 801
+any, time, 800
+have, a, good, one, 960
+see, you, tomorrow, 955
+talk, to, you, later, 950
+what, do, you, think, 945
+let, me, know, when, 940
+i, love, you, so, 935
+thank, you, very, much, 930
+as, soon, as, possible, 925
+i, don't, know, if, 920
+i, am, on, my, 915
+on, my, way, home, 910
+sounds, good, to, me, 905
+hope, you, are, well, 900
+please, let, me, know, 895
+if, you, have, any, 890
+have, any, questions, please, 885
+looking, forward, to, hearing, 880
+feel, free, to, contact, 875
+thanks, for, the, update, 870
+thanks, in, advance, 865
+i, will, be, there, 860
+can, you, call, me, 855
+give, me, a, call, 850
+let, me, check, and, 845
+i, have, no, idea, 840
+what, time, works, for, 835
+time, works, for, you, 830
+works, for, me, 825
+that, makes, sense, 820
+no, worries, at, all, 815
+it, is, up, to, 810
+up, to, you, 805
+that, is, fine, with, 800
+fine, with, me, 795
+do, you, want, to, 790
+what, are, you, doing, 785
+where, are, you, going, 780
+are, we, still, on, 775
+still, on, for, today, 770
+on, for, tomorrow, 765
+how, was, your, weekend, 760
+how, was, your, day, 755
+have, a, great, weekend, 750
+hope, you, have, a, 745
+have, a, wonderful, day, 740
+i, am, looking, forward, 735
+looking, forward, to, it, 730
+can, we, talk, about, 725
+talk, about, it, later, 720
+we, can, discuss, it, 715
+in, the, meantime, 710
+for, the, time, being, 705
+at, the, same, time, 700
+on, the, other, hand, 695
+by, the, way, 690
+for, what, it's, worth, 685
+to, be, honest, 680
+to, tell, the, truth, 675
+as, a, matter, of, 670
+matter, of, fact, 665
+in, a, few, minutes, 660
+a, couple, of, days, 655
+a, few, days, ago, 650
+next, week, or, so, 645
+in, the, next, few, 640
+over, the, next, few, 635
+at, the, end, of, 630
+the, end, of, the, 625
+by, the, end, of, 620
+in, the, middle, of, 615
+the, middle, of, the, 610
+a, lot, of, people, 605
+for, the, first, time, 600
+is, one, of, the, 595
+was, one, of, the, 590
+to, be, able, to, 585
+as, well, as, the, 580
+in, order, to, make, 575
+with, respect, to, the, 570
+in, terms, of, the, 565
+based, on, the, fact, 560
+due, to, the, fact, 555
+the, fact, that, the, 550
+a, wide, range, of, 545
+a, large, number, of, 540
+a, great, deal, of, 535
+the, vast, majority, of, 530
+an, important, role, in, 525
+play, a, role, in, 520
+a, key, role, in, 515
+part, of, the, problem, 510
+the, rest, of, the, 505
+the, turn, of, the, 500
+turn, of, the, century, 495
+in, the, form, of, 490
+the, shape, of, the, 485
+at, the, top, of, 480
+the, bottom, of, the, 475
+the, back, of, the, 470
+the, front, of, the, 465
+the, side, of, the, 460
+the, back, of, my, 455
+the, top, of, my, 450
+i, just, wanted, to, 445
+just, wanted, to, say, 440
+wanted, to, reach, out, 435
+to, reach, out, and, 430
+reach, out, and, touch, 425
+i, was, wondering, if, 420
+was, wondering, if, you, 415
+wondering, if, you, could, 410
+if, you, could, please, 405
+could, you, please, send, 400
+would, it, be, possible, 395
+it, be, possible, to, 390
+i, would, appreciate, it, 385
+would, appreciate, it, if, 380
+appreciate, it, if, you, 375
+thank, you, in, advance, 370
+thanks, in, advance, for, 365
+advance, for, your, help, 360
+for, your, help, with, 355
+help, with, this, matter, 350
+if, you, need, anything, 345
+you, need, anything, else, 340
+need, anything, else, please, 335
+please, do, not, hesitate, 330
+do, not, hesitate, to, 325
+not, hesitate, to, contact, 320
+hesitate, to, contact, me, 315
+i, will, let, you, 310
+will, let, you, know, 305
+let, you, know, when, 300
+you, know, when, i, 295
+know, when, i, have, 290
+when, i, have, more, 285
+i, have, more, information, 280
+have, more, information, on, 275
+i, will, keep, you, 270
+will, keep, you, posted, 265
+keep, you, posted, on, 260
+please, keep, me, in, 255
+keep, me, in, the, 250
+me, in, the, loop, 245
+in, the, loop, on, 240
+the, loop, on, this, 235
+i, will, be, out, 230
+will, be, out, of, 225
+be, out, of, the, 220
+out, of, the, office, 215
+of, the, office, today, 210
+the, office, today, and, 205
+office, today, and, will, 200
+today, and, will, have, 195
+and, will, have, limited, 190
+will, have, limited, access, 185
+have, limited, access, to, 180
+limited, access, to, email, 175
+access, to, email, during, 170
+to, email, during, this, 165
+email, during, this, time, 160
+during, this, time, if, 155
+this, time, if, you, 150
+time, if, you, require, 145
+if, you, require, immediate, 140
+you, require, immediate, assistance, 135
+require, immediate, assistance, please, 130
+immediate, assistance, please, contact, 125
+assistance, please, contact, the, 120
+i, am, writing, to, 990
+am, writing, to, inquire, 985
+writing, to, inquire, about, 980
+to, inquire, about, the, 975
+inquire, about, the, status, 970
+about, the, status, of, 965
+the, status, of, my, 960
+status, of, my, application, 955
+i, am, attaching, my, 950
+am, attaching, my, resume, 945
+attaching, my, resume, for, 940
+my, resume, for, your, 935
+resume, for, your, review, 930
+for, your, review, and, 925
+your, review, and, consideration, 920
+review, and, consideration, for, 915
+and, consideration, for, the, 910
+consideration, for, the, position, 905
+for, the, position, of, 900
+the, position, of, sales, 895
+position, of, sales, manager, 890
+thank, you, for, your, 885
+you, for, your, time, 880
+for, your, time, and, 875
+your, time, and, consideration, 870
+time, and, consideration, of, 865
+and, consideration, of, my, 860
+consideration, of, my, application, 855
+i, have, attached, the, 850
+have, attached, the, file, 845
+attached, the, file, you, 840
+the, file, you, requested, 835
+file, you, requested, for, 830
+you, requested, for, your, 825
+requested, for, your, reference, 820
+please, let, me, know, 815
+let, me, know, if, 810
+me, know, if, there, 805
+know, if, there, is, 800
+if, there, is, anything, 795
+there, is, anything, else, 790
+is, anything, else, you, 785
+anything, else, you, need, 780
+else, you, need, from, 775
+you, need, from, me, 770
+need, from, me, to, 765
+from, me, to, complete, 760
+me, to, complete, this, 755
+to, complete, this, process, 750
+i, will, follow, up, 745
+will, follow, up, with, 740
+follow, up, with, you, 735
+up, with, you, next, 730
+with, you, next, week, 725
+you, next, week, to, 720
+next, week, to, discuss, 715
+week, to, discuss, this, 710
+to, discuss, this, further, 705
+discuss, this, further, thank, 700
+this, further, thank, you, 695
+further, thank, you, again, 690
+thank, you, again, for, 685
+you, again, for, your, 680
+again, for, your, help, 675
+i, hope, this, email, 670
+hope, this, email, finds, 665
+this, email, finds, you, 660
+email, finds, you, well, 655
+finds, you, well, i, 650
+you, well, i, wanted, 645
+well, i, wanted, to, 640
+i, wanted, to, reach, 635
+wanted, to, reach, out, 630
+to, reach, out, to, 625
+reach, out, to, you, 620
+out, to, you, regarding, 615
+to, you, regarding, the, 610
+you, regarding, the, upcoming, 605
+regarding, the, upcoming, meeting, 600
+the, upcoming, meeting, on, 595
+upcoming, meeting, on, tuesday, 590
+meeting, on, tuesday, at, 585
+on, tuesday, at, ten, 580
+tuesday, at, ten, am, 575
+at, ten, am, in, 570
+ten, am, in, the, 565
+am, in, the, conference, 560
+in, the, conference, room, 555
+the, conference, room, please, 550
+conference, room, please, let, 545
+room, please, let, me, 540
+please, let, me, know, 535
+let, me, know, if, 530
+me, know, if, you, 525
+know, if, you, will, 520
+if, you, will, be, 515
+you, will, be, able, 510
+will, be, able, to, 505
+be, able, to, attend, 500
+able, to, attend, this, 495
+to, attend, this, meeting, 490
+attend, this, meeting, so, 485
+this, meeting, so, that, 480
+meeting, so, that, i, 475
+so, that, i, can, 470
+that, i, can, finalize, 465
+i, can, finalize, the, 460
+can, finalize, the, agenda, 455
+finalize, the, agenda, and, 450
+the, agenda, and, send, 445
+agenda, and, send, it, 440
+and, send, it, out, 435
+send, it, out, to, 430
+it, out, to, the, 425
+out, to, the, rest, 420
+to, the, rest, of, 415
+the, rest, of, the, 410
+rest, of, the, team, 405
+of, the, team, by, 400
+the, team, by, monday, 395
+team, by, monday, afternoon, 390
+by, monday, afternoon, at, 385
+monday, afternoon, at, the, 380
+afternoon, at, the, latest, 375
+at, the, latest, thank, 370
+the, latest, thank, you, 365
+latest, thank, you, for, 360
+thank, you, for, your, 355
+you, for, your, cooperation, 350
+for, your, cooperation, in, 345
+your, cooperation, in, this, 340
+cooperation, in, this, matter, 335
+in, this, matter, and, 330
+this, matter, and, i, 325
+matter, and, i, look, 320
+and, i, look, forward, 315
+i, look, forward, to, 310
+look, forward, to, seeing, 305
+forward, to, seeing, you, 300
+to, seeing, you, then, 295
+seeing, you, then, best, 290
+you, then, best, regards, 285
+then, best, regards, john, 280
+best, regards, john, smith, 275
+it, has, come, to, 990
+has, come, to, my, 985
+come, to, my, attention, 980
+to, my, attention, that, 975
+my, attention, that, there, 970
+attention, that, there, is, 965
+that, there, is, an, 960
+there, is, an, issue, 955
+is, an, issue, with, 950
+an, issue, with, the, 945
+issue, with, the, current, 940
+with, the, current, billing, 935
+the, current, billing, cycle, 930
+current, billing, cycle, and, 925
+billing, cycle, and, i, 920
+cycle, and, i, would, 915
+and, i, would, like, 910
+i, would, like, to, 905
+would, like, to, request, 900
+like, to, request, a, 895
+to, request, a, meeting, 890
+request, a, meeting, to, 885
+a, meeting, to, discuss, 880
+meeting, to, discuss, this, 875
+to, discuss, this, matter, 870
+discuss, this, matter, in, 865
+this, matter, in, more, 860
+matter, in, more, detail, 855
+in, more, detail, as, 850
+more, detail, as, soon, 845
+detail, as, soon, as, 840
+as, soon, as, possible, 835
+soon, as, possible, please, 830
+as, possible, please, let, 825
+possible, please, let, me, 820
+please, let, me, know, 815
+let, me, know, your, 810
+me, know, your, availability, 805
+know, your, availability, for, 800
+your, availability, for, a, 795
+availability, for, a, brief, 790
+for, a, brief, phone, 785
+a, brief, phone, call, 780
+brief, phone, call, sometime, 775
+phone, call, sometime, next, 770
+call, sometime, next, week, 765
+sometime, next, week, so, 760
+next, week, so, that, 755
+week, so, that, we, 750
+so, that, we, can, 745
+that, we, can, resolve, 740
+we, can, resolve, this, 735
+can, resolve, this, issue, 730
+resolve, this, issue, before, 725
+this, issue, before, it, 720
+issue, before, it, escalates, 715
+before, it, escalates, further, 710
+it, escalates, further, thank, 705
+escalates, further, thank, you, 700
+further, thank, you, for, 695
+thank, you, for, your, 690
+you, for, your, prompt, 685
+for, your, prompt, attention, 680
+your, prompt, attention, to, 675
+prompt, attention, to, this, 670
+attention, to, this, matter, 665
+to, this, matter, and, 660
+this, matter, and, i, 655
+matter, and, i, look, 650
+and, i, look, forward, 645
+i, look, forward, to, 640
+look, forward, to, hearing, 635
+forward, to, hearing, from, 630
+to, hearing, from, you, 625
+hearing, from, you, soon, 620
+from, you, soon, sincerely, 615
+you, soon, sincerely, jane, 610
+soon, sincerely, jane, doe, 605
+sincerely, jane, doe, customer, 600
+jane, doe, customer, service, 595
+doe, customer, service, manager, 590
+customer, service, manager, abc, 585
+service, manager, abc, company, 580
+manager, abc, company, one, 575
+abc, company, one, two, 570
+company, one, two, three, 565
+one, two, three, main, 560
+two, three, main, street, 555
+three, main, street, anytown, 550
+main, street, anytown, ca, 545
+street, anytown, ca, nine, 540
+anytown, ca, nine, zero, 535
+ca, nine, zero, two, 530
+nine, zero, two, one, 525
+zero, two, one, zero, 520
+two, one, zero, five, 515
+one, zero, five, five, 510
+zero, five, five, five, 505
+five, five, five, one, 500
+five, five, one, two, 495
+five, one, two, three, 490
+one, two, three, four, 485
+two, three, four, email, 480
+three, four, email, protected, 475
+four, email, protected, www, 470
+email, protected, www, abccompany, 465
+protected, www, abccompany, com, 460
+omg, i, can't, believe, 990
+i, can't, believe, it, 985
+can't, believe, it, happened, 980
+believe, it, happened, again, 975
+it, happened, again, lol, 970
+happened, again, lol, that, 965
+again, lol, that, is, 960
+lol, that, is, so, 955
+that, is, so, funny, 950
+is, so, funny, i, 945
+so, funny, i, am, 940
+funny, i, am, literally, 935
+i, am, literally, crying, 930
+am, literally, crying, right, 925
+literally, crying, right, now, 920
+crying, right, now, haha, 915
+right, now, haha, anyway, 910
+now, haha, anyway, what, 905
+haha, anyway, what, are, 900
+anyway, what, are, you, 895
+what, are, you, up, 890
+are, you, up, to, 885
+you, up, to, tonight, 880
+up, to, tonight, let's, 875
+to, tonight, let's, hang, 870
+tonight, let's, hang, out, 865
+let's, hang, out, if, 860
+hang, out, if, you, 855
+out, if, you, are, 850
+if, you, are, free, 845
+you, are, free, hit, 840
+are, free, hit, me, 835
+free, hit, me, up, 830
+hit, me, up, later, 825
+me, up, later, peace, 820
+up, later, peace, out, 815
+hey, how, are, you, 995
+how, are, you, doing, 990
+are, you, doing, today, 985
+you, doing, today, just, 980
+doing, today, just, checking, 975
+today, just, checking, in, 970
+just, checking, in, to, 965
+checking, in, to, see, 960
+in, to, see, if, 955
+to, see, if, you, 950
+see, if, you, wanted, 945
+if, you, wanted, to, 940
+you, wanted, to, grab, 935
+wanted, to, grab, lunch, 930
+to, grab, lunch, or, 925
+grab, lunch, or, coffee, 920
+lunch, or, coffee, sometime, 915
+or, coffee, sometime, this, 910
+coffee, sometime, this, week, 905
+sometime, this, week, let, 900
+this, week, let, me, 895
+week, let, me, know, 890
+let, me, know, what, 885
+me, know, what, your, 880
+know, what, your, schedule, 875
+what, your, schedule, looks, 870
+your, schedule, looks, like, 865
+schedule, looks, like, and, 860
+looks, like, and, we, 855
+like, and, we, can, 850
+and, we, can, figure, 845
+we, can, figure, something, 840
+can, figure, something, out, 835
+figure, something, out, talk, 830
+something, out, talk, to, 825
+out, talk, to, you, 820
+talk, to, you, soon, 815
+i, don't, even, know, 990
+don't, even, know, what, 985
+even, know, what, to, 980
+know, what, to, say, 975
+what, to, say, about, 970
+to, say, about, that, 965
+say, about, that, whole, 960
+about, that, whole, situation, 955
+that, whole, situation, it, 950
+whole, situation, it, was, 945
+situation, it, was, just, 940
+it, was, just, so, 935
+was, just, so, crazy, 930
+just, so, crazy, and, 925
+so, crazy, and, unexpected, 920
+crazy, and, unexpected, anyway, 915
+and, unexpected, anyway, i, 910
+unexpected, anyway, i, hope, 905
+anyway, i, hope, things, 900
+i, hope, things, are, 895
+hope, things, are, going, 890
+things, are, going, well, 885
+are, going, well, for, 880
+going, well, for, you, 875
+well, for, you, let's, 870
+for, you, let's, catch, 865
+you, let's, catch, up, 860
+let's, catch, up, real, 855
+catch, up, real, soon, 850
+for, sure, 895
+sounds, great, 890
+no, problem, 885
+thank, you, 880
+you, too, 875
+me, too, 870
+i, know, 865
+of, course, 860
+i, see, 855
+makes, sense, 850
+good, luck, 845
+take, care, 840
+good, morning, 835
+good, night, 830
+see, ya, 825
+talk, later, 820
+call, me, 815
+text, me, 810
+email, me, 805
+let's, go, 800
+come, on, 795
+hurry, up, 790
+slow, down, 785
+wait, up, 780
+hold, on, 775
+hang, on, 770
+be, right, 765
+right, back, 760
+on, my, 755
+my, way, 750
+almost, there, 745
+just, leaving, 740
+running, late, 735
+so, sorry, 730
+my, bad, 725
+no, worries, 720
+all, good, 715
+it's, okay, 710
+that's, fine, 705
+perfect, timing, 700
+great, job, 695
+well, done, 690
+nice, work, 685
+keep, going, 680
+don't, stop, 675
+keep, trying, 670
+try, again, 665
+start, over, 660
+look, out, 655
+watch, out, 650
+be, careful, 645
+drive, safe, 640
+safe, travels, 635
+have, fun, 630
+enjoy, it, 625
+love, it, 620
+hate, it, 615
+don't, care, 610
+doesn't, matter, 605
+whatever, happens, 600
+who, cares, 595
+why, not, 590
+how, come, 585
+what, else, 580
+where, to, 575
+when, exactly, 570
+how, much, 565
+how, many, 560
+too, much, 555
+too, many, 550
+not, enough, 545
+just, right, 540
+exactly, right, 535
+spot, on, 530
+fair, enough, 525
+fair, play, 520
+good, point, 515
+bad, idea, 510
+good, idea, 505
+great, idea, 500
+terrible, idea, 495
+best, friend, 490
+good, friend, 485
+old, friend, 480
+new, friend, 475
+boyfriend, and, 470
+girlfriend, and, 465
+husband, and, 460
+wife, and, 455
+mom, and, 450
+dad, and, 445
+brother, and, 440
+sister, and, 435
+family, and, 430
+friends, and, 425
+coworkers, and, 420
+colleagues, and, 415
+boss, and, 410
+manager, and, 405
+team, members, 400
+what, do, you, 900
+how, do, you, 895
+why, do, you, 890
+where, do, you, 885
+when, do, you, 880
+who, do, you, 875
+what, are, you, 870
+how, are, you, 865
+where, are, you, 860
+why, are, you, 855
+what, did, you, 850
+how, did, you, 845
+why, did, you, 840
+where, did, you, 835
+when, did, you, 830
+who, did, you, 825
+do, you, want, 820
+do, you, need, 815
+do, you, have, 810
+do, you, know, 805
+do, you, think, 800
+do, you, feel, 795
+are, you, going, 790
+are, you, coming, 785
+are, you, sure, 780
+are, you, ready, 775
+are, you, serious, 770
+are, you, crazy, 765
+can, you, help, 760
+can, you, tell, 755
+can, you, see, 750
+can, you, hear, 745
+could, you, please, 740
+would, you, like, 735
+would, you, mind, 730
+will, you, be, 725
+should, we, go, 720
+can, we, get, 715
+can, i, have, 710
+can, i, get, 705
+may, i, have, 700
+let, me, know, 695
+let, me, see, 690
+let, me, check, 685
+let, me, think, 680
+give, me, a, 675
+tell, me, about, 670
+show, me, the, 665
+help, me, out, 660
+i, don't, know, 655
+i, don't, think, 650
+i, don't, want, 645
+i, don't, care, 640
+i, don't, have, 635
+i, don't, understand, 630
+i, didn't, know, 625
+i, didn't, mean, 620
+i, didn't, see, 615
+i, didn't, do, 610
+i, can't, wait, 605
+i, can't, believe, 600
+i, can't, stand, 595
+i, can't, see, 590
+i, couldn't, sleep, 585
+i, couldn't, find, 580
+i, wouldn't, do, 575
+i, wouldn't, say, 570
+i, shouldn't, have, 565
+i, am, not, 560
+i, am, sorry, 555
+i, am, sure, 550
+i, am, glad, 545
+i, am, happy, 540
+i, am, tired, 535
+i, am, hungry, 530
+i, was, just, 525
+i, was, wondering, 520
+i, was, thinking, 515
+i, was, hoping, 510
+i, have, a, 505
+i, have, to, 500
+i, need, a, 495
+i, need, to, 490
+i, want, a, 485
+i, want, to, 480
+i, would, like, 475
+i, would, love, 470
+i, feel, like, 465
+i, think, so, 460
+i, hope, so, 455
+i, guess, so, 450
+it, is, a, 445
+it, is, not, 440
+it, is, very, 435
+it, is, the, 430
+it, was, a, 425
+it, was, not, 420
+it, was, very, 415
+it, will, be, 410
+it, could, be, 405
+it, should, be, 400
+it, would, be, 395
+it, might, be, 390
+it, must, be, 385
+it, looks, like, 380
+it, sounds, like, 375
+it, feels, like, 370
+it, seems, like, 365
+it, doesn't, matter, 360
+it, didn't, work, 355
+that, is, a, 350
+that, is, the, 345
+that, was, a, 340
+that, was, the, 335
+that, will, be, 330
+that, sounds, good, 325
+that, looks, good, 320
+that, makes, sense, 315
+this, is, a, 310
+this, is, the, 305
+this, was, a, 300
+this, was, the, 295
+this, will, be, 290
+there, is, a, 285
+there, is, no, 280
+there, are, a, 275
+there, are, no, 270
+there, was, a, 265
+there, was, no, 260
+there, were, a, 255
+there, were, no, 250
+to, be, honest, 245
+to, tell, you, 240
+as, far, as, 235
+as, well, as, 230
+as, soon, as, 225
+as, long, as, 220
+as, much, as, 215
+for, a, while, 210
+for, a, long, 205
+in, a, row, 200
+in, the, morning, 195
+in, the, afternoon, 190
+in, the, evening, 185
+at, the, end, 180
+at, the, same, 175
+on, the, other, 170
+on, the, phone, 165
+by, the, time, 160
+by, the, way, 155
+from, time, to, 150
+from, start, to, 145
+with, respect, to, 140
+with, regard, to, 135
+due, to, the, 130
+prior, to, the, 125
+next, to, the, 120
+close, to, the, 115
+up, to, the, 110
+down, to, the, 105
+out, of, the, 104
+part, of, the, 103
+some, of, the, 102
+all, of, the, 101
+none, of, the, 100
+i, don't, know, if, 900
+i, don't, know, what, 895
+i, don't, know, how, 890
+i, don't, know, why, 885
+i, don't, want, to, 880
+i, didn't, want, to, 875
+i, don't, think, so, 870
+i, didn't, think, so, 865
+i, just, wanted, to, 860
+i, just, want, to, 855
+i, am, going, to, 850
+i, was, going, to, 845
+i, have, to, go, 840
+i, had, to, go, 835
+i, need, to, get, 830
+i, needed, to, get, 825
+i, would, like, to, 820
+i, would, love, to, 815
+i, look, forward, to, 810
+i, am, looking, forward, 805
+i, can't, wait, to, 800
+what, do, you, mean, 795
+what, do, you, think, 790
+what, do, you, want, 785
+what, are, you, doing, 780
+what, are, you, saying, 775
+what, did, you, do, 770
+what, did, you, say, 765
+what, are, we, doing, 760
+what, are, we, going, 755
+where, are, we, going, 750
+when, are, we, going, 745
+how, are, you, doing, 740
+how, have, you, been, 735
+do, you, want, to, 730
+do, you, have, a, 725
+do, you, know, what, 720
+do, you, know, how, 715
+do, you, think, it, 710
+are, you, going, to, 705
+are, you, ready, to, 700
+are, you, sure, you, 695
+can, you, tell, me, 690
+can, you, help, me, 685
+could, you, please, send, 680
+would, you, like, to, 675
+let, me, know, if, 670
+let, me, know, when, 665
+let, me, know, what, 660
+please, let, me, know, 655
+just, let, me, know, 650
+thank, you, so, much, 645
+thank, you, very, much, 640
+thanks, so, much, for, 635
+we, look, forward, to, 630
+we, are, looking, forward, 625
+have, a, great, day, 620
+have, a, good, day, 615
+have, a, good, weekend, 610
+have, a, great, weekend, 605
+hope, you, have, a, 600
+i, hope, you, are, 595
+just, wanted, to, check, 590
+just, checking, in, on, 585
+just, following, up, on, 580
+if, you, have, any, 575
+please, feel, free, to, 570
+feel, free, to, reach, 565
+reach, out, if, you, 560
+as, soon, as, possible, 555
+as, much, as, i, 550
+as, long, as, you, 545
+as, far, as, i, 540
+for, a, long, time, 535
+in, a, row, now, 530
+to, make, sure, that, 525
+it, was, nice, to, 520
+it, is, nice, to, 515
+nice, to, meet, you, 510
+nice, to, see, you, 505
+great, to, see, you, 500
+hope, to, see, you, 495
+can't, wait, to, see, 490
+can't, wait, to, hear, 485
+i, will, let, you, 480
+i, will, send, you, 475
+i, will, give, you, 470
+i, will, call, you, 465
+let's, catch, up, soon, 460
+let's, get, together, soon, 455
+do, you, want, me, 450
+would, you, like, me, 445
+i, thought, you, were, 440
+i, am, so, glad, 435
+i, am, so, happy, 430
+i, am, so, sorry, 425
+i, am, very, sorry, 420
+at, the, end, of, 415
+in, the, middle, of, 410
+the, rest, of, the, 405
+the, end, of, the, 400
+the, top, of, the, 395
+the, back, of, the, 390
+the, bottom, of, the, 385
+the, front, of, the, 380
+the, side, of, the, 375
+a, great, deal, of, 370
+a, lot, of, people, 365
+a, lot, of, time, 360
+a, lot, of, money, 355
+a, lot, of, things, 350
+for, the, first, time, 345
+for, the, last, time, 340
+is, one, of, the, 335
+was, one, of, the, 330
+as, one, of, the, 325
+be, one, of, the, 320
+to, be, able, to, 315
+going, to, have, to, 310
+in, front, of, the, 305
+on, top, of, the, 300
+at, the, same, time, 295
+by, the, time, we, 290
+on, the, other, hand, 285
+with, respect, to, the, 280
+in, order, to, make, 275
+to, make, sure, we, 270
+make, sure, that, we, 265
+due, to, the, fact, 260
+the, fact, that, the, 255
+based, on, the, fact, 250
+it, looks, like, a, 245
+it, looks, like, the, 240
+it, sounds, like, a, 235
+it, sounds, like, the, 230
+it, feels, like, a, 225
+it, seems, like, a, 220
+i, don't, think, it, 215
+i, don't, think, that, 210
+i, didn't, think, it, 205
+i, didn't, think, that, 200
+i, just, don't, know, 195
+i, just, can't, believe, 190
+i, just, wanted, you, 185
+i, just, want, you, 180
+i, will, be, there, 175
+i, will, be, back, 170
+i, will, let, him, 165
+i, will, let, her, 160
+i, am, going, out, 155
+i, am, staying, in, 150
+what, do, you, say, 145
+how, do, you, feel, 140
+where, do, you, live, 135
+why, do, you, ask, 130
+when, do, you, want, 125
+who, do, you, think, 120
+what, are, you, wearing, 115
+how, are, you, feeling, 110
+where, are, you, from, 105
+why, are, you, here, 100
+i, am, doing, 950
+i, am, trying, 945
+i, am, working, 940
+i, am, wondering, 935
+i, am, watching, 930
+i, am, reading, 925
+i, am, writing, 920
+i, am, feeling, 915
+i, am, getting, 910
+i, am, looking, 905
+i, am, heading, 900
+i, am, leaving, 895
+i, am, staying, 890
+i, am, sitting, 885
+i, am, standing, 880
+i, am, waiting, 875
+i, am, running, 870
+i, am, playing, 865
+i, am, eating, 860
+i, am, drinking, 855
+i, am, currently, 850
+i, am, officially, 845
+i, am, definitely, 840
+i, am, literally, 835
+i, am, totally, 830
+i, am, really, 825
+i, am, so, 820
+i, am, very, 815
+i, am, pretty, 810
+i, am, kind, of, 805
+i, am, sort, of, 800
+i, am, not, entirely, 795
+i, am, not, going, 790
+i, am, not, ready, 785
+i, am, not, doing, 780
+i, am, not, getting, 775
+i, am, not, looking, 770
+i, am, not, feeling, 765
+i'm, doing, 950
+i'm, trying, 945
+i'm, working, 940
+i'm, wondering, 935
+i'm, watching, 930
+i'm, reading, 925
+i'm, writing, 920
+i'm, feeling, 915
+i'm, getting, 910
+i'm, looking, 905
+i'm, heading, 900
+i'm, leaving, 895
+i'm, staying, 890
+i'm, sitting, 885
+i'm, standing, 880
+i'm, waiting, 875
+i'm, running, 870
+i'm, playing, 865
+i'm, eating, 860
+i'm, drinking, 855
+i'm, currently, 850
+i'm, officially, 845
+i'm, definitely, 840
+i'm, literally, 835
+i'm, totally, 830
+i'm, really, 825
+i'm, so, 820
+i'm, very, 815
+i'm, pretty, 810
+i'm, kind, of, 805
+i'm, sort, of, 800
+i'm, not, entirely, 795
+are, we, meeting, 950
+are, we, doing, 945
+are, we, going, 940
+are, we, leaving, 935
+are, we, eating, 930
+are, we, ready, 925
+are, we, sure, 920
+are, we, good, 915
+are, we, okay, 910
+are, we, still, 905
+are, we, there, 900
+are, we, almost, 895
+do, we, have, 890
+do, we, need, 885
+do, we, know, 880
+do, we, want, 875
+can, we, go, 870
+can, we, get, 865
+can, we, do, 860
+can, we, talk, 855
+can, we, meet, 850
+can, we, see, 845
+can, we, make, 840
+can, we, try, 835
+can, we, just, 830
+could, we, get, 825
+could, we, do, 820
+could, we, meet, 815
+could, we, go, 810
+could, we, talk, 805
+should, we, go, 800
+should, we, do, 795
+should, we, get, 790
+should, we, leave, 785
+should, we, try, 780
+should, we, ask, 775
+should, we, tell, 770
+what, time, is, 950
+what, time, are, 945
+what, time, do, 940
+what, time, does, 935
+what, time, will, 930
+what, time, should, 925
+what, time, did, 920
+what, time, works, 915
+what, time, to, 910
+when, are, you, 905
+when, are, we, 900
+when, is, the, 895
+when, is, it, 890
+when, do, you, 885
+when, do, we, 880
+when, does, the, 875
+when, does, it, 870
+when, will, you, 865
+when, will, it, 860
+when, did, you, 855
+when, did, it, 850
+at, what, time, 845
+around, what, time, 840
+this, time, of, 835
+next, time, i, 830
+next, time, you, 825
+last, time, i, 820
+last, time, you, 815
+last, time, we, 810
+first, time, i, 805
+every, time, i, 800
+any, time, you, 795
+by, the, time, 790
+in, no, time, 785
+all, the, time, 780
+half, the, time, 775
+most, of, the, time, 770
+some, of, the, time, 765
+at, the, same, time, 760
+one, at, a, time, 755
+take, your, time, 750
+have, a, good, time, 745
+what, are, you, up, 950
+what, you, up, to, 945
+are, you, up, to, 940
+you, up, to, today, 935
+you, up, to, tonight, 930
+up, to, much, today, 925
+not, up, to, much, 920
+what, is, going, on, 915
+is, going, on, with, 910
+going, on, with, you, 905
+how, is, it, going, 900
+is, it, going, well, 895
+how, are, things, going, 890
+are, things, going, well, 885
+hope, things, are, going, 880
+things, are, going, well, 875
+how, is, your, day, 870
+is, your, day, going, 865
+your, day, going, well, 860
+hope, your, day, is, 855
+how, was, your, day, 850
+was, your, day, good, 845
+how, was, the, weekend, 840
+was, the, weekend, good, 835
+did, you, have, a, 830
+you, have, a, good, 825
+have, a, good, weekend, 820
+did, you, do, anything, 815
+you, do, anything, fun, 810
+do, anything, fun, this, 805
+anything, fun, this, weekend, 800
+are, we, still, on, 795
+we, still, on, for, 790
+still, on, for, tonight, 785
+still, on, for, today, 780
+still, on, for, tomorrow, 775
+let, me, know, if, 770
+me, know, if, you, 765
+know, if, you, want, 770
+if, you, want, to, 765
+do, you, want, to, 760
+you, want, to, go, 755
+want, to, go, to, 750
+do, you, wanna, go, 745
+you, wanna, go, to, 740
+wanna, go, to, the, 735
+do, you, want, me, 730
+you, want, me, to, 725
+want, me, to, bring, 720
+do, you, need, me, 715
+you, need, me, to, 710
+need, me, to, bring, 705
+let, me, know, what, 700
+me, know, what, you, 695
+know, what, you, think, 690
+know, what, you, want, 685
+just, let, me, know, 680
+i, will, let, you, 675
+will, let, you, know, 670
+let, you, know, when, 665
+i'll, let, you, know, 660
+i, can, let, you, 655
+can, let, you, know, 650
+please, let, me, know, 645
+sounds, like, a, plan, 640
+that, sounds, like, a, 635
+it, sounds, like, a, 630
+works, for, me, 625
+that, works, for, me, 620
+it, works, for, me, 615
+works, for, you, 610
+if, it, works, for, 605
+time, works, for, you, 600
+what, time, works, for, 595
+where, do, you, want, 590
+do, you, plan, to, 585
+when, do, you, plan, 580
+how, do, you, plan, 575
+what, do, you, plan, 570
+i, don't, really, care, 565
+don't, really, care, about, 560
+i, don't, really, know, 555
+don't, really, know, what, 550
+i, do, not, know, 545
+i, do, not, think, 540
+i, do, not, want, 535
+i, do, not, have, 530
+i, do, not, care, 525
+i, do, not, mind, 520
+do, not, mind, if, 515
+not, mind, if, i, 510
+i, am, pretty, sure, 505
+am, pretty, sure, that, 500
+i'm, pretty, sure, that, 495
+i, am, pretty, confident, 490
+i, have, no, idea, 485
+have, no, idea, what, 480
+i, have, a, question, 475
+have, a, question, about, 470
+i, have, to, ask, 465
+please, find, attached, 950
+find, attached, the, 945
+attached, is, the, 940
+i, have, attached, the, 935
+have, attached, the, document, 930
+attached, the, document, for, 925
+the, document, for, your, 920
+document, for, your, review, 915
+for, your, review, and, 910
+your, review, and, approval, 905
+review, and, approval, process, 900
+if, you, have, any, 895
+you, have, any, questions, 890
+have, any, questions, or, 885
+any, questions, or, concerns, 880
+questions, or, concerns, please, 875
+or, concerns, please, let, 870
+concerns, please, let, me, 865
+please, let, me, know, 860
+let, me, know, if, 855
+me, know, if, you, 850
+know, if, you, have, 845
+if, you, need, more, 840
+if, you, need, anything, 835
+you, need, anything, else, 830
+need, anything, else, from, 825
+anything, else, from, me, 820
+do, not, hesitate, to, 815
+not, hesitate, to, contact, 810
+hesitate, to, contact, me, 805
+to, contact, me, if, 800
+contact, me, if, you, 795
+feel, free, to, reach, 790
+free, to, reach, out, 785
+to, reach, out, if, 780
+reach, out, if, you, 775
+i, am, reaching, out, 770
+am, reaching, out, to, 765
+reaching, out, to, you, 760
+out, to, you, regarding, 755
+to, you, regarding, the, 750
+i, am, writing, to, 745
+am, writing, to, you, 740
+writing, to, you, regarding, 735
+i, just, wanted, to, 730
+just, wanted, to, check, 725
+wanted, to, check, in, 720
+to, check, in, on, 715
+just, wanted, to, follow, 710
+wanted, to, follow, up, 705
+to, follow, up, on, 700
+follow, up, on, the, 695
+i, am, following, up, 690
+am, following, up, on, 685
+following, up, on, our, 680
+up, on, our, conversation, 675
+on, our, conversation, regarding, 670
+as, per, our, conversation, 665
+per, our, conversation, i, 660
+as, discussed, in, our, 655
+discussed, in, our, meeting, 650
+in, our, meeting, yesterday, 645
+thank, you, for, your, 640
+you, for, your, time, 635
+for, your, time, and, 630
+your, time, and, consideration, 625
+thank, you, in, advance, 620
+you, in, advance, for, 615
+in, advance, for, your, 610
+advance, for, your, help, 605
+thanks, for, getting, back, 600
+for, getting, back, to, 595
+getting, back, to, me, 590
+back, to, me, so, 585
+to, me, so, quickly, 580
+i, look, forward, to, 575
+look, forward, to, hearing, 570
+forward, to, hearing, from, 565
+to, hearing, from, you, 560
+looking, forward, to, hearing, 555
+forward, to, working, with, 550
+to, working, with, you, 545
+looking, forward, to, the, 540
+forward, to, the, meeting, 535
+hope, you, had, a, 530
+you, had, a, great, 525
+had, a, great, weekend, 520
+hope, you, are, having, 515
+you, are, having, a, 510
+are, having, a, good, 505
+having, a, good, week, 500
+hope, this, email, finds, 495
+this, email, finds, you, 490
+email, finds, you, well, 485
+finds, you, well, and, 480
+best, regards, and, thanks, 475
+regards, and, thanks, for, 470
+thanks, for, your, patience, 465
+thank, you, for, understanding, 460
+thanks, for, understanding, the, 455
+at, the, end, of, 950
+the, end, of, the, 945
+end, of, the, day, 940
+at, the, same, time, 935
+the, same, time, as, 930
+for, the, most, part, 925
+in, the, middle, of, 920
+the, middle, of, the, 915
+middle, of, the, night, 910
+in, the, grand, scheme, 905
+the, grand, scheme, of, 900
+grand, scheme, of, things, 895
+on, the, other, hand, 890
+the, other, hand, it, 885
+in, a, lot, of, 880
+a, lot, of, people, 875
+lot, of, people, think, 870
+for, a, long, time, 865
+a, long, time, ago, 860
+in, front, of, the, 855
+front, of, the, house, 850
+on, top, of, that, 845
+out, of, the, blue, 840
+of, the, blue, and, 835
+as, a, matter, of, 830
+a, matter, of, fact, 825
+matter, of, fact, i, 820
+for, what, it's, worth, 815
+what, it's, worth, i, 810
+to, make, a, long, 805
+make, a, long, story, 800
+a, long, story, short, 795
+long, story, short, we, 790
+by, the, way, i, 785
+the, way, i, see, 780
+way, i, see, it, 775
+it, is, what, it, 770
+is, what, it, is, 765
+at, this, point, in, 760
+this, point, in, time, 755
+in, spite, of, the, 750
+spite, of, the, fact, 745
+of, the, fact, that, 740
+due, to, the, fact, 735
+to, the, fact, that, 730
+based, on, the, fact, 725
+on, the, fact, that, 720
+in, light, of, the, 715
+light, of, the, fact, 710
+with, respect, to, the, 705
+respect, to, the, issue, 700
+in, terms, of, the, 695
+terms, of, the, project, 690
+as, far, as, i, 685
+far, as, i, know, 680
+far, as, i, can, 675
+as, far, as, the, 670
+far, as, the, eye, 665
+as, well, as, the, 660
+well, as, the, other, 655
+as, long, as, you, 650
+long, as, you, want, 645
+as, soon, as, possible, 640
+soon, as, possible, to, 635
+as, much, as, i, 630
+much, as, i, love, 625
+in, order, to, get, 620
+order, to, get, the, 615
+in, order, to, make, 610
+order, to, make, it, 605
+with, a, grain, of, 600
+a, grain, of, salt, 595
+grain, of, salt, but, 590
+on, a, regular, basis, 585
+a, regular, basis, for, 580
+where, are, we, going, 950
+are, we, going, to, 945
+we, going, to, the, 940
+going, to, the, store, 935
+where, did, you, go, 930
+did, you, go, to, 925
+you, go, to, the, 920
+go, to, the, doctor, 915
+how, did, it, go, 910
+did, it, go, well, 905
+how, long, does, it, 900
+long, does, it, take, 895
+does, it, take, to, 890
+how, much, does, it, 885
+much, does, it, cost, 880
+does, it, cost, to, 875
+how, many, do, you, 870
+many, do, you, need, 865
+do, you, need, to, 860
+who, are, you, going, 855
+are, you, going, with, 850
+who, is, going, to, 845
+is, going, to, be, 840
+going, to, be, there, 835
+why, are, you, so, 830
+are, you, so, mad, 825
+why, did, you, do, 820
+did, you, do, that, 815
+why, is, it, so, 810
+is, it, so, hard, 805
+what, do, you, think, 800
+do, you, think, about, 795
+what, do, you, want, 790
+do, you, want, for, 785
+what, are, you, doing, 780
+are, you, doing, here, 775
+what, did, you, say, 770
+did, you, say, to, 765
+what, are, we, having, 760
+are, we, having, for, 755
+we, having, for, dinner, 750
+i, don't, know, what, 745
+don't, know, what, to, 740
+know, what, to, do, 735
+i, don't, know, how, 730
+don't, know, how, to, 725
+know, how, to, fix, 720
+i, don't, know, why, 715
+don't, know, why, it, 710
+know, why, it, is, 705
+i, don't, know, who, 700
+don't, know, who, it, 695
+know, who, it, was, 690
+i, don't, know, when, 685
+don't, know, when, it, 680
+know, when, it, will, 675
+i, don't, know, where, 670
+don't, know, where, it, 665
+know, where, it, is, 660
+i, don't, know, if, 655
+don't, know, if, i, 650
+know, if, i, can, 645
+i, am, not, convinced, 640
+am, not, sure, what, 635
+not, sure, what, to, 630
+am, not, sure, where, 625
+not, sure, where, to, 620
+am, not, sure, when, 615
+not, sure, when, to, 610
+am, not, sure, why, 605
+not, sure, why, it, 600
+am, not, sure, who, 595
+not, sure, who, is, 590
+am, not, sure, how, 585
+not, sure, how, to, 580
+thank, you, for, your, 950
+thank, you, for, the, 945
+thank, you, for, all, 940
+thank, you, for, letting, 935
+thank, you, for, reaching, 930
+thank, you, for, sharing, 925
+thank, you, for, understanding, 920
+thank, you, for, getting, 915
+thank, you, for, helping, 910
+thank, you, for, taking, 905
+thanks, for, your, help, 900
+thanks, for, the, update, 895
+thanks, for, the, heads, 890
+thanks, for, the, info, 885
+thanks, for, letting, me, 880
+thanks, for, reaching, out, 875
+thanks, for, sharing, this, 870
+thanks, for, getting, back, 865
+thanks, for, all, your, 860
+thanks, for, taking, the, 855
+sorry, for, the, delay, 850
+sorry, for, the, late, 845
+sorry, for, the, confusion, 840
+sorry, for, the, inconvenience, 835
+sorry, for, any, confusion, 830
+sorry, for, any, inconvenience, 825
+sorry, for, the, short, 820
+sorry, for, not, getting, 815
+sorry, for, the, trouble, 810
+sorry, for, being, so, 805
+looking, forward, to, seeing, 800
+looking, forward, to, hearing, 795
+looking, forward, to, meeting, 790
+looking, forward, to, working, 785
+looking, forward, to, the, 780
+looking, forward, to, it, 775
+looking, forward, to, reading, 770
+looking, forward, to, speaking, 765
+look, forward, to, seeing, 760
+look, forward, to, hearing, 755
+please, let, me, know, 750
+just, let, me, know, 745
+will, let, you, know, 740
+i, will, let, you, 735
+let, me, know, if, 730
+let, me, know, when, 725
+let, me, know, what, 720
+let, us, know, if, 715
+please, let, us, know, 710
+do, let, me, know, 705
+if, you, have, any, 700
+you, have, any, questions, 695
+have, any, questions, or, 690
+any, questions, or, concerns, 685
+questions, please, let, me, 680
+if, you, need, anything, 675
+you, need, anything, else, 670
+if, there, is, anything, 665
+there, is, anything, else, 660
+is, anything, else, i, 655
+how, is, your, day, 650
+how, is, your, week, 645
+how, is, your, morning, 640
+how, is, the, family, 635
+how, is, it, going, 630
+how, are, you, doing, 625
+how, are, things, going, 620
+how, are, the, kids, 615
+how, are, we, doing, 610
+how, are, you, feeling, 605
+hope, you, are, doing, 600
+hope, you, are, well, 595
+hope, you, are, having, 590
+hope, you, had, a, 585
+hope, you, have, a, 580
+i, hope, you, are, 575
+i, hope, you, have, 570
+hope, your, week, is, 565
+hope, your, day, is, 560
+hope, all, is, well, 555
+have, a, great, day, 550
+have, a, great, weekend, 545
+have, a, good, one, 540
+have, a, good, time, 535
+have, a, good, day, 530
+have, a, good, weekend, 525
+have, a, wonderful, day, 520
+have, a, wonderful, weekend, 515
+have, a, safe, trip, 510
+have, a, safe, flight, 505
+what, are, you, doing, 500
+what, are, you, up, 495
+what, are, you, going, 490
+what, are, you, thinking, 485
+what, are, you, looking, 480
+what, are, you, talking, 475
+what, are, you, wearing, 470
+what, are, you, having, 465
+what, are, you, making, 460
+what, are, you, playing, 455
+what, do, you, think, 450
+what, do, you, want, 445
+what, do, you, mean, 440
+what, do, you, need, 435
+what, do, you, say, 430
+what, do, you, know, 425
+what, do, you, have, 420
+what, do, you, see, 415
+what, do, you, like, 410
+what, do, you, recommend, 405
+do, you, want, to, 400
+do, you, want, me, 395
+you, want, to, go, 390
+you, want, to, do, 385
+you, want, to, come, 380
+you, want, me, to, 375
+want, me, to, pick, 370
+want, me, to, bring, 365
+want, me, to, come, 360
+want, me, to, call, 355
+i, am, going, to, 350
+am, going, to, be, 345
+am, going, to, get, 340
+am, going, to, the, 335
+am, going, to, have, 330
+am, going, to, try, 325
+am, going, to, take, 320
+am, going, to, go, 315
+am, going, to, make, 310
+am, going, to, do, 305
+i'm, going, to, be, 300
+i'm, going, to, get, 295
+i'm, going, to, the, 290
+i'm, going, to, have, 285
+i'm, going, to, try, 280
+i'm, going, to, take, 275
+i'm, going, to, go, 270
+i'm, going, to, make, 265
+i'm, going, to, do, 260
+i'm, going, to, sleep, 255
+i, have, to, go, 250
+i, have, to, get, 245
+i, have, to, work, 240
+i, have, to, leave, 235
+i, have, to, be, 230
+i, have, to, say, 225
+i, have, to, do, 220
+i, have, to, make, 215
+i, have, to, call, 210
+i, have, to, tell, 205
+you, have, to, be, 200
+you, have, to, go, 195
+you, have, to, do, 190
+you, have, to, get, 185
+you, have, to, see, 180
+you, have, to, try, 175
+you, have, to, make, 170
+you, have, to, come, 165
+you, have, to, wait, 160
+you, have, to, pay, 155
+we, have, to, go, 150
+we, have, to, get, 145
+we, have, to, be, 140
+we, have, to, do, 135
+we, have, to, make, 130
+we, have, to, leave, 125
+we, have, to, wait, 120
+we, have, to, talk, 115
+we, have, to, stop, 110
+we, have, to, see, 105
+just, wanted, to, follow, 950
+wanted, to, follow, up, 945
+to, follow, up, on, 940
+follow, up, on, my, 935
+up, on, my, email, 930
+on, my, email, regarding, 925
+i, am, reaching, out, 920
+am, reaching, out, to, 915
+reaching, out, to, you, 910
+out, to, you, regarding, 905
+i, am, writing, to, 900
+am, writing, to, you, 895
+writing, to, you, to, 890
+to, you, to, request, 885
+you, to, request, a, 880
+as, per, our, conversation, 875
+per, our, conversation, i, 870
+our, conversation, i, have, 865
+as, we, discussed, on, 860
+we, discussed, on, the, 855
+discussed, on, the, phone, 850
+on, the, phone, earlier, 845
+please, find, attached, the, 840
+find, attached, the, document, 835
+attached, the, document, for, 830
+the, document, for, your, 825
+document, for, your, review, 820
+for, your, review, and, 815
+your, review, and, approval, 810
+have, any, questions, please, 795
+any, questions, please, let, 790
+questions, please, let, me, 785
+let, me, know, if, 775
+me, know, if, you, 770
+know, if, you, have, 765
+if, you, have, any, 760
+you, have, any, concerns, 755
+feel, free, to, reach, 750
+free, to, reach, out, 745
+to, reach, out, to, 740
+reach, out, to, me, 735
+out, to, me, if, 730
+to, me, if, you, 725
+me, if, you, need, 720
+if, you, need, anything, 715
+you, need, anything, else, 710
+do, not, hesitate, to, 705
+not, hesitate, to, contact, 700
+hesitate, to, contact, me, 695
+i, look, forward, to, 690
+forward, to, hearing, from, 680
+to, hearing, from, you, 675
+look, forward, to, working, 670
+forward, to, working, with, 665
+to, working, with, you, 660
+thank, you, for, your, 655
+you, for, your, time, 650
+for, your, time, and, 645
+your, time, and, consideration, 640
+thank, you, in, advance, 635
+you, in, advance, for, 630
+in, advance, for, your, 625
+advance, for, your, help, 620
+hope, you, have, a, 615
+you, have, a, great, 610
+have, a, great, weekend, 605
+hope, you, had, a, 600
+you, had, a, good, 595
+had, a, good, weekend, 590
+what, time, works, best, 585
+time, works, best, for, 580
+works, best, for, you, 575
+let, me, know, what, 570
+me, know, what, time, 565
+know, what, time, works, 560
+what, time, works, for, 555
+are, you, available, for, 550
+you, available, for, a, 545
+available, for, a, quick, 540
+for, a, quick, call, 535
+a, quick, call, tomorrow, 530
+can, we, set, up, 525
+we, set, up, a, 520
+set, up, a, time, 515
+up, a, time, to, 510
+a, time, to, discuss, 505
+let's, set, up, a, 500
+would, you, be, available, 495
+you, be, available, to, 490
+when, would, be, a, 485
+would, be, a, good, 480
+be, a, good, time, 475
+a, good, time, to, 470
+good, time, to, chat, 465
+i, am, free, on, 460
+am, free, on, monday, 455
+am, free, on, tuesday, 450
+am, free, on, wednesday, 445
+am, free, on, thursday, 440
+am, free, on, friday, 435
+does, that, work, for, 430
+that, work, for, you, 425
+if, that, works, for, 420
+that, works, for, you, 415
+that, works, for, me, 410
+it, works, for, me, 405
+sounds, like, a, plan, 400
+like, a, plan, to, 395
+a, plan, to, me, 390
+see, you, then, 385
+talk, to, you, then, 380
+i, completely, agree, with, 375
+completely, agree, with, you, 370
+i, think, that, is, 365
+think, that, is, a, 360
+that, is, a, good, 355
+is, a, good, idea, 350
+that, sounds, like, a, 345
+sounds, like, a, great, 340
+like, a, great, idea, 335
+i, am, not, sure, 330
+am, not, sure, if, 325
+not, sure, if, i, 320
+sure, if, i, can, 315
+i, don't, think, that, 310
+don't, think, that, is, 305
+think, that, is, the, 300
+that, is, the, best, 295
+is, the, best, way, 290
+the, best, way, to, 285
+it, might, be, a, 280
+might, be, a, good, 275
+it, would, be, great, 270
+would, be, great, if, 265
+be, great, if, you, 260
+great, if, you, could, 255
+if, you, could, please, 250
+you, could, please, send, 245
+i, was, wondering, if, 240
+was, wondering, if, you, 235
+wondering, if, you, could, 230
+do, you, think, it, 225
+you, think, it, is, 220
+think, it, is, a, 215
+it, makes, sense, to, 210
+makes, sense, to, me, 205
+that, makes, perfect, sense, 200
+i, will, keep, you, 195
+will, keep, you, posted, 190
+keep, you, posted, on, 185
+please, keep, me, updated, 180
+keep, me, updated, on, 175
+i, will, let, you, 170
+will, let, you, know, 165
+let, you, know, as, 160
+you, know, as, soon, 155
+know, as, soon, as, 150
+as, soon, as, i, 145
+soon, as, i, have, 140
+as, i, have, more, 135
+i, have, more, information, 130
+have, more, information, on, 125
+once, i, have, more, 120
+when, i, know, more, 115
+i, will, be, sure, 110
+will, be, sure, to, 105
+be, sure, to, let, 100
+what, are, you, up, 995
+are, you, up, to, 990
+you, up, to, tonight, 985
+what, are, you, doing, 980
+are, you, doing, tonight, 975
+are, you, doing, tomorrow, 970
+are, you, doing, this, 965
+you, doing, this, weekend, 960
+do, you, want, to, 955
+you, want, to, hang, 950
+want, to, hang, out, 945
+to, hang, out, tonight, 940
+do, you, wanna, hang, 935
+you, wanna, hang, out, 930
+wanna, hang, out, tonight, 925
+let's, hang, out, this, 920
+hang, out, this, weekend, 915
+let's, get, together, soon, 910
+we, should, get, together, 905
+should, get, together, soon, 900
+we, need, to, catch, 895
+need, to, catch, up, 890
+to, catch, up, soon, 885
+it, has, been, a, 880
+has, been, a, while, 875
+been, a, while, since, 870
+a, while, since, we, 865
+it's, been, a, while, 860
+been, so, long, since, 855
+so, long, since, we, 850
+how, have, you, been, 845
+have, you, been, up, 840
+you, been, up, to, 835
+what, have, you, been, 830
+have, you, been, doing, 825
+i, have, been, so, 820
+have, been, so, busy, 815
+been, so, busy, lately, 810
+i've, been, so, busy, 805
+sorry, i, missed, your, 800
+i, missed, your, call, 795
+missed, your, call, earlier, 790
+sorry, i, just, saw, 785
+i, just, saw, this, 780
+just, saw, this, message, 775
+sorry, for, the, late, 770
+for, the, late, reply, 765
+i, will, call, you, 760
+will, call, you, back, 755
+call, you, back, in, 750
+you, back, in, a, 745
+back, in, a, few, 740
+in, a, few, minutes, 735
+i'm, on, my, way, 730
+on, my, way, home, 725
+on, my, way, to, 720
+i, am, almost, there, 715
+am, almost, there, now, 710
+i'm, almost, there, now, 705
+i, will, be, there, 700
+will, be, there, in, 695
+be, there, in, a, 690
+there, in, a, few, 685
+in, a, few, minutes, 680
+be, there, in, five, 675
+there, in, five, minutes, 670
+be, there, in, ten, 665
+there, in, ten, minutes, 660
+i, am, running, late, 655
+am, running, late, today, 650
+i'm, running, late, today, 645
+i, will, be, a, 640
+will, be, a, little, 635
+be, a, little, late, 630
+a, little, late, today, 625
+i, am, stuck, in, 620
+am, stuck, in, traffic, 615
+i'm, stuck, in, traffic, 610
+stuck, in, traffic, right, 605
+in, traffic, right, now, 600
+i, am, at, the, 595
+i'm, at, the, store, 590
+i, am, at, work, 585
+i'm, at, work, right, 580
+at, work, right, now, 575
+i, am, heading, home, 570
+am, heading, home, now, 565
+i'm, heading, home, now, 560
+i, am, going, to, 555
+am, going, to, bed, 550
+i'm, going, to, bed, 545
+going, to, bed, soon, 540
+i, am, so, tired, 535
+am, so, tired, today, 530
+i'm, so, tired, today, 525
+i, am, exhausted, today, 520
+i'm, exhausted, today, and, 515
+i, have, a, headache, 510
+have, a, headache, today, 505
+i, am, not, feeling, 500
+am, not, feeling, well, 495
+not, feeling, well, today, 490
+i'm, not, feeling, well, 485
+i, feel, so, sick, 480
+feel, so, sick, today, 475
+i, hope, you, feel, 470
+hope, you, feel, better, 465
+you, feel, better, soon, 460
+feel, better, soon, and, 455
+get, well, soon, and, 450
+i, love, you, so, 445
+love, you, so, much, 440
+you, so, much, baby, 435
+i, miss, you, so, 430
+miss, you, so, much, 425
+you, so, much, too, 420
+can't, wait, to, see, 415
+wait, to, see, you, 410
+to, see, you, tonight, 405
+to, see, you, tomorrow, 400
+see, you, tomorrow, morning, 395
+see, you, tomorrow, night, 390
+i, will, see, you, 385
+will, see, you, then, 380
+see, you, then, bye, 375
+talk, to, you, later, 370
+to, you, later, today, 365
+talk, to, you, soon, 360
+to, you, soon, bye, 355
+have, a, good, night, 350
+have, a, good, evening, 345
+have, a, great, night, 340
+have, a, great, evening, 335
+good, morning, how, are, 330
+morning, how, are, you, 325
+how, are, you, today, 320
+how, did, you, sleep, 315
+did, you, sleep, well, 310
+hope, you, slept, well, 305
+good, night, sleep, tight, 300
+night, sleep, tight, and, 295
+sleep, tight, and, don't, 290
+tight, and, don't, let, 285
+and, don't, let, the, 280
+don't, let, the, bed, 275
+let, the, bed, bugs, 270
+the, bed, bugs, bite, 265
+sweet, dreams, my, love, 260
+sweet, dreams, talk, tomorrow, 255
+have, sweet, dreams, tonight, 250
+what, do, you, want, 245
+do, you, want, for, 240
+you, want, for, dinner, 235
+want, for, dinner, tonight, 230
+what, are, we, having, 225
+are, we, having, for, 220
+we, having, for, dinner, 215
+having, for, dinner, tonight, 210
+i, am, so, hungry, 205
+am, so, hungry, right, 200
+so, hungry, right, now, 195
+i'm, so, hungry, right, 190
+i, am, starving, right, 185
+am, starving, right, now, 180
+i'm, starving, right, now, 175
+let's, order, some, food, 170
+order, some, food, tonight, 165
+what, kind, of, food, 160
+kind, of, food, do, 155
+of, food, do, you, 150
+food, do, you, want, 145
+i, could, go, for, 140
+could, go, for, some, 135
+go, for, some, pizza, 130
+for, some, pizza, tonight, 125
+how, about, we, get, 120
+about, we, get, some, 115
+we, get, some, takeout, 110
+get, some, takeout, tonight, 105
+where, did, you, go, 990
+when, did, you, get, 985
+how, much, is, it, 980
+how, much, does, it, 975
+much, does, it, cost, 970
+does, it, cost, to, 965
+where, is, the, closest, 960
+where, is, the, nearest, 955
+what, time, does, the, 950
+what, time, do, you, 945
+time, do, you, get, 940
+do, you, get, off, 935
+you, get, off, work, 930
+what, time, are, you, 925
+time, are, you, going, 920
+what, time, should, i, 915
+time, should, i, be, 910
+should, i, be, there, 905
+how, long, will, it, 900
+long, will, it, take, 895
+will, it, take, to, 890
+how, long, does, it, 885
+how, far, away, is, 880
+far, away, is, it, 875
+how, long, is, the, 870
+long, is, the, drive, 865
+is, it, going, to, 860
+it, going, to, rain, 855
+going, to, rain, today, 850
+what, is, the, weather, 845
+is, the, weather, like, 840
+the, weather, like, today, 835
+what, is, it, called, 830
+what, was, the, name, 825
+was, the, name, of, 820
+the, name, of, the, 815
+what, did, you, say, 810
+what, do, you, mean, 805
+do, you, mean, by, 800
+you, mean, by, that, 795
+what, are, you, saying, 790
+why, did, you, do, 785
+did, you, do, that, 780
+how, did, you, know, 775
+where, did, you, find, 770
+did, you, find, it, 765
+who, are, you, with, 760
+who, is, going, to, 755
+is, going, to, be, 750
+going, to, be, there, 745
+when, is, your, birthday, 740
+what, day, is, it, 735
+day, is, it, today, 730
+what, is, today's, date, 725
+what, do, we, need, 720
+do, we, need, to, 715
+do, you, have, any, 710
+do, you, have, a, 705
+do, you, know, how, 700
+you, know, how, to, 695
+do, you, know, where, 690
+you, know, where, the, 685
+do, you, know, what, 680
+you, know, what, time, 675
+know, what, time, it, 670
+know, what, time, the, 665
+do, you, know, who, 660
+do, you, know, why, 655
+why, would, you, do, 650
+would, you, do, that, 645
+did, you, get, my, 640
+you, get, my, text, 635
+any, updates, on, the, 995
+any, update, on, the, 990
+do, you, have, an, 985
+have, an, update, on, 980
+what, is, the, status, 975
+is, the, status, of, 970
+the, status, of, the, 965
+keep, me, in, the, 960
+me, in, the, loop, 955
+please, keep, me, in, 950
+i, will, keep, you, 945
+will, keep, you, posted, 940
+keep, you, posted, on, 935
+thanks, for, the, heads, 930
+for, the, heads, up, 925
+just, a, heads, up, 920
+wanted, to, give, you, 915
+give, you, a, heads, 910
+to, give, you, a, 905
+a, quick, heads, up, 900
+can, we, jump, on, 895
+we, jump, on, a, 890
+jump, on, a, call, 885
+hop, on, a, call, 880
+let's, hop, on, a, 875
+can, we, hop, on, 870
+are, you, free, to, 865
+you, free, to, chat, 860
+do, you, have, a, 855
+have, a, few, minutes, 850
+a, few, minutes, to, 845
+few, minutes, to, chat, 840
+i, will, send, an, 835
+will, send, an, invite, 830
+send, a, calendar, invite, 825
+did, you, get, the, 820
+you, get, the, invite, 815
+when, are, you, free, 810
+let, me, check, my, 805
+check, my, calendar, and, 800
+let's, touch, base, on, 795
+touch, base, on, this, 790
+we, can, touch, base, 785
+just, to, clarify, the, 780
+to, clarify, the, situation, 775
+did, you, mean, to, 770
+i, see, what, you, 765
+see, what, you, mean, 760
+i, know, what, you, 755
+know, what, you, mean, 750
+i, couldn't, agree, more, 745
+couldn't, agree, more, with, 740
+that, makes, total, sense, 735
+makes, total, sense, to, 730
+that, is, exactly, what, 725
+is, exactly, what, i, 720
+exactly, what, i, was, 715
+what, i, was, thinking, 710
+i, was, thinking, the, 705
+thinking, the, same, thing, 700
+we, are, on, the, 695
+are, on, the, same, 690
+on, the, same, page, 685
+my, apologies, for, the, 680
+apologies, for, the, delay, 675
+apologize, for, the, delay, 670
+i, apologize, for, the, 665
+please, accept, my, apologies, 660
+accept, my, apologies, for, 655
+my, mistake, i, will, 650
+sorry, about, that, i, 645
+i, am, sorry, about, 640
+am, sorry, about, that, 635
+that, was, my, mistake, 630
+was, my, fault, i, 625
+my, fault, i, will, 620
+sorry, for, the, confusion, 615
+can't, thank, you, enough, 610
+i, can't, thank, you, 605
+thanks, a, million, for, 600
+thanks, a, lot, for, 595
+i, really, appreciate, it, 590
+really, appreciate, your, help, 585
+i, appreciate, your, time, 580
+appreciate, your, time, and, 575
+thank, you, for, everything, 570
+thanks, again, for, your, 565
+you, are, the, best, 560
+are, the, best, thank, 555
+the, best, thank, you, 550
+you, are, a, lifesaver, 545
+have, a, great, rest, 540
+a, great, rest, of, 535
+great, rest, of, your, 530
+rest, of, your, day, 525
+rest, of, your, week, 520
+enjoy, the, rest, of, 515
+enjoy, your, weekend, and, 510
+any, fun, plans, for, 505
+plans, for, the, weekend, 500
+any, big, plans, for, 495
+what, are, your, plans, 490
+are, your, plans, for, 485
+what, is, for, dinner, 480
+is, for, dinner, tonight, 475
+want, to, grab, a, 470
+to, grab, a, bite, 465
+grab, a, bite, to, 460
+a, bite, to, eat, 455
+do, you, want, to, 450
+you, want, to, grab, 445
+let's, grab, lunch, sometime, 440
+grab, lunch, sometime, soon, 435
+can, i, get, a, 430
+i, would, like, a, 425
+would, like, to, order, 420
+like, to, order, a, 415
+to, order, some, food, 410
+order, some, food, tonight, 405
+it, is, so, nice, 400
+is, so, nice, out, 395
+so, nice, out, today, 390
+it, is, supposed, to, 385
+is, supposed, to, rain, 380
+supposed, to, rain, tomorrow, 375
+beautiful, day, out, today, 370
+how, is, the, weather, 365
+is, the, weather, over, 360
+the, weather, over, there, 355
+did, you, watch, the, 350
+you, watch, the, game, 345
+watch, the, game, last, 340
+the, game, last, night, 335
+how, have, you, been, 330
+have, you, been, lately, 325
+it, has, been, so, 320
+has, been, so, long, 315
+been, so, long, since, 310
+so, long, since, we, 305
+since, we, last, spoke, 300
+we, need, to, catch, 295
+need, to, catch, up, 290
+to, catch, up, soon, 285
+let's, get, together, soon, 280
+get, together, for, drinks, 275
+we, should, get, together, 270
+i, should, be, there, 265
+should, be, there, in, 260
+be, there, in, about, 255
+there, in, about, ten, 250
+in, about, ten, minutes, 245
+i, am, running, a, 240
+am, running, a, bit, 235
+running, a, bit, late, 230
+a, bit, late, today, 225
+just, leaving, the, house, 220
+leaving, the, house, now, 215
+on, my, way, over, 210
+my, way, over, now, 205
+i, just, got, here, 200
+just, got, here, where, 195
+got, here, where, are, 190
+here, where, are, you, 185
+where, did, you, park, 180
+let, me, know, when, 175
+me, know, when, you, 170
+know, when, you, arrive, 165
+i, am, writing, 995
+am, writing, to, 990
+writing, to, follow, 985
+to, follow, up, 980
+follow, up, on, 975
+up, on, my, 970
+on, my, previous, 965
+my, previous, email, 960
+previous, email, regarding, 955
+email, regarding, the, 950
+i, am, writing, to, 945
+am, writing, to, follow, 940
+writing, to, follow, up, 935
+to, follow, up, on, 930
+follow, up, on, my, 925
+up, on, my, previous, 920
+on, my, previous, email, 915
+my, previous, email, regarding, 910
+previous, email, regarding, the, 905
+could, you, please, 900
+you, please, provide, 895
+please, provide, an, 890
+provide, an, update, 885
+an, update, on, 880
+update, on, the, 875
+on, the, status, 870
+the, status, of, 865
+status, of, the, 860
+of, the, project, 855
+could, you, please, provide, 850
+you, please, provide, an, 845
+please, provide, an, update, 840
+provide, an, update, on, 835
+an, update, on, the, 830
+update, on, the, status, 825
+on, the, status, of, 820
+the, status, of, the, 815
+status, of, the, project, 810
+i, would, like, 805
+would, like, to, 800
+like, to, schedule, 795
+to, schedule, a, 790
+schedule, a, meeting, 785
+a, meeting, to, 780
+meeting, to, discuss, 775
+to, discuss, this, 770
+discuss, this, further, 765
+i, would, like, to, 760
+would, like, to, schedule, 755
+like, to, schedule, a, 750
+to, schedule, a, meeting, 745
+schedule, a, meeting, to, 740
+a, meeting, to, discuss, 735
+meeting, to, discuss, this, 730
+to, discuss, this, further, 725
+please, let, me, 720
+let, me, know, 715
+me, know, if, 710
+know, if, you, 705
+if, you, need, 700
+you, need, any, 695
+need, any, additional, 690
+any, additional, information, 685
+additional, information, from, 680
+information, from, me, 675
+please, let, me, know, 670
+let, me, know, if, 665
+me, know, if, you, 660
+know, if, you, need, 655
+if, you, need, any, 650
+you, need, any, additional, 645
+need, any, additional, information, 640
+any, additional, information, from, 635
+additional, information, from, me, 630
+i, look, forward, 625
+look, forward, to, 620
+forward, to, hearing, 615
+to, hearing, from, 610
+hearing, from, you, 605
+from, you, soon, 600
+you, soon, regarding, 595
+soon, regarding, this, 590
+regarding, this, matter, 585
+i, look, forward, to, 580
+look, forward, to, hearing, 575
+forward, to, hearing, from, 570
+to, hearing, from, you, 565
+hearing, from, you, soon, 560
+from, you, soon, regarding, 555
+you, soon, regarding, this, 550
+soon, regarding, this, matter, 545
+thanks, for, bringing, 540
+for, bringing, this, 535
+bringing, this, to, 530
+this, to, my, 525
+to, my, attention, 520
+my, attention, i, 515
+attention, i, will, 510
+i, will, look, 505
+will, look, into, 500
+look, into, it, 495
+thanks, for, bringing, this, 490
+for, bringing, this, to, 485
+bringing, this, to, my, 480
+this, to, my, attention, 475
+to, my, attention, i, 470
+my, attention, i, will, 465
+attention, i, will, look, 460
+i, will, look, into, 455
+will, look, into, it, 450
+i, am, out, 445
+am, out, of, 440
+out, of, the, 435
+of, the, office, 430
+the, office, today, 425
+office, today, and, 420
+today, and, will, 415
+and, will, have, 410
+will, have, limited, 405
+have, limited, access, 400
+i, am, out, of, 395
+am, out, of, the, 390
+out, of, the, office, 385
+of, the, office, today, 380
+the, office, today, and, 375
+office, today, and, will, 370
+today, and, will, have, 365
+and, will, have, limited, 360
+will, have, limited, access, 355
+if, you, need, 350
+you, need, immediate, 345
+need, immediate, assistance, 340
+immediate, assistance, please, 335
+assistance, please, contact, 330
+please, contact, my, 325
+contact, my, colleague, 320
+if, you, need, immediate, 315
+you, need, immediate, assistance, 310
+need, immediate, assistance, please, 305
+immediate, assistance, please, contact, 300
+assistance, please, contact, my, 295
+please, contact, my, colleague, 290
+do, you, have, 285
+you, have, any, 280
+have, any, availability, 275
+any, availability, for, 270
+availability, for, a, 265
+for, a, quick, 260
+a, quick, call, 255
+quick, call, tomorrow, 250
+do, you, have, any, 245
+you, have, any, availability, 240
+have, any, availability, for, 235
+any, availability, for, a, 230
+availability, for, a, quick, 225
+for, a, quick, call, 220
+a, quick, call, tomorrow, 215
+am, writing, to, 205
+writing, to, inform, 200
+to, inform, you, 195
+inform, you, that, 190
+you, that, we, 185
+that, we, have, 180
+we, have, received, 175
+have, received, your, 170
+received, your, application, 165
+i, am, writing, to, 160
+am, writing, to, inform, 155
+writing, to, inform, you, 150
+to, inform, you, that, 145
+inform, you, that, we, 140
+you, that, we, have, 135
+that, we, have, received, 130
+we, have, received, your, 125
+have, received, your, application, 120
+let, me, know, 110
+me, know, what, 105
+know, what, time, 100
+time, works, best, 990
+works, best, for, 985
+best, for, you, 980
+please, let, me, know, 975
+let, me, know, what, 970
+me, know, what, time, 965
+know, what, time, works, 960
+what, time, works, best, 955
+time, works, best, for, 950
+works, best, for, you, 945
+i, just, wanted, 940
+just, wanted, to, 935
+wanted, to, check, 930
+to, check, in, 925
+check, in, and, 920
+in, and, see, 915
+and, see, how, 910
+see, how, things, 905
+how, things, are, 900
+things, are, going, 895
+i, just, wanted, to, 890
+just, wanted, to, check, 885
+wanted, to, check, in, 880
+to, check, in, and, 875
+check, in, and, see, 870
+in, and, see, how, 865
+and, see, how, things, 860
+see, how, things, are, 855
+how, things, are, going, 850
+are, we, still, 845
+we, still, on, 840
+still, on, for, 835
+on, for, our, 830
+for, our, meeting, 825
+our, meeting, later, 820
+meeting, later, today, 815
+are, we, still, on, 810
+we, still, on, for, 805
+still, on, for, our, 800
+on, for, our, meeting, 795
+for, our, meeting, later, 790
+our, meeting, later, today, 785
+i, will, call, 780
+will, call, you, 775
+call, you, back, 770
+you, back, in, 765
+back, in, a, 760
+in, a, few, 755
+a, few, minutes, 750
+i, will, call, you, 745
+will, call, you, back, 740
+call, you, back, in, 735
+you, back, in, a, 730
+back, in, a, few, 725
+in, a, few, minutes, 720
+i, am, running, 715
+am, running, a, 710
+running, a, little, 705
+a, little, late, 700
+little, late, but, 695
+late, but, should, 690
+but, should, be, 685
+should, be, there, 680
+be, there, soon, 675
+i, am, running, a, 670
+am, running, a, little, 665
+running, a, little, late, 660
+a, little, late, but, 655
+little, late, but, should, 650
+late, but, should, be, 645
+but, should, be, there, 640
+should, be, there, soon, 635
+what, do, you, 630
+do, you, want, 625
+you, want, to, 620
+want, to, do, 615
+to, do, for, 610
+do, for, dinner, 605
+for, dinner, tonight, 600
+what, do, you, want, 595
+do, you, want, to, 590
+you, want, to, do, 585
+want, to, do, for, 580
+to, do, for, dinner, 575
+do, for, dinner, tonight, 570
+have, a, great, 565
+a, great, weekend, 560
+great, weekend, and, 555
+weekend, and, i, 550
+and, i, will, 545
+i, will, see, 540
+will, see, you, 535
+see, you, on, 530
+you, on, monday, 525
+have, a, great, weekend, 520
+a, great, weekend, and, 515
+great, weekend, and, i, 510
+weekend, and, i, will, 505
+and, i, will, see, 500
+i, will, see, you, 495
+will, see, you, on, 490
+see, you, on, monday, 485
+it, was, great, 480
+was, great, to, 475
+great, to, meet, 470
+to, meet, you, 465
+meet, you, the, 460
+you, the, other, 455
+the, other, day, 450
+it, was, great, to, 445
+was, great, to, meet, 440
+great, to, meet, you, 435
+to, meet, you, the, 430
+meet, you, the, other, 425
+you, the, other, day, 420
+i, completely, forgot, 415
+completely, forgot, about, 410
+forgot, about, that, 405
+about, that, but, 400
+that, but, i, 395
+but, i, will, 390
+i, will, handle, 385
+will, handle, it, 380
+handle, it, now, 375
+i, completely, forgot, about, 370
+completely, forgot, about, that, 365
+forgot, about, that, but, 360
+about, that, but, i, 355
+that, but, i, will, 350
+but, i, will, handle, 345
+i, will, handle, it, 340
+will, handle, it, now, 335
+i, wanted, to, follow, 995
+wanted, to, follow, up, 993
+to, follow, up, on, 992
+follow, up, on, this, 990
+up, on, this, thread, 988
+on, this, thread, to, 987
+this, thread, to, see, 985
+thread, to, see, if, 984
+to, see, if, you, 982
+see, if, you, had, 981
+if, you, had, any, 979
+you, had, any, updates, 978
+had, any, updates, on, 976
+any, updates, on, the, 975
+updates, on, the, project, 973
+please, let, me, know, 972
+let, me, know, if, 970
+me, know, if, you, 969
+know, if, you, need, 967
+if, you, need, anything, 966
+you, need, anything, else, 964
+need, anything, else, from, 963
+anything, else, from, me, 961
+else, from, me, today, 960
+i, look, forward, to, 958
+look, forward, to, hearing, 957
+forward, to, hearing, from, 955
+to, hearing, from, you, 954
+hearing, from, you, soon, 952
+from, you, soon, best, 951
+you, soon, best, regards, 949
+hope, you, are, having, 948
+you, are, having, a, 946
+are, having, a, good, 945
+having, a, good, week, 943
+a, good, week, so, 942
+good, week, so, far, 940
+what, are, you, doing, 939
+are, you, doing, this, 937
+you, doing, this, weekend, 936
+doing, this, weekend, any, 934
+this, weekend, any, plans, 933
+do, you, want, to, 931
+you, want, to, get, 930
+want, to, get, together, 928
+to, get, together, soon, 927
+let's, plan, on, meeting, 925
+plan, on, meeting, at, 924
+on, meeting, at, the, 922
+meeting, at, the, coffee, 921
+at, the, coffee, shop, 919
+i, will, be, there, 918
+will, be, there, in, 916
+be, there, in, about, 915
+there, in, about, ten, 913
+in, about, ten, minutes, 912
+running, a, little, late, 910
+a, little, late, today, 909
+little, late, today, sorry, 907
+be, right, there, just, 906
+right, there, just, parking, 904
+there, just, parking, the, 903
+just, parking, the, car, 901
+parking, the, car, now, 900
+see, you, in, a, 898
+you, in, a, bit, 897
+in, a, bit, bye, 895
+what, do, you, think, 894
+do, you, think, about, 892
+you, think, about, it, 891
+let, me, know, what, 889
+me, know, what, you, 888
+know, what, you, think, 886
+i, am, not, sure, 885
+am, not, sure, if, 883
+not, sure, if, i, 882
+sure, if, i, can, 880
+if, i, can, make, 879
+i, can, make, it, 877
+can, make, it, tonight, 876
+make, it, tonight, but, 874
+it, tonight, but, maybe, 873
+tonight, but, maybe, tomorrow, 871
+that, sounds, like, a, 870
+sounds, like, a, great, 868
+like, a, great, idea, 867
+a, great, idea, let's, 865
+great, idea, let's, do, 864
+idea, let's, do, it, 862
+i, completely, agree, with, 861
+completely, agree, with, you, 859
+agree, with, you, on, 858
+with, you, on, that, 856
+you, on, that, one, 855
+that, makes, a, lot, 853
+makes, a, lot, of, 852
+a, lot, of, sense, 850
+i, don't, understand, what, 849
+don't, understand, what, you, 847
+understand, what, you, mean, 846
+what, you, mean, exactly, 844
+could, you, please, clarify, 843
+you, please, clarify, that, 841
+please, clarify, that, for, 840
+clarify, that, for, me, 838
+i, am, confused, about, 837
+am, confused, about, the, 835
+confused, about, the, new, 834
+about, the, new, policy, 832
+the, new, policy, changes, 831
+can, we, schedule, a, 829
+we, schedule, a, quick, 828
+schedule, a, quick, meeting, 826
+a, quick, meeting, to, 825
+quick, meeting, to, discuss, 823
+meeting, to, discuss, this, 822
+let's, touch, base, later, 820
+touch, base, later, this, 819
+base, later, this, week, 817
+later, this, week, to, 816
+this, week, to, review, 814
+week, to, review, the, 813
+to, review, the, document, 811
+review, the, document, together, 810
+i, have, attached, the, 808
+have, attached, the, file, 807
+attached, the, file, to, 805
+the, file, to, this, 804
+file, to, this, email, 802
+to, this, email, for, 801
+this, email, for, your, 799
+email, for, your, reference, 798
+please, find, the, attached, 796
+find, the, attached, document, 795
+the, attached, document, and, 793
+attached, document, and, let, 792
+document, and, let, me, 790
+and, let, me, know, 789
+if, there, are, any, 787
+there, are, any, questions, 786
+are, any, questions, or, 784
+any, questions, or, concerns, 783
+thanks, for, getting, back, 781
+for, getting, back, to, 780
+getting, back, to, me, 778
+back, to, me, so, 777
+to, me, so, quickly, 775
+me, so, quickly, on, 774
+so, quickly, on, this, 772
+i, appreciate, the, quick, 771
+appreciate, the, quick, response, 769
+the, quick, response, and, 768
+quick, response, and, will, 766
+response, and, will, review, 765
+and, will, review, it, 763
+will, review, it, shortly, 762
+i, will, let, you, 760
+will, let, you, know, 759
+let, you, know, as, 757
+you, know, as, soon, 756
+know, as, soon, as, 754
+as, soon, as, i, 753
+soon, as, i, have, 751
+as, i, have, an, 750
+i, have, an, update, 748
+have, an, update, on, 747
+an, update, on, my, 745
+update, on, my, end, 744
+please, keep, me, in, 742
+keep, me, in, the, 741
+me, in, the, loop, 739
+in, the, loop, regarding, 738
+the, loop, regarding, this, 736
+loop, regarding, this, issue, 735
+i, will, be, out, 733
+will, be, out, of, 732
+be, out, of, the, 730
+out, of, the, office, 729
+of, the, office, starting, 727
+the, office, starting, tomorrow, 726
+office, starting, tomorrow, and, 724
+starting, tomorrow, and, returning, 723
+tomorrow, and, returning, on, 721
+and, returning, on, monday, 720
+for, urgent, matters, please, 718
+urgent, matters, please, contact, 717
+matters, please, contact, my, 715
+please, contact, my, colleague, 714
+what, is, the, status, 712
+is, the, status, of, 711
+the, status, of, the, 709
+status, of, the, project, 708
+could, you, give, me, 706
+you, give, me, an, 705
+give, me, an, update, 703
+me, an, update, on, 702
+an, update, on, where, 700
+update, on, where, we, 699
+on, where, we, stand, 697
+where, we, stand, with, 696
+we, stand, with, this, 694
+i, am, writing, to, 693
+am, writing, to, request, 691
+writing, to, request, more, 690
+to, request, more, information, 688
+request, more, information, about, 687
+more, information, about, the, 685
+information, about, the, program, 684
+i, would, like, to, 682
+would, like, to, invite, 681
+like, to, invite, you, 679
+to, invite, you, to, 678
+invite, you, to, our, 676
+you, to, our, upcoming, 675
+to, our, upcoming, event, 673
+thank, you, for, your, 672
+you, for, your, interest, 670
+for, your, interest, in, 669
+your, interest, in, our, 667
+interest, in, our, company, 666
+we, are, pleased, to, 664
+are, pleased, to, inform, 663
+pleased, to, inform, you, 661
+to, inform, you, that, 660
+inform, you, that, your, 658
+you, that, your, application, 657
+that, your, application, has, 655
+your, application, has, been, 654
+application, has, been, accepted, 652
+we, regret, to, inform, 651
+regret, to, inform, you, 649
+that, we, will, not, 648
+we, will, not, be, 646
+will, not, be, moving, 645
+not, be, moving, forward, 643
+be, moving, forward, with, 642
+moving, forward, with, your, 640
+forward, with, your, candidacy, 639
+wishing, you, the, best, 637
+you, the, best, of, 636
+the, best, of, luck, 634
+best, of, luck, in, 633
+of, luck, in, your, 631
+luck, in, your, future, 630
+in, your, future, endeavors, 628
+please, do, not, hesitate, 627
+do, not, hesitate, to, 625
+not, hesitate, to, reach, 624
+hesitate, to, reach, out, 622
+to, reach, out, if, 621
+reach, out, if, you, 619
+out, if, you, have, 618
+if, you, have, any, 616
+you, have, any, questions, 615
+have, a, wonderful, weekend, 613
+a, wonderful, weekend, and, 612
+wonderful, weekend, and, i, 610
+weekend, and, i, will, 609
+and, i, will, see, 607
+i, will, see, you, 606
+will, see, you, on, 604
+see, you, on, monday, 603
+thanks, and, best, regards, 601
+looking, forward, to, it, 600
+sounds, great, talk, soon, 598
+let's, do, lunch, sometime, 597
+do, lunch, sometime, next, 595
+lunch, sometime, next, week, 594
+when, is, a, good, 592
+is, a, good, time, 591
+a, good, time, for, 589
+good, time, for, you, 588
+time, for, you, to, 586
+for, you, to, call, 585
+are, you, available, to, 583
+you, available, to, meet, 582
+available, to, meet, on, 580
+to, meet, on, tuesday, 579
+does, wednesday, work, for, 577
+wednesday, work, for, you, 576
+what, time, should, we, 574
+time, should, we, meet, 573
+should, we, meet, up, 571
+where, do, you, want, 570
+do, you, want, to, 568
+you, want, to, go, 567
+want, to, go, for, 565
+to, go, for, lunch, 564
+let's, grab, a, coffee, 562
+grab, a, coffee, and, 561
+a, coffee, and, catch, 559
+coffee, and, catch, up, 558
+i, haven't, seen, you, 556
+haven't, seen, you, in, 555
+seen, you, in, ages, 553
+you, in, ages, how, 552
+in, ages, how, have, 550
+ages, how, have, you, 549
+how, have, you, been, 547
+have, you, been, doing, 546
+how, is, the, family, 544
+is, the, family, doing, 543
+the, family, doing, well, 541
+everything, is, going, well, 540
+is, going, well, here, 538
+we, have, been, so, 537
+have, been, so, busy, 535
+been, so, busy, lately, 534
+so, busy, lately, with, 532
+busy, lately, with, work, 531
+lately, with, work, and, 529
+with, work, and, the, 528
+work, and, the, kids, 526
+the, kids, are, growing, 525
+kids, are, growing, up, 523
+are, growing, up, so, 522
+growing, up, so, fast, 520
+up, so, fast, it, 519
+so, fast, it, is, 517
+fast, it, is, crazy, 516
+it, is, crazy, how, 514
+is, crazy, how, time, 513
+crazy, how, time, flies, 511
+i, can't, believe, it, 510
+can't, believe, it, is, 508
+believe, it, is, already, 507
+it, is, already, december, 505
+happy, holidays, to, you, 504
+holidays, to, you, and, 502
+to, you, and, yours, 501
+you, and, yours, this, 499
+and, yours, this, season, 498
+hope, you, have, a, 496
+you, have, a, merry, 495
+have, a, merry, christmas, 493
+a, merry, christmas, and, 492
+merry, christmas, and, a, 490
+christmas, and, a, happy, 489
+and, a, happy, new, 487
+a, happy, new, year, 486
+happy, new, year, let's, 484
+new, year, let's, make, 483
+year, let's, make, sure, 481
+let's, make, sure, to, 480
+make, sure, to, stay, 478
+sure, to, stay, in, 477
+to, stay, in, touch, 475
+stay, in, touch, more, 474
+in, touch, more, often, 472
+what, are, your, plans, 471
+are, your, plans, for, 469
+your, plans, for, the, 468
+plans, for, the, summer, 466
+are, you, taking, any, 465
+you, taking, any, time, 463
+taking, any, time, off, 462
+any, time, off, soon, 460
+we, are, going, to, 459
+are, going, to, the, 457
+going, to, the, beach, 456
+to, the, beach, for, 454
+the, beach, for, a, 453
+beach, for, a, week, 451
+for, a, week, in, 450
+a, week, in, july, 448
+it, should, be, a, 447
+should, be, a, lot, 445
+be, a, lot, of, 444
+a, lot, of, fun, 442
+how, is, the, weather, 441
+is, the, weather, over, 439
+the, weather, over, there, 438
+it, has, been, raining, 436
+has, been, raining, all, 435
+been, raining, all, week, 433
+raining, all, week, here, 432
+i, hope, it, clears, 430
+hope, it, clears, up, 429
+it, clears, up, soon, 427
+clears, up, soon, so, 426
+up, soon, so, we, 424
+soon, so, we, can, 423
+so, we, can, go, 421
+we, can, go, outside, 420
+the, sun, is, finally, 418
+sun, is, finally, shining, 417
+is, finally, shining, today, 415
+what, a, beautiful, day, 414
+a, beautiful, day, it, 412
+beautiful, day, it, is, 411
+i, think, i, am, 409
+think, i, am, getting, 408
+i, am, getting, sick, 406
+am, getting, sick, again, 405
+i, have, a, sore, 403
+have, a, sore, throat, 402
+a, sore, throat, and, 400
+sore, throat, and, a, 399
+throat, and, a, cough, 397
+and, a, cough, so, 396
+a, cough, so, i, 394
+cough, so, i, am, 393
+so, i, am, going, 391
+i, am, going, to, 390
+am, going, to, stay, 388
+going, to, stay, home, 387
+to, stay, home, and, 385
+stay, home, and, rest, 384
+hope, you, feel, better, 382
+you, feel, better, soon, 381
+feel, better, soon, take, 379
+better, soon, take, care, 378
+let, me, know, if, 376
+me, know, if, you, 375
+know, if, you, need, 373
+if, you, need, anything, 372
+i, can, drop, off, 370
+can, drop, off, some, 369
+drop, off, some, soup, 367
+off, some, soup, later, 366
+thank, you, that, is, 364
+you, that, is, so, 363
+that, is, so, sweet, 361
+is, so, sweet, of, 360
+so, sweet, of, you, 358
+i, really, appreciate, your, 357
+really, appreciate, your, help, 355
+appreciate, your, help, with, 354
+your, help, with, this, 352
+i, couldn't, have, done, 351
+couldn't, have, done, it, 349
+have, done, it, without, 348
+done, it, without, you, 346
+you, are, a, lifesaver, 345
+are, a, lifesaver, seriously, 343
+no, problem, at, all, 342
+problem, at, all, happy, 340
+at, all, happy, to, 339
+all, happy, to, help, 337
+happy, to, help, out, 336
+let, me, know, when, 334
+me, know, when, you, 333
+know, when, you, are, 331
+when, you, are, ready, 330
+i, will, call, you, 328
+will, call, you, back, 327
+call, you, back, in, 325
+you, back, in, five, 324
+back, in, five, minutes, 322
+in, five, minutes, ok, 321
+i, am, in, a, 319
+am, in, a, meeting, 318
+in, a, meeting, right, 316
+a, meeting, right, now, 315
+meeting, right, now, can, 313
+right, now, can, i, 312
+now, can, i, call, 310
+can, i, call, you, 309
+i, call, you, later, 307
+call, you, later, tonight, 306
+yes, that, works, for, 304
+that, works, for, me, 303
+talk, to, you, then, 301
+to, you, then, bye, 300
+i, just, sent, you, 298
+just, sent, you, an, 297
+sent, you, an, email, 295
+you, an, email, with, 294
+an, email, with, the, 292
+email, with, the, details, 291
+with, the, details, for, 289
+the, details, for, the, 288
+details, for, the, event, 286
+please, let, me, know, 285
+let, me, know, if, 283
+me, know, if, you, 282
+know, if, you, receive, 280
+if, you, receive, it, 279
+you, receive, it, okay, 277
+yes, i, got, it, 276
+i, got, it, thanks, 274
+will, read, it, over, 273
+read, it, over, and, 271
+it, over, and, get, 270
+over, and, get, back, 268
+and, get, back, to, 267
+get, back, to, you, 265
+back, to, you, tomorrow, 264
+sounds, good, thanks, for, 262
+good, thanks, for, checking, 261
+thanks, for, checking, in, 259
+i, will, talk, to, 258
+will, talk, to, you, 256
+talk, to, you, soon, 255
+looking, forward, to, seeing, 253
+forward, to, seeing, you, 252
+to, seeing, you, there, 250
+it, will, be, great, 249
+will, be, great, to, 247
+be, great, to, catch, 246
+just, circling, back, 999
+circling, back, on, 998
+back, on, this, 997
+to, circle, back, 996
+wanted, to, circle, 995
+just, checking, in, 994
+checking, in, on, 993
+in, on, this, 992
+just, following, up, 991
+following, up, on, 990
+to, follow, up, 989
+follow, up, regarding, 988
+regarding, our, conversation, 987
+per, our, conversation, 986
+as, discussed, earlier, 985
+discussed, earlier, today, 984
+attached, please, find, 983
+please, find, attached, 982
+find, attached, the, 981
+the, attached, document, 980
+the, attached, file, 979
+please, review, the, 978
+review, the, attached, 977
+let, me, know, 976
+me, know, your, 975
+know, your, thoughts, 974
+your, thoughts, on, 973
+thoughts, on, this, 972
+what, are, your, 971
+are, your, thoughts, 970
+do, you, think, 969
+what, do, you, 968
+do, you, have, 967
+you, have, time, 966
+have, time, to, 965
+time, to, chat, 964
+time, to, discuss, 963
+free, to, chat, 962
+free, to, talk, 961
+are, you, free, 960
+when, are, you, 959
+when, works, for, 958
+works, for, you, 957
+does, that, work, 956
+that, work, for, 955
+work, for, you, 954
+let's, set, up, 953
+set, up, a, 952
+up, a, time, 951
+a, time, to, 950
+time, to, meet, 949
+to, meet, up, 948
+meet, up, later, 947
+let's, catch, up, 946
+catch, up, soon, 945
+we, should, catch, 944
+should, catch, up, 943
+long, time, no, 942
+time, no, see, 941
+how, have, you, 940
+have, you, been, 939
+you, been, lately, 938
+hope, all, is, 937
+all, is, well, 936
+is, well, with, 935
+well, with, you, 934
+hope, you're, doing, 933
+you're, doing, well, 932
+doing, well, today, 931
+have, a, great, 930
+a, great, day, 929
+have, a, wonderful, 928
+a, wonderful, weekend, 927
+have, a, good, 926
+a, good, one, 925
+see, you, later, 924
+you, later, today, 923
+talk, to, you, 922
+to, you, soon, 921
+you, soon, bye, 920
+bye, for, now, 919
+thanks, so, much, 918
+thank, you, so, 917
+you, so, much, 916
+so, much, for, 915
+much, for, your, 914
+for, your, help, 913
+your, help, with, 912
+help, with, this, 911
+appreciate, your, help, 910
+really, appreciate, your, 909
+i, really, appreciate, 908
+really, appreciate, it, 907
+appreciate, it, thanks, 906
+thanks, a, lot, 905
+a, lot, for, 904
+thanks, a, million, 903
+you, are, the, 902
+are, the, best, 901
+the, best, thanks, 900
+best, thanks, again, 899
+thanks, again, for, 898
+again, for, everything, 897
+sorry, for, the, 896
+for, the, delay, 895
+the, delay, in, 894
+apologies, for, the, 893
+for, the, late, 892
+the, late, reply, 891
+sorry, i, missed, 890
+i, missed, your, 889
+missed, your, call, 888
+your, call, earlier, 887
+i, was, in, 886
+was, in, a, 885
+in, a, meeting, 884
+a, meeting, earlier, 883
+just, got, out, 882
+got, out, of, 881
+out, of, a, 880
+i, will, call, 879
+will, call, you, 878
+call, you, back, 877
+you, back, in, 876
+back, in, a, 875
+in, a, few, 874
+a, few, minutes, 873
+few, minutes, okay, 872
+give, me, a, 871
+me, a, few, 870
+me, a, call, 869
+a, call, when, 868
+call, when, you, 867
+when, you, can, 866
+you, can, talk, 865
+if, you, need, 864
+you, need, me, 863
+need, me, to, 862
+me, to, do, 861
+to, do, anything, 860
+do, anything, else, 859
+anything, else, for, 858
+else, for, you, 857
+me, know, if, 856
+know, if, i, 855
+if, i, can, 854
+i, can, help, 853
+can, help, with, 852
+help, with, anything, 851
+happy, to, help, 850
+to, help, out, 849
+glad, i, could, 848
+i, could, help, 847
+no, problem, at, 846
+problem, at, all, 845
+at, all, anytime, 844
+anytime, you, need, 843
+you, need, it, 842
+don't, worry, about, 841
+worry, about, it, 840
+it, is, no, 839
+is, no, problem, 838
+no, problem, thanks, 837
+no, worries, at, 836
+worries, at, all, 835
+all, good, here, 834
+everything, is, fine, 833
+is, fine, here, 832
+we, are, good, 831
+are, good, to, 830
+good, to, go, 829
+to, go, now, 828
+ready, to, go, 827
+are, you, ready, 826
+you, ready, to, 825
+ready, to, leave, 824
+to, leave, soon, 823
+leave, soon, for, 822
+soon, for, the, 821
+for, the, airport, 820
+the, airport, now, 819
+heading, to, the, 818
+to, the, store, 817
+the, store, now, 816
+store, now, do, 815
+now, do, you, 814
+do, you, need, 813
+you, need, anything, 812
+need, anything, from, 811
+anything, from, the, 810
+from, the, store, 809
+can, you, pick, 808
+you, pick, up, 807
+pick, up, some, 806
+up, some, milk, 805
+some, milk, on, 804
+milk, on, your, 803
+on, your, way, 802
+your, way, home, 801
+way, home, please, 800
+yes, i, can, 799
+i, can, do, 798
+can, do, that, 797
+do, that, for, 796
+that, for, you, 795
+for, you, later, 794
+you, later, tonight, 793
+later, tonight, ok, 792
+tonight, ok, sounds, 791
+ok, sounds, good, 790
+sounds, good, see, 789
+good, see, you, 788
+see, you, then, 787
+you, then, bye, 786
+what, time, are, 785
+time, are, you, 784
+are, you, coming, 783
+you, coming, over, 782
+coming, over, today, 781
+around, six, pm, 780
+six, pm, tonight, 779
+pm, tonight, ok, 778
+okay, see, you, 777
+see, you, soon, 776
+i, am, on, 775
+am, on, my, 774
+on, my, way, 773
+my, way, now, 772
+way, now, see, 771
+now, see, you, 770
+running, a, little, 769
+a, little, late, 768
+little, late, sorry, 767
+late, sorry, about, 766
+sorry, about, that, 765
+about, that, see, 764
+that, see, you, 763
+be, there, in, 762
+there, in, five, 761
+in, five, minutes, 760
+five, minutes, ok, 759
+ok, take, your, 758
+take, your, time, 757
+your, time, no, 756
+time, no, rush, 755
+no, rush, at, 754
+rush, at, all, 753
+at, all, drive, 752
+all, drive, safe, 751
+drive, safe, and, 750
+safe, and, see, 749
+and, see, you, 748
+i, am, here, 747
+am, here, now, 746
+here, now, where, 745
+now, where, are, 744
+where, are, you, 743
+are, you, at, 742
+i, am, outside, 741
+am, outside, waiting, 740
+outside, waiting, for, 739
+waiting, for, you, 738
+coming, out, now, 737
+out, now, see, 736
+did, you, get, 735
+you, get, my, 734
+get, my, message, 733
+my, message, earlier, 732
+yes, i, got, 731
+i, got, it, 730
+got, it, thanks, 729
+it, thanks, for, 728
+thanks, for, letting, 727
+for, letting, me, 726
+letting, me, know, 725
+no, problem, at, 724
+what, are, we, 723
+are, we, doing, 722
+we, doing, for, 721
+doing, for, dinner, 720
+for, dinner, tonight, 719
+i, don't, know, 718
+don't, know, what, 717
+know, what, do, 716
+what, do, you, 715
+want, to, eat, 714
+how, about, pizza, 713
+about, pizza, tonight, 712
+pizza, tonight, sounds, 711
+tonight, sounds, good, 710
+sounds, good, to, 709
+good, to, me, 708
+let's, order, pizza, 707
+order, pizza, tonight, 706
+pizza, tonight, okay, 705
+okay, let's, do, 704
+let's, do, that, 703
+what, time, should, 702
+time, should, we, 701
+should, we, order, 700
+we, order, it, 699
+order, it, for, 698
+it, for, seven, 697
+for, seven, pm, 696
+seven, pm, works, 695
+pm, works, for, 694
+for, me, too, 693
+what, are, your, 692
+are, your, plans, 691
+your, plans, for, 690
+plans, for, the, 689
+for, the, weekend, 688
+the, weekend, anything, 687
+weekend, anything, fun, 686
+anything, fun, planned, 685
+not, much, just, 684
+much, just, relaxing, 683
+just, relaxing, at, 682
+relaxing, at, home, 681
+at, home, you, 680
+home, you, doing, 679
+you, doing, anything, 678
+doing, anything, fun, 677
+going, to, the, 676
+to, the, movies, 675
+the, movies, tonight, 674
+movies, tonight, want, 673
+tonight, want, to, 672
+want, to, come, 671
+to, come, with, 670
+come, with, us, 669
+with, us, tonight, 668
+us, tonight, sure, 667
+tonight, sure, what, 666
+sure, what, time, 665
+time, are, you, 664
+are, you, going, 663
+we, are, going, 662
+are, going, at, 661
+going, at, eight, 660
+at, eight, pm, 659
+eight, pm, okay, 658
+pm, okay, see, 657
+okay, see, you, 656
+how, was, your, 655
+was, your, day, 654
+your, day, today, 653
+day, today, good, 652
+today, good, and, 651
+good, and, yours, 650
+it, was, good, 649
+was, good, too, 648
+good, too, thanks, 647
+too, thanks, for, 646
+thanks, for, asking, 645
+how, is, the, 644
+is, the, family, 643
+the, family, doing, 642
+family, doing, well, 641
+doing, well, thanks, 640
+everyone, is, doing, 639
+is, doing, great, 638
+doing, great, how, 637
+great, how, are, 636
+how, are, you, 635
+are, you, doing, 634
+you, doing, lately, 633
+i, am, doing, 632
+am, doing, well, 631
+doing, well, just, 630
+well, just, busy, 629
+just, busy, with, 628
+busy, with, work, 627
+with, work, and, 626
+work, and, stuff, 625
+and, stuff, you, 624
+stuff, you, know, 623
+you, know, how, 622
+know, how, it, 621
+how, it, goes, 620
+it, goes, sometimes, 619
+goes, sometimes, yeah, 618
+sometimes, yeah, i, 617
+yeah, i, know, 616
+i, know, what, 615
+know, what, you, 614
+what, you, mean, 613
+you, mean, exactly, 612
+it, has, been, 611
+has, been, a, 610
+been, a, long, 609
+a, long, week, 608
+long, week, for, 607
+week, for, me, 606
+for, me, too, 605
+i, am, so, 604
+am, so, tired, 603
+so, tired, today, 602
+tired, today, need, 601
+today, need, coffee, 600
+need, coffee, now, 599
+coffee, now, lol, 598
+me, too, let's, 597
+too, let's, go, 596
+let's, go, get, 595
+go, get, some, 594
+get, some, coffee, 593
+some, coffee, soon, 592
+coffee, soon, okay, 591
+sounds, like, a, 590
+like, a, plan, 589
+a, plan, see, 588
+plan, see, you, 587
+did, you, sleep, 586
+you, sleep, well, 585
+sleep, well, last, 584
+well, last, night, 583
+last, night, yes, 582
+night, yes, i, 581
+yes, i, did, 580
+i, did, sleep, 579
+did, sleep, well, 578
+sleep, well, thanks, 577
+well, thanks, how, 576
+thanks, how, about, 575
+how, about, you, 574
+about, you, did, 573
+you, did, you, 572
+you, sleep, okay, 571
+sleep, okay, tonight, 570
+not, really, i, 569
+really, i, kept, 568
+i, kept, waking, 567
+kept, waking, up, 566
+waking, up, early, 565
+up, early, today, 564
+oh, no, that, 563
+no, that, sucks, 562
+that, sucks, hope, 561
+sucks, hope, you, 560
+hope, you, can, 559
+you, can, nap, 558
+can, nap, later, 557
+nap, later, today, 556
+later, today, maybe, 555
+today, maybe, i, 554
+maybe, i, will, 553
+i, will, try, 552
+will, try, to, 551
+try, to, nap, 550
+to, nap, later, 549
+nap, later, thanks, 548
+what, is, the, 547
+is, the, weather, 546
+the, weather, like, 545
+weather, like, today, 544
+like, today, there, 543
+today, there, it, 542
+there, it, is, 541
+it, is, raining, 540
+is, raining, here, 539
+raining, here, now, 538
+here, now, what, 537
+now, what, about, 536
+what, about, there, 535
+about, there, it, 534
+it, is, sunny, 533
+is, sunny, here, 532
+sunny, here, today, 531
+here, today, nice, 530
+today, nice, enjoy, 529
+nice, enjoy, the, 528
+enjoy, the, sun, 527
+the, sun, today, 526
+sun, today, will, 525
+today, will, do, 524
+will, do, thanks, 523
+do, thanks, have, 522
+thanks, have, a, 521
+have, a, good, 520
+a, good, day, 519
+good, day, bye, 518
+happy, birthday, to, 517
+birthday, to, you, 516
+to, you, hope, 515
+you, hope, you, 514
+hope, you, have, 513
+you, have, a, 512
+a, great, birthday, 511
+great, birthday, today, 510
+birthday, today, thanks, 509
+today, thanks, so, 508
+so, much, for, 507
+much, for, the, 506
+for, the, wishes, 505
+the, wishes, appreciate, 504
+wishes, appreciate, it, 503
+appreciate, it, a, 502
+it, a, lot, 501
+congratulations, on, the, 500
+i, will, send, you, 999
+will, send, you, an, 998
+send, you, an, invite, 997
+send, you, a, calendar, 996
+you, a, calendar, invite, 995
+i, will, set, up, 994
+will, set, up, a, 993
+set, up, a, meeting, 992
+set, up, a, call, 991
+can, we, push, this, 990
+we, push, this, back, 989
+push, this, back, to, 988
+this, back, to, next, 987
+back, to, next, week, 986
+can, we, move, this, 985
+we, move, this, to, 984
+move, this, to, tomorrow, 983
+let's, reschedule, for, next, 982
+reschedule, for, next, week, 981
+i, will, send, a, 980
+will, send, a, meeting, 979
+send, a, meeting, invite, 978
+a, meeting, invite, shortly, 977
+please, send, me, an, 976
+send, me, an, invite, 975
+i, didn't, get, the, 974
+didn't, get, the, invite, 973
+did, you, send, the, 972
+you, send, the, invite, 971
+what, time, is, the, 970
+time, is, the, meeting, 969
+is, the, meeting, today, 968
+the, meeting, is, at, 967
+meeting, is, at, two, 966
+is, at, two, pm, 965
+at, two, pm, today, 964
+let's, meet, in, the, 963
+meet, in, the, conference, 962
+in, the, conference, room, 961
+the, conference, room, today, 960
+i, will, book, a, 959
+will, book, a, room, 958
+book, a, room, for, 957
+a, room, for, us, 956
+room, for, us, to, 955
+for, us, to, meet, 954
+us, to, meet, in, 953
+to, meet, in, person, 952
+meet, in, person, tomorrow, 951
+in, person, tomorrow, morning, 950
+do, you, know, if, 949
+you, know, if, we, 948
+know, if, we, have, 947
+if, we, have, any, 946
+we, have, any, more, 945
+have, any, more, of, 944
+any, more, of, those, 943
+do, you, happen, to, 942
+you, happen, to, know, 941
+happen, to, know, if, 940
+to, know, if, the, 939
+know, if, the, meeting, 938
+if, the, meeting, is, 937
+the, meeting, is, still, 936
+meeting, is, still, on, 935
+is, still, on, for, 934
+still, on, for, today, 933
+do, you, think, we, 932
+you, think, we, should, 931
+think, we, should, get, 930
+we, should, get, some, 929
+should, get, some, food, 928
+get, some, food, soon, 927
+do, you, know, where, 926
+you, know, where, the, 925
+know, where, the, file, 924
+where, the, file, is, 923
+do, you, know, what, 922
+you, know, what, time, 921
+know, what, time, it, 920
+what, time, it, starts, 919
+time, it, starts, today, 918
+do, you, know, who, 917
+you, know, who, is, 916
+know, who, is, in, 915
+who, is, in, charge, 914
+is, in, charge, of, 913
+in, charge, of, this, 912
+do, you, know, how, 911
+you, know, how, to, 910
+know, how, to, fix, 909
+how, to, fix, this, 908
+to, fix, this, issue, 907
+fix, this, issue, quickly, 906
+do, you, remember, when, 905
+you, remember, when, we, 904
+remember, when, we, went, 903
+when, we, went, to, 902
+we, went, to, the, 901
+went, to, the, store, 900
+i, am, so, sorry, 899
+am, so, sorry, for, 898
+so, sorry, for, the, 897
+sorry, for, the, late, 896
+for, the, late, notice, 895
+sorry, for, the, short, 894
+for, the, short, notice, 893
+sorry, to, bother, you, 892
+to, bother, you, but, 891
+bother, you, but, i, 890
+you, but, i, have, 889
+but, i, have, a, 888
+i, have, a, quick, 887
+have, a, quick, question, 886
+a, quick, question, for, 885
+quick, question, for, you, 884
+i, hate, to, bother, 883
+hate, to, bother, you, 882
+i, am, very, sorry, 881
+am, very, sorry, about, 880
+very, sorry, about, that, 879
+sorry, about, that, i, 878
+about, that, i, will, 877
+that, i, will, fix, 876
+i, will, fix, it, 875
+will, fix, it, right, 874
+fix, it, right, away, 873
+i, am, sorry, i, 872
+am, sorry, i, missed, 871
+sorry, i, missed, your, 870
+i, missed, your, call, 869
+missed, your, call, earlier, 868
+please, accept, my, apologies, 867
+accept, my, apologies, for, 866
+my, apologies, for, the, 865
+apologies, for, the, delay, 864
+for, the, delay, in, 863
+the, delay, in, getting, 862
+delay, in, getting, back, 861
+in, getting, back, to, 860
+getting, back, to, you, 859
+i, apologize, for, the, 858
+apologize, for, the, confusion, 857
+for, the, confusion, earlier, 856
+sorry, for, any, inconvenience, 855
+for, any, inconvenience, this, 854
+any, inconvenience, this, may, 853
+inconvenience, this, may, have, 852
+this, may, have, caused, 851
+may, have, caused, you, 850
+i, just, wanted, to, 849
+just, wanted, to, follow, 848
+wanted, to, follow, up, 847
+to, follow, up, on, 846
+follow, up, on, my, 845
+up, on, my, previous, 844
+on, my, previous, email, 843
+just, wanted, to, check, 842
+wanted, to, check, in, 841
+to, check, in, with, 840
+check, in, with, you, 839
+in, with, you, on, 838
+with, you, on, the, 837
+you, on, the, status, 836
+on, the, status, of, 835
+the, status, of, the, 834
+status, of, the, project, 833
+just, wanted, to, see, 832
+wanted, to, see, if, 831
+to, see, if, you, 830
+see, if, you, had, 829
+if, you, had, any, 828
+you, had, any, questions, 827
+just, wanted, to, say, 826
+wanted, to, say, thank, 825
+to, say, thank, you, 824
+say, thank, you, for, 823
+thank, you, for, all, 822
+you, for, all, your, 821
+for, all, your, help, 820
+all, your, help, with, 819
+your, help, with, this, 818
+just, wanted, to, let, 817
+wanted, to, let, you, 816
+to, let, you, know, 815
+let, you, know, that, 814
+you, know, that, i, 813
+know, that, i, am, 812
+that, i, am, working, 811
+i, am, working, on, 810
+am, working, on, it, 809
+just, wanted, to, confirm, 808
+wanted, to, confirm, that, 807
+to, confirm, that, you, 806
+confirm, that, you, received, 805
+that, you, received, my, 804
+you, received, my, email, 803
+received, my, email, yesterday, 802
+just, wanted, to, remind, 801
+wanted, to, remind, you, 800
+could, you, please, let, 799
+you, please, let, me, 798
+please, let, me, know, 797
+let, me, know, your, 796
+me, know, your, availability, 795
+know, your, availability, for, 794
+your, availability, for, a, 793
+availability, for, a, call, 792
+could, you, please, send, 791
+you, please, send, me, 790
+please, send, me, the, 789
+send, me, the, latest, 788
+me, the, latest, version, 787
+the, latest, version, of, 786
+latest, version, of, the, 785
+could, you, please, review, 784
+you, please, review, this, 783
+please, review, this, document, 782
+review, this, document, and, 781
+this, document, and, let, 780
+document, and, let, me, 779
+could, you, please, provide, 778
+you, please, provide, an, 777
+please, provide, an, update, 776
+provide, an, update, on, 775
+could, you, please, confirm, 774
+you, please, confirm, receipt, 773
+please, confirm, receipt, of, 772
+confirm, receipt, of, this, 771
+receipt, of, this, email, 770
+could, you, please, clarify, 769
+you, please, clarify, what, 768
+please, clarify, what, you, 767
+clarify, what, you, mean, 766
+what, you, mean, by, 765
+could, you, please, help, 764
+you, please, help, me, 763
+please, help, me, with, 762
+help, me, with, this, 761
+me, with, this, issue, 760
+would, you, mind, sending, 759
+you, mind, sending, me, 758
+mind, sending, me, the, 757
+would, you, be, able, 756
+you, be, able, to, 755
+be, able, to, attend, 754
+able, to, attend, the, 753
+to, attend, the, meeting, 752
+attend, the, meeting, tomorrow, 751
+the, meeting, tomorrow, morning, 750
+i, am, stuck, in, 749
+am, stuck, in, traffic, 748
+stuck, in, traffic, right, 747
+in, traffic, right, now, 746
+traffic, right, now, i, 745
+right, now, i, will, 744
+now, i, will, be, 743
+i, will, be, a, 742
+will, be, a, few, 741
+be, a, few, minutes, 740
+a, few, minutes, late, 739
+few, minutes, late, sorry, 738
+minutes, late, sorry, for, 737
+late, sorry, for, the, 736
+i, am, running, a, 735
+am, running, a, little, 734
+running, a, little, late, 733
+a, little, late, today, 732
+little, late, today, i, 731
+late, today, i, will, 730
+today, i, will, be, 729
+i, am, on, my, 728
+am, on, my, way, 727
+on, my, way, to, 726
+my, way, to, the, 725
+way, to, the, office, 724
+to, the, office, now, 723
+i, just, got, off, 722
+just, got, off, the, 721
+got, off, the, phone, 720
+off, the, phone, with, 719
+the, phone, with, the, 718
+phone, with, the, client, 717
+i, am, boarding, the, 716
+am, boarding, the, plane, 715
+boarding, the, plane, now, 714
+the, plane, now, talk, 713
+plane, now, talk, to, 712
+now, talk, to, you, 711
+talk, to, you, when, 710
+to, you, when, i, 709
+you, when, i, land, 708
+i, missed, my, train, 707
+missed, my, train, i, 706
+my, train, i, will, 705
+train, i, will, catch, 704
+i, will, catch, the, 703
+will, catch, the, next, 702
+catch, the, next, one, 701
+the, next, one, soon, 700
+that, sounds, like, a, 699
+sounds, like, a, good, 698
+like, a, good, plan, 697
+a, good, plan, to, 696
+good, plan, to, me, 695
+that, makes, perfect, sense, 694
+makes, perfect, sense, to, 693
+perfect, sense, to, me, 692
+sense, to, me, let's, 691
+to, me, let's, do, 690
+me, let's, do, that, 689
+i, completely, agree, with, 688
+completely, agree, with, you, 687
+agree, with, you, on, 686
+with, you, on, that, 685
+you, on, that, one, 684
+i, think, that, is, 683
+think, that, is, a, 682
+that, is, a, great, 681
+is, a, great, idea, 680
+a, great, idea, thank, 679
+great, idea, thank, you, 678
+i, do, not, think, 677
+do, not, think, that, 676
+not, think, that, is, 675
+think, that, is, the, 674
+that, is, the, best, 673
+is, the, best, way, 672
+the, best, way, to, 671
+best, way, to, handle, 670
+way, to, handle, this, 669
+i, am, not, sure, 668
+am, not, sure, if, 667
+not, sure, if, we, 666
+sure, if, we, can, 665
+if, we, can, do, 664
+we, can, do, that, 663
+can, do, that, right, 662
+do, that, right, now, 661
+let, me, think, about, 660
+me, think, about, it, 659
+think, about, it, and, 658
+about, it, and, get, 657
+it, and, get, back, 656
+and, get, back, to, 655
+get, back, to, you, 654
+back, to, you, tomorrow, 653
+to, you, tomorrow, morning, 652
+you, tomorrow, morning, okay, 651
+tomorrow, morning, okay, thanks, 650
+did, you, have, a, 649
+you, have, a, good, 648
+have, a, good, weekend, 647
+a, good, weekend, yes, 646
+good, weekend, yes, it, 645
+weekend, yes, it, was, 644
+yes, it, was, great, 643
+it, was, great, thanks, 642
+was, great, thanks, for, 641
+great, thanks, for, asking, 640
+how, was, your, weekend, 639
+was, your, weekend, good, 638
+your, weekend, good, thanks, 637
+what, are, you, doing, 636
+are, you, doing, this, 635
+you, doing, this, weekend, 634
+doing, this, weekend, anything, 633
+this, weekend, anything, fun, 632
+weekend, anything, fun, planned, 631
+any, big, plans, for, 630
+big, plans, for, the, 629
+plans, for, the, weekend, 628
+we, are, going, to, 627
+are, going, to, the, 626
+going, to, the, beach, 625
+to, the, beach, this, 624
+the, beach, this, weekend, 623
+i, am, just, going, 622
+am, just, going, to, 621
+just, going, to, relax, 620
+going, to, relax, at, 619
+to, relax, at, home, 618
+relax, at, home, this, 617
+at, home, this, weekend, 616
+home, this, weekend, and, 615
+this, weekend, and, catch, 614
+weekend, and, catch, up, 613
+and, catch, up, on, 612
+catch, up, on, sleep, 611
+hope, you, have, a, 610
+you, have, a, wonderful, 609
+have, a, wonderful, weekend, 608
+a, wonderful, weekend, enjoy, 607
+wonderful, weekend, enjoy, your, 606
+weekend, enjoy, your, time, 605
+enjoy, your, time, off, 604
+have, a, great, rest, 603
+a, great, rest, of, 602
+great, rest, of, your, 601
+rest, of, your, day, 600
+thanks, so, much, for, 599
+so, much, for, your, 598
+much, for, your, help, 597
+for, your, help, today, 596
+your, help, today, i, 595
+help, today, i, really, 594
+today, i, really, appreciate, 593
+i, really, appreciate, it, 592
+really, appreciate, it, thanks, 591
+appreciate, it, thanks, again, 590
+thanks, again, for, your, 589
+again, for, your, time, 588
+for, your, time, today, 587
+your, time, today, it, 586
+time, today, it, was, 585
+it, was, very, helpful, 584
+was, very, helpful, talking, 583
+very, helpful, talking, to, 582
+helpful, talking, to, you, 581
+thank, you, in, advance, 580
+you, in, advance, for, 579
+in, advance, for, your, 578
+advance, for, your, assistance, 577
+for, your, assistance, with, 576
+your, assistance, with, this, 575
+assistance, with, this, matter, 574
+thank, you, for, everything, 573
+you, for, everything, you, 572
+for, everything, you, do, 571
+i, cannot, thank, you, 570
+cannot, thank, you, enough, 569
+thank, you, enough, for, 568
+you, enough, for, this, 567
+enough, for, this, opportunity, 566
+let, me, know, if, 565
+me, know, if, you, 564
+know, if, you, have, 563
+if, you, have, any, 562
+you, have, any, questions, 561
+have, any, questions, or, 560
+any, questions, or, concerns, 559
+please, do, not, hesitate, 558
+do, not, hesitate, to, 557
+not, hesitate, to, reach, 556
+hesitate, to, reach, out, 555
+to, reach, out, if, 554
+reach, out, if, you, 553
+out, if, you, need, 552
+if, you, need, anything, 551
+you, need, anything, else, 550
+i, will, take, a, 549
+will, take, a, look, 548
+take, a, look, at, 547
+a, look, at, it, 546
+look, at, it, tomorrow, 545
+at, it, tomorrow, morning, 544
+i, will, get, back, 543
+will, get, back, to, 542
+get, back, to, you, 541
+back, to, you, on, 540
+to, you, on, this, 539
+you, on, this, by, 538
+on, this, by, the, 537
+this, by, the, end, 536
+by, the, end, of, 535
+the, end, of, the, 534
+end, of, the, day, 533
+of, the, day, today, 532
+day, today, let, me, 531
+i, am, working, on, 530
+am, working, on, it, 529
+working, on, it, now, 528
+on, it, now, and, 527
+it, now, and, will, 526
+now, and, will, send, 525
+and, will, send, it, 524
+will, send, it, over, 523
+send, it, over, shortly, 522
+i, will, review, and, 521
+will, review, and, get, 520
+review, and, get, back, 519
+i, have, attached, the, 518
+have, attached, the, updated, 517
+attached, the, updated, file, 516
+the, updated, file, for, 515
+updated, file, for, your, 514
+file, for, your, review, 513
+please, find, attached, the, 512
+find, attached, the, requested, 511
+attached, the, requested, documents, 510
+the, requested, documents, let, 509
+requested, documents, let, me, 508
+documents, let, me, know, 507
+let, me, know, what, 506
+me, know, what, you, 505
+know, what, you, think, 504
+what, you, think, about, 503
+you, think, about, the, 502
+think, about, the, proposal, 501
+about, the, proposal, thanks, 500
+how, to, get, 999
+to, get, to, 999
+get, to, the, 998
+where, is, the, 998
+is, the, nearest, 997
+the, nearest, gas, 997
+nearest, gas, station, 996
+can, you, show, 996
+you, show, me, 995
+show, me, the, 995
+me, the, way, 994
+the, way, to, 994
+turn, left, at, 993
+left, at, the, 993
+turn, right, at, 992
+right, at, the, 992
+go, straight, ahead, 991
+straight, ahead, for, 991
+ahead, for, two, 990
+for, two, blocks, 990
+on, the, right, 989
+on, the, left, 989
+it, is, on, 988
+is, on, the, 988
+how, far, is, 987
+far, is, it, 987
+is, it, from, 986
+it, from, here, 986
+how, long, does, 985
+long, does, it, 985
+does, it, take, 984
+it, take, to, 984
+take, to, get, 983
+to, get, there, 983
+what, is, the, 982
+is, the, best, 982
+the, best, way, 981
+best, way, to, 981
+can, we, walk, 980
+we, walk, there, 980
+is, it, safe, 979
+it, safe, to, 979
+safe, to, walk, 978
+to, walk, around, 978
+where, can, i, 977
+can, i, find, 977
+i, find, a, 976
+find, a, taxi, 976
+call, a, taxi, 975
+a, taxi, for, 975
+taxi, for, me, 974
+for, me, please, 974
+what, time, is, 973
+time, is, my, 973
+is, my, flight, 972
+my, flight, tomorrow, 972
+i, need, to, 971
+need, to, go, 971
+to, go, to, 970
+go, to, the, 970
+to, the, airport, 969
+the, airport, please, 969
+i, would, like, 968
+would, like, to, 968
+like, to, check, 967
+to, check, in, 967
+check, in, please, 966
+here, is, my, 966
+is, my, passport, 965
+my, passport, and, 965
+passport, and, ticket, 964
+and, ticket, please, 964
+do, you, have, 963
+you, have, any, 963
+have, any, bags, 962
+any, bags, to, 962
+bags, to, check, 961
+just, this, one, 961
+this, one, bag, 960
+what, is, the, 960
+is, the, boarding, 959
+the, boarding, time, 959
+boarding, time, for, 958
+time, for, this, 958
+for, this, flight, 957
+what, gate, is, 957
+gate, is, it, 956
+is, it, departing, 956
+it, departing, from, 955
+have, a, safe, 955
+a, safe, flight, 954
+safe, flight, home, 954
+flight, home, today, 953
+welcome, back, home, 953
+back, home, safely, 952
+how, much, is, 952
+much, is, this, 951
+is, this, item, 951
+this, item, please, 950
+do, you, accept, 950
+you, accept, credit, 949
+accept, credit, cards, 949
+credit, cards, here, 948
+cash, only, please, 948
+can, i, pay, 947
+i, pay, with, 947
+pay, with, cash, 946
+with, cash, instead, 946
+can, i, get, 945
+i, get, a, 945
+get, a, receipt, 944
+a, receipt, please, 944
+receipt, please, thanks, 943
+is, this, on, 943
+this, on, sale, 942
+on, sale, today, 942
+do, you, have, 941
+have, this, in, 941
+this, in, a, 940
+in, a, smaller, 940
+a, smaller, size, 939
+in, a, larger, 939
+a, larger, size, 938
+can, i, try, 938
+i, try, this, 937
+try, this, on, 937
+where, are, the, 936
+are, the, fitting, 936
+the, fitting, rooms, 935
+fitting, rooms, located, 935
+i, am, just, 934
+am, just, looking, 934
+just, looking, around, 933
+looking, around, thanks, 933
+i, will, take, 932
+will, take, it, 932
+take, it, please, 931
+what, is, your, 931
+is, your, return, 930
+your, return, policy, 930
+return, policy, here, 929
+can, i, return, 929
+i, return, this, 928
+return, this, item, 928
+this, item, later, 927
+i, need, a, 927
+need, a, refund, 926
+a, refund, please, 926
+refund, please, for, 925
+please, for, this, 925
+do, you, sell, 924
+you, sell, gift, 924
+sell, gift, cards, 923
+gift, cards, here, 923
+are, you, open, 922
+you, open, today, 922
+open, today, until, 921
+what, time, do, 921
+time, do, you, 920
+do, you, close, 920
+you, close, tonight, 919
+close, tonight, at, 919
+i, need, some, 918
+need, some, help, 918
+some, help, with, 917
+help, with, this, 917
+with, this, computer, 916
+this, computer, issue, 916
+my, screen, is, 915
+screen, is, frozen, 915
+is, frozen, again, 914
+frozen, again, today, 914
+i, can't, log, 913
+can't, log, in, 913
+log, in, to, 912
+in, to, my, 912
+to, my, account, 911
+my, account, is, 911
+account, is, locked, 910
+is, locked, out, 910
+locked, out, again, 909
+i, forgot, my, 909
+forgot, my, password, 908
+my, password, again, 908
+how, do, i, 907
+do, i, reset, 907
+i, reset, my, 906
+reset, my, password, 906
+my, internet, is, 905
+internet, is, down, 905
+is, down, again, 904
+down, again, today, 904
+the, wifi, is, 903
+wifi, is, not, 903
+is, not, working, 902
+not, working, properly, 902
+working, properly, today, 901
+what, is, the, 901
+is, the, wifi, 900
+the, wifi, password, 900
+wifi, password, here, 899
+can, you, restart, 899
+you, restart, your, 898
+restart, your, computer, 898
+your, computer, please, 897
+have, you, tried, 897
+you, tried, turning, 896
+tried, turning, it, 896
+turning, it, off, 895
+it, off, and, 895
+off, and, on, 894
+and, on, again, 894
+on, again, to, 893
+is, it, plugged, 893
+it, plugged, in, 892
+plugged, in, properly, 892
+i, am, getting, 891
+am, getting, an, 891
+getting, an, error, 890
+an, error, message, 890
+error, message, when, 889
+message, when, i, 889
+when, i, try, 888
+i, try, to, 888
+try, to, open, 887
+to, open, the, 887
+open, the, file, 886
+the, file, is, 886
+file, is, corrupted, 885
+is, corrupted, and, 885
+i, cannot, access, 884
+cannot, access, the, 884
+access, the, server, 883
+the, server, is, 883
+server, is, down, 882
+how, to, fix, 882
+to, fix, this, 881
+fix, this, problem, 881
+i, need, to, 880
+need, to, update, 880
+to, update, my, 879
+update, my, software, 879
+my, software, today, 878
+the, system, is, 878
+system, is, updating, 877
+is, updating, now, 877
+updating, now, please, 876
+now, please, wait, 876
+please, wait, a, 875
+wait, a, moment, 875
+a, moment, while, 874
+moment, while, it, 874
+while, it, loads, 873
+it, loads, the, 873
+loads, the, data, 872
+can, i, get, 872
+i, get, a, 871
+get, a, table, 871
+a, table, for, 870
+table, for, two, 870
+for, two, please, 869
+do, you, have, 869
+you, have, a, 868
+have, a, reservation, 868
+a, reservation, for, 867
+reservation, for, tonight, 867
+i, would, like, 866
+would, like, to, 866
+like, to, order, 865
+to, order, now, 865
+order, now, please, 864
+can, we, see, 864
+we, see, the, 863
+see, the, menu, 863
+the, menu, please, 862
+what, do, you, 862
+do, you, recommend, 861
+you, recommend, here, 861
+recommend, here, today, 860
+what, is, the, 860
+is, the, soup, 859
+the, soup, of, 859
+soup, of, the, 858
+of, the, day, 858
+i, will, have, 857
+will, have, the, 857
+have, the, chicken, 856
+the, chicken, please, 856
+and, a, side, 855
+a, side, of, 855
+side, of, fries, 854
+of, fries, please, 854
+can, i, get, 853
+i, get, that, 853
+get, that, to, 852
+that, to, go, 852
+to, go, please, 851
+is, it, possible, 851
+it, possible, to, 850
+possible, to, get, 850
+to, get, the, 849
+get, the, sauce, 849
+the, sauce, on, 848
+sauce, on, the, 848
+on, the, side, 847
+i, am, allergic, 847
+am, allergic, to, 846
+allergic, to, peanuts, 846
+to, peanuts, and, 845
+peanuts, and, tree, 845
+and, tree, nuts, 844
+do, you, have, 844
+have, any, vegan, 843
+any, vegan, options, 843
+vegan, options, here, 842
+gluten, free, options, 842
+free, options, available, 841
+options, available, today, 841
+could, we, get, 840
+we, get, some, 840
+get, some, more, 839
+some, more, water, 839
+more, water, please, 838
+water, please, thanks, 838
+everything, was, delicious, 837
+was, delicious, thank, 837
+delicious, thank, you, 836
+can, we, get, 836
+we, get, the, 835
+get, the, check, 835
+the, check, please, 834
+check, please, thanks, 834
+can, we, split, 833
+we, split, the, 833
+split, the, bill, 832
+the, bill, evenly, 832
+bill, evenly, please, 831
+i, will, pay, 831
+will, pay, the, 830
+pay, the, bill, 830
+the, bill, today, 829
+let, me, get, 829
+me, get, this, 828
+get, this, one, 828
+this, one, is, 827
+one, is, on, 827
+is, on, me, 826
+how, are, you, 826
+are, you, feeling, 825
+you, feeling, today, 825
+feeling, today, after, 824
+i, am, feeling, 824
+am, feeling, much, 823
+feeling, much, better, 823
+much, better, today, 822
+better, today, thanks, 822
+i, feel, a, 821
+feel, a, little, 821
+a, little, sick, 820
+little, sick, today, 820
+sick, today, and, 819
+today, and, tired, 819
+i, have, a, 818
+have, a, headache, 818
+a, headache, and, 817
+headache, and, a, 817
+and, a, fever, 816
+i, need, to, 816
+need, to, see, 815
+to, see, a, 815
+see, a, doctor, 814
+a, doctor, soon, 814
+can, you, recommend, 813
+you, recommend, a, 813
+recommend, a, good, 812
+a, good, doctor, 812
+i, need, to, 811
+need, to, make, 811
+to, make, an, 810
+make, an, appointment, 810
+an, appointment, for, 809
+appointment, for, tomorrow, 809
+i, hurt, my, 808
+hurt, my, back, 808
+my, back, yesterday, 807
+back, yesterday, and, 807
+yesterday, and, it, 806
+and, it, hurts, 806
+it, hurts, a, 805
+hurts, a, lot, 805
+i, need, to, 804
+need, to, get, 804
+to, get, some, 803
+get, some, rest, 803
+some, rest, tonight, 802
+i, am, going, 802
+am, going, to, 801
+going, to, bed, 801
+to, bed, early, 800
+bed, early, tonight, 800
+did, you, sleep, 799
+you, sleep, well, 799
+sleep, well, last, 798
+well, last, night, 798
+i, slept, terrible, 797
+slept, terrible, last, 797
+terrible, last, night, 796
+i, am, so, 796
+am, so, exhausted, 795
+so, exhausted, today, 795
+i, need, a, 794
+need, a, nap, 794
+a, nap, right, 793
+nap, right, now, 793
+right, now, please, 792
+i, am, trying, 792
+am, trying, to, 791
+trying, to, eat, 791
+to, eat, healthier, 790
+eat, healthier, now, 790
+i, started, a, 789
+started, a, new, 789
+a, new, diet, 788
+new, diet, plan, 788
+i, need, to, 787
+need, to, drink, 787
+to, drink, more, 786
+drink, more, water, 786
+more, water, daily, 785
+i, am, going, 785
+am, going, to, 784
+going, to, the, 784
+to, the, gym, 783
+the, gym, later, 783
+gym, later, today, 782
+what, do, you, 782
+do, you, do, 781
+you, do, for, 781
+do, for, fun, 780
+what, are, your, 780
+are, your, hobbies, 779
+your, hobbies, outside, 779
+hobbies, outside, of, 778
+outside, of, work, 778
+i, like, to, 777
+like, to, read, 777
+to, read, books, 776
+read, books, and, 776
+books, and, watch, 775
+and, watch, movies, 775
+watch, movies, on, 774
+movies, on, weekends, 774
+do, you, play, 773
+you, play, any, 773
+play, any, sports, 772
+any, sports, locally, 772
+i, play, tennis, 771
+play, tennis, on, 771
+tennis, on, the, 770
+on, the, weekends, 770
+i, love, listening, 769
+love, listening, to, 769
+listening, to, music, 768
+to, music, while, 768
+music, while, working, 767
+while, working, out, 767
+what, kind, of, 766
+kind, of, music, 766
+of, music, do, 765
+music, do, you, 765
+do, you, like, 764
+have, you, seen, 764
+you, seen, any, 763
+seen, any, good, 763
+any, good, movies, 762
+good, movies, lately, 762
+i, just, watched, 761
+just, watched, a, 761
+watched, a, great, 760
+a, great, movie, 760
+great, movie, last, 759
+movie, last, night, 759
+what, is, your, 758
+is, your, favorite, 758
+your, favorite, color, 757
+favorite, color, and, 757
+color, and, why, 756
+i, am, learning, 756
+am, learning, how, 755
+learning, how, to, 755
+how, to, cook, 754
+to, cook, healthy, 754
+cook, healthy, meals, 753
+healthy, meals, now, 753
+i, love, traveling, 752
+love, traveling, and, 752
+traveling, and, exploring, 751
+and, exploring, new, 751
+exploring, new, places, 750
+new, places, to, 750
+places, to, visit, 749
+where, is, your, 749
+is, your, next, 748
+your, next, vacation, 748
+next, vacation, destination, 747
+i, want, to, 747
+want, to, go, 746
+to, go, to, 746
+go, to, europe, 745
+to, europe, next, 745
+europe, next, year, 744
+next, year, hopefully, 744
+do, you, have, 743
+you, have, any, 743
+have, any, pets, 742
+any, pets, at, 742
+pets, at, home, 741
+i, have, a, 741
+have, a, dog, 740
+a, dog, named, 740
+dog, named, max, 739
+i, love, cats, 739
+love, cats, so, 738
+cats, so, much, 738
+they, are, so, 737
+are, so, cute, 737
+so, cute, and, 736
+cute, and, fluffy, 736
+what, a, beautiful, 735
+a, beautiful, day, 735
+beautiful, day, outside, 734
+day, outside, today, 734
+the, weather, is, 733
+weather, is, perfect, 733
+is, perfect, for, 732
+perfect, for, a, 732
+for, a, walk, 731
+a, walk, in, 731
+walk, in, the, 730
+in, the, park, 730
+let's, go, for, 729
+go, for, a, 729
+for, a, hike, 728
+a, hike, this, 728
+hike, this, weekend, 727
+i, enjoy, spending, 727
+enjoy, spending, time, 726
+spending, time, outdoors, 726
+time, outdoors, when, 725
+outdoors, when, it, 725
+when, it, is, 724
+it, is, sunny, 724
+is, sunny, out, 723
+it, was, so, 723
+was, so, good, 722
+so, good, to, 722
+good, to, see, 721
+to, see, you, 721
+see, you, again, 720
+you, again, soon, 720
+we, had, a, 719
+had, a, great, 719
+a, great, time, 718
+great, time, together, 718
+time, together, yesterday, 717
+thank, you, for, 717
+you, for, inviting, 716
+for, inviting, me, 716
+inviting, me, over, 715
+me, over, for, 715
+over, for, dinner, 714
+for, dinner, tonight, 714
+i, can't, wait, 713
+can't, wait, to, 713
+wait, to, see, 712
+to, see, it, 712
+see, it, for, 711
+it, for, myself, 711
+that, is, so, 710
+is, so, exciting, 710
+so, exciting, for, 709
+exciting, for, you, 709
+i, am, so, 708
+am, so, proud, 708
+so, proud, of, 707
+proud, of, you, 707
+of, you, for, 706
+you, for, doing, 706
+for, doing, that, 705
+doing, that, great, 705
+that, great, job, 704
+congratulations, on, your, 704
+on, your, new, 703
+your, new, job, 703
+new, job, offer, 702
+job, offer, yesterday, 702
+you, deserve, it, 701
+deserve, it, completely, 701
+it, completely, today, 700
+thank, you, for, 700
+you, for, being, 699
+for, being, there, 699
+being, there, for, 698
+there, for, me, 698
+for, me, always, 697
+i, appreciate, your, 697
+appreciate, your, support, 696
+your, support, during, 696
+support, during, this, 695
+during, this, time, 695
+this, time, of, 694
+time, of, need, 694
+of, need, now, 693
+let, me, know, 693
+me, know, how, 692
+know, how, i, 692
+how, i, can, 691
+i, can, help, 691
+can, help, you, 690
+help, you, with, 690
+you, with, anything, 689
+with, anything, else, 689
+is, there, anything, 688
+there, anything, i, 688
+anything, i, can, 687
+i, can, do, 687
+can, do, to, 686
+do, to, help, 686
+to, help, out, 685
+help, out, here, 685
+please, don't, hesitate, 684
+don't, hesitate, to, 684
+hesitate, to, ask, 683
+to, ask, for, 683
+ask, for, help, 682
+for, help, anytime, 682
+i, am, here, 681
+am, here, for, 681
+here, for, you, 680
+for, you, always, 680
+you, always, friend, 679
+that, sounds, like, 679
+sounds, like, a, 678
+like, a, lot, 678
+a, lot, of, 677
+lot, of, fun, 677
+of, fun, to, 676
+fun, to, me, 676
+i, would, love, 675
+would, love, to, 675
+love, to, join, 674
+to, join, you, 674
+join, you, guys, 673
+you, guys, later, 673
+guys, later, tonight, 672
+count, me, in, 672
+me, in, for, 671
+in, for, sure, 671
+for, sure, today, 670
+i, will, be, 670
+will, be, there, 669
+be, there, at, 669
+there, at, six, 668
+at, six, pm, 668
+six, pm, sharp, 667
+pm, sharp, ok, 667
+i, can't, make, 666
+can't, make, it, 666
+make, it, tonight, 665
+it, tonight, sorry, 665
+tonight, sorry, guys, 664
+sorry, guys, maybe, 664
+guys, maybe, next, 663
+maybe, next, time, 663
+next, time, then, 662
+i, have, other, 662
+have, other, plans, 661
+other, plans, for, 661
+plans, for, tonight, 660
+for, tonight, unfortunately, 660
+let's, reschedule, for, 659
+reschedule, for, next, 659
+for, next, week, 658
+next, week, instead, 658
+week, instead, okay, 657
+i, am, writing, 657
+am, writing, to, 656
+writing, to, follow, 656
+to, follow, up, 655
+follow, up, on, 655
+up, on, our, 654
+on, our, previous, 654
+our, previous, conversation, 653
+previous, conversation, regarding, 653
+conversation, regarding, the, 652
+regarding, the, project, 652
+the, project, status, 651
+project, status, update, 651
+please, find, attached, 650
+find, attached, the, 650
+attached, the, requested, 649
+the, requested, document, 649
+requested, document, for, 648
+document, for, your, 648
+for, your, review, 647
+your, review, and, 647
+review, and, feedback, 646
+and, feedback, by, 646
+feedback, by, friday, 645
+by, friday, please, 645
+i, look, forward, 644
+look, forward, to, 644
+forward, to, hearing, 643
+to, hearing, from, 643
+hearing, from, you, 642
+from, you, soon, 642
+you, soon, regarding, 641
+soon, regarding, this, 641
+regarding, this, matter, 640
+this, matter, further, 640
+if, you, have, 639
+you, have, any, 639
+have, any, questions, 638
+any, questions, please, 638
+questions, please, let, 637
+please, let, me, 637
+let, me, know, 636
+me, know, immediately, 636
+thank, you, for, 635
+you, for, your, 635
+for, your, time, 634
+your, time, and, 634
+time, and, consideration, 633
+and, consideration, today, 633
+best, regards, and, 632
+regards, and, thanks, 632
+and, thanks, again, 631
+thanks, again, for, 631
+again, for, everything, 630
+sincerely, yours, truly, 630
+as, we, discussed, 629
+we, discussed, earlier, 629
+discussed, earlier, today, 628
+earlier, today, i, 628
+today, i, will, 627
+i, will, proceed, 627
+will, proceed, with, 626
+proceed, with, the, 626
+with, the, next, 625
+the, next, steps, 625
+next, steps, tomorrow, 624
+please, keep, me, 624
+keep, me, updated, 623
+me, updated, on, 623
+updated, on, the, 622
+on, the, progress, 622
+the, progress, of, 621
+progress, of, this, 621
+of, this, task, 620
+this, task, daily, 620
+i, will, keep, 619
+will, keep, you, 619
+keep, you, in, 618
+you, in, the, 618
+in, the, loop, 617
+the, loop, moving, 617
+loop, moving, forward, 616
+the, deadline, is, 616
+deadline, is, fast, 615
+is, fast, approaching, 615
+fast, approaching, so, 614
+approaching, so, we, 614
+so, we, need, 613
+we, need, to, 613
+need, to, hurry, 612
+to, hurry, up, 612
+hurry, up, now, 611
+please, submit, the, 611
+submit, the, report, 610
+the, report, by, 610
+report, by, the, 609
+by, the, end, 609
+the, end, of, 608
+end, of, the, 608
+of, the, day, 607
+the, day, today, 607
+can, you, review, 606
+you, review, this, 606
+review, this, draft, 605
+this, draft, when, 605
+draft, when, you, 604
+when, you, have, 604
+you, have, time, 603
+have, time, later, 603
+let's, schedule, a, 602
+schedule, a, meeting, 602
+a, meeting, to, 601
+meeting, to, discuss, 601
+to, discuss, further, 600
+discuss, further, details, 600
+what, is, your, 599
+is, your, availability, 599
+your, availability, for, 598
+availability, for, next, 598
+for, next, week, 597
+next, week, please, 597
+are, you, free, 596
+you, free, to, 596
+free, to, jump, 595
+to, jump, on, 595
+jump, on, a, 594
+on, a, quick, 594
+a, quick, call, 593
+quick, call, tomorrow, 593
+i, am, out, 592
+am, out, of, 592
+out, of, the, 591
+of, the, office, 591
+the, office, today, 590
+office, today, returning, 590
+today, returning, on, 589
+returning, on, monday, 589
+for, urgent, matters, 588
+urgent, matters, please, 588
+matters, please, contact, 587
+please, contact, my, 587
+contact, my, manager, 586
+my, manager, directly, 586
+manager, directly, thanks, 585
+i, am, currently, 585
+am, currently, working, 584
+currently, working, on, 584
+working, on, this, 583
+on, this, issue, 583
+this, issue, now, 582
+issue, now, and, 582
+now, and, will, 581
+and, will, update, 581
+will, update, you, 580
+update, you, shortly, 580
+you, shortly, today, 579
+thank, you, for, 579
+you, for, bringing, 578
+for, bringing, this, 578
+bringing, this, to, 577
+this, to, my, 577
+to, my, attention, 576
+my, attention, today, 576
+i, will, look, 575
+will, look, into, 575
+look, into, it, 574
+into, it, right, 574
+it, right, away, 573
+right, away, sir, 573
+i, apologize, for, 572
+apologize, for, the, 572
+for, the, inconvenience, 571
+the, inconvenience, this, 571
+inconvenience, this, has, 570
+this, has, caused, 570
+has, caused, you, 569
+caused, you, today, 569
+we, are, working, 568
+are, working, to, 568
+working, to, resolve, 567
+to, resolve, this, 567
+resolve, this, as, 566
+this, as, quickly, 566
+as, quickly, as, 565
+quickly, as, possible, 565
+as, possible, today, 564
+please, let, us, 564
+let, us, know, 563
+us, know, if, 563
+know, if, there, 562
+if, there, is, 562
+there, is, anything, 561
+is, anything, else, 561
+anything, else, we, 560
+else, we, can, 560
+we, can, do, 559
+can, do, for, 559
+do, for, you, 558
+for, you, today, 558
+we, appreciate, your, 557
+appreciate, your, business, 557
+your, business, and, 556
+business, and, support, 556
+and, support, always, 555
+thank, you, for, 555
+you, for, choosing, 554
+for, choosing, our, 554
+choosing, our, services, 553
+our, services, today, 553
+have, a, great, 552
+a, great, rest, 552
+great, rest, of, 551
+rest, of, your, 551
+of, your, day, 550
+your, day, ahead, 550
+day, ahead, thanks, 549
+per, your, request, 549
+your, request, i, 548
+request, i, have, 548
+i, have, attached, 547
+have, attached, the, 547
+attached, the, necessary, 546
+the, necessary, documents, 546
+necessary, documents, below, 545
+documents, below, for, 545
+below, for, your, 544
+for, your, reference, 544
+your, reference, only, 543
+reference, only, thanks, 543
+i, am, writing, 542
+am, writing, on, 542
+writing, on, behalf, 541
+on, behalf, of, 541
+behalf, of, my, 540
+of, my, team, 540
+my, team, today, 539
+team, today, to, 539
+today, to, inform, 538
+to, inform, you, 538
+inform, you, that, 537
+you, that, the, 537
+that, the, project, 536
+the, project, is, 536
+project, is, complete, 535
+is, complete, now, 535
+complete, now, thanks, 534
+we, are, pleased, 534
+are, pleased, to, 533
+pleased, to, announce, 533
+to, announce, that, 532
+announce, that, our, 532
+that, our, new, 531
+our, new, product, 531
+new, product, launches, 530
+product, launches, tomorrow, 530
+launches, tomorrow, morning, 529
+tomorrow, morning, early, 529
+we, regret, to, 528
+regret, to, inform, 528
+to, inform, you, 527
+inform, you, that, 527
+you, that, your, 526
+that, your, application, 526
+your, application, was, 525
+application, was, not, 525
+was, not, successful, 524
+not, successful, this, 524
+successful, this, time, 523
+this, time, around, 523
+time, around, sorry, 522
+we, wish, you, 522
+wish, you, the, 521
+you, the, best, 521
+the, best, of, 520
+best, of, luck, 520
+of, luck, in, 519
+luck, in, your, 519
+in, your, future, 518
+your, future, endeavors, 518
+future, endeavors, always, 517
+endeavors, always, thanks, 517
+thank, you, again, 516
+you, again, for, 516
+again, for, your, 515
+for, your, interest, 515
+your, interest, in, 514
+interest, in, our, 514
+in, our, company, 513
+our, company, today, 513
+company, today, bye, 512
+what, are, the, 512
+are, the, action, 511
+the, action, items, 511
+action, items, from, 510
+items, from, today, 510
+from, today, meeting, 509
+today, meeting, earlier, 509
+meeting, earlier, today, 508
+earlier, today, please, 508
+today, please, send, 507
+please, send, me, 507
+send, me, the, 506
+me, the, meeting, 506
+the, meeting, minutes, 505
+meeting, minutes, when, 505
+minutes, when, ready, 504
+when, ready, thanks, 504
+ready, thanks, again, 503
+thanks, again, for, 503
+again, for, taking, 502
+for, taking, the, 502
+taking, the, notes, 501
+the, notes, today, 501
+notes, today, bye, 500
+let's, circle, back, 500
+circle, back, on, 499
+back, on, this, 499
+on, this, next, 498
+this, next, week, 498
+next, week, when, 497
+week, when, we, 497
+when, we, have, 496
+we, have, more, 496
+have, more, data, 495
+more, data, available, 495
+data, available, thanks, 494
+i, need, your, 494
+need, your, input, 493
+your, input, on, 493
+input, on, this, 492
+on, this, proposal, 492
+this, proposal, before, 491
+proposal, before, we, 491
+before, we, finalize, 490
+we, finalize, it, 490
+finalize, it, today, 489
+it, today, please, 489
+today, please, review, 488
+please, review, the, 488
+review, the, attached, 487
+the, attached, document, 487
+attached, document, and, 486
+document, and, provide, 486
+and, provide, feedback, 485
+provide, feedback, by, 485
+feedback, by, tomorrow, 484
+by, tomorrow, morning, 484
+tomorrow, morning, latest, 483
+morning, latest, thanks, 483
+latest, thanks, again, 482
+i, am, confused, 482
+am, confused, about, 481
+confused, about, the, 481
+about, the, new, 480
+the, new, policy, 480
+new, policy, changes, 479
+policy, changes, recently, 479
+changes, recently, made, 478
+recently, made, here, 478
+made, here, today, 477
+could, you, please, 477
+you, please, clarify, 476
+please, clarify, this, 476
+clarify, this, point, 475
+this, point, for, 475
+point, for, me, 474
+for, me, clearly, 474
+me, clearly, please, 473
+clearly, please, thanks, 473
+please, thanks, again, 472
+i, don't, understand, 472
+don't, understand, what, 471
+understand, what, you, 471
+what, you, mean, 470
+you, mean, exactly, 470
+mean, exactly, here, 469
+exactly, here, now, 469
+can, you, explain, 468
+you, explain, that, 468
+explain, that, in, 467
+that, in, more, 467
+in, more, detail, 466
+more, detail, please, 466
+detail, please, thanks, 465
+please, thanks, a, 465
+thanks, a, lot, 464
+a, lot, for, 464
+lot, for, explaining, 463
+for, explaining, that, 463
+explaining, that, clearly, 462
+that, clearly, today, 462
+i, completely, agree, 461
+completely, agree, with, 461
+agree, with, your, 460
+with, your, assessment, 460
+your, assessment, of, 459
+assessment, of, the, 459
+of, the, situation, 458
+the, situation, now, 458
+situation, now, yes, 457
+now, yes, completely, 457
+yes, completely, agree, 456
+that, makes, perfect, 456
+makes, perfect, sense, 455
+perfect, sense, to, 455
+sense, to, me, 454
+to, me, now, 454
+me, now, thanks, 453
+now, thanks, for, 453
+thanks, for, clarifying, 452
+for, clarifying, that, 452
+clarifying, that, today, 451
+that, today, greatly, 451
+today, greatly, appreciated, 450
+greatly, appreciated, thanks, 450
+i, am, not, 449
+am, not, sure, 449
+not, sure, if, 448
+sure, if, i, 448
+if, i, agree, 447
+i, agree, with, 447
+agree, with, that, 446
+with, that, approach, 446
+that, approach, entirely, 445
+approach, entirely, today, 445
+entirely, today, sorry, 444
+today, sorry, but, 444
+sorry, but, i, 443
+but, i, have, 443
+i, have, some, 442
+have, some, concerns, 442
+some, concerns, about, 441
+concerns, about, this, 441
+about, this, plan, 440
+this, plan, now, 440
+plan, now, so, 439
+now, so, let's, 439
+so, let's, discuss, 438
+let's, discuss, it, 438
+discuss, it, further, 437
+it, further, tomorrow, 437
+further, tomorrow, okay, 436
+tomorrow, okay, thanks, 436
+okay, thanks, bye, 435
+what, are, your, 435
+are, your, thoughts, 434
+your, thoughts, on, 434
+thoughts, on, this, 433
+on, this, idea, 433
+this, idea, please, 432
+idea, please, share, 432
+please, share, them, 431
+share, them, now, 431
+them, now, thanks, 430
+i, would, love, 430
+would, love, to, 429
+love, to, hear, 429
+to, hear, your, 428
+hear, your, feedback, 428
+your, feedback, on, 427
+feedback, on, this, 427
+on, this, draft, 426
+this, draft, today, 426
+draft, today, please, 425
+today, please, thanks, 425
+please, thanks, so, 424
+thanks, so, much, 424
+so, much, for, 423
+much, for, helping, 423
+for, helping, me, 422
+helping, me, out, 422
+me, out, today, 421
+out, today, seriously, 421
+today, seriously, appreciate, 420
+seriously, appreciate, it, 420
+appreciate, it, a, 419
+it, a, lot, 419
+a, lot, always, 418
+lot, always, thanks, 418
+i, couldn't, have, 417
+couldn't, have, done, 417
+have, done, it, 416
+done, it, without, 416
+it, without, your, 415
+without, your, help, 415
+your, help, really, 414
+help, really, appreciate, 414
+really, appreciate, you, 413
+appreciate, you, so, 413
+you, so, much, 412
+so, much, friend, 412
+you, are, a, 411
+are, a, lifesaver, 411
+a, lifesaver, thank, 410
+lifesaver, thank, you, 410
+thank, you, seriously, 409
+you, seriously, thanks, 409
+seriously, thanks, again, 408
+thanks, again, bye, 408
+no, problem, at, 407
+problem, at, all, 407
+at, all, happy, 406
+all, happy, to, 406
+happy, to, help, 405
+to, help, anytime, 405
+help, anytime, just, 404
+anytime, just, let, 404
+just, let, me, 403
+let, me, know, 403
+me, know, if, 402
+know, if, you, 402
+if, you, need, 401
+you, need, anything, 401
+need, anything, else, 400
+anything, else, today, 400
+else, today, bye, 399
+today, bye, for, 399
+bye, for, now, 398
+for, now, see, 398
+now, see, ya, 397
+see, ya, later, 397
+ya, later, man, 396
+later, man, peace, 396
+man, peace, out, 395
+i, am, running, 395
+am, running, a, 394
+running, a, few, 394
+a, few, minutes, 393
+few, minutes, late, 393
+minutes, late, sorry, 392
+late, sorry, about, 392
+sorry, about, that, 391
+about, that, see, 391
+that, see, you, 390
+see, you, soon, 390
+you, soon, there, 389
+soon, there, okay, 389
+there, okay, bye, 388
+i, am, stuck, 388
+am, stuck, in, 387
+stuck, in, traffic, 387
+in, traffic, right, 386
+traffic, right, now, 386
+right, now, so, 385
+now, so, i, 385
+so, i, will, 384
+i, will, be, 384
+will, be, delayed, 383
+be, delayed, slightly, 383
+delayed, slightly, sorry, 382
+slightly, sorry, again, 382
+sorry, again, for, 381
+again, for, the, 381
+for, the, delay, 380
+the, delay, today, 380
+delay, today, see, 379
+today, see, you, 379
+see, you, shortly, 378
+you, shortly, bye, 378
+i, am, on, 377
+am, on, my, 377
+on, my, way, 376
+my, way, now, 376
+way, now, be, 375
+now, be, there, 375
+be, there, in, 374
+there, in, five, 374
+in, five, minutes, 373
+five, minutes, okay, 373
+minutes, okay, see, 372
+okay, see, you, 372
+see, you, then, 371
+you, then, bye, 371
+what, are, we, 370
+are, we, doing, 370
+we, doing, for, 369
+doing, for, dinner, 369
+for, dinner, tonight, 368
+dinner, tonight, any, 368
+tonight, any, ideas, 367
+any, ideas, yet, 367
+ideas, yet, let, 366
+yet, let, me, 366
+let, me, know, 365
+me, know, soon, 365
+know, soon, please, 364
+soon, please, thanks, 364
+where, do, you, 363
+do, you, want, 363
+you, want, to, 362
+want, to, eat, 362
+to, eat, tonight, 361
+eat, tonight, i, 361
+tonight, i, am, 360
+i, am, starving, 360
+am, starving, right, 359
+starving, right, now, 359
+right, now, so, 358
+now, so, hungry, 358
+so, hungry, let's, 357
+hungry, let's, go, 357
+let's, go, get, 356
+go, get, some, 356
+get, some, food, 355
+some, food, soon, 355
+food, soon, please, 354
+how, about, we, 354
+about, we, order, 353
+we, order, pizza, 353
+order, pizza, tonight, 352
+pizza, tonight, it, 352
+tonight, it, is, 351
+it, is, easy, 351
+is, easy, and, 350
+easy, and, fast, 350
+and, fast, tonight, 349
+fast, tonight, okay, 349
+tonight, okay, sounds, 348
+okay, sounds, good, 348
+sounds, good, to, 347
+good, to, me, 347
+to, me, too, 346
+me, too, let's, 346
+too, let's, do, 345
+let's, do, it, 345
+do, it, then, 344
+it, then, bye, 344
+then, bye, for, 343
+bye, for, now, 343
+what, are, your, 342
+are, your, plans, 342
+your, plans, for, 341
+plans, for, the, 341
+for, the, weekend, 340
+the, weekend, anything, 340
+weekend, anything, fun, 339
+anything, fun, planned, 339
+fun, planned, yet, 338
+planned, yet, let, 338
+yet, let, me, 337
+let, me, know, 337
+me, know, if, 336
+know, if, you, 336
+if, you, are, 335
+you, are, free, 335
+are, free, to, 334
+free, to, hang, 334
+to, hang, out, 333
+hang, out, later, 333
+out, later, maybe, 332
+later, maybe, saturday, 332
+maybe, saturday, night, 331
+saturday, night, or, 331
+night, or, sunday, 330
+or, sunday, morning, 330
+sunday, morning, okay, 329
+morning, okay, bye, 329
+i, don't, have, 328
+don't, have, any, 328
+have, any, plans, 327
+any, plans, yet, 327
+plans, yet, just, 326
+yet, just, relaxing, 326
+just, relaxing, at, 325
+relaxing, at, home, 325
+at, home, mostly, 324
+home, mostly, you, 324
+mostly, you, what, 323
+you, what, are, 323
+what, are, you, 322
+are, you, doing, 322
+you, doing, this, 321
+doing, this, weekend, 321
+this, weekend, then, 320
+weekend, then, anything, 320
+then, anything, exciting, 319
+anything, exciting, happening, 319
+exciting, happening, soon, 318
+happening, soon, anyway, 318
+soon, anyway, talk, 317
+anyway, talk, to, 317
+talk, to, you, 316
+to, you, later, 316
+you, later, bye, 315
+later, bye, now, 315
+we, are, going, 314
+are, going, to, 314
+going, to, the, 313
+to, the, movies, 313
+the, movies, tonight, 312
+movies, tonight, want, 312
+tonight, want, to, 311
+want, to, come, 311
+to, come, with, 310
+come, with, us, 310
+with, us, later, 309
+us, later, tonight, 309
+later, tonight, let, 308
+tonight, let, me, 308
+let, me, know, 307
+me, know, soon, 307
+know, soon, okay, 306
+soon, okay, thanks, 306
+okay, thanks, bye, 305
+how, was, your, 305
+was, your, day, 304
+your, day, today, 304
+day, today, hopefully, 303
+today, hopefully, it, 303
+hopefully, it, was, 302
+it, was, good, 302
+was, good, and, 301
+good, and, productive, 301
+and, productive, overall, 300
+productive, overall, today, 300
+overall, today, anyway, 299
+today, anyway, talk, 299
+anyway, talk, to, 298
+talk, to, you, 298
+to, you, soon, 297
+you, soon, bye, 297
+it, was, a, 296
+was, a, long, 296
+a, long, day, 295
+long, day, today, 295
+day, today, i, 294
+today, i, am, 294
+i, am, so, 293
+am, so, tired, 293
+so, tired, now, 292
+tired, now, going, 292
+now, going, to, 291
+going, to, sleep, 291
+to, sleep, soon, 290
+sleep, soon, goodnight, 290
+soon, goodnight, everyone, 289
+goodnight, everyone, sleep, 289
+everyone, sleep, well, 288
+sleep, well, tonight, 288
+well, tonight, bye, 287
+tonight, bye, now, 287
+did, you, hear, 286
+you, hear, the, 286
+hear, the, news, 285
+the, news, today, 285
+news, today, about, 284
+today, about, that, 284
+about, that, thing, 283
+that, thing, earlier, 283
+thing, earlier, today, 282
+earlier, today, it, 282
+today, it, was, 281
+it, was, crazy, 281
+was, crazy, right, 280
+crazy, right, completely, 280
+right, completely, unexpected, 279
+completely, unexpected, anyway, 279
+unexpected, anyway, talk, 278
+anyway, talk, later, 278
+talk, later, bye, 277
+later, bye, for, 277
+bye, for, now, 276
+no, i, didn't, 276
+i, didn't, hear, 275
+didn't, hear, about, 275
+hear, about, it, 274
+about, it, yet, 274
+it, yet, what, 273
+yet, what, happened, 273
+what, happened, exactly, 272
+happened, exactly, tell, 272
+exactly, tell, me, 271
+tell, me, more, 271
+me, more, please, 270
+more, please, thanks, 270
+please, thanks, a, 269
+thanks, a, lot, 269
+a, lot, bye, 268
+lot, bye, now, 268
+i, can't, believe, 267
+can't, believe, it, 267
+believe, it, either, 266
+it, either, that, 266
+either, that, is, 265
+that, is, insane, 265
+is, insane, truly, 264
+insane, truly, crazy, 264
+truly, crazy, stuff, 263
+crazy, stuff, happening, 263
+stuff, happening, lately, 262
+happening, lately, around, 262
+lately, around, here, 261
+around, here, anyway, 261
+here, anyway, got, 260
+anyway, got, to, 260
+got, to, go, 259
+to, go, now, 259
+go, now, bye, 258
+now, bye, friend, 258
+bye, friend, see, 257
+friend, see, ya, 257
+see, ya, soon, 256
+ya, soon, later, 256
+soon, later, man, 255
+later, man, peace, 255
+man, peace, out, 254
+peace, out, bro, 254
+out, bro, bye, 253
+bro, bye, now, 253
+bye, now, take, 252
+now, take, care, 252
+take, care, always, 251
+care, always, friend, 251
+always, friend, bye, 250
+friend, bye, bye, 250

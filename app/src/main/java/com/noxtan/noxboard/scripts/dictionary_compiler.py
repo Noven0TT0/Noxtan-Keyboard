@@ -83,26 +83,30 @@ def flatten_and_save_trie(trie, output_path):
     print(f"Successfully generated: {os.path.basename(output_path)} (Nodes: {len(nodes_array)})")
 
 def main():
-    # .txt ဖိုင်များရှိသည့် လက်ရှိ scripts folder နေရာ (Input)
     script_dir = os.path.dirname(os.path.abspath(__file__))
-
-    # .bin ဖိုင်များ သွားသိမ်းမည့် assets folder နေရာ (Output)
     assets_dir = os.path.abspath(os.path.join(script_dir, '../../../../../assets'))
 
     if not os.path.exists(assets_dir):
         print(f"Error: Asset directory not found at {assets_dir}")
         return
 
-    dicts = ['dict_my', 'dict_en', 'dict_th']
+    # proverbs_my ကိုပါ တစ်ခါတည်း ထုတ်ပေးရန် ထည့်ထားသည်
+    dicts = ['dict_my', 'dict_en', 'dict_th', 'proverbs_my']
 
     for d in dicts:
-        txt_file = os.path.join(script_dir, f"{d}.txt")     # scripts/ ထဲက .txt ကို ဖတ်မည်
-        bin_file = os.path.join(assets_dir, f"{d}.bin")     # assets/ ထဲသို့ .bin သွားထုတ်မည်
+        # txt ဖိုင်များကို script ရှိရာ folder (လက်ရှိနေရာ) မှ ဖတ်မည်
+        txt_file = os.path.join(script_dir, f"{d}.txt")
+        # ထွက်လာမည့် bin ဖိုင်များကို assets folder ထဲသို့ တိုက်ရိုက် ထည့်မည်
+        bin_file = os.path.join(assets_dir, f"{d}.bin")
 
-        print(f"Processing {d}.txt ...")
-        trie = build_trie_from_txt(txt_file)
-        if trie:
-            flatten_and_save_trie(trie, bin_file)
+        if os.path.exists(txt_file):
+            print(f"Processing {d}.txt ...")
+            trie = build_trie_from_txt(txt_file)
+            if trie:
+                flatten_and_save_trie(trie, bin_file)
+        else:
+            if d != 'proverbs_my': # proverbs မရှိရင် error မပြဘဲ ကျော်သွားရန်
+                print(f"Skipping {d}.txt (File not found in {script_dir})")
 
 if __name__ == "__main__":
     main()

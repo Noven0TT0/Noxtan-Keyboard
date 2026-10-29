@@ -50,8 +50,8 @@ object MyanmarLayout : BaseLayout() {
 
             val row0 = mutableListOf<Key>()
             row0.add(Key("Emoji", "Emoji", -11, 1.0f))
-            row0.addAll(createRow(listOf("ော်", "ိုင်", "င်္", "ုံ"), listOf("<", ">", "/", "ဩ"), 1.0f))
-            row0.addAll(createRow(listOf("ြီ", "ရ", "ဂ", "ဝ", "ဟ"), listOf("ဏ", "ဋ္ဌ", "ဏ္ဍ", "ဋ", "ဍ"), 1.0f))
+            row0.addAll(createRow(listOf("(", ")", "ဩ", "င်္"), listOf("+", "-", "/", "%"), 1.0f))
+            row0.addAll(createRow(listOf("?", "ရ", "ဂ", "ဝ", "ဟ"), listOf("ဏ", "ဋ္ဌ", "ဏ္ဍ", "ဋ", "ဍ"), 1.0f))
             rows.add(row0)
 
             rows.add(createRow(
@@ -75,7 +75,7 @@ object MyanmarLayout : BaseLayout() {
 
             rows.add(listOf(
                 Key("Globe", "Globe", -3, 1.5f),
-                Key("္", "+", 0, 1f),
+                Key("္", "္", 0, 1f),
                 Key("Space", "Space", 32, 5f),
                 Key(".", ",", 0, 1f),
                 Key("Enter", "Enter", 10, 1.5f)

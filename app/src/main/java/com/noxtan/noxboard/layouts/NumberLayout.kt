@@ -13,11 +13,11 @@ object NumberLayout : BaseLayout() {
                 Key("*", "*", 0, weight),
                 Key("0", "0", 0, weight),
                 Key("#", "#", 0, weight),
-                Key("Space", "Space", 32, weight)
+                Key("+", "+", 0, weight)
             ),
             listOf(
                 Key("🌐", "🌐", -3, weight),
-                Key("", "", -100, weight),
+                Key("Space", "Space", 32, weight),
                 Key("⌫", "⌫", -2, weight),
                 Key("Enter", "Enter", 10, weight)
             )

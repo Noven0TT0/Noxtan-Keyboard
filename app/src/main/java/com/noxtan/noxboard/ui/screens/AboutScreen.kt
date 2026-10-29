@@ -4,45 +4,70 @@ import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
-import androidx.compose.material3.*
+import androidx.compose.material.icons.filled.BugReport
+import androidx.compose.material.icons.filled.ChevronRight
+import androidx.compose.material.icons.filled.Code
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.HeadsetMic
+import androidx.compose.material.icons.filled.IntegrationInstructions
+import androidx.compose.material.icons.filled.Security
+import androidx.compose.material.icons.filled.Shield
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.noxtan.noxboard.R
 import com.noxtan.noxboard.ui.components.NoxTopBar
 import com.noxtan.noxboard.ui.utils.topAndBottomNoise
-import androidx.compose.material.icons.filled.CloudOff
-import androidx.compose.material.icons.filled.BugReport
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.res.stringResource
-import com.noxtan.noxboard.R
 import compose.icons.SimpleIcons
 import compose.icons.simpleicons.Github
-import compose.icons.simpleicons.Telegram
 import compose.icons.simpleicons.Messenger
 import compose.icons.simpleicons.Signal
+import compose.icons.simpleicons.Telegram
 
 @Composable
 fun AboutScreen(
     onBack: () -> Unit,
-    onNavigateToLogs: () -> Unit,
     onNavigateToOpenSource: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -157,13 +182,6 @@ fun AboutScreen(
                     subtitle = "Report issues or suggest features",
                     onClick = { showContactDialog = true }
                 )
-                HorizontalDivider(color = MaterialTheme.colorScheme.surface, modifier = Modifier.padding(start = 64.dp))
-                AboutListItem(
-                    icon = Icons.Default.BugReport,
-                    title = stringResource(R.string.about_system_logs),
-                    subtitle = stringResource(R.string.about_system_logs_desc),
-                    onClick = onNavigateToLogs
-                )
             }
 
             Spacer(modifier = Modifier.height(24.dp))
@@ -174,7 +192,7 @@ fun AboutScreen(
                     title = "Telegram Community",
                     subtitle = "Join our group to discuss, share and get updates",
                     onClick = {
-                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/+Ph4_sY3-uutjN2Rk"))
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/+7Sv2Hi3RPWsxNTJk"))
                         try {
                             context.startActivity(intent)
                         } catch (e: Exception) {
@@ -223,7 +241,7 @@ fun AboutScreen(
                 AboutListItem(
                     icon = Icons.Default.Code,
                     title = "Developer",
-                    subtitle = "NoxTan (View GitHub)",
+                    subtitle = "Noven (View GitHub)",
                     onClick = {
                         context.startActivity(Intent(Intent.ACTION_VIEW, android.net.Uri.parse("https://github.com/Noven0TT0")))
                     }
@@ -369,54 +387,27 @@ fun ContactSupportDialog(onDismiss: () -> Unit, context: android.content.Context
             Text("Contact Support", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary, fontSize = 18.sp)
         },
         text = {
-            Column {
-                Text("ဘယ်ကနေတဆင့် ဆက်သွယ်ချင်ပါသလဲ?", color = Color.Gray, fontSize = 13.sp)
-                Spacer(modifier = Modifier.height(24.dp))
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    "အကြံပြုချက် သို့မဟုတ် ပြဿနာများကို အောက်ပါ Email မှတဆင့် တိုက်ရိုက် ပေးပို့နိုင်ပါသည်။",
+                    color = Color.Gray,
+                    fontSize = 13.sp,
+                    textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                )
+                Spacer(modifier = Modifier.height(20.dp))
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    ContactIconBtn(
-                        name = "Telegram",
-                        icon = SimpleIcons.Telegram,
-                        onClick = {
-                            onDismiss()
-                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("tg://resolve?domain=Noven0TT0"))
-                            try { context.startActivity(intent) } catch (e: Exception) { android.widget.Toast.makeText(context, "Telegram is not installed", android.widget.Toast.LENGTH_SHORT).show() }
-                        }
-                    )
-
-                    ContactIconBtn(
-                        name = "Messenger",
-                        icon = SimpleIcons.Messenger,
-                        onClick = {
-                            onDismiss()
-                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://m.me/your_fb_page"))
-                            try { context.startActivity(intent) } catch (e: Exception) {}
-                        }
-                    )
-
-                    ContactIconBtn(
-                        name = "Signal",
-                        icon = SimpleIcons.Signal,
-                        onClick = {
-                            onDismiss()
-                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://signal.me/#p/+1234567890"))
-                            try { context.startActivity(intent) } catch (e: Exception) { android.widget.Toast.makeText(context, "Signal is not installed", android.widget.Toast.LENGTH_SHORT).show() }
-                        }
-                    )
-
-                    ContactIconBtn(
-                        name = "Email",
-                        icon = Icons.Default.Email,
-                        onClick = {
-                            onDismiss()
-                            val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:noxtan.dev@proton.me"))
-                            try { context.startActivity(intent) } catch (e: Exception) {}
-                        }
-                    )
-                }
+                ContactIconBtn(
+                    name = "Email Us",
+                    icon = Icons.Default.Email,
+                    onClick = {
+                        onDismiss()
+                        val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:noxtan.dev@proton.me"))
+                        try { context.startActivity(intent) } catch (e: Exception) {}
+                    }
+                )
             }
         },
         confirmButton = {

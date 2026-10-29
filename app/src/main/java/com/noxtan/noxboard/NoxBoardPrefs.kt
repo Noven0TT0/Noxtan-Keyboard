@@ -40,6 +40,7 @@ class NoxBoardPrefs(context: Context) {
         private const val KEY_CUSTOM_ACTIVE_KEY_COLOR = "custom_active_key_color"
         private const val KEY_CUSTOM_POPUP_BG_COLOR = "custom_popup_bg_color"
         private const val KEY_CUSTOM_POPUP_TEXT_COLOR = "custom_popup_text_color"
+        private const val KEY_CUSTOM_SUG_BG_COLOR = "custom_sug_bg_color"
         private const val KEY_INDIVIDUAL_KEY_COLORS = "individual_key_colors"
         private const val KEY_INDIVIDUAL_KEY_TEXT_COLORS = "individual_key_text_colors"
         private const val KEY_INDIVIDUAL_KEY_ACTIVE_COLORS = "individual_key_active_colors"
@@ -54,12 +55,17 @@ class NoxBoardPrefs(context: Context) {
         private const val KEY_INDIVIDUAL_ROW_GAPS = "individual_row_gaps"
         private const val KEY_USE_CUSTOM_ICON_COLORS = "use_custom_icon_colors"
         private const val KEY_SUGGESTION_ENABLED = "suggestion_enabled"
+        private const val KEY_PROVERBS_SUGGESTION = "proverbs_suggestion_enabled"
         private const val KEY_AUTO_CORRECTION = "auto_correction"
         private const val KEY_NEXT_WORD_PREDICTION = "next_word_prediction"
         private const val KEY_AUTO_CAPITALIZATION = "auto_capitalization"
         private const val KEY_AUTO_SPACE = "auto_space"
         private const val KEY_BLOCK_OFFENSIVE = "block_offensive_words"
         private const val KEY_DOUBLE_SPACE_PERIOD = "double_space_period"
+        private const val KEY_CALCULATOR_ENABLED = "calculator_enabled"
+
+        private const val KEY_ONE_HAND_MODE = "is_one_hand_mode"
+        private const val KEY_ONE_HAND_SIDE = "one_hand_side"
         private const val KEY_ACTIVE_THEME = "active_theme"
         private const val KEY_SAVED_THEMES = "saved_custom_themes"
         private const val KEY_ACTIVE_SIZE_PRESET = "active_size_preset"
@@ -90,7 +96,6 @@ class NoxBoardPrefs(context: Context) {
         private const val KEY_ICON_STYLE_EMOJI = "icon_style_emoji"
         private const val KEY_ICON_STYLE_ENTER = "icon_style_enter"
         private const val KEY_ICON_STYLE_GLOBE = "icon_style_globe"
-        private const val KEY_ICON_STYLE_VAULT = "icon_style_vault"
         private const val KEY_ICON_STYLE_NUMPAD = "icon_style_numpad"
         private const val KEY_ICON_STYLE_CLIPBOARD = "icon_style_clipboard"
         private const val KEY_ICON_STYLE_SETTING = "icon_style_setting"
@@ -223,6 +228,10 @@ class NoxBoardPrefs(context: Context) {
         get() = prefs.getString(KEY_CUSTOM_POPUP_TEXT_COLOR, "#FFFFFF") ?: "#FFFFFF"
         set(value) = prefs.edit().putString(KEY_CUSTOM_POPUP_TEXT_COLOR, value).apply()
 
+    var customSugBgColor: String
+        get() = prefs.getString(KEY_CUSTOM_SUG_BG_COLOR, "") ?: ""
+        set(value) = prefs.edit().putString(KEY_CUSTOM_SUG_BG_COLOR, value).apply()
+
     var customWallpaperUri: String?
         get() = prefs.getString(KEY_CUSTOM_WALLPAPER_URI, null)
         set(value) = prefs.edit().putString(KEY_CUSTOM_WALLPAPER_URI, value).apply()
@@ -338,9 +347,17 @@ class NoxBoardPrefs(context: Context) {
         get() = prefs.getBoolean(KEY_SUGGESTION_ENABLED, true)
         set(value) = prefs.edit().putBoolean(KEY_SUGGESTION_ENABLED, value).apply()
 
+    var isProverbsSuggestionEnabled: Boolean
+        get() = prefs.getBoolean(KEY_PROVERBS_SUGGESTION, false)
+        set(value) = prefs.edit().putBoolean(KEY_PROVERBS_SUGGESTION, value).apply()
+
     var isIncognitoModeEnabled: Boolean
         get() = prefs.getBoolean("incognito_mode_enabled", false)
         set(value) = prefs.edit().putBoolean("incognito_mode_enabled", value).apply()
+
+    var pinnedClipboardItems: String
+        get() = prefs.getString("pinned_clipboard_items", "[]") ?: "[]"
+        set(value) = prefs.edit().putString("pinned_clipboard_items", value).apply()
 
     var isAutoCorrectionEnabled: Boolean
         get() = prefs.getBoolean(KEY_AUTO_CORRECTION, true)
@@ -422,7 +439,6 @@ class NoxBoardPrefs(context: Context) {
     var iconStyleEmoji: String get() = prefs.getString(KEY_ICON_STYLE_EMOJI, "DEFAULT") ?: "DEFAULT"; set(value) = prefs.edit().putString(KEY_ICON_STYLE_EMOJI, value).apply()
     var iconStyleEnter: String get() = prefs.getString(KEY_ICON_STYLE_ENTER, "DEFAULT") ?: "DEFAULT"; set(value) = prefs.edit().putString(KEY_ICON_STYLE_ENTER, value).apply()
     var iconStyleGlobe: String get() = prefs.getString(KEY_ICON_STYLE_GLOBE, "DEFAULT") ?: "DEFAULT"; set(value) = prefs.edit().putString(KEY_ICON_STYLE_GLOBE, value).apply()
-    var iconStyleVault: String get() = prefs.getString(KEY_ICON_STYLE_VAULT, "DEFAULT") ?: "DEFAULT"; set(value) = prefs.edit().putString(KEY_ICON_STYLE_VAULT, value).apply()
     var iconStyleNumpad: String get() = prefs.getString(KEY_ICON_STYLE_NUMPAD, "DEFAULT") ?: "DEFAULT"; set(value) = prefs.edit().putString(KEY_ICON_STYLE_NUMPAD, value).apply()
     var iconStyleClipboard: String get() = prefs.getString(KEY_ICON_STYLE_CLIPBOARD, "DEFAULT") ?: "DEFAULT"; set(value) = prefs.edit().putString(KEY_ICON_STYLE_CLIPBOARD, value).apply()
     var iconStyleSetting: String get() = prefs.getString(KEY_ICON_STYLE_SETTING, "DEFAULT") ?: "DEFAULT"; set(value) = prefs.edit().putString(KEY_ICON_STYLE_SETTING, value).apply()
@@ -473,8 +489,8 @@ class NoxBoardPrefs(context: Context) {
 
     var customShortcutRow: String
         get() {
-            val saved = prefs.getString("custom_shortcut_row", "VAULT,CLIPBOARD,SELECT_ALL,UNDO,REDO,HIDE") ?: "VAULT,CLIPBOARD,SELECT_ALL,UNDO,REDO,HIDE"
-            return saved.replace("EMOJI", "SELECT_ALL").replace("LEFT,RIGHT", "UNDO,REDO")
+            val saved = prefs.getString("custom_shortcut_row", "CLIPBOARD,SELECT_ALL,UNDO,REDO,HIDE") ?: "CLIPBOARD,SELECT_ALL,UNDO,REDO,HIDE"
+            return saved.replace("VAULT,", "").replace("EMOJI", "SELECT_ALL").replace("LEFT,RIGHT", "UNDO,REDO")
         }
         set(value) = prefs.edit().putString("custom_shortcut_row", value).apply()
 
@@ -533,4 +549,16 @@ class NoxBoardPrefs(context: Context) {
     var floatingHeightDp: Float
         get() = prefs.getFloat("floating_height_dp", -1f)
         set(value) = prefs.edit().putFloat("floating_height_dp", value).apply()
+
+    var isCalculatorEnabled: Boolean
+        get() = prefs.getBoolean(KEY_CALCULATOR_ENABLED, true)
+        set(value) = prefs.edit().putBoolean(KEY_CALCULATOR_ENABLED, value).apply()
+
+    var isOneHandMode: Boolean
+        get() = prefs.getBoolean(KEY_ONE_HAND_MODE, false)
+        set(value) = prefs.edit().putBoolean(KEY_ONE_HAND_MODE, value).apply()
+
+    var oneHandSide: String
+        get() = prefs.getString(KEY_ONE_HAND_SIDE, "RIGHT") ?: "RIGHT"
+        set(value) = prefs.edit().putString(KEY_ONE_HAND_SIDE, value).apply()
 }

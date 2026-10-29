@@ -171,6 +171,9 @@ object SoundGenerator {
 
     private fun createWav(context: Context, fileName: String, pcmData: ShortArray): String {
         val file = File(context.cacheDir, fileName)
+        if (file.exists() && file.length() > 44) {
+            return file.absolutePath
+        }
         val out = FileOutputStream(file)
 
         val sampleRate = 44100

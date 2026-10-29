@@ -4,11 +4,20 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -16,8 +25,17 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -30,7 +48,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.noxtan.noxboard.KeyboardMode
 import com.noxtan.noxboard.NoxBoardPrefs
-import com.noxtan.noxboard.ui.components.CategoryPill
 import com.noxtan.noxboard.ui.components.MockKeyboard
 import com.noxtan.noxboard.ui.components.ThemePreviewDialog
 import com.noxtan.noxboard.ui.models.KeyboardThemePreset
@@ -59,7 +76,7 @@ fun DesignTab(
         KeyboardThemePreset("PRESET_STRAWBERRY", "strawberry milk", "#FCE4EC", "#FFFFFF", "#F06292", "#FCE4EC", "#F06292"),
         KeyboardThemePreset("PRESET_TARO", "taro milk", "#F3E5F5", "#FFFFFF", "#6A1B9A", "#E1BEE7", "#4A148C"),
         KeyboardThemePreset("PRESET_ABYSS", "abyss blue", "#0A192F", "#112240", "#E6F1FF", "#0A192F", "#64FFDA"),
-        KeyboardThemePreset("PRESET_BUMBLEBEE", "bumblebee", "#FFCC00", "#212121", "#FFD700", "#121212", "#00B0FF"),
+        KeyboardThemePreset("PRESET_BUMBLEBEE", "bumblebee", "#FFCC00", "#212121", "#FFD700", "#121212", "#00B0FF", sugBgHex = "#121212", sugTextHex = "#FFD700"),
         KeyboardThemePreset("PRESET_CYBERPUNK", "cyberpunk 2077", "#0D0221", "#261447", "#00FFCC", "#FF3864", "#FFFFFF"),
         KeyboardThemePreset("PRESET_MOCHA", "mocha coffee", "#3E2723", "#5D4037", "#D7CCC8", "#795548", "#FFC107"),
         KeyboardThemePreset("PRESET_RETRO", "retro arcade", "#212121", "#424242", "#FFFFFF", "#FF5722", "#FFEB3B"),
@@ -112,6 +129,7 @@ fun DesignTab(
                                     popupBgHex = obj.optString("popupBgHex", obj.optString("specKeyHex")),
                                     popupTextHex = obj.optString("popupTextHex", obj.optString("specTextHex")),
                                     activeKeyHex = obj.optString("activeKeyHex", obj.optString("specTextHex")),
+                                    sugBgHex = obj.optString("sugBgHex", obj.optString("bgHex")),
                                     sugTextHex = obj.optString("sugTextHex", obj.optString("specTextHex"))
                                 )
                             )
@@ -159,6 +177,7 @@ fun DesignTab(
                                     val finalSpecBorder = if (theme.id.startsWith("CUSTOM_")) Color(android.graphics.Color.parseColor(theme.specBorderHex)) else calcSpecBorder
 
                                     val finalSugColor = try { android.graphics.Color.parseColor(if (theme.sugTextHex.isNotEmpty()) theme.sugTextHex else theme.specTextHex) } catch(e: Exception) { android.graphics.Color.WHITE }
+                                    val finalSugBgColor = try { Color(android.graphics.Color.parseColor(theme.sugBgHex)) } catch(e: Exception) { Color(android.graphics.Color.parseColor(theme.bgHex)) }
 
                                     MockKeyboard(
                                         bg = Color(android.graphics.Color.parseColor(theme.bgHex)),
@@ -166,6 +185,7 @@ fun DesignTab(
                                         textColor = Color(android.graphics.Color.parseColor(theme.textHex)),
                                         specKeyColor = Color(android.graphics.Color.parseColor(theme.specKeyHex)),
                                         specTextColor = Color(android.graphics.Color.parseColor(theme.specTextHex)),
+                                        sugBgColor = finalSugBgColor,
                                         sugTextColor = Color(finalSugColor),
                                         keyBorderColor = finalKeyBorder,
                                         specKeyBorderColor = finalSpecBorder,
@@ -232,6 +252,7 @@ fun DesignTab(
                                         val finalSpecBorder = if (theme.id.startsWith("CUSTOM_")) Color(android.graphics.Color.parseColor(theme.specBorderHex)) else calcSpecBorder
 
                                         val finalSugColor = try { android.graphics.Color.parseColor(if (theme.sugTextHex.isNotEmpty()) theme.sugTextHex else theme.specTextHex) } catch(e: Exception) { android.graphics.Color.WHITE }
+                                        val finalSugBgColor = try { Color(android.graphics.Color.parseColor(theme.sugBgHex)) } catch(e: Exception) { Color(android.graphics.Color.parseColor(theme.bgHex)) }
 
                                         MockKeyboard(
                                             bg = Color(android.graphics.Color.parseColor(theme.bgHex)),
@@ -239,6 +260,7 @@ fun DesignTab(
                                             textColor = Color(android.graphics.Color.parseColor(theme.textHex)),
                                             specKeyColor = Color(android.graphics.Color.parseColor(theme.specKeyHex)),
                                             specTextColor = Color(android.graphics.Color.parseColor(theme.specTextHex)),
+                                            sugBgColor = finalSugBgColor,
                                             sugTextColor = Color(finalSugColor),
                                             keyBorderColor = finalKeyBorder,
                                             specKeyBorderColor = finalSpecBorder,
@@ -459,6 +481,7 @@ fun DesignTab(
                 prefs.customPopupBgColor = theme.popupBgHex
                 prefs.customPopupTextColor = theme.popupTextHex
                 prefs.customActiveKeyColor = theme.activeKeyHex
+                prefs.customSugBgColor = theme.sugBgHex
 
                 if (theme.id.startsWith("CUSTOM_")) {
                     prefs.customKeyBorderColor = theme.borderHex
@@ -519,6 +542,7 @@ fun DesignTab(
                     put("popupBgHex", theme.popupBgHex)
                     put("popupTextHex", theme.popupTextHex)
                     put("activeKeyHex", theme.activeKeyHex)
+                    put("sugBgHex", theme.sugBgHex)
                     put("sugTextHex", theme.sugTextHex)
                 }
                 prefs.editingThemeId = json.toString()

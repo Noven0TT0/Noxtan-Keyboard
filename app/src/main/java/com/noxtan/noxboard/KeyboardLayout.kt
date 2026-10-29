@@ -7,7 +7,13 @@ import com.noxtan.noxboard.layouts.NumpadLayout
 import com.noxtan.noxboard.layouts.SymbolLayout
 
 object KeyboardLayout {
+    private var lastParsedJson: String = ""
+    private var lastParsedLayout: List<List<Key>>? = null
+
     private fun parseLayoutFromJson(jsonStr: String): List<List<Key>>? {
+        if (jsonStr == lastParsedJson && lastParsedLayout != null) {
+            return lastParsedLayout!!.map { row -> row.map { it.copy() } }
+        }
         try {
             val rootArray = org.json.JSONArray(jsonStr)
             val layout = mutableListOf<List<Key>>()
@@ -31,9 +37,10 @@ object KeyboardLayout {
                 }
                 layout.add(row)
             }
-            return layout
+            lastParsedJson = jsonStr
+            lastParsedLayout = layout
+            return layout.map { row -> row.map { it.copy() } }
         } catch (e: Exception) {
-            com.noxtan.noxboard.utils.NoxLogger.logError("KeyboardLayout", "Failed to parse custom layout", e)
             return null
         }
     }
@@ -68,8 +75,10 @@ object KeyboardLayout {
         val isClassic = active == "CLASSIC"
 
         if (active != "default" && active != "MODERN" && active != "CLASSIC" && active != "SYSTEM") {
-            try {
-                val arr = org.json.JSONArray(prefs.savedLayoutsMyanmar)
+            val savedJson = prefs.savedLayoutsMyanmar
+            if (savedJson.isNotEmpty() && savedJson != "[]") {
+                try {
+                    val arr = org.json.JSONArray(savedJson)
                 for (i in 0 until arr.length()) {
                     val item = arr.getJSONObject(i)
                     if (item.optString("id") == active) {
@@ -81,7 +90,8 @@ object KeyboardLayout {
                         }
                     }
                 }
-            } catch (e: Exception) {}
+                } catch (e: Exception) {}
+            }
         }
         val custom = prefs.customLayoutMyanmar
         if (custom.isNotEmpty() && (active == "default" || active == "MODERN")) {

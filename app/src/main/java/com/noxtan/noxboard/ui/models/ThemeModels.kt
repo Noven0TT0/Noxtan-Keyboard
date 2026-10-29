@@ -13,6 +13,7 @@ data class KeyboardThemePreset(
     val popupBgHex: String = specKeyHex,
     val popupTextHex: String = specTextHex,
     val activeKeyHex: String = specTextHex,
+    val sugBgHex: String = bgHex,
     val sugTextHex: String = specTextHex
 )
 

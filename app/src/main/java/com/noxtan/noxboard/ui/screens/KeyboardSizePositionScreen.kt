@@ -3,12 +3,37 @@ package com.noxtan.noxboard.ui.screens
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderDefaults
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -55,7 +80,6 @@ fun KeyboardSizePositionScreen(onBack: () -> Unit) {
     }
 
     val statusBarHeight = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
-    val topBarHeight = 64.dp + statusBarHeight
 
     Scaffold(
         topBar = {
@@ -95,8 +119,8 @@ fun KeyboardSizePositionScreen(onBack: () -> Unit) {
         },
         containerColor = MaterialTheme.colorScheme.background,
         contentWindowInsets = WindowInsets(0.dp)
-    ) { _ ->
-        Column(modifier = Modifier.fillMaxSize().padding(top = topBarHeight)) {
+    ) { innerPadding ->
+        Column(modifier = Modifier.fillMaxSize().padding(top = innerPadding.calculateTopPadding())) {
 
             Column(
                 modifier = Modifier
@@ -153,7 +177,9 @@ fun KeyboardSizePositionScreen(onBack: () -> Unit) {
                         view.theme.keyCornerRadiusDp = cornerRadius
                         view.theme.textSizeSp = fontSize
 
-                        view.initPaints() // <-- ဒါလေးထည့်ပေးပါ
+                        view.cachedEffectiveTextSize = -1f
+
+                        view.initPaints()
 
                         view.isEmojiMode = view.isEmojiMode
                         view.invalidate()

@@ -8,15 +8,61 @@ import android.media.AudioAttributes
 import android.media.SoundPool
 import android.os.Build
 import android.util.Log
-import android.view.Gravity
 import android.view.KeyEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.FrameLayout
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Assignment
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.OpenWith
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.SwapHoriz
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
@@ -28,66 +74,31 @@ import androidx.savedstate.SavedStateRegistry
 import androidx.savedstate.SavedStateRegistryController
 import androidx.savedstate.SavedStateRegistryOwner
 import androidx.savedstate.setViewTreeSavedStateRegistryOwner
-import com.noxtan.noxboard.ui.screens.CredentialVaultPanel
+import com.noxtan.noxboard.data.NoxDatabase
 import com.noxtan.noxboard.ui.theme.NoxBoardTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.launch
-import com.noxtan.noxboard.data.NoxDatabase
 import kotlinx.coroutines.flow.MutableStateFlow
-import androidx.compose.runtime.collectAsState
-import androidx.compose.foundation.clickable
-import androidx.compose.ui.Alignment
-import androidx.compose.material3.Text
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
-import androidx.compose.ui.unit.dp
-import android.graphics.RectF
-import androidx.compose.foundation.background
-import androidx.compose.foundation.combinedClickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.material3.TextButton
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.ui.draw.clipToBounds
-import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.ui.draw.clip
-import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.IconButton
-import com.noxtan.pass.aidl.VaultAccountInfo
-import androidx.compose.material.icons.filled.TouchApp
-import androidx.compose.material.icons.filled.Undo
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.Icon
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.MoreHoriz
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.ui.res.painterResource
+import kotlinx.coroutines.launch
 
 class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActionListener,
     SharedPreferences.OnSharedPreferenceChangeListener {
+
+    private val touchableRect = android.graphics.Rect()
+    private val punctuationSet = setOf(".", ",", "!", "?", "။", "၊", ":", ";", "”", "’", ")", "]", "}")
+
+    private var lastDoubleTapStatesStr: String? = null
+    private var lastMyanmarTypingStyle: String? = null
+
+    private var typingJob: kotlinx.coroutines.Job? = null
+
     var activePanelState = androidx.compose.runtime.mutableStateOf("KEYBOARD")
     var hasSelectionState = androidx.compose.runtime.mutableStateOf(false)
     var themeUpdateTrigger = androidx.compose.runtime.mutableIntStateOf(0)
     private var currentMathResult: com.noxtan.noxboard.engines.MathResult? = null
+    private lateinit var prefs: NoxBoardPrefs
+    private var audioManager: android.media.AudioManager? = null
     private val _suggestionsFlow = MutableStateFlow<List<String>>(emptyList())
     private val _typedWordFlow = MutableStateFlow<String>("")
     private val _hasActiveSuggestionsFlow = kotlinx.coroutines.flow.MutableStateFlow<Boolean>(false)
@@ -95,7 +106,6 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
     private val serviceJob = SupervisorJob()
     private val serviceScope = CoroutineScope(Dispatchers.IO + serviceJob)
     private lateinit var db: NoxDatabase
-    private val trieEngine = com.noxtan.noxboard.engines.TrieEngine()
     private val myTrieEngine = com.noxtan.noxboard.engines.TrieEngine()
     private val enTrieEngine = com.noxtan.noxboard.engines.TrieEngine()
     private val thTrieEngine = com.noxtan.noxboard.engines.TrieEngine()
@@ -112,11 +122,21 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
     private val tempPairCounts = mutableMapOf<Pair<String, String>, Int>()
     private val badWordsSet = mutableSetOf<String>()
     private val clipboardHistory = androidx.compose.runtime.mutableStateListOf<String>()
+    private val pinnedClipboardHistory = androidx.compose.runtime.mutableStateListOf<String>()
     private var clipboardListener: android.content.ClipboardManager.OnPrimaryClipChangedListener? = null
-
     private val emojiSuggestionMap = mutableMapOf<String, String>()
-
     private var currentSuggestionsMap = mapOf<String, String>()
+
+    private val rawKeystrokeBuffer = java.lang.StringBuilder()
+
+    var isResizeModeState = androidx.compose.runtime.mutableStateOf(false)
+    var tempResizeHeightState = androidx.compose.runtime.mutableFloatStateOf(235f)
+    var tempBottomPaddingState = androidx.compose.runtime.mutableFloatStateOf(54f)
+    private lateinit var resizeComposeView: ComposeView
+
+    var isOneHandModeState = androidx.compose.runtime.mutableStateOf(false)
+    var oneHandSideState = androidx.compose.runtime.mutableStateOf("RIGHT")
+    private lateinit var oneHandComposeView: ComposeView
 
     private fun buildFullSuggestion(prefix: String, prediction: String, isEnglish: Boolean): String {
         val overlap = getOverlapLength(prefix, prediction)
@@ -133,14 +153,13 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
     private var lastSavedWordTime = 0L
     private val temporarilyDeletedWords = mutableSetOf<String>()
     private var myMyanmarEngine: com.noxtan.noxboard.engines.MyanmarInputEngine? = null
-    private var isWaitingForVaultUnlock = false
 
     private var serviceLifecycleOwner: ServiceLifecycleOwner? = null
 
     private lateinit var frameLayout: FrameLayout
     private lateinit var keyboardWrapper: android.widget.LinearLayout
     private lateinit var dragHandle: FrameLayout
-    private lateinit var snapIndicatorView: View // <--- ဒါလေး ရှိနေဖို့လိုပါတယ်
+    private lateinit var snapIndicatorView: View
     private lateinit var keyboardView: NoxKeyboardView
     private var composeView: ComposeView? = null
     private var composePaddingState = androidx.compose.runtime.mutableFloatStateOf(0f)
@@ -150,10 +169,6 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
     private lateinit var sharedPrefs: SharedPreferences
 
     private val DOUBLE_TAP_TIMEOUT = 350L
-
-    private var lastTapKey = ""
-    private var lastTapTime = 0L
-    private var tapCount = 0
 
     private var soundPool: SoundPool? = null
     private var mechClickySoundId: Int = -1
@@ -168,34 +183,13 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
     private var woodenSoundId: Int = -1
     private var softThudSoundId: Int = -1
     private var sciFiSoundId: Int = -1
-    private val maukchaConsonants = setOf("ခ", "ဂ", "င", "ဒ", "ပ", "ဝ")
-    private val myanmarConsonants = setOf(
-        "က", "ခ", "ဂ", "ဃ", "င",
-        "စ", "ဆ", "ဇ", "ဈ", "ည",
-        "ဋ", "ဌ", "ဍ", "ဎ", "ဏ",
-        "တ", "ထ", "ဒ", "ဓ", "န",
-        "ပ", "ဖ", "ဗ", "ဘ", "မ",
-        "ယ", "ရ", "လ", "ဝ", "သ",
-        "ဟ", "ဠ", "အ"
-    )
-
-    private val doubleTapMap = mapOf(
-        "ဆ" to "ဈ", "ဈ" to "ဈ", "က" to "ဿ", "ဿ" to "ဿ", "သ" to "ဥ", "ဥ" to "ဥ",
-        "ေ" to "ဗ", "ဗ" to "ဗ", "ျ" to "ှ", "ှ" to "ှ", "ိ" to "ီ", "ီ" to "ီ",
-        "်" to "ွ", "ွ" to "ွ", "့" to "ံ", "ံ" to "ံ", "ြ" to "ဲ", "ဲ" to "ဲ",
-        "ု" to "ဒ", "ဒ" to "ဒ", "ူ" to "ဓ", "ဓ" to "ဓ", "ဖ" to "ဇ", "ဇ" to "ဇ",
-        "ထ" to "ဌ", "ဌ" to "ဌ", "ခ" to "ဃ", "ဃ" to "ဃ", "လ" to "ဠ", "ဠ" to "ဠ",
-        "ဘ" to "၊", "၊" to "၊", "ည" to "ဉ", "ဉ" to "ဉ", "ာ" to "ါ", "ါ" to "ါ",
-        "ယ" to "။", "။" to "။", "ဏ" to "သြ", "သြ" to "သြ", "ရ" to "ဌ", "ဌ" to "ဌ",
-        "ဂ" to "ဃ", "ဃ" to "ဃ", "ဝ" to "ဠ", "ဠ" to "ဠ", "ဟ" to "ဦ", "ဦ" to "ဦ"
-    )
 
     private val autoCorrectMap = mutableMapOf<String, String>()
 
     override fun onCreate() {
         super.onCreate()
-
-        com.noxtan.noxboard.utils.NoxLogger.init(this)
+        prefs = NoxBoardPrefs(this)
+        audioManager = getSystemService(Context.AUDIO_SERVICE) as android.media.AudioManager
 
         try {
             serviceLifecycleOwner = ServiceLifecycleOwner().apply {
@@ -214,6 +208,12 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
         com.noxtan.noxboard.engines.NativeDictionaryEngine.initEngine(assets)
         loadDictionaryFromAssetsOnlyForAutoCorrect()
         loadUserDictionary()
+        try {
+            val arr = org.json.JSONArray(NoxBoardPrefs(this).pinnedClipboardItems)
+            for (i in 0 until arr.length()) {
+                pinnedClipboardHistory.add(arr.getString(i))
+            }
+        } catch (e: Exception) {}
         val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
         clipboardListener = android.content.ClipboardManager.OnPrimaryClipChangedListener {
             val clip = clipboardManager.primaryClip
@@ -257,12 +257,20 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
                 _suggestionsFlow.value = emptyList()
                 _typedWordFlow.value = ""
                 currentSuggestionsMap = emptyMap()
+                _hasActiveSuggestionsFlow.value = false
                 if (::keyboardView.isInitialized) keyboardView.setSuggestionsActive(false)
                 return
             }
         }
 
-        val prefs = NoxBoardPrefs(this)
+        if (::keyboardView.isInitialized && keyboardView.currentMode == com.noxtan.noxboard.KeyboardMode.NUMBER) {
+            _suggestionsFlow.value = emptyList()
+            _typedWordFlow.value = ""
+            currentSuggestionsMap = emptyMap()
+            keyboardView.setSuggestionsActive(false)
+            return
+        }
+
         val showSystemSuggestions = prefs.isSuggestionEnabled
         val showUserSuggestions = !prefs.isIncognitoModeEnabled
 
@@ -283,22 +291,26 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
 
         val textBefore = ic.getTextBeforeCursor(50, 0)?.toString() ?: ""
 
-        val mathRes = com.noxtan.noxboard.engines.MathEngine.evaluate(textBefore)
-        currentMathResult = mathRes
-        if (mathRes != null) {
-            _typedWordFlow.value = ""
-            val mathSuggestions = listOf(mathRes.resultOnly, mathRes.fullEquation)
-            val newSuggestionsMap = mutableMapOf<String, String>()
-            newSuggestionsMap[mathRes.resultOnly] = mathRes.resultOnly
-            newSuggestionsMap[mathRes.fullEquation] = mathRes.fullEquation
-            currentSuggestionsMap = newSuggestionsMap
-            _suggestionsFlow.value = mathSuggestions
-            _hasActiveSuggestionsFlow.value = true
-            if (::keyboardView.isInitialized) keyboardView.setSuggestionsActive(true)
-            return
+        if (prefs.isCalculatorEnabled) {
+            val mathRes = com.noxtan.noxboard.engines.MathEngine.evaluate(textBefore)
+            currentMathResult = mathRes
+            if (mathRes != null) {
+                _typedWordFlow.value = ""
+                val mathSuggestions = listOf(mathRes.resultOnly, mathRes.fullEquation)
+                val newSuggestionsMap = mutableMapOf<String, String>()
+                newSuggestionsMap[mathRes.resultOnly] = mathRes.resultOnly
+                newSuggestionsMap[mathRes.fullEquation] = mathRes.fullEquation
+                currentSuggestionsMap = newSuggestionsMap
+                _suggestionsFlow.value = mathSuggestions
+                _hasActiveSuggestionsFlow.value = true
+                if (::keyboardView.isInitialized) keyboardView.setSuggestionsActive(true)
+                return
+            }
+        } else {
+            currentMathResult = null
         }
 
-        val words = textBefore.split(Regex("\\s+"))
+        val words = textBefore.split(' ', '\n')
         val lastWord = words.lastOrNull() ?: ""
 
         if (lastWord.isNotBlank()) {
@@ -315,155 +327,163 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
 
             _typedWordFlow.value = lastWord
 
-            if (cleanPrefix.length >= 1) {
-                val isEnglish = keyboardView.currentMode == com.noxtan.noxboard.KeyboardMode.ENGLISH
-                val newSuggestionsMap = mutableMapOf<String, String>()
-                val suggestionsList = mutableListOf<String>()
+            val isEnglishMode = keyboardView.currentMode == com.noxtan.noxboard.KeyboardMode.ENGLISH
+            val minLen = if (isEnglishMode) 1 else 2
 
-                android.util.Log.d("NoxDebug", "--- Typing Word: '$cleanPrefix' ---")
-                android.util.Log.d("NoxDebug", "Show System: $showSystemSuggestions, Show User: $showUserSuggestions")
-
+            if (cleanPrefix.length >= minLen) {
+                val isEnglish = isEnglishMode
+                val isThai = keyboardView.currentMode == com.noxtan.noxboard.KeyboardMode.THAI
                 val currentEditor = currentInputEditorInfo
-                var isEmailField = false
-                if (currentEditor != null) {
-                    val inputType = currentEditor.inputType
-                    val cls = inputType and android.text.InputType.TYPE_MASK_CLASS
-                    val variation = inputType and android.text.InputType.TYPE_MASK_VARIATION
-                    isEmailField = cls == android.text.InputType.TYPE_CLASS_TEXT &&
-                            (variation == android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS ||
-                                    variation == android.text.InputType.TYPE_TEXT_VARIATION_WEB_EMAIL_ADDRESS)
-                }
 
-                val shouldShowEmails = isEmailField || (cleanPrefix.contains("@") && cleanPrefix.indexOf("@") > 0)
+                serviceScope.launch(kotlinx.coroutines.Dispatchers.Default) {
+                    val newSuggestionsMap = mutableMapOf<String, String>()
+                    val suggestionsList = mutableListOf<String>()
 
-                android.util.Log.d("NoxDebug", "Email Check -> isEmailField: $isEmailField, shouldShowEmails: $shouldShowEmails")
+                    val currentEditor = currentInputEditorInfo
+                    var isEmailField = false
+                    if (currentEditor != null) {
+                        val inputType = currentEditor.inputType
+                        val cls = inputType and android.text.InputType.TYPE_MASK_CLASS
+                        val variation = inputType and android.text.InputType.TYPE_MASK_VARIATION
+                        isEmailField = cls == android.text.InputType.TYPE_CLASS_TEXT &&
+                                (variation == android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS ||
+                                        variation == android.text.InputType.TYPE_TEXT_VARIATION_WEB_EMAIL_ADDRESS)
+                    }
 
-                if (shouldShowEmails) {
-                    val domains = listOf("gmail.com", "outlook.com", "proton.me", "yahoo.com", "icloud.com")
-                    if (!cleanPrefix.contains("@")) {
-                        domains.forEach { domain ->
-                            val display = "@$domain"
-                            val fullEmail = "$cleanPrefix@$domain"
-                            suggestionsList.add(display)
-                            newSuggestionsMap[display] = fullEmail
-                        }
-                    } else {
-                        val parts = cleanPrefix.split("@")
-                        if (parts.size == 2) {
-                            val name = parts[0]
-                            val domainPrefix = parts[1].lowercase()
-                            domains.filter { it.startsWith(domainPrefix) }.forEach { domain ->
-                                val display = domain
-                                val fullEmail = "$name@$domain"
+                    val shouldShowEmails = isEmailField || (cleanPrefix.contains("@") && cleanPrefix.indexOf("@") > 0)
+
+                    if (shouldShowEmails) {
+                        val domains = listOf("gmail.com", "outlook.com", "proton.me", "yahoo.com", "icloud.com")
+                        if (!cleanPrefix.contains("@")) {
+                            domains.forEach { domain ->
+                                val display = "@$domain"
+                                val fullEmail = "$cleanPrefix@$domain"
                                 suggestionsList.add(display)
                                 newSuggestionsMap[display] = fullEmail
                             }
-                        }
-                    }
-                }
-
-                val isThai = keyboardView.currentMode == com.noxtan.noxboard.KeyboardMode.THAI
-                if (isEnglish) {
-                    val prevWordRaw = if (words.size >= 2) words[words.size - 2] else ""
-                    val prevWord = prevWordRaw.replace(Regex("[.,!?။၊:;\"'()\\[\\]{}]"), "").replace("\u200C", "")
-
-                    if (prevWord.isNotBlank() && prefs.isNextWordPredictionEnabled) {
-                        val userNextWords = if (showUserSuggestions) enUserNextWordEngine.getExactNextWords(prevWord).filter { it.startsWith(cleanPrefix, ignoreCase = true) } else emptyList()
-
-                        val systemNextWords = if (showSystemSuggestions) {
-                            com.noxtan.noxboard.engines.NativeDictionaryEngine.getSuggestions("$prevWord $cleanPrefix".lowercase(), "ENGLISH", 10)
-                                .map { it.split(" ").last() }
-                        } else emptyList()
-
-                        (userNextWords + systemNextWords).distinct().map { adjustCasing(it, cleanPrefix) }.forEach { pred ->
-                            if (!suggestionsList.contains(pred)) { suggestionsList.add(pred); newSuggestionsMap[pred] = pred }
-                        }
-                    }
-
-                    val userTrie = if (showUserSuggestions) enUserTrieEngine.searchPrefix(cleanPrefix.lowercase()) else emptyList()
-
-                    val systemTrie = if (showSystemSuggestions) com.noxtan.noxboard.engines.NativeDictionaryEngine.getSuggestions(cleanPrefix.lowercase(), "ENGLISH", 10).map { it.split(" ").first() }.toList() else emptyList()
-
-                    (userTrie + systemTrie).distinct().map { adjustCasing(it, cleanPrefix) }.forEach { pred ->
-                        if (!suggestionsList.contains(pred)) { suggestionsList.add(pred); newSuggestionsMap[pred] = pred }
-                    }
-
-                } else if (isThai) {
-                    val userTrie = if (showUserSuggestions) thUserTrieEngine.searchPrefix(cleanPrefix) else emptyList()
-
-                    val systemTrie = if (showSystemSuggestions) com.noxtan.noxboard.engines.NativeDictionaryEngine.getSuggestions(cleanPrefix, "THAI", 10).map { it.split(" ").first() }.toList() else emptyList()
-
-                    (userTrie + systemTrie).distinct().forEach { pred ->
-                        if (!suggestionsList.contains(pred)) {
-                            suggestionsList.add(pred)
-                            newSuggestionsMap[pred] = pred
-                        }
-                    }
-                } else {
-                    val userTrie = if (showUserSuggestions) myUserTrieEngine.searchPrefix(cleanPrefix) else emptyList()
-
-                    val systemTrie = if (showSystemSuggestions) com.noxtan.noxboard.engines.NativeDictionaryEngine.getSuggestions(cleanPrefix, "MYANMAR", 10).map { it.split(" ").first() }.toList() else emptyList()
-
-                    (userTrie + systemTrie).distinct().forEach { pred ->
-                        if (!suggestionsList.contains(pred)) {
-                            suggestionsList.add(pred)
-                            newSuggestionsMap[pred] = pred
-                        }
-                    }
-                }
-
-                var emoji: String? = null
-                val cleanPrefixLower = cleanPrefix.lowercase()
-
-                emoji = emojiSuggestionMap[cleanPrefixLower]
-
-                if (emoji == null && words.size >= 2) {
-                    val prevWord = words[words.size - 2].replace("\u200C", "").lowercase()
-                    val twoWords = "$prevWord $cleanPrefixLower"
-                    emoji = emojiSuggestionMap[twoWords]
-                }
-
-                if (emoji == null && words.size >= 3) {
-                    val prevWord1 = words[words.size - 3].replace("\u200C", "").lowercase()
-                    val prevWord2 = words[words.size - 2].replace("\u200C", "").lowercase()
-                    val threeWords = "$prevWord1 $prevWord2 $cleanPrefixLower"
-                    emoji = emojiSuggestionMap[threeWords]
-                }
-
-                if (emoji != null) {
-                    if (suggestionsList.contains(emoji)) {
-                        suggestionsList.remove(emoji)
-                    }
-                    suggestionsList.add(0, emoji)
-                    newSuggestionsMap[emoji] = emoji
-                }
-
-                currentSuggestionsMap = newSuggestionsMap
-
-                val garbageWords = setOf("re", "ll", "ve", "m", "d", "s", "t")
-                val cleanSuggestionsList = suggestionsList.filter {
-                    !(isEnglish && garbageWords.contains(it.lowercase()))
-                }
-
-                val finalSuggestions = if (prefs.isBlockOffensiveWordsEnabled) {
-                    cleanSuggestionsList.filter { suggestion ->
-                        val raw = currentSuggestionsMap[suggestion] ?: suggestion
-                        val isMyanmar = raw.any { it in '\u1000'..'\u109F' }
-                        badWordsSet.none { badWord ->
-                            if (isMyanmar) {
-                                raw.contains(badWord)
-                            } else {
-                                raw.equals(badWord, ignoreCase = true)
+                        } else {
+                            val parts = cleanPrefix.split("@")
+                            if (parts.size == 2) {
+                                val name = parts[0]
+                                val domainPrefix = parts[1].lowercase()
+                                domains.filter { it.startsWith(domainPrefix) }.forEach { domain ->
+                                    val display = domain
+                                    val fullEmail = "$name@$domain"
+                                    suggestionsList.add(display)
+                                    newSuggestionsMap[display] = fullEmail
+                                }
                             }
                         }
-                    }.take(6)
-                } else {
-                    cleanSuggestionsList.take(6)
+                    }
+
+                    val isThai = keyboardView.currentMode == com.noxtan.noxboard.KeyboardMode.THAI
+                    if (isEnglish) {
+                        val prevWordRaw = if (words.size >= 2) words[words.size - 2] else ""
+                        val prevWord = prevWordRaw.replace(Regex("[.,!?။၊:;\"'()\\[\\]{}]"), "").replace("\u200C", "")
+
+                        if (prevWord.isNotBlank() && prefs.isNextWordPredictionEnabled) {
+                            val userNextWords = if (showUserSuggestions) enUserNextWordEngine.getExactNextWords(prevWord).filter { it.startsWith(cleanPrefix, ignoreCase = true) } else emptyList()
+
+                            val systemNextWords = if (showSystemSuggestions) {
+                                com.noxtan.noxboard.engines.NativeDictionaryEngine.getSuggestions("$prevWord $cleanPrefix".lowercase(), "ENGLISH", 10)
+                                    .map { it.split(" ").last() }
+                            } else emptyList()
+
+                            (userNextWords + systemNextWords).distinct().map { adjustCasing(it, cleanPrefix) }.forEach { pred ->
+                                if (!suggestionsList.contains(pred)) { suggestionsList.add(pred); newSuggestionsMap[pred] = pred }
+                            }
+                        }
+
+                        val userTrie = if (showUserSuggestions) enUserTrieEngine.searchPrefix(cleanPrefix.lowercase()) else emptyList()
+
+                        val systemTrie = if (showSystemSuggestions) com.noxtan.noxboard.engines.NativeDictionaryEngine.getSuggestions(cleanPrefix.lowercase(), "ENGLISH", 10).map { it.split(" ").first() }.toList() else emptyList()
+
+                        (userTrie + systemTrie).distinct().map { adjustCasing(it, cleanPrefix) }.forEach { pred ->
+                            if (!suggestionsList.contains(pred)) { suggestionsList.add(pred); newSuggestionsMap[pred] = pred }
+                        }
+
+                    } else if (isThai) {
+                        val userTrie = if (showUserSuggestions) thUserTrieEngine.searchPrefix(cleanPrefix) else emptyList()
+
+                        val systemTrie = if (showSystemSuggestions) com.noxtan.noxboard.engines.NativeDictionaryEngine.getSuggestions(cleanPrefix, "THAI", 10).map { it.split(" ").first() }.toList() else emptyList()
+
+                        (userTrie + systemTrie).distinct().forEach { pred ->
+                            if (!suggestionsList.contains(pred)) {
+                                suggestionsList.add(pred)
+                                newSuggestionsMap[pred] = pred
+                            }
+                        }
+                    } else {
+                        val userTrie = if (showUserSuggestions) myUserTrieEngine.searchPrefix(cleanPrefix) else emptyList()
+
+                        val systemTrie = if (showSystemSuggestions) {
+                            val base = com.noxtan.noxboard.engines.NativeDictionaryEngine.getSuggestions(cleanPrefix, "MYANMAR", 10).map { it.split(" ").first() }
+                            val proverbs = if (prefs.isProverbsSuggestionEnabled) com.noxtan.noxboard.engines.NativeDictionaryEngine.getSuggestions(cleanPrefix, "MYANMAR_PROVERBS", 5).toList() else emptyList()
+                            base + proverbs
+                        } else emptyList()
+
+                        (userTrie + systemTrie).distinct().forEach { pred ->
+                            if (!suggestionsList.contains(pred)) {
+                                suggestionsList.add(pred)
+                                newSuggestionsMap[pred] = pred
+                            }
+                        }
+                    }
+
+                    var emoji: String? = null
+                    val cleanPrefixLower = cleanPrefix.lowercase()
+
+                    emoji = emojiSuggestionMap[cleanPrefixLower]
+
+                    if (emoji == null && words.size >= 2) {
+                        val prevWord = words[words.size - 2].replace("\u200C", "").lowercase()
+                        val twoWords = "$prevWord $cleanPrefixLower"
+                        emoji = emojiSuggestionMap[twoWords]
+                    }
+
+                    if (emoji == null && words.size >= 3) {
+                        val prevWord1 = words[words.size - 3].replace("\u200C", "").lowercase()
+                        val prevWord2 = words[words.size - 2].replace("\u200C", "").lowercase()
+                        val threeWords = "$prevWord1 $prevWord2 $cleanPrefixLower"
+                        emoji = emojiSuggestionMap[threeWords]
+                    }
+
+                    if (emoji != null) {
+                        if (suggestionsList.contains(emoji)) {
+                            suggestionsList.remove(emoji)
+                        }
+                        suggestionsList.add(0, emoji)
+                        newSuggestionsMap[emoji] = emoji
+                    }
+
+                    currentSuggestionsMap = newSuggestionsMap
+
+                    val garbageWords = setOf("re", "ll", "ve", "m", "d", "s", "t")
+                    val cleanSuggestionsList = suggestionsList.filter {
+                        !(isEnglish && garbageWords.contains(it.lowercase()))
+                    }
+
+                    val finalSuggestions = if (prefs.isBlockOffensiveWordsEnabled) {
+                        cleanSuggestionsList.filter { suggestion ->
+                            val raw = newSuggestionsMap[suggestion] ?: suggestion
+                            val isMyanmar = raw.any { it in '\u1000'..'\u109F' }
+                            badWordsSet.none { badWord ->
+                                if (isMyanmar) {
+                                    raw.contains(badWord)
+                                } else {
+                                    raw.equals(badWord, ignoreCase = true)
+                                }
+                            }
+                        }.take(6)
+                    } else {
+                        cleanSuggestionsList.take(6)
+                    }
+
+                    kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.Main) {
+                        currentSuggestionsMap = newSuggestionsMap
+                        _suggestionsFlow.value = finalSuggestions
+                    }
                 }
-
-                android.util.Log.d("NoxDebug", "Final Suggestions: $finalSuggestions")
-                _suggestionsFlow.value = finalSuggestions
-
             } else {
                 _suggestionsFlow.value = emptyList()
                 currentSuggestionsMap = emptyMap()
@@ -481,8 +501,6 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
             val prevWordRaw = if (words.size >= 2) words[words.size - 2] else ""
             val prevWord = prevWordRaw.replace(Regex("[.,!?။၊:;\"'()\\[\\]{}]"), "").replace("\u200C", "")
 
-            android.util.Log.d("NoxDebug", "--- Space Pressed. Prev Word: '$prevWord' ---")
-
             if (prevWord.isNotBlank() && prevWord.length >= 1) {
                 val isEnglish = keyboardView.currentMode == com.noxtan.noxboard.KeyboardMode.ENGLISH
 
@@ -492,7 +510,7 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
                 val isThai = keyboardView.currentMode == com.noxtan.noxboard.KeyboardMode.THAI
                 val suggestions = if (isEnglish) {
                     val userNext = if (showUserSuggestions) enUserNextWordEngine.getExactNextWords(prevWord) else emptyList()
-                    val sysNext = if (showSystemSuggestions) com.noxtan.noxboard.engines.NativeDictionaryEngine.getSuggestions("$prevWord ", "ENGLISH", 10).map { it.split(" ").last() } else emptyList()
+                    val sysNext = if (showSystemSuggestions) com.noxtan.noxboard.engines.NativeDictionaryEngine.getSuggestions("$prevWord ".lowercase(), "ENGLISH", 10).map { it.split(" ").last() } else emptyList()
                     (userNext + sysNext).distinct()
                 } else if (isThai) {
                     val userNext = if (showUserSuggestions) thUserNextWordEngine.getExactNextWords(prevWord) else emptyList()
@@ -503,8 +521,6 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
                     val sysNext = if (showSystemSuggestions) com.noxtan.noxboard.engines.NativeDictionaryEngine.getSuggestions("$prevWord ", "MYANMAR", 10).map { it.split(" ").last() } else emptyList()
                     (userNext + sysNext).distinct()
                 }
-
-                android.util.Log.d("NoxDebug", "Next Word Suggestions: $suggestions")
 
                 val newSuggestionsMap = mutableMapOf<String, String>()
                 suggestions.forEach { newSuggestionsMap[it] = it }
@@ -555,7 +571,6 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
 
     private fun checkAutoCapitalization() {
         if (!::keyboardView.isInitialized) return
-        val prefs = NoxBoardPrefs(this)
 
         if (keyboardView.currentMode != com.noxtan.noxboard.KeyboardMode.ENGLISH) return
 
@@ -644,12 +659,11 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
 
         val textBefore = ic.getTextBeforeCursor(50, 0)?.toString() ?: ""
 
-        val words = textBefore.split(Regex("\\s+"))
+        val words = textBefore.split(' ', '\n')
         val lastWord = words.lastOrNull() ?: ""
         val cleanPrefix = lastWord.replace("\u200C", "")
 
         val isEnglish = keyboardView.currentMode == com.noxtan.noxboard.KeyboardMode.ENGLISH
-        val prefs = NoxBoardPrefs(this)
 
         val rawPrediction = currentSuggestionsMap[displayWord] ?: displayWord
 
@@ -659,8 +673,6 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
             val cleanWord = rawPrediction.replace("\u200C", "")
             val isMyanmar = cleanWord.any { it in '\u1000'..'\u109F' }
             val isThai = cleanWord.any { it in '\u0E00'..'\u0E7F' }
-
-            android.util.Log.d("NoxDebug", "insertSuggestion: Preview tapped! Force saving '$cleanWord'")
 
             if (isMyanmar) myUserTrieEngine.insert(cleanWord, 1) else if (isThai) thUserTrieEngine.insert(cleanWord, 1) else enUserTrieEngine.insert(cleanWord, 1)
 
@@ -731,7 +743,11 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
         }
 
         val textToCommit = if (rawPrediction.contains("@")) rawPrediction else displayWord
-        ic.commitText("$textToCommit ", 1)
+        if (textToCommit.contains("@")) {
+            ic.commitText(textToCommit, 1)
+        } else {
+            ic.commitText("$textToCommit ", 1)
+        }
 
         myMyanmarEngine?.resetState()
         saveTypingData()
@@ -769,14 +785,19 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
                     }
                 }
             } catch (e: Exception) {
-                Log.e("NoxBoard", "Failed to generate custom sounds", e)
             }
         }
     }
 
     private fun loadMyanmarEngine() {
-        val prefs = NoxBoardPrefs(this)
-        myMyanmarEngine = when (prefs.myanmarTypingStyle) {
+        val currentStyle = prefs.myanmarTypingStyle
+        val currentDoubleTapStr = prefs.doubleTapStates
+
+        if (myMyanmarEngine != null && currentStyle == lastMyanmarTypingStyle && currentDoubleTapStr == lastDoubleTapStatesStr) {
+            return
+        }
+
+        myMyanmarEngine = when (currentStyle) {
             "UNICODE" -> com.noxtan.noxboard.engines.UnicodeInputEngine()
             "VISUAL_SMART" -> com.noxtan.noxboard.engines.VisualSmartInputEngine()
             else -> com.noxtan.noxboard.engines.ZawgyiInputEngine()
@@ -791,7 +812,7 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
         )
 
         val defaultOffKeys = setOf("ဆ", "ဖ", "ထ", "ခ", "ည", "ဏ", "ဂ", "ဝ", "ဟ", "သ", "ူ", "ရ")
-        val savedStates = try { org.json.JSONObject(prefs.doubleTapStates) } catch (e: Exception) { org.json.JSONObject() }
+        val savedStates = try { org.json.JSONObject(currentDoubleTapStr) } catch (e: Exception) { org.json.JSONObject() }
         val activeMap = mutableMapOf<String, String>()
 
         masterDoubleTapMap.forEach { (key, value) ->
@@ -802,7 +823,8 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
         }
         myMyanmarEngine?.activeDoubleTapMap = activeMap
 
-        Log.d("NoxBoard", "Myanmar Engine Loaded: ${prefs.myanmarTypingStyle}")
+        lastMyanmarTypingStyle = currentStyle
+        lastDoubleTapStatesStr = currentDoubleTapStr
     }
 
     private fun loadDictionaryFromAssetsOnlyForAutoCorrect() {
@@ -820,7 +842,6 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
                             }
                         }
                     } catch (e: Exception) {
-                        android.util.Log.e("NoxBoard", "Error loading $fileName", e)
                     }
                 }
 
@@ -834,12 +855,8 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
                         }
                     }
                 } catch (e: Exception) {
-                    android.util.Log.e("NoxBoard", "Error loading emoji_suggestions.txt", e)
                 }
-
-                android.util.Log.d("NoxBoard", "Auto-Corrects and Emojis loaded!")
             } catch (e: Exception) {
-                com.noxtan.noxboard.utils.NoxLogger.logError("Dictionary", "Failed to load extras", e)
             }
         }
     }
@@ -880,16 +897,12 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
                         if (isMyanmar) myUserNextWordEngine.insert(entity.word, entity.nextWord, entity.frequency) else if (isThai) thUserNextWordEngine.insert(entity.word, entity.nextWord, entity.frequency) else enUserNextWordEngine.insert(entity.word, entity.nextWord, entity.frequency)
                     }
                 }
-                android.util.Log.d("NoxBoard", "User dictionary loaded into RAM!")
             } catch (e: Exception) {
-                android.util.Log.e("NoxBoard", "Failed to load user dictionary", e)
-                com.noxtan.noxboard.utils.NoxLogger.logError("Dictionary", "Failed to load user dictionary", e)
             }
         }
     }
 
     fun playKeypressSound() {
-        val prefs = NoxBoardPrefs(this)
         if (!prefs.isSoundEnabled) return
 
         val volume = prefs.soundVolume
@@ -934,14 +947,12 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
     }
 
     private fun playSystemSound() {
-        val am = getSystemService(Context.AUDIO_SERVICE) as android.media.AudioManager
-        am.playSoundEffect(android.media.AudioManager.FX_KEYPRESS_STANDARD)
+        audioManager?.playSoundEffect(android.media.AudioManager.FX_KEYPRESS_STANDARD)
     }
 
     override fun onConfigurationChanged(newConfig: android.content.res.Configuration) {
         super.onConfigurationChanged(newConfig)
         if (::keyboardView.isInitialized) {
-            val prefs = NoxBoardPrefs(this)
             if (prefs.activeTheme == "DEFAULT") {
                 keyboardView.applySettings(prefs)
                 applyNavigationBarTheme()
@@ -981,7 +992,7 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
             return
         }
 
-        if (key == "double_tap_states" || key == "font_size" || key == "keyboard_height" ||
+        if (key == "default_language" || key == "double_tap_states" || key == "font_size" || key == "keyboard_height" ||
             key == "keyboard_width" || key == "keyboard_alignment" ||
             key == "key_corner_radius" || key == "key_padding" ||
             key == "bottom_padding" || key == "is_sliding" ||
@@ -994,6 +1005,9 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
             key == "custom_key_color" || key == "custom_key_border_color" ||
             key == "custom_text_color" || key == "custom_special_key_color" || key == "custom_special_text_color" ||
             key == "custom_active_key_color" || key == "custom_popup_bg_color" || key == "custom_popup_text_color" ||
+            key == "custom_sug_bg_color" || key == "individual_key_colors" || key == "individual_key_text_colors" ||
+            key == "individual_key_active_colors" || key == "individual_key_popup_bg_colors" ||
+            key == "individual_key_popup_text_colors" || key == "active_theme" ||
             key == "number_row_enabled" ||
             key == "suggestion_enabled" ||
             key == "myanmar_typing_style" ||
@@ -1004,6 +1018,17 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
             loadMyanmarEngine()
 
             if (::keyboardView.isInitialized) {
+                if (key == "default_language") {
+                    val newMode = when (NoxBoardPrefs(this).defaultLanguage) {
+                        "THAI" -> com.noxtan.noxboard.KeyboardMode.THAI
+                        "ENGLISH" -> com.noxtan.noxboard.KeyboardMode.ENGLISH
+                        else -> com.noxtan.noxboard.KeyboardMode.MYANMAR
+                    }
+                    if (keyboardView.currentMode != newMode) {
+                        keyboardView.currentMode = newMode
+                    }
+                }
+
                 keyboardView.post {
                     keyboardView.applySettings(NoxBoardPrefs(this))
                     applyNavigationBarTheme()
@@ -1014,7 +1039,6 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
     }
 
     private fun saveTypingData() {
-        val prefs = NoxBoardPrefs(this)
         if (prefs.isIncognitoModeEnabled) return
 
         val editorInfo = currentInputEditorInfo
@@ -1033,7 +1057,6 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
             val isNoLearning = (editorInfo.imeOptions and android.view.inputmethod.EditorInfo.IME_FLAG_NO_PERSONALIZED_LEARNING) != 0
 
             if (isPassword || isNoLearning) {
-                android.util.Log.d("NoxDebug", "saveTypingData: Password/Incognito field detected. Aborting.")
                 return
             }
             if (keyboardView.currentMode == com.noxtan.noxboard.KeyboardMode.THAI) {
@@ -1049,7 +1072,7 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
         val textBefore = textBeforeRaw.trimEnd()
         if (textBefore.isEmpty()) return
 
-        val words = textBefore.split(Regex("\\s+"))
+        val words = textBefore.split(' ', '\n')
 
         if (words.isNotEmpty()) {
             val lastWordRaw = words.last().trim()
@@ -1084,8 +1107,6 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
             val wordCount = (tempWordCounts[finalCleanWord] ?: 0) + 1
             tempWordCounts[finalCleanWord] = wordCount
 
-            android.util.Log.d("NoxDebug", "saveTypingData: '$finalCleanWord' typed $wordCount times")
-
             var finalPrevWord = ""
             var pairCount = 0
             if (words.size >= 2) {
@@ -1100,7 +1121,6 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
             }
 
             if (wordCount % 3 == 0) {
-                android.util.Log.d("NoxDebug", "saveTypingData: Inserting '$finalCleanWord' permanently")
                 if (isMyanmar) myUserTrieEngine.insert(finalCleanWord, 1) else if (isThai) thUserTrieEngine.insert(finalCleanWord, 1) else enUserTrieEngine.insert(finalCleanWord, 1)
 
                 serviceScope.launch {
@@ -1109,7 +1129,6 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
             }
 
             if (pairCount % 3 == 0 && finalPrevWord.isNotBlank()) {
-                android.util.Log.d("NoxDebug", "saveTypingData: Inserting pair '$finalPrevWord -> $finalCleanWord' permanently")
                 if (isMyanmar) {
                     myUserNextWordEngine.insert(finalPrevWord, finalCleanWord, 1)
                 } else if (isThai) {
@@ -1131,8 +1150,6 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
         keyboardView.visibility = android.view.View.VISIBLE
     }
 
-    private var activeAppPackageName: String = "com.google.android.apps.messaging"
-
     override fun onWindowShown() {
         super.onWindowShown()
         if (::keyboardView.isInitialized) {
@@ -1145,7 +1162,20 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
     override fun onStartInputView(info: EditorInfo?, restarting: Boolean) {
         super.onStartInputView(info, restarting)
 
-        activeAppPackageName = info?.packageName ?: "com.google.android.apps.messaging"
+        val displayMetrics = resources.displayMetrics
+        val realMetrics = android.util.DisplayMetrics()
+        val windowManager = getSystemService(Context.WINDOW_SERVICE) as android.view.WindowManager
+        windowManager.defaultDisplay.getRealMetrics(realMetrics)
+
+        var navBarHeight = 0
+        var gestureInsetsBottom = 0
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+            val windowInsets = window?.window?.decorView?.rootWindowInsets
+            if (windowInsets != null) {
+                navBarHeight = windowInsets.getInsets(android.view.WindowInsets.Type.navigationBars()).bottom
+                gestureInsetsBottom = windowInsets.getInsets(android.view.WindowInsets.Type.systemGestures()).bottom
+            }
+        }
 
         try {
             window?.window?.decorView?.let { decorView ->
@@ -1164,13 +1194,8 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
         }
 
         if (!restarting) {
-            if (isWaitingForVaultUnlock) {
-                isWaitingForVaultUnlock = false
-            } else {
-                closeEmojiPicker()
-                hideVaultPanel()
-                hideToolsMenuPanel()
-            }
+            closeEmojiPicker()
+            hideToolsMenuPanel()
         }
 
         var isNumberField = false
@@ -1196,7 +1221,6 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
                 if (isNumberField) {
                     keyboardView.currentMode = com.noxtan.noxboard.KeyboardMode.NUMBER
                 } else if (keyboardView.currentMode == com.noxtan.noxboard.KeyboardMode.NUMBER) {
-                    val prefs = NoxBoardPrefs(this)
                     keyboardView.currentMode = when(prefs.defaultLanguage) {
                         "THAI" -> com.noxtan.noxboard.KeyboardMode.THAI
                         "ENGLISH" -> com.noxtan.noxboard.KeyboardMode.ENGLISH
@@ -1214,7 +1238,6 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
             hasSelectionState.value = isSelecting
             keyboardView.hasSelection = isSelecting
 
-            val prefs = NoxBoardPrefs(this)
             keyboardView.applySettings(prefs)
             applyNavigationBarTheme()
             themeUpdateTrigger.intValue += 1
@@ -1222,7 +1245,7 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
         loadMyanmarEngine()
         checkAutoCapitalization()
         updateSuggestions()
-        applyFloatingState() // <--- ဒီစာကြောင်းလေး အသစ်ထည့်ပေးပါ
+        applyFloatingState()
     }
 
     override fun onUpdateSelection(
@@ -1303,10 +1326,8 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
             )
         }
 
-        // --- Snap Indicator (အောက်ခြေက ဘောင်ပါးပါးလေး) ---
         snapIndicatorView = View(this).apply {
             val density = resources.displayMetrics.density
-            // Landscape ဆိုရင် တစ်ဝက် (24dp) ပဲထားမယ်၊ Portrait ဆိုရင် 48dp
             val isLandscape = resources.configuration.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
             val indicatorHeight = if (isLandscape) 24f else 48f
 
@@ -1323,7 +1344,6 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
             visibility = View.GONE
         }
 
-        // --- Drag Handle ---
         dragHandle = FrameLayout(this).apply {
             val density = resources.displayMetrics.density
             layoutParams = android.widget.LinearLayout.LayoutParams(
@@ -1537,10 +1557,17 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
         keyboardWrapper.addView(dragHandle)
 
         keyboardView = NoxKeyboardView(this)
+
+        val prefsForMode = NoxBoardPrefs(this)
+        keyboardView.currentMode = when(prefsForMode.defaultLanguage) {
+            "THAI" -> com.noxtan.noxboard.KeyboardMode.THAI
+            "ENGLISH" -> com.noxtan.noxboard.KeyboardMode.ENGLISH
+            else -> com.noxtan.noxboard.KeyboardMode.MYANMAR
+        }
+
         keyboardView.listener = this
         val currentModeState = androidx.compose.runtime.mutableStateOf(keyboardView.currentMode)
         keyboardView.onModeChanged = { currentModeState.value = it }
-        val prefs = NoxBoardPrefs(this)
         keyboardView.applySettings(prefs)
         applyNavigationBarTheme()
 
@@ -1584,12 +1611,17 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
                     val localCtx = androidx.compose.ui.platform.LocalContext.current
                     val prefs = remember { com.noxtan.noxboard.NoxBoardPrefs(localCtx) }
                     val shortcutListStr = prefs.customShortcutRow
-                    val shortcutList = remember(shortcutListStr) { shortcutListStr.split(",").filter { it.isNotEmpty() }.take(6) }
+
+                    val isFloating = prefs.isFloating
+                    val shortcutList = remember(shortcutListStr) {
+                        shortcutListStr.split(",").filter { it.isNotEmpty() && !(isFloating && it == "ONE_HAND") }.take(6)
+                    }
 
                     val bgColor = Color(keyboardView.theme.backgroundColor)
+                    val sugBgStr = prefs.customSugBgColor
+                    val sugBgColor = if (sugBgStr.isNotEmpty()) try { Color(android.graphics.Color.parseColor(sugBgStr)) } catch(e:Exception){ bgColor } else bgColor
                     val textColor = Color(keyboardView.getResolvedSuggestionTextColor())
 
-                    // Custom Icons တွေကို ပြန်ခေါ်မယ်
                     val toolsIconRes = remember(prefs.iconStyleSetting) { if (prefs.iconStyleSetting == "DEFAULT") com.noxtan.noxboard.R.drawable.ic_tools_menu else localCtx.resources.getIdentifier(prefs.iconStyleSetting, "drawable", localCtx.packageName).takeIf { it != 0 } ?: com.noxtan.noxboard.R.drawable.ic_tools_menu }
                     val emojiIconRes = remember(prefs.iconStyleEmoji) { if (prefs.iconStyleEmoji == "DEFAULT") com.noxtan.noxboard.R.drawable.ic_emoji else localCtx.resources.getIdentifier(prefs.iconStyleEmoji, "drawable", localCtx.packageName).takeIf { it != 0 } ?: com.noxtan.noxboard.R.drawable.ic_emoji }
                     val numpadIconRes = remember(prefs.iconStyleNumpad) { if (prefs.iconStyleNumpad == "DEFAULT") com.noxtan.noxboard.R.drawable.ic_numpad else localCtx.resources.getIdentifier(prefs.iconStyleNumpad, "drawable", localCtx.packageName).takeIf { it != 0 } ?: com.noxtan.noxboard.R.drawable.ic_numpad }
@@ -1603,7 +1635,7 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .height(42.dp)
-                                .background(bgColor)
+                                .background(sugBgColor)
                         ) {
                             if (currentPanel == "TOOLS") {
                                 Row(
@@ -1625,7 +1657,6 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
                                         shortcutList.forEach { action ->
                                             IconButton(onClick = { onKey(-1000, action) }) {
                                                 when (action) {
-                                                    "VAULT" -> Icon(painterResource(id = com.noxtan.noxboard.R.drawable.ic_pass), contentDescription = "Vault", tint = textColor, modifier = Modifier.size(20.dp))
                                                     "CLIPBOARD" -> {
                                                         val icon = if (hasSelection) com.noxtan.noxboard.R.drawable.ic_copy else com.noxtan.noxboard.R.drawable.ic_paste
                                                         Icon(painterResource(id = icon), contentDescription = "Clipboard", tint = textColor, modifier = Modifier.size(20.dp))
@@ -1643,8 +1674,14 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
                                                     "RIGHT" -> Text("▶", color = textColor, fontSize = 14.sp, fontWeight = FontWeight.Bold)
                                                     "UP" -> Text("▲", color = textColor, fontSize = 14.sp, fontWeight = FontWeight.Bold)
                                                     "DOWN" -> Text("▼", color = textColor, fontSize = 14.sp, fontWeight = FontWeight.Bold)
-                                                    "SELECT_ALL" -> Text("All", color = textColor, fontSize = 14.sp, fontWeight = FontWeight.Bold)
-                                                    "COPY_ALL" -> Text("All", color = textColor, fontSize = 14.sp, fontWeight = FontWeight.Bold)
+                                                    "SELECT_ALL" -> Icon(painterResource(id = com.noxtan.noxboard.R.drawable.ic_select_all), contentDescription = "Select All", tint = textColor, modifier = Modifier.size(20.dp))
+                                                    "COPY_ALL" -> Icon(painterResource(id = com.noxtan.noxboard.R.drawable.ic_select_all), contentDescription = "Copy All", tint = textColor, modifier = Modifier.size(20.dp))
+
+                                                    "HISTORY" -> Icon(Icons.Default.Assignment, contentDescription = "History", tint = textColor, modifier = Modifier.size(20.dp))
+                                                    "FLOATING" -> Icon(painterResource(id = com.noxtan.noxboard.R.drawable.ic_float), contentDescription = "Floating", tint = textColor, modifier = Modifier.size(20.dp))
+                                                    "RESIZE" -> Icon(Icons.Default.OpenWith, contentDescription = "Resize", tint = textColor, modifier = Modifier.size(20.dp))
+                                                    "ONE_HAND" -> Icon(painterResource(id = com.noxtan.noxboard.R.drawable.ic_one_hand), contentDescription = "One Hand", tint = textColor, modifier = Modifier.size(20.dp))
+
                                                     else -> Text(action.take(3), color = textColor, fontSize = 14.sp, fontWeight = FontWeight.Bold)
                                                 }
                                             }
@@ -1761,7 +1798,6 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
                                             shortcutList.forEach { action ->
                                                 IconButton(onClick = { onKey(-1000, action) }) {
                                                     when (action) {
-                                                        "VAULT" -> Icon(painterResource(id = com.noxtan.noxboard.R.drawable.ic_pass), contentDescription = "Vault", tint = textColor, modifier = Modifier.size(20.dp))
                                                         "CLIPBOARD" -> {
                                                             val icon = if (hasSelection) com.noxtan.noxboard.R.drawable.ic_copy else com.noxtan.noxboard.R.drawable.ic_paste
                                                             Icon(painterResource(id = icon), contentDescription = "Clipboard", tint = textColor, modifier = Modifier.size(20.dp))
@@ -1779,8 +1815,14 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
                                                         "RIGHT" -> Text("▶", color = textColor, fontSize = 14.sp, fontWeight = FontWeight.Bold)
                                                         "UP" -> Text("▲", color = textColor, fontSize = 14.sp, fontWeight = FontWeight.Bold)
                                                         "DOWN" -> Text("▼", color = textColor, fontSize = 14.sp, fontWeight = FontWeight.Bold)
-                                                        "SELECT_ALL" -> Text("All", color = textColor, fontSize = 14.sp, fontWeight = FontWeight.Bold)
-                                                        "COPY_ALL" -> Text("All", color = textColor, fontSize = 14.sp, fontWeight = FontWeight.Bold)
+                                                        "SELECT_ALL" -> Icon(painterResource(id = com.noxtan.noxboard.R.drawable.ic_select_all), contentDescription = "Select All", tint = textColor, modifier = Modifier.size(20.dp))
+                                                        "COPY_ALL" -> Icon(painterResource(id = com.noxtan.noxboard.R.drawable.ic_select_all), contentDescription = "Copy All", tint = textColor, modifier = Modifier.size(20.dp))
+
+                                                        "HISTORY" -> Icon(Icons.Default.Assignment, contentDescription = "History", tint = textColor, modifier = Modifier.size(20.dp))
+                                                        "FLOATING" -> Icon(painterResource(id = com.noxtan.noxboard.R.drawable.ic_float), contentDescription = "Floating", tint = textColor, modifier = Modifier.size(20.dp))
+                                                        "RESIZE" -> Icon(Icons.Default.OpenWith, contentDescription = "Resize", tint = textColor, modifier = Modifier.size(20.dp))
+                                                        "ONE_HAND" -> Icon(painterResource(id = com.noxtan.noxboard.R.drawable.ic_one_hand), contentDescription = "One Hand", tint = textColor, modifier = Modifier.size(20.dp))
+
                                                         else -> Text(action.take(3), color = textColor, fontSize = 14.sp, fontWeight = FontWeight.Bold)
                                                     }
                                                 }
@@ -1840,151 +1882,312 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
         frameLayout.addView(keyboardWrapper)
         frameLayout.addView(snapIndicatorView)
 
+        resizeComposeView = ComposeView(this).apply {
+            id = android.view.View.generateViewId()
+            setViewTreeLifecycleOwner(owner)
+            setViewTreeViewModelStoreOwner(owner)
+            setViewTreeSavedStateRegistryOwner(owner)
+            setContent {
+                if (isResizeModeState.value) {
+                    val density = androidx.compose.ui.platform.LocalDensity.current
+
+                    val applyPreview = {
+                        keyboardView.theme.keyboardHeightDp = tempResizeHeightState.floatValue
+                        keyboardView.theme.bottomPaddingDp = tempBottomPaddingState.floatValue
+                        keyboardView.requestLayout()
+                        keyboardView.invalidate()
+                        window?.window?.decorView?.requestApplyInsets()
+                    }
+
+                    val cancelAndClose = {
+                        isResizeModeState.value = false
+                        frameLayout.layoutParams.height = android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+                        frameLayout.requestLayout()
+
+                        val p = NoxBoardPrefs(this@NoxKeyboardService)
+                        keyboardView.theme.keyboardHeightDp = p.keyboardHeight
+                        keyboardView.theme.bottomPaddingDp = p.bottomPadding
+                        keyboardView.requestLayout()
+                        keyboardView.invalidate()
+                        window?.window?.decorView?.requestApplyInsets()
+                    }
+
+                    val saveAndClose = {
+                        isResizeModeState.value = false
+                        frameLayout.layoutParams.height = android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+                        frameLayout.requestLayout()
+
+                        val p = NoxBoardPrefs(this@NoxKeyboardService)
+                        p.keyboardHeight = tempResizeHeightState.floatValue
+                        p.bottomPadding = tempBottomPaddingState.floatValue
+
+                        keyboardView.requestLayout()
+                        keyboardView.invalidate()
+                        window?.window?.decorView?.requestApplyInsets()
+                    }
+
+                    val contextLocal = androidx.compose.ui.platform.LocalContext.current
+                    val displayMetricsLocal = contextLocal.resources.displayMetrics
+                    val realMetricsLocal = android.util.DisplayMetrics()
+                    val windowManagerLocal = contextLocal.getSystemService(android.content.Context.WINDOW_SERVICE) as android.view.WindowManager
+                    windowManagerLocal.defaultDisplay.getRealMetrics(realMetricsLocal)
+
+                    val isLandscapeLocal = contextLocal.resources.configuration.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
+                    val effectivePaddingLocal = if (isLandscapeLocal) tempBottomPaddingState.floatValue * 0.25f else tempBottomPaddingState.floatValue
+
+                    val systemNavBarHeightLocalPx = realMetricsLocal.heightPixels - displayMetricsLocal.heightPixels
+                    val userPaddingLocalPx = effectivePaddingLocal * displayMetricsLocal.density
+
+                    val actualPaddingLocalPx = kotlin.math.max(0f, userPaddingLocalPx - systemNavBarHeightLocalPx)
+                    val visualBottomPadding = (actualPaddingLocalPx / displayMetricsLocal.density).dp
+
+                    androidx.compose.foundation.layout.Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(Color.Black.copy(alpha = 0.5f))
+                            .pointerInput(Unit) {
+                                detectTapGestures(
+                                    onTap = {
+                                        cancelAndClose()
+                                    }
+                                )
+                            },
+                        contentAlignment = Alignment.BottomCenter
+                    ) {
+                        val effectiveKbHeightLocal = if (isLandscapeLocal) tempResizeHeightState.floatValue * 0.85f else tempResizeHeightState.floatValue
+
+                        androidx.compose.foundation.layout.Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = visualBottomPadding)
+                                .height(effectiveKbHeightLocal.dp + 34.dp)
+                                .border(2.dp, Color(0xFF4CAF50), RoundedCornerShape(12.dp))
+                                .background(Color(0xFF4CAF50).copy(alpha = 0.1f))
+                                .pointerInput(Unit) {
+                                    detectTapGestures(onTap = {})
+                                }
+                        ) {
+
+                            androidx.compose.foundation.layout.Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(40.dp)
+                                    .pointerInput(Unit) {
+                                        detectDragGestures(
+                                            onDragEnd = { applyPreview() },
+                                            onDragCancel = { applyPreview() },
+                                            onDrag = { change, dragAmount ->
+                                                change.consume()
+                                                val isLandscapeLocal = contextLocal.resources.configuration.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
+                                                val scaleH = if (isLandscapeLocal) 0.85f else 1f
+                                                val scaleP = if (isLandscapeLocal) 0.25f else 1f
+
+                                                val dyDp = (dragAmount.y / density.density) / scaleH
+                                                val oldHeight = tempResizeHeightState.floatValue
+
+                                                val screenHeightDp = resources.displayMetrics.heightPixels / density.density
+                                                val maxActualTotalAllowed = screenHeightDp * 0.6f
+
+                                                val actualPadding = tempBottomPaddingState.floatValue * scaleP
+                                                val maxActualHeight = (maxActualTotalAllowed - actualPadding).coerceAtLeast(180f * scaleH)
+                                                val maxBaseHeight = maxActualHeight / scaleH
+
+                                                tempResizeHeightState.floatValue = (oldHeight - dyDp).coerceIn(180f, maxBaseHeight)
+                                            }
+                                        )
+                                    },
+                                contentAlignment = Alignment.Center
+                            ) {
+                                androidx.compose.foundation.layout.Box(modifier = Modifier.width(48.dp).height(4.dp).background(Color.White.copy(alpha = 0.8f), CircleShape))
+                            }
+
+                            androidx.compose.foundation.layout.Row(
+                                modifier = Modifier.fillMaxWidth().weight(1f),
+                                horizontalArrangement = Arrangement.SpaceEvenly,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                IconButton(
+                                    onClick = {
+                                        tempResizeHeightState.floatValue = 235f
+                                        tempBottomPaddingState.floatValue = 54f
+                                        applyPreview()
+                                    },
+                                    modifier = Modifier.background(Color.Black.copy(alpha = 0.6f), CircleShape)
+                                ) {
+                                    Icon(androidx.compose.material.icons.Icons.Default.Refresh, contentDescription = "Reset", tint = Color.White)
+                                }
+
+                                androidx.compose.foundation.layout.Box(
+                                    modifier = Modifier
+                                        .size(56.dp)
+                                        .background(Color(0xFF4CAF50).copy(alpha = 0.8f), CircleShape)
+                                        .pointerInput(Unit) {
+                                            detectDragGestures(
+                                                onDragEnd = { applyPreview() },
+                                                onDragCancel = { applyPreview() },
+                                                onDrag = { change, dragAmount ->
+                                                    change.consume()
+                                                    val isLandscapeLocal = contextLocal.resources.configuration.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
+                                                    val scaleH = if (isLandscapeLocal) 0.85f else 1f
+                                                    val scaleP = if (isLandscapeLocal) 0.25f else 1f
+
+                                                    val dyDp = (dragAmount.y / density.density) / scaleP
+                                                    val oldPadding = tempBottomPaddingState.floatValue
+
+                                                    val screenHeightDp = resources.displayMetrics.heightPixels / density.density
+                                                    val maxActualTotalAllowed = screenHeightDp * 0.6f
+
+                                                    val actualHeight = tempResizeHeightState.floatValue * scaleH
+                                                    val maxActualPadding = (maxActualTotalAllowed - actualHeight).coerceAtLeast(0f)
+                                                    val maxBasePadding = maxActualPadding / scaleP
+
+                                                    tempBottomPaddingState.floatValue = (oldPadding - dyDp).coerceIn(0f, maxBasePadding)
+                                                }
+                                            )
+                                        },
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Icon(androidx.compose.material.icons.Icons.Default.OpenWith, contentDescription = "Move", tint = Color.White, modifier = Modifier.size(32.dp))
+                                }
+
+                                IconButton(
+                                    onClick = {
+                                        saveAndClose()
+                                    },
+                                    modifier = Modifier.background(Color.Black.copy(alpha = 0.6f), CircleShape)
+                                ) {
+                                    Icon(androidx.compose.material.icons.Icons.Default.Check, contentDescription = "Done", tint = Color.White)
+                                }
+                            }
+
+                            androidx.compose.foundation.layout.Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(40.dp)
+                                    .pointerInput(Unit) {
+                                        detectDragGestures(
+                                            onDragEnd = { applyPreview() },
+                                            onDragCancel = { applyPreview() },
+                                            onDrag = { change, dragAmount ->
+                                                change.consume()
+                                                val isLandscapeLocal = contextLocal.resources.configuration.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
+                                                val scaleH = if (isLandscapeLocal) 0.85f else 1f
+                                                val scaleP = if (isLandscapeLocal) 0.25f else 1f
+
+                                                val dyDp = dragAmount.y / density.density
+
+                                                val currentHeight = tempResizeHeightState.floatValue
+                                                val currentPadding = tempBottomPaddingState.floatValue
+
+                                                val maxActualDeltaDown = currentPadding * scaleP
+                                                val maxActualDeltaUp = (currentHeight - 180f) * scaleH
+
+                                                val actualDeltaClamped = dyDp.coerceIn(-maxActualDeltaUp, maxActualDeltaDown)
+
+                                                tempBottomPaddingState.floatValue = currentPadding - (actualDeltaClamped / scaleP)
+                                                tempResizeHeightState.floatValue = currentHeight + (actualDeltaClamped / scaleH)
+                                            }
+                                        )
+                                    },
+                                contentAlignment = Alignment.Center
+                            ) {
+                                androidx.compose.foundation.layout.Box(modifier = Modifier.width(48.dp).height(4.dp).background(Color.White.copy(alpha = 0.8f), CircleShape))
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        frameLayout.addView(resizeComposeView, FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT, android.view.ViewGroup.LayoutParams.MATCH_PARENT))
+
+        isOneHandModeState.value = NoxBoardPrefs(this).isOneHandMode
+        oneHandSideState.value = NoxBoardPrefs(this).oneHandSide
+
+        oneHandComposeView = ComposeView(this).apply {
+            id = android.view.View.generateViewId()
+            setViewTreeLifecycleOwner(owner)
+            setViewTreeViewModelStoreOwner(owner)
+            setViewTreeSavedStateRegistryOwner(owner)
+            setContent {
+                val p = NoxBoardPrefs(this@NoxKeyboardService)
+
+                if (p.isFloating || isResizeModeState.value) return@setContent
+
+                if (isOneHandModeState.value && activePanelState.value == "KEYBOARD") {
+                    val side = oneHandSideState.value
+                    val isRight = side == "RIGHT"
+
+                    val kbHeight = p.keyboardHeight
+                    val suggestionHeight = 42f
+                    val totalHeight = kbHeight + suggestionHeight
+
+                    androidx.compose.foundation.layout.Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(totalHeight.dp)
+                            .padding(bottom = composePaddingState.floatValue.dp)
+                    ) {
+                        androidx.compose.foundation.layout.Column(
+                            modifier = Modifier
+                                .align(if (isRight) Alignment.BottomStart else Alignment.BottomEnd)
+                                .fillMaxHeight()
+                                .fillMaxWidth(0.25f)
+                                .background(Color.Black.copy(alpha = 0.15f)),
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            IconButton(
+                                onClick = {
+                                    val newSide = if (isRight) "LEFT" else "RIGHT"
+                                    oneHandSideState.value = newSide
+                                    p.oneHandSide = newSide
+                                    keyboardView.applySettings(p)
+                                    window?.window?.decorView?.requestApplyInsets()
+                                },
+                                modifier = Modifier.size(46.dp).background(MaterialTheme.colorScheme.surfaceVariant, CircleShape)
+                            ) {
+                                Icon(Icons.Default.SwapHoriz, contentDescription = "Switch Side", tint = MaterialTheme.colorScheme.onSurface)
+                            }
+
+                            Spacer(modifier = Modifier.height(24.dp))
+
+                            IconButton(
+                                onClick = {
+                                    isOneHandModeState.value = false
+                                    p.isOneHandMode = false
+                                    keyboardView.applySettings(p)
+                                    window?.window?.decorView?.requestApplyInsets()
+                                },
+                                modifier = Modifier.size(46.dp).background(MaterialTheme.colorScheme.surfaceVariant, CircleShape)
+                            ) {
+                                Icon(Icons.Default.OpenWith, contentDescription = "Expand", tint = MaterialTheme.colorScheme.onSurface)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        val oneHandParams = FrameLayout.LayoutParams(
+            android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+            android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+        ).apply {
+            gravity = android.view.Gravity.BOTTOM
+        }
+        frameLayout.addView(oneHandComposeView, oneHandParams)
+
         applyFloatingState()
 
         return frameLayout
-    }
-
-    private fun showVaultPanel() {
-        val view = composeView ?: return
-        try {
-            val isFloating = NoxBoardPrefs(this).isFloating
-            val effectiveBottomPadding = if (isFloating) 0f else keyboardView.getEffectiveBottomPaddingDp()
-            composePaddingState.floatValue = effectiveBottomPadding // State ကို Initial လုပ်ပေးရန်
-
-            val exactHeightPx = if (keyboardView.height > 0) {
-                keyboardView.height
-            } else {
-                keyboardView.measure(
-                    android.view.View.MeasureSpec.makeMeasureSpec(keyboardWrapper.width, android.view.View.MeasureSpec.EXACTLY),
-                    android.view.View.MeasureSpec.makeMeasureSpec(0, android.view.View.MeasureSpec.UNSPECIFIED)
-                )
-                keyboardView.measuredHeight
-            }
-
-            val headHeightPx = (42f * resources.displayMetrics.density).toInt()
-            val panelHeightPx = exactHeightPx + headHeightPx
-
-            activePanelState.value = "VAULT"
-            val params = view.layoutParams as? android.widget.LinearLayout.LayoutParams ?: android.widget.LinearLayout.LayoutParams(
-                android.view.ViewGroup.LayoutParams.MATCH_PARENT,
-                panelHeightPx
-            )
-            params.width = android.view.ViewGroup.LayoutParams.MATCH_PARENT
-            params.height = panelHeightPx
-            view.layoutParams = params
-
-            keyboardView.visibility = android.view.View.GONE
-            view.visibility = android.view.View.VISIBLE
-
-            view.setContent {
-                NoxBoardTheme {
-                    var accounts by androidx.compose.runtime.remember { androidx.compose.runtime.mutableStateOf<List<VaultAccountInfo>>(emptyList()) }
-                    var isLocked by androidx.compose.runtime.remember { androidx.compose.runtime.mutableStateOf(false) }
-
-                    fun refreshData() {
-                        serviceScope.launch {
-                            val result = com.noxtan.noxboard.provider.VaultAidlClient.fetchAccounts(this@NoxKeyboardService, activeAppPackageName)
-                            kotlinx.coroutines.withContext(Dispatchers.Main) {
-                                when (result) {
-                                    is com.noxtan.noxboard.provider.VaultAidlClient.VaultResult.Success -> {
-                                        accounts = result.accounts
-                                        isLocked = false
-                                    }
-                                    is com.noxtan.noxboard.provider.VaultAidlClient.VaultResult.Locked -> {
-                                        accounts = emptyList()
-                                        isLocked = true
-                                    }
-                                    is com.noxtan.noxboard.provider.VaultAidlClient.VaultResult.Error -> {
-                                        accounts = emptyList()
-                                        isLocked = false
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    androidx.compose.runtime.LaunchedEffect(Unit) {
-                        refreshData()
-                    }
-
-                    val windowInfo = androidx.compose.ui.platform.LocalWindowInfo.current
-                    androidx.compose.runtime.LaunchedEffect(windowInfo.isWindowFocused) {
-                        if (windowInfo.isWindowFocused) {
-                            refreshData()
-                        }
-                    }
-
-                    CredentialVaultPanel(
-                        packageName = activeAppPackageName,
-                        bottomPaddingDp = composePaddingState.floatValue,
-                        accounts = accounts,
-                        isLocked = isLocked,
-                        onUnlockClick = {
-                            isWaitingForVaultUnlock = true
-
-                            val intent = packageManager.getLaunchIntentForPackage("com.noxtan.pass")?.apply {
-                                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                            }
-                            if (intent != null) {
-                                startActivity(intent)
-                            } else {
-                                android.widget.Toast.makeText(this@NoxKeyboardService, "Noxtan Pass is not installed", android.widget.Toast.LENGTH_SHORT).show()
-                            }
-                        },
-                        onFillText = { text ->
-                            when (text) {
-                                "⌫" -> {
-                                    val ic = currentInputConnection
-                                    if (ic != null) {
-                                        val selectedText = ic.getSelectedText(0)
-                                        if (!selectedText.isNullOrEmpty()) {
-                                            ic.commitText("", 1)
-                                        } else {
-                                            ic.deleteSurroundingText(1, 0)
-                                        }
-                                    }
-                                }
-                                "\n" -> {
-                                    val ic = currentInputConnection
-                                    if (ic != null) {
-                                        if (isMultiLine) {
-                                            ic.commitText("\n", 1)
-                                        } else {
-                                            ic.performEditorAction(currentActionId)
-                                        }
-                                    }
-                                }
-                                else -> {
-                                    currentInputConnection?.commitText(text, 1)
-                                }
-                            }
-                        },
-                        onClose = {
-                            hideVaultPanel()
-                        }
-                    )
-                }
-            }
-            Log.d("NoxBoard", "VaultPanel content set and displayed successfully")
-        } catch (e: Throwable) {
-            Log.e("NoxBoard", "Crash inside showVaultPanel while calling setContent", e)
-            hideVaultPanel()
-        }
-    }
-
-    private fun hideVaultPanel() {
-        activePanelState.value = "KEYBOARD"
-        composeView?.visibility = View.GONE
-        keyboardView.visibility = View.VISIBLE
     }
 
     private fun showToolsMenuPanel() {
         val view = composeView ?: return
         try {
             val isFloating = NoxBoardPrefs(this).isFloating
-            val effectiveBottomPadding = if (isFloating) 0f else keyboardView.getEffectiveBottomPaddingDp()
-            composePaddingState.floatValue = effectiveBottomPadding // State ကို Initial လုပ်ပေးရန်
+            val isLandscape = resources.configuration.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
+            val effectiveBottomPadding = if (isFloating) 0f else if (isLandscape) keyboardView.theme.bottomPaddingDp * 0.25f else keyboardView.theme.bottomPaddingDp
+            composePaddingState.floatValue = effectiveBottomPadding
 
             val exactHeightPx = if (keyboardView.height > 0) {
                 keyboardView.height
@@ -2013,14 +2216,16 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
                     com.noxtan.noxboard.ui.screens.ToolsMenuPanel(
                         bottomPaddingDp = composePaddingState.floatValue,
                         hasSelection = keyboardView.hasSelection,
+
+                        isOneHandMode = isOneHandModeState.value,
+                        isFloatingMode = NoxBoardPrefs(this@NoxKeyboardService).isFloating,
+
                         onClose = { hideToolsMenuPanel() },
                         onActionClick = { actionId ->
                             if (actionId == "CLIPBOARD") {
                                 onKey(-13, "")
                             } else if (actionId == "HISTORY") {
                                 showClipboardPanel()
-                            } else if (actionId == "VAULT") {
-                                showVaultPanel()
                             } else if (actionId == "EMOJI") {
                                 showEmojiPicker()
                             } else {
@@ -2050,9 +2255,6 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
                         onClipboardHistoryClick = {
                             showClipboardPanel()
                         },
-                        onVaultClick = {
-                            showVaultPanel()
-                        },
                         onSettingsClick = {
                             requestHideSelf(0)
                             hideToolsMenuPanel()
@@ -2063,6 +2265,23 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
                         },
                         onFloatingClick = {
                             toggleFloatingMode(!NoxBoardPrefs(this@NoxKeyboardService).isFloating)
+                        },
+                        onResizeClick = {
+                            hideToolsMenuPanel()
+                            val p = NoxBoardPrefs(this@NoxKeyboardService)
+
+                            if (p.isOneHandMode) {
+                                p.isOneHandMode = false
+                                isOneHandModeState.value = false
+                                keyboardView.applySettings(p)
+                            }
+
+                            tempResizeHeightState.floatValue = p.keyboardHeight
+                            tempBottomPaddingState.floatValue = p.bottomPadding
+                            isResizeModeState.value = true
+
+                            frameLayout.layoutParams.height = android.view.ViewGroup.LayoutParams.MATCH_PARENT
+                            frameLayout.requestLayout()
                         }
                     )
                 }
@@ -2076,8 +2295,9 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
         val view = composeView ?: return
         try {
             val isFloating = NoxBoardPrefs(this).isFloating
-            val effectiveBottomPadding = if (isFloating) 0f else keyboardView.getEffectiveBottomPaddingDp()
-            composePaddingState.floatValue = effectiveBottomPadding // State ကို Initial လုပ်ပေးရန်
+            val isLandscape = resources.configuration.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
+            val effectiveBottomPadding = if (isFloating) 0f else if (isLandscape) keyboardView.theme.bottomPaddingDp * 0.25f else keyboardView.theme.bottomPaddingDp
+            composePaddingState.floatValue = effectiveBottomPadding
 
             val exactHeightPx = if (keyboardView.height > 0) {
                 keyboardView.height
@@ -2109,10 +2329,31 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
                     com.noxtan.noxboard.ui.screens.ClipboardHistoryPanel(
                         bottomPaddingDp = composePaddingState.floatValue,
                         historyList = clipboardHistory,
+                        pinnedList = pinnedClipboardHistory,
                         onClose = { hideToolsMenuPanel() },
                         onItemClick = { text ->
                             currentInputConnection?.commitText(text, 1)
                             hideToolsMenuPanel()
+                        },
+                        onPinClick = { text, isPinnedNow ->
+                            if (isPinnedNow) {
+                                if (!pinnedClipboardHistory.contains(text)) pinnedClipboardHistory.add(0, text)
+                            } else {
+                                pinnedClipboardHistory.remove(text)
+                            }
+                            val arr = org.json.JSONArray()
+                            pinnedClipboardHistory.forEach { arr.put(it) }
+                            NoxBoardPrefs(this@NoxKeyboardService).pinnedClipboardItems = arr.toString()
+                        },
+                        onDeleteClick = { text, isPinnedTab ->
+                            if (isPinnedTab) {
+                                pinnedClipboardHistory.remove(text)
+                                val arr = org.json.JSONArray()
+                                pinnedClipboardHistory.forEach { arr.put(it) }
+                                NoxBoardPrefs(this@NoxKeyboardService).pinnedClipboardItems = arr.toString()
+                            } else {
+                                clipboardHistory.remove(text)
+                            }
                         }
                     )
                 }
@@ -2132,8 +2373,9 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
         val view = composeView ?: return
         try {
             val isFloating = NoxBoardPrefs(this).isFloating
-            val effectiveBottomPadding = if (isFloating) 0f else keyboardView.getEffectiveBottomPaddingDp()
-            composePaddingState.floatValue = effectiveBottomPadding // State ကို Initial လုပ်ပေးရန်
+            val isLandscape = resources.configuration.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
+            val effectiveBottomPadding = if (isFloating) 0f else if (isLandscape) keyboardView.theme.bottomPaddingDp * 0.25f else keyboardView.theme.bottomPaddingDp
+            composePaddingState.floatValue = effectiveBottomPadding
 
             val exactHeightPx = if (keyboardView.height > 0) {
                 keyboardView.height
@@ -2160,18 +2402,22 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
             keyboardView.visibility = android.view.View.GONE
             view.visibility = android.view.View.VISIBLE
 
+            val sessionKey = System.currentTimeMillis()
+
             view.setContent {
-                com.noxtan.noxboard.ui.theme.NoxBoardTheme {
-                    com.noxtan.noxboard.ui.screens.EmojiPanel(
-                        bottomPaddingDp = composePaddingState.floatValue,
-                        onClose = { closeEmojiPicker() },
-                        onEmojiClick = { currentInputConnection?.commitText(it, 1) },
-                        onBackspace = {
-                            currentInputConnection?.sendKeyEvent(android.view.KeyEvent(android.view.KeyEvent.ACTION_DOWN, android.view.KeyEvent.KEYCODE_DEL))
-                            currentInputConnection?.sendKeyEvent(android.view.KeyEvent(android.view.KeyEvent.ACTION_UP, android.view.KeyEvent.KEYCODE_DEL))
-                        },
-                        onSpace = { currentInputConnection?.commitText(" ", 1) }
-                    )
+                androidx.compose.runtime.key(sessionKey) {
+                    com.noxtan.noxboard.ui.theme.NoxBoardTheme {
+                        com.noxtan.noxboard.ui.screens.EmojiPanel(
+                            bottomPaddingDp = composePaddingState.floatValue,
+                            onClose = { closeEmojiPicker() },
+                            onEmojiClick = { currentInputConnection?.commitText(it, 1) },
+                            onBackspace = {
+                                currentInputConnection?.sendKeyEvent(android.view.KeyEvent(android.view.KeyEvent.ACTION_DOWN, android.view.KeyEvent.KEYCODE_DEL))
+                                currentInputConnection?.sendKeyEvent(android.view.KeyEvent(android.view.KeyEvent.ACTION_UP, android.view.KeyEvent.KEYCODE_DEL))
+                            },
+                            onSpace = { currentInputConnection?.commitText(" ", 1) }
+                        )
+                    }
                 }
             }
         } catch (e: Throwable) {
@@ -2191,9 +2437,11 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
 
         when (code) {
             -1000 -> {
-                android.util.Log.d("NoxGesture", "Gesture Triggered: $text")
-
                 when (text) {
+                    "SHOW_IME_PICKER" -> {
+                        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
+                        imm.showInputMethodPicker()
+                    }
                     "UNDO" -> {
                         val t = android.os.SystemClock.uptimeMillis()
                         ic.sendKeyEvent(android.view.KeyEvent(t, t, android.view.KeyEvent.ACTION_DOWN, android.view.KeyEvent.KEYCODE_Z, 0, android.view.KeyEvent.META_CTRL_ON))
@@ -2206,8 +2454,7 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
                         ic.sendKeyEvent(android.view.KeyEvent(t, t, android.view.KeyEvent.ACTION_UP, android.view.KeyEvent.KEYCODE_Z, 0, metaState))
                     }
                     "COPY" -> {
-                        val result = ic.performContextMenuAction(android.R.id.copy)
-                        android.util.Log.d("NoxGesture", "COPY action result: $result")
+                        ic.performContextMenuAction(android.R.id.copy)
                     }
                     "PASTE" -> ic.performContextMenuAction(android.R.id.paste)
                     "CUT" -> ic.performContextMenuAction(android.R.id.cut)
@@ -2220,13 +2467,45 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
                         ic.sendKeyEvent(android.view.KeyEvent(android.view.KeyEvent.ACTION_UP, android.view.KeyEvent.KEYCODE_DPAD_RIGHT))
                         android.widget.Toast.makeText(this, "Copied All", android.widget.Toast.LENGTH_SHORT).show()
                     }
+
+                    "LEFT" -> {
+                        ic.sendKeyEvent(android.view.KeyEvent(android.view.KeyEvent.ACTION_DOWN, android.view.KeyEvent.KEYCODE_DPAD_LEFT))
+                        ic.sendKeyEvent(android.view.KeyEvent(android.view.KeyEvent.ACTION_UP, android.view.KeyEvent.KEYCODE_DPAD_LEFT))
+                    }
+                    "RIGHT" -> {
+                        ic.sendKeyEvent(android.view.KeyEvent(android.view.KeyEvent.ACTION_DOWN, android.view.KeyEvent.KEYCODE_DPAD_RIGHT))
+                        ic.sendKeyEvent(android.view.KeyEvent(android.view.KeyEvent.ACTION_UP, android.view.KeyEvent.KEYCODE_DPAD_RIGHT))
+                    }
+                    "UP" -> {
+                        ic.sendKeyEvent(android.view.KeyEvent(android.view.KeyEvent.ACTION_DOWN, android.view.KeyEvent.KEYCODE_DPAD_UP))
+                        ic.sendKeyEvent(android.view.KeyEvent(android.view.KeyEvent.ACTION_UP, android.view.KeyEvent.KEYCODE_DPAD_UP))
+                    }
+                    "DOWN" -> {
+                        ic.sendKeyEvent(android.view.KeyEvent(android.view.KeyEvent.ACTION_DOWN, android.view.KeyEvent.KEYCODE_DPAD_DOWN))
+                        ic.sendKeyEvent(android.view.KeyEvent(android.view.KeyEvent.ACTION_UP, android.view.KeyEvent.KEYCODE_DPAD_DOWN))
+                    }
+
                     "CHANGE_LANGUAGE" -> {
                         if (::keyboardView.isInitialized) {
                             keyboardView.switchLanguage()
+                            checkAutoCapitalization()
                         }
                     }
-                    "VAULT" -> showVaultPanel()
                     "TOOLS" -> showToolsMenuPanel()
+
+                    "ONE_HAND" -> {
+                        val p = NoxBoardPrefs(this)
+
+                        if (p.isFloating) return true
+
+                        val newState = !p.isOneHandMode
+                        p.isOneHandMode = newState
+                        isOneHandModeState.value = newState
+                        if (::keyboardView.isInitialized) {
+                            keyboardView.applySettings(p)
+                        }
+                        hideToolsMenuPanel()
+                    }
 
                     "CURSOR_LEFT_WORD" -> {
                         val t = android.os.SystemClock.uptimeMillis()
@@ -2250,13 +2529,32 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
                     "CLIPBOARD" -> onKey(-13, "")
                     "HISTORY" -> showClipboardPanel()
                     "HIDE" -> requestHideSelf(0)
+
+                    "FLOATING" -> toggleFloatingMode(!NoxBoardPrefs(this).isFloating)
+                    "RESIZE" -> {
+                        val p = NoxBoardPrefs(this)
+                        if (p.isOneHandMode) {
+                            p.isOneHandMode = false
+                            isOneHandModeState.value = false
+                            if (::keyboardView.isInitialized) {
+                                keyboardView.applySettings(p)
+                            }
+                        }
+                        tempResizeHeightState.floatValue = p.keyboardHeight
+                        tempBottomPaddingState.floatValue = p.bottomPadding
+                        isResizeModeState.value = true
+                        frameLayout.layoutParams.height = android.view.ViewGroup.LayoutParams.MATCH_PARENT
+                        frameLayout.requestLayout()
+                        hideToolsMenuPanel()
+                    }
                 }
                 return true
             }
 
-            -3 -> { }
+            -3, -4, -5 -> {
+                checkAutoCapitalization()
+            }
             -97 -> {
-                val prefs = NoxBoardPrefs(this)
                 if (prefs.isDoubleSpacePeriodEnabled) {
                     val textBefore = ic.getTextBeforeCursor(2, 0)?.toString() ?: ""
 
@@ -2309,9 +2607,6 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
                     showEmojiPicker()
                 }
             }
-            -12 -> {
-                showVaultPanel()
-            }
             -13 -> {
                 val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
                 val selectedText = ic.getSelectedText(0)
@@ -2336,7 +2631,6 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
             }
             -14 -> {
                 closeEmojiPicker()
-                hideVaultPanel()
                 showToolsMenuPanel()
             }
             -2 -> {
@@ -2344,14 +2638,14 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
                 if (!selectedText.isNullOrEmpty()) {
                     ic.commitText("", 1)
                 } else {
-                    val textBefore = ic.getTextBeforeCursor(2, 0)?.toString() ?: ""
-                    if (textBefore.isNotEmpty()) {
-                        if (textBefore.endsWith("\u200C")) {
-                            if (textBefore.length == 2) {
-                                ic.deleteSurroundingText(2, 0)
-                            } else {
-                                ic.deleteSurroundingText(1, 0)
-                            }
+                    val textBefore3 = ic.getTextBeforeCursor(3, 0)?.toString() ?: ""
+                    if (textBefore3.isNotEmpty()) {
+                        if (textBefore3.endsWith("\u200Cြေ")) {
+                            ic.deleteSurroundingText(3, 0)
+                        } else if (textBefore3.endsWith("\u200Cေ") || textBefore3.endsWith("\u200Cြ")) {
+                            ic.deleteSurroundingText(2, 0)
+                        } else if (textBefore3.endsWith("\u200C")) {
+                            ic.deleteSurroundingText(1, 0)
                         } else {
                             ic.sendKeyEvent(android.view.KeyEvent(android.view.KeyEvent.ACTION_DOWN, android.view.KeyEvent.KEYCODE_DEL))
                             ic.sendKeyEvent(android.view.KeyEvent(android.view.KeyEvent.ACTION_UP, android.view.KeyEvent.KEYCODE_DEL))
@@ -2384,9 +2678,13 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
             }
             10 -> {
                 saveTypingData()
-                val action = currentActionId
-                if (isMultiLine) {
-                    ic.commitText("\n", 1)
+                val editorInfo = currentInputEditorInfo
+                val imeOptions = editorInfo?.imeOptions ?: 0
+                val action = imeOptions and EditorInfo.IME_MASK_ACTION
+
+                if ((imeOptions and EditorInfo.IME_FLAG_NO_ENTER_ACTION) != 0) {
+                    ic.sendKeyEvent(KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER))
+                    ic.sendKeyEvent(KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_ENTER))
                 } else if (action != EditorInfo.IME_ACTION_NONE && action != EditorInfo.IME_ACTION_UNSPECIFIED) {
                     ic.performEditorAction(action)
                 } else {
@@ -2396,7 +2694,6 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
                 myMyanmarEngine?.resetState()
             }
             32 -> {
-                val prefs = NoxBoardPrefs(this)
                 if (prefs.isAutoCorrectionEnabled) {
                     performAutoCorrect(ic)
                 }
@@ -2406,9 +2703,7 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
                 myMyanmarEngine?.resetState()
             }
             else -> {
-                val prefs = NoxBoardPrefs(this)
-                val punctuations = setOf(".", ",", "!", "?", "။", "၊", ":", ";", "”", "’", ")", "]", "}")
-                val isPunctuation = punctuations.contains(text)
+                val isPunctuation = punctuationSet.contains(text)
 
                 if (isPunctuation && prefs.isAutoCorrectionEnabled) {
                     performAutoCorrect(ic)
@@ -2421,14 +2716,20 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
                     }
                 }
 
+                if (code == 32 || code == 10 || isPunctuation) {
+                    rawKeystrokeBuffer.clear()
+                } else if (code == -2) {
+                    if (rawKeystrokeBuffer.isNotEmpty()) rawKeystrokeBuffer.deleteCharAt(rawKeystrokeBuffer.length - 1)
+                } else if (text.length == 1 && text.first() in '\u1000'..'\u109F') {
+                    rawKeystrokeBuffer.append(text)
+                } else {
+                    rawKeystrokeBuffer.clear()
+                }
+
                 if (keyboardView.currentMode == KeyboardMode.MYANMAR) {
                     myMyanmarEngine?.handleKeyPress(text, ic)
                 } else {
                     ic.commitText(text, 1)
-                }
-
-                if (!isPunctuation && prefs.isAutoCorrectionEnabled) {
-                    performAutoCorrect(ic, isInstant = true)
                 }
 
                 if (isPunctuation && prefs.isAutoSpaceEnabled) {
@@ -2457,7 +2758,7 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
                         }
 
                         if (text == ".") {
-                            val currentWord = textBeforeFull.dropLast(1).split(Regex("\\s+")).lastOrNull() ?: ""
+                            val currentWord = textBeforeFull.dropLast(1).split(' ', '\n').lastOrNull() ?: ""
 
                             if (currentWord.contains("@") ||
                                 currentWord.startsWith("www", ignoreCase = true) ||
@@ -2484,8 +2785,21 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
                 }
             }
         }
-        updateSuggestions()
-        checkAutoCapitalization()
+        typingJob?.cancel()
+        typingJob = serviceScope.launch(kotlinx.coroutines.Dispatchers.Main) {
+            kotlinx.coroutines.delay(150)
+
+            val localPrefs = NoxBoardPrefs(this@NoxKeyboardService)
+            val isPunct = punctuationSet.contains(text)
+
+            if (!isPunct && localPrefs.isAutoCorrectionEnabled && code != -2) {
+                performAutoCorrect(ic, isInstant = true)
+            }
+
+            updateSuggestions()
+            checkAutoCapitalization()
+        }
+
         return success
     }
 
@@ -2554,12 +2868,16 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
         return moved
     }
     private fun toggleFloatingMode(enable: Boolean) {
-        val prefs = NoxBoardPrefs(this)
         prefs.isFloating = enable
+
+        if (enable) {
+            prefs.isOneHandMode = false
+            isOneHandModeState.value = false
+        }
+
         applyFloatingState()
 
         if (!enable) {
-            // System ကို Window Insets အသစ်ပြန်တွက်ခိုင်းရန် (UI တွေကို မပိတ်ပါ)
             setInputView(frameLayout)
         } else {
             activePanelState.value = "KEYBOARD"
@@ -2572,7 +2890,6 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
         try {
             if (!::frameLayout.isInitialized) return
 
-            val prefs = NoxBoardPrefs(this)
             val isFloating = prefs.isFloating
             val displayMetrics = resources.displayMetrics
             val density = displayMetrics.density
@@ -2619,13 +2936,12 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
                 }
                 keyboardWrapper.clipToOutline = true
 
-                // ဒေါင်လိုက်/အလျားလိုက် အလိုက် သက်ဆိုင်ရာ မှတ်ထားတဲ့ နေရာကို ခေါ်ယူမယ်
                 val savedX = if (isLandscape) prefs.floatingLandscapeX else prefs.floatingPortraitX
                 val savedY = if (isLandscape) prefs.floatingLandscapeY else prefs.floatingPortraitY
 
                 if (savedX == -1f && savedY == -1f) {
                     keyboardWrapper.translationX = (screenWidth - floatWidth) / 2f
-                    val kbHeight = try { (keyboardView.getEffectiveKeyboardHeightDp() * density).toInt() } catch(e: Exception) { (300f * density).toInt() }
+                    val kbHeight = try { (keyboardView.getBaseKeyboardHeightDp() * density).toInt() } catch(e: Exception) { (300f * density).toInt() }
                     keyboardWrapper.translationY = (screenHeight / 2f) - (kbHeight / 2f)
                 } else {
                     val maxX = Math.max(0f, (screenWidth - floatWidth).toFloat())
@@ -2657,8 +2973,7 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
                 keyboardWrapper.clipToOutline = false
             }
 
-            // --- အသစ်ထည့်ရန် စတင် ---
-            composePaddingState.floatValue = if (isFloating) 0f else keyboardView.getEffectiveBottomPaddingDp()
+            composePaddingState.floatValue = if (isFloating) 0f else keyboardView.theme.bottomPaddingDp
 
             composeView?.let { cv ->
                 if (cv.visibility == View.VISIBLE) {
@@ -2673,37 +2988,52 @@ class NoxKeyboardService : InputMethodService(), NoxKeyboardView.OnKeyboardActio
                     cv.requestLayout()
                 }
             }
-            // --- အသစ်ထည့်ရန် ပြီးဆုံး ---
 
             frameLayout.requestLayout()
             window?.window?.decorView?.requestApplyInsets()
 
         } catch (e: Exception) {
-            android.util.Log.e("NoxFloatingDebug", "Crash in applyFloatingState", e)
         }
     }
 
     override fun onEvaluateFullscreenMode(): Boolean {
-        // Landscape မှာ Android ရဲ့ Fullscreen စာရိုက်ကွင်းကြီး ပေါ်လာတာကို လုံးဝ ပိတ်ပစ်မယ်
         return false
     }
 
     override fun onComputeInsets(outInsets: Insets?) {
         super.onComputeInsets(outInsets)
         try {
-            val prefs = NoxBoardPrefs(this)
+            if (isResizeModeState.value) {
+                val density = resources.displayMetrics.density
+                val screenHeight = resources.displayMetrics.heightPixels
+
+                val isLandscape = resources.configuration.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
+
+                val effectiveKbHeightDp = if (isLandscape) tempResizeHeightState.floatValue * 0.85f else tempResizeHeightState.floatValue
+                val currentKbHeightPx = (effectiveKbHeightDp * density).toInt()
+                val effectivePadding = if (isLandscape) tempBottomPaddingState.floatValue * 0.25f else tempBottomPaddingState.floatValue
+                val currentBottomPaddingPx = (effectivePadding * density).toInt()
+                val suggestionHeightPx = (42f * density).toInt()
+
+                val totalOriginalHeight = currentKbHeightPx + suggestionHeightPx + currentBottomPaddingPx
+
+                val topInset = screenHeight - totalOriginalHeight
+
+                outInsets?.contentTopInsets = topInset
+                outInsets?.visibleTopInsets = topInset
+                outInsets?.touchableInsets = Insets.TOUCHABLE_INSETS_FRAME
+                return
+            }
             if (prefs.isFloating && ::keyboardWrapper.isInitialized && ::frameLayout.isInitialized) {
                 val screenHeight = resources.displayMetrics.heightPixels
                 outInsets?.contentTopInsets = screenHeight
                 outInsets?.visibleTopInsets = screenHeight
 
                 outInsets?.touchableInsets = Insets.TOUCHABLE_INSETS_REGION
-                val rect = android.graphics.Rect()
-                keyboardWrapper.getGlobalVisibleRect(rect)
-                outInsets?.touchableRegion?.set(rect)
+                keyboardWrapper.getGlobalVisibleRect(touchableRect)
+                outInsets?.touchableRegion?.set(touchableRect)
             }
         } catch (e: Exception) {
-            android.util.Log.e("NoxFloatingDebug", "Crash in onComputeInsets", e)
         }
     }
 }
@@ -2723,7 +3053,6 @@ private class ServiceLifecycleOwner : LifecycleOwner, ViewModelStoreOwner, Saved
             savedStateRegistryController.performRestore(null)
             lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
         } catch (e: Throwable) {
-            Log.e("NoxBoard", "Error during ServiceLifecycleOwner onCreate", e)
         }
     }
 
@@ -2732,7 +3061,6 @@ private class ServiceLifecycleOwner : LifecycleOwner, ViewModelStoreOwner, Saved
             lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_START)
             lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
         } catch (e: Throwable) {
-            Log.e("NoxBoard", "Error during ServiceLifecycleOwner onStart", e)
         }
     }
 
@@ -2741,7 +3069,6 @@ private class ServiceLifecycleOwner : LifecycleOwner, ViewModelStoreOwner, Saved
             lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
             lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
         } catch (e: Throwable) {
-            Log.e("NoxBoard", "Error during ServiceLifecycleOwner onStop", e)
         }
     }
 
@@ -2750,7 +3077,6 @@ private class ServiceLifecycleOwner : LifecycleOwner, ViewModelStoreOwner, Saved
             lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
             store.clear()
         } catch (e: Throwable) {
-            Log.e("NoxBoard", "Error during ServiceLifecycleOwner onDestroy", e)
         }
     }
 }

@@ -1,9 +1,23 @@
 package com.noxtan.noxboard.ui.screens
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,29 +25,49 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Redo
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Undo
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderDefaults
+import androidx.compose.material3.Switch
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.graphics.ColorUtils
 import com.noxtan.noxboard.NoxBoardPrefs
 import com.noxtan.noxboard.ui.components.CategoryPill
-import com.noxtan.noxboard.ui.components.EffectPreviewCard
-import com.noxtan.noxboard.ui.components.MockKeyboard
 import com.noxtan.noxboard.ui.components.SwatchPreviewCard
 import com.noxtan.noxboard.ui.models.CustomizerColorPreset
-import androidx.core.graphics.ColorUtils
-import androidx.compose.ui.graphics.Brush
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -63,6 +97,7 @@ fun ThemeEditorScreen(
     var currentPopupBg by remember { mutableStateOf(prefs.customPopupBgColor) }
     var currentPopupText by remember { mutableStateOf(prefs.customPopupTextColor) }
     var currentActiveKey by remember { mutableStateOf(prefs.customActiveKeyColor) }
+    var currentSugBg by remember { mutableStateOf(prefs.customSugBgColor) }
     var isPreviewEnabled by remember { mutableStateOf(prefs.isKeyPreviewEnabled) }
 
     var currentSugText by remember {
@@ -77,12 +112,16 @@ fun ThemeEditorScreen(
     var undoStack by remember { mutableStateOf(listOf<ThemeSnapshot>()) }
     var redoStack by remember { mutableStateOf(listOf<ThemeSnapshot>()) }
 
-    val currentSnapshot = ThemeSnapshot(currentBg, currentKey, currentText, currentSpecKey, currentSpecText, currentBorder, currentSpecBorder, currentPopupBg, currentPopupText, currentActiveKey, currentSugText)
+    val currentSnapshot = ThemeSnapshot(currentBg, currentKey, currentText, currentSpecKey, currentSpecText, currentBorder, currentSpecBorder, currentPopupBg, currentPopupText, currentActiveKey, currentSugBg, currentSugText)
     var initialSnapshot by remember { mutableStateOf(currentSnapshot) }
 
     var showSaveDialog by remember { mutableStateOf(false) }
     var themeNameInput by remember { mutableStateOf("") }
     var editingCustomThemeId by remember { mutableStateOf("") }
+
+    BackHandler(enabled = true) {
+        onBack()
+    }
 
     LaunchedEffect(Unit) {
         val editData = prefs.editingThemeId
@@ -106,9 +145,10 @@ fun ThemeEditorScreen(
                 currentPopupBg = json.optString("popupBgHex", currentSpecKey)
                 currentPopupText = json.optString("popupTextHex", currentSpecText)
                 currentActiveKey = json.optString("activeKeyHex", currentSpecText)
+                currentSugBg = json.optString("sugBgHex", currentBg)
                 currentSugText = json.optString("sugTextHex", currentSpecText)
 
-                initialSnapshot = ThemeSnapshot(currentBg, currentKey, currentText, currentSpecKey, currentSpecText, currentBorder, currentSpecBorder, currentPopupBg, currentPopupText, currentActiveKey, currentSugText)
+                initialSnapshot = ThemeSnapshot(currentBg, currentKey, currentText, currentSpecKey, currentSpecText, currentBorder, currentSpecBorder, currentPopupBg, currentPopupText, currentActiveKey, currentSugBg, currentSugText)
                 undoStack = emptyList()
                 redoStack = emptyList()
                 selectedColorPresetId = ""
@@ -134,6 +174,7 @@ fun ThemeEditorScreen(
         currentPopupBg = snap.popupBg
         currentPopupText = snap.popupText
         currentActiveKey = snap.activeKey
+        currentSugBg = snap.sugBg
         currentSugText = snap.sugText
     }
 
@@ -413,8 +454,9 @@ fun ThemeEditorScreen(
                                 horizontalArrangement = Arrangement.spacedBy(6.dp)
                             ) {
                                 val elements = when (selectedKeyGroup) {
-                                    "BACKGROUND", "ALL" -> listOf("Key Color" to "KEY_COLOR", "Letter Color" to "TEXT_COLOR")
-                                    "FUNCTION" -> listOf("Key Color" to "KEY_COLOR", "Letter Color" to "TEXT_COLOR", "Border" to "BORDER_COLOR", "Suggestion" to "SUG_TEXT_COLOR")
+                                    "BACKGROUND" -> listOf("Main BG" to "KEY_COLOR", "Suggestion BG" to "SUG_BG_COLOR")
+                                    "ALL" -> listOf("Key Color" to "KEY_COLOR", "Letter Color" to "TEXT_COLOR")
+                                    "FUNCTION" -> listOf("Key Color" to "KEY_COLOR", "Letter Color" to "TEXT_COLOR", "Border" to "BORDER_COLOR", "Suggestion Text" to "SUG_TEXT_COLOR")
                                     else -> listOf("Key Color" to "KEY_COLOR", "Letter Color" to "TEXT_COLOR", "Border" to "BORDER_COLOR")
                                 }
                                 elements.forEach { (label, value) ->
@@ -453,6 +495,8 @@ fun ThemeEditorScreen(
                                 }
                             } else if (selectedTargetElement == "SUG_TEXT_COLOR") {
                                 currentSugText
+                            } else if (selectedTargetElement == "SUG_BG_COLOR") {
+                                currentSugBg
                             } else {
                                 when (selectedKeyGroup) {
                                     "NORMAL" -> if (selectedTargetElement == "KEY_COLOR") currentKey else currentText
@@ -527,6 +571,8 @@ fun ThemeEditorScreen(
                                                                     }
                                                                 } else if (selectedTargetElement == "SUG_TEXT_COLOR") {
                                                                     currentSugText = hex
+                                                                } else if (selectedTargetElement == "SUG_BG_COLOR") {
+                                                                    currentSugBg = hex
                                                                 } else {
                                                                     when (selectedKeyGroup) {
                                                                         "NORMAL" -> {
@@ -677,30 +723,91 @@ fun ThemeEditorScreen(
                                 "SKEW" to "Skew"
                             )
 
+                            var motionProgress by remember { mutableFloatStateOf(0f) }
+                            LaunchedEffect(Unit) {
+                                while (true) {
+                                    androidx.compose.animation.core.animate(
+                                        initialValue = 0f, targetValue = 1f,
+                                        animationSpec = androidx.compose.animation.core.spring(
+                                            dampingRatio = 0.55f,
+                                            stiffness = 1000f
+                                        )
+                                    ) { value, _ -> motionProgress = value }
+
+                                    kotlinx.coroutines.delay(150)
+
+                                    androidx.compose.animation.core.animate(
+                                        initialValue = 1f, targetValue = 0f,
+                                        animationSpec = androidx.compose.animation.core.spring(
+                                            dampingRatio = 0.45f,
+                                            stiffness = 600f
+                                        )
+                                    ) { value, _ -> motionProgress = value }
+
+                                    kotlinx.coroutines.delay(800)
+                                }
+                            }
+
+                            val density = androidx.compose.ui.platform.LocalDensity.current
+                            val previewKey = try { Color(android.graphics.Color.parseColor(currentKey)) } catch(e:Exception){ Color.DarkGray }
+                            val previewText = try { Color(android.graphics.Color.parseColor(currentText)) } catch(e:Exception){ Color.White }
+
                             val chunkedMotions = motions.chunked(3)
                             chunkedMotions.forEach { rowMotions ->
                                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
                                     rowMotions.forEach { (id, name) ->
                                         val isSel = currentKeyMotion == id
-                                        Box(
-                                            modifier = Modifier
-                                                .weight(1f)
-                                                .clip(RoundedCornerShape(12.dp))
-                                                .background(if (isSel) MaterialTheme.colorScheme.primary.copy(alpha = 0.15f) else MaterialTheme.colorScheme.surfaceVariant.copy(alpha=0.5f))
-                                                .border(1.5.dp, if (isSel) MaterialTheme.colorScheme.primary else Color.Transparent, RoundedCornerShape(12.dp))
-                                                .clickable {
-                                                    if (isSel) {
-                                                        currentKeyMotion = "NONE"
-                                                        prefs.keyMotionStyle = "NONE"
-                                                    } else {
-                                                        currentKeyMotion = id
-                                                        prefs.keyMotionStyle = id
-                                                    }
-                                                }
-                                                .padding(vertical = 16.dp),
-                                            contentAlignment = Alignment.Center
+
+                                        Column(
+                                            modifier = Modifier.weight(1f),
+                                            horizontalAlignment = Alignment.CenterHorizontally
                                         ) {
-                                            Text(name, fontSize = 13.sp, fontWeight = if(isSel) FontWeight.Bold else FontWeight.Medium, color = if(isSel) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface)
+                                            Box(
+                                                modifier = Modifier
+                                                    .fillMaxWidth()
+                                                    .aspectRatio(1.2f)
+                                                    .clip(RoundedCornerShape(12.dp))
+                                                    .background(if (isSel) MaterialTheme.colorScheme.primary.copy(alpha = 0.15f) else MaterialTheme.colorScheme.surfaceVariant.copy(alpha=0.3f))
+                                                    .border(1.5.dp, if (isSel) MaterialTheme.colorScheme.primary else Color.Transparent, RoundedCornerShape(12.dp))
+                                                    .clickable {
+                                                        currentKeyMotion = if (isSel) "NONE" else id
+                                                        prefs.keyMotionStyle = currentKeyMotion
+                                                    },
+                                                contentAlignment = Alignment.Center
+                                            ) {
+                                                Box(
+                                                    modifier = Modifier
+                                                        .fillMaxWidth(0.6f)
+                                                        .aspectRatio(1f)
+                                                        .graphicsLayer {
+                                                            val p = motionProgress
+                                                            when (id) {
+                                                                "SHRINK" -> { scaleX = 1f - 0.22f * p; scaleY = 1f - 0.22f * p }
+                                                                "POP" -> { scaleX = 1f + 0.24f * p; scaleY = 1f + 0.24f * p }
+                                                                "TILT" -> { rotationZ = -14f * p }
+                                                                "SINK" -> { translationY = (6f * density.density) * p }
+                                                                "SQUISH" -> { scaleX = 1f + 0.20f * p; scaleY = 1f - 0.25f * p }
+                                                                "FLOAT" -> { translationY = (-6f * density.density) * p }
+                                                                "SKEW" -> { rotationY = -25f * p; rotationZ = -5f * p }
+                                                            }
+                                                        }
+                                                        .clip(RoundedCornerShape(6.dp))
+                                                        .background(previewKey)
+                                                        .border(0.5.dp, Color.White.copy(alpha=0.15f), RoundedCornerShape(6.dp)),
+                                                    contentAlignment = Alignment.Center
+                                                ) {
+                                                    Text("A", color = previewText, fontSize = 16.sp, fontWeight = FontWeight.Bold)
+                                                }
+                                            }
+
+                                            Spacer(modifier = Modifier.height(8.dp))
+
+                                            Text(
+                                                text = name,
+                                                fontSize = 12.sp,
+                                                fontWeight = if(isSel) FontWeight.Bold else FontWeight.Medium,
+                                                color = if(isSel) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
+                                            )
                                         }
                                     }
                                     if (rowMotions.size < 3) {
@@ -727,6 +834,8 @@ fun ThemeEditorScreen(
                     currentPopupText = hex
                 } else if (selectedTargetElement == "ACTIVE_KEY") {
                     currentActiveKey = hex
+                } else if (selectedTargetElement == "SUG_BG_COLOR") {
+                    currentSugBg = hex
                 } else if (selectedTargetElement == "SUG_TEXT_COLOR") {
                     currentSugText = hex
                 } else if (selectedTargetElement == "BORDER_COLOR") {
@@ -797,6 +906,7 @@ fun ThemeEditorScreen(
                             put("popupBgHex", currentPopupBg)
                             put("popupTextHex", currentPopupText)
                             put("activeKeyHex", currentActiveKey)
+                            put("sugBgHex", currentSugBg)
                             put("sugTextHex", currentSugText)
                         }
 
@@ -828,6 +938,7 @@ fun ThemeEditorScreen(
                         prefs.customPopupBgColor = currentPopupBg
                         prefs.customPopupTextColor = currentPopupText
                         prefs.customActiveKeyColor = currentActiveKey
+                        prefs.customSugBgColor = currentSugBg
 
                         prefs.customNumpadBgColor = currentBg
                         prefs.customNumpadKeyColor = currentKey
@@ -857,7 +968,7 @@ data class ThemeSnapshot(
     val specKey: String, val specText: String,
     val border: String, val specBorder: String,
     val popupBg: String, val popupText: String, val activeKey: String,
-    val sugText: String
+    val sugBg: String, val sugText: String
 )
 
 @Composable

@@ -53,7 +53,6 @@ class ZawgyiInputEngine : MyanmarInputEngine {
 
     override fun handleKeyPress(text: String, ic: InputConnection) {
         val currentTime = System.currentTimeMillis()
-
         val isSameKey = (text == lastTapKey && (currentTime - lastTapTime) < DOUBLE_TAP_TIMEOUT)
         if (isSameKey) {
             tapCount++
@@ -63,22 +62,29 @@ class ZawgyiInputEngine : MyanmarInputEngine {
         }
         lastTapTime = currentTime
 
+        val cachedText = ic.getTextBeforeCursor(6, 0)?.toString() ?: ""
+        val textBefore1 = if (cachedText.isNotEmpty()) cachedText.last().toString() else ""
+
         if (activeDoubleTapMap.containsKey(text)) {
+
+            if (tapCount == 2 && textBefore1 != text) {
+                tapCount = 1
+            }
+
             if (tapCount == 2) {
                 val doubleTapText = activeDoubleTapMap[text]!!
-                val textBefore5 = ic.getTextBeforeCursor(5, 0)?.toString() ?: ""
 
-                if (text == "ေ" && textBefore5.endsWith("\u200Cေ")) {
+                if (text == "ေ" && cachedText.endsWith("\u200Cေ")) {
                     ic.deleteSurroundingText(2, 0)
-                } else if (text == "ြ" && textBefore5.endsWith("\u200Cြ")) {
+                } else if (text == "ြ" && cachedText.endsWith("\u200Cြ")) {
                     ic.deleteSurroundingText(2, 0)
-                } else if (textBefore5.endsWith(text + "ေဲ")) {
+                } else if (cachedText.endsWith(text + "ေဲ")) {
                     ic.deleteSurroundingText(text.length + 2, 0)
                     ic.commitText("ေဲ", 1)
-                } else if (textBefore5.endsWith(text + "ေ")) {
+                } else if (cachedText.endsWith(text + "ေ")) {
                     ic.deleteSurroundingText(text.length + 1, 0)
                     ic.commitText("ေ", 1)
-                } else if (textBefore5.endsWith(text)) {
+                } else if (cachedText.endsWith(text)) {
                     ic.deleteSurroundingText(text.length, 0)
                 } else {
                     ic.deleteSurroundingText(1, 0)
@@ -96,14 +102,13 @@ class ZawgyiInputEngine : MyanmarInputEngine {
         }
 
         if (text == "ိ" || text == "ီ") {
-            val textBefore4 = ic.getTextBeforeCursor(4, 0)?.toString() ?: ""
             val misplacedChars = setOf('ု', 'ူ', 'ံ', '့', 'း')
             var count = 0
-            for (i in textBefore4.length - 1 downTo 0) {
-                if (misplacedChars.contains(textBefore4[i])) count++ else break
+            for (i in cachedText.length - 1 downTo 0) {
+                if (misplacedChars.contains(cachedText[i])) count++ else break
             }
             if (count > 0) {
-                val charsToMove = textBefore4.takeLast(count)
+                val charsToMove = cachedText.takeLast(count)
                 ic.deleteSurroundingText(count, 0)
                 ic.commitText(text + charsToMove, 1)
                 return
@@ -111,14 +116,13 @@ class ZawgyiInputEngine : MyanmarInputEngine {
         }
 
         if (text == "ု" || text == "ူ") {
-            val textBefore4 = ic.getTextBeforeCursor(4, 0)?.toString() ?: ""
             val misplacedChars = setOf('ံ', '့', 'း')
             var count = 0
-            for (i in textBefore4.length - 1 downTo 0) {
-                if (misplacedChars.contains(textBefore4[i])) count++ else break
+            for (i in cachedText.length - 1 downTo 0) {
+                if (misplacedChars.contains(cachedText[i])) count++ else break
             }
             if (count > 0) {
-                val charsToMove = textBefore4.takeLast(count)
+                val charsToMove = cachedText.takeLast(count)
                 ic.deleteSurroundingText(count, 0)
                 ic.commitText(text + charsToMove, 1)
                 return
@@ -126,24 +130,23 @@ class ZawgyiInputEngine : MyanmarInputEngine {
         }
 
         if (text == "ာ") {
-            val textBeforeCursor = ic.getTextBeforeCursor(6, 0)?.toString() ?: ""
             var shouldBeMaukcha = false
 
-            if (textBeforeCursor.isNotEmpty()) {
+            if (cachedText.isNotEmpty()) {
                 var hasMedial = false
                 var isStacked = false
                 var rootConsonant: String? = null
                 val medials = setOf("ျ", "ြ", "ွ", "ှ")
 
-                for (i in textBeforeCursor.length - 1 downTo 0) {
-                    val char = textBeforeCursor[i].toString()
+                for (i in cachedText.length - 1 downTo 0) {
+                    val char = cachedText[i].toString()
 
                     if (medials.contains(char)) {
                         hasMedial = true
                     } else if (myanmarConsonants.contains(char)) {
                         rootConsonant = char
-                        if (i > 0 && textBeforeCursor[i - 1] == '္') {
-                            val isKinsi = i > 1 && textBeforeCursor[i - 2] == '်'
+                        if (i > 0 && cachedText[i - 1] == '္') {
+                            val isKinsi = i > 1 && cachedText[i - 2] == '်'
                             if (!isKinsi) {
                                 isStacked = true
                             }
@@ -166,10 +169,9 @@ class ZawgyiInputEngine : MyanmarInputEngine {
         }
 
         if (text == "ေ") {
-            val textBefore4 = ic.getTextBeforeCursor(4, 0)?.toString() ?: ""
-            val textBefore1 = if (textBefore4.isNotEmpty()) textBefore4.last().toString() else ""
+            val textBefore1 = if (cachedText.isNotEmpty()) cachedText.last().toString() else ""
 
-            if (textBefore4.endsWith("င်္" + textBefore1) && myanmarConsonants.contains(textBefore1)) {
+            if (cachedText.endsWith("င်္" + textBefore1) && myanmarConsonants.contains(textBefore1)) {
                 ic.deleteSurroundingText(4, 0)
                 ic.commitText("င်္" + textBefore1 + "ေ", 1)
                 return
@@ -179,14 +181,13 @@ class ZawgyiInputEngine : MyanmarInputEngine {
         }
 
         if (text == "င်္") {
-            val textBefore3 = ic.getTextBeforeCursor(3, 0)?.toString() ?: ""
-            val textBefore1 = if (textBefore3.isNotEmpty()) textBefore3.last().toString() else ""
+            val textBefore1 = if (cachedText.isNotEmpty()) cachedText.last().toString() else ""
 
-            if (textBefore3.endsWith("\u200Cေ" + textBefore1) && myanmarConsonants.contains(textBefore1)) {
+            if (cachedText.endsWith("\u200Cေ" + textBefore1) && myanmarConsonants.contains(textBefore1)) {
                 ic.deleteSurroundingText(3, 0)
                 ic.commitText("င်္" + textBefore1 + "ေ", 1)
                 return
-            } else if (textBefore3.endsWith("ေ" + textBefore1) && myanmarConsonants.contains(textBefore1)) {
+            } else if (cachedText.endsWith("ေ" + textBefore1) && myanmarConsonants.contains(textBefore1)) {
                 ic.deleteSurroundingText(2, 0)
                 ic.commitText("င်္" + textBefore1 + "ေ", 1)
                 return
@@ -200,15 +201,14 @@ class ZawgyiInputEngine : MyanmarInputEngine {
         }
 
         if (text == "ြ") {
-            val textBefore2 = ic.getTextBeforeCursor(2, 0)?.toString() ?: ""
-            val textBefore1 = if (textBefore2.isNotEmpty()) textBefore2.last().toString() else ""
+            val textBefore1 = if (cachedText.isNotEmpty()) cachedText.last().toString() else ""
 
-            if (textBefore2.endsWith("\u200Cေ")) {
+            if (cachedText.endsWith("\u200Cေ")) {
                 ic.deleteSurroundingText(2, 0)
                 ic.commitText("\u200Cြေ", 1)
                 return
             } else if (textBefore1 == "ေ") {
-                val charBeforeE = if (textBefore2.length >= 2) textBefore2[textBefore2.length - 2].toString() else ""
+                val charBeforeE = if (cachedText.length >= 2) cachedText[cachedText.length - 2].toString() else ""
                 val medials = setOf("ျ", "ြ", "ွ", "ှ", "္")
 
                 val isAttached = myanmarConsonants.contains(charBeforeE) || medials.contains(charBeforeE)
@@ -228,40 +228,35 @@ class ZawgyiInputEngine : MyanmarInputEngine {
         }
 
         if (myanmarConsonants.contains(text)) {
-            val textBefore5 = ic.getTextBeforeCursor(5, 0)?.toString() ?: ""
 
-            if (textBefore5.endsWith("\u200Cေင်္") || textBefore5.endsWith("င်္\u200Cေ")) {
+            if (cachedText.endsWith("\u200Cေင်္") || cachedText.endsWith("င်္\u200Cေ")) {
                 ic.deleteSurroundingText(5, 0)
                 ic.commitText("င်္" + text + "ေ", 1)
                 return
-            } else if (textBefore5.endsWith("ေင်္") || textBefore5.endsWith("င်္ေ")) {
+            } else if (cachedText.endsWith("ေင်္") || cachedText.endsWith("င်္ေ")) {
                 ic.deleteSurroundingText(4, 0)
                 ic.commitText("င်္" + text + "ေ", 1)
                 return
-            } else if (textBefore5.endsWith("င်္")) {
+            } else if (cachedText.endsWith("င်္")) {
                 ic.deleteSurroundingText(3, 0)
                 ic.commitText("င်္" + text, 1)
                 return
             }
 
-            val textBefore3 = ic.getTextBeforeCursor(3, 0)?.toString() ?: ""
-            if (textBefore3.endsWith("\u200Cြေ")) {
+            if (cachedText.endsWith("\u200Cြေ")) {
                 ic.deleteSurroundingText(3, 0)
                 ic.commitText(text + "ြေ", 1)
                 return
             }
 
-            val textBefore2 = ic.getTextBeforeCursor(2, 0)?.toString() ?: ""
-            val textBefore1 = ic.getTextBeforeCursor(1, 0)?.toString() ?: ""
-
-            if (textBefore2.endsWith("\u200Cြ")) {
+            if (cachedText.endsWith("\u200Cြ")) {
                 ic.deleteSurroundingText(2, 0)
                 ic.commitText(text + "ြ", 1)
                 return
             }
 
-            if (textBefore2.endsWith("ြေ")) {
-                val charBefore = if (textBefore3.length >= 3) textBefore3[textBefore3.length - 3].toString() else ""
+            if (cachedText.endsWith("ြေ")) {
+                val charBefore = if (cachedText.length >= 3) cachedText[cachedText.length - 3].toString() else ""
 
                 val isAttached = myanmarConsonants.contains(charBefore)
 
@@ -276,17 +271,17 @@ class ZawgyiInputEngine : MyanmarInputEngine {
                 }
             }
 
-            if (textBefore2.endsWith("\u200Cေ")) {
+            if (cachedText.endsWith("\u200Cေ")) {
                 ic.deleteSurroundingText(2, 0)
                 ic.commitText(text + "ေ", 1)
                 return
             }
 
             if (textBefore1 == "ေ") {
+                val charBeforeE = if (cachedText.length >= 2) cachedText[cachedText.length - 2].toString() else ""
                 val medials = setOf("ျ", "ြ", "ွ", "ှ", "္")
-                val isAttached = textBefore2.length == 2 &&
-                        (myanmarConsonants.contains(textBefore2[0].toString()) ||
-                                medials.contains(textBefore2[0].toString()))
+
+                val isAttached = myanmarConsonants.contains(charBeforeE) || medials.contains(charBeforeE)
 
                 if (!isAttached) {
                     ic.deleteSurroundingText(1, 0)
@@ -296,7 +291,7 @@ class ZawgyiInputEngine : MyanmarInputEngine {
             }
 
             if (textBefore1 == "ြ") {
-                val charBeforeYait = if (textBefore2.length >= 2) textBefore2[textBefore2.length - 2].toString() else ""
+                val charBeforeYait = if (cachedText.length >= 2) cachedText[cachedText.length - 2].toString() else ""
                 val validYayitConsonants = setOf("က", "ခ", "ဂ", "င", "ပ", "ဖ", "ဗ", "ဘ", "မ", "သ")
                 val isAttached = validYayitConsonants.contains(charBeforeYait)
 
@@ -310,18 +305,29 @@ class ZawgyiInputEngine : MyanmarInputEngine {
 
         val medialsSet = setOf("ျ", "ြ", "ွ", "ှ", "္")
         if (medialsSet.contains(text)) {
-            val textBefore5 = ic.getTextBeforeCursor(5, 0)?.toString() ?: ""
 
-            var stringBeforeSuffix = textBefore5
+            val misplacedVowels = setOf('ိ', 'ီ', 'ု', 'ူ', 'ဲ', 'ံ', '့', 'း', 'ာ', 'ါ')
+            var vowelCount = 0
+            for (i in cachedText.length - 1 downTo 0) {
+                if (misplacedVowels.contains(cachedText[i])) vowelCount++ else break
+            }
+            if (vowelCount > 0) {
+                val vowelsToMove = cachedText.takeLast(vowelCount)
+                ic.deleteSurroundingText(vowelCount, 0)
+                ic.commitText(text + vowelsToMove, 1)
+                return
+            }
+
+            var stringBeforeSuffix = cachedText
             var suffix = ""
             var deleteLen = 0
 
-            if (textBefore5.endsWith("ေဲ")) {
-                stringBeforeSuffix = textBefore5.dropLast(2)
+            if (cachedText.endsWith("ေဲ")) {
+                stringBeforeSuffix = cachedText.dropLast(2)
                 suffix = "ေဲ"
                 deleteLen = 2
-            } else if (textBefore5.endsWith("ေ") && !textBefore5.endsWith("\u200Cေ")) {
-                stringBeforeSuffix = textBefore5.dropLast(1)
+            } else if (cachedText.endsWith("ေ") && !cachedText.endsWith("\u200Cေ")) {
+                stringBeforeSuffix = cachedText.dropLast(1)
                 suffix = "ေ"
                 deleteLen = 1
             }
@@ -399,8 +405,7 @@ class ZawgyiInputEngine : MyanmarInputEngine {
         }
 
         if (text == "်") {
-            val textBefore2 = ic.getTextBeforeCursor(2, 0)?.toString() ?: ""
-            if (textBefore2.endsWith("ငေ")) {
+            if (cachedText.endsWith("ငေ")) {
                 ic.deleteSurroundingText(2, 0)
                 ic.commitText("င်ေ", 1)
                 return
@@ -408,8 +413,7 @@ class ZawgyiInputEngine : MyanmarInputEngine {
         }
 
         if (text == "္") {
-            val textBefore3 = ic.getTextBeforeCursor(3, 0)?.toString() ?: ""
-            if (textBefore3.endsWith("င်ေ")) {
+            if (cachedText.endsWith("င်ေ")) {
                 ic.deleteSurroundingText(3, 0)
                 ic.commitText("င်္ေ", 1)
                 return

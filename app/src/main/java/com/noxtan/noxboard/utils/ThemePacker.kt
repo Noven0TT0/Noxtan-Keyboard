@@ -43,7 +43,6 @@ object ThemePacker {
             exportFile
         } catch (e: Exception) {
             e.printStackTrace()
-            com.noxtan.noxboard.utils.NoxLogger.logError("ThemePacker", "Failed to export theme", e)
             null
         }
     }
@@ -107,11 +106,9 @@ object ThemePacker {
                 null
             }
         } catch (e: SecurityException) {
-            android.util.Log.e("ThemePacker", "Security Blocked: ${e.message}")
             null
         } catch (e: Exception) {
             e.printStackTrace()
-            com.noxtan.noxboard.utils.NoxLogger.logError("ThemePacker", "Failed to import theme", e)
             null
         }
     }

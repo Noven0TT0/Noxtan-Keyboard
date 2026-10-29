@@ -1,17 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <!-- ၁။ Noxtan Pass ရဲ့ Service ကို ချိတ်ဆက်ခွင့်တောင်းခြင်း (ဒီနေရာလေး ပြင်ထားပါတယ်) -->
-    <uses-permission android:name="com.noxtan.pass.PERMISSION_ACCESS_VAULT" />
-
-    <!-- ၂။ Android 11+ မှာ Noxtan Pass ကို လှမ်းမြင်နိုင်အောင် ကြေညာခြင်း (ဒီနေရာလေး ပြင်ထားပါတယ်) -->
-    <queries>
-        <package android:name="com.noxtan.pass" />
-        <intent>
-            <action android:name="com.noxtan.pass.ACTION_BIND_VAULT_SERVICE" />
-        </intent>
-    </queries>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:allowBackup="true"
@@ -51,7 +39,8 @@
             android:name=".NoxKeyboardService"
             android:label="Nox Myanmar Keyboard"
             android:permission="android.permission.BIND_INPUT_METHOD"
-            android:exported="true">
+            android:exported="true"
+            android:directBootAware="true">
             <intent-filter>
                 <action android:name="android.view.InputMethod" />
             </intent-filter>

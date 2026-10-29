@@ -31,7 +31,6 @@ class UnicodeInputEngine : MyanmarInputEngine {
 
     override fun handleKeyPress(text: String, ic: InputConnection) {
         val currentTime = System.currentTimeMillis()
-
         val isSameKey = (text == lastTapKey && (currentTime - lastTapTime) < DOUBLE_TAP_TIMEOUT)
         if (isSameKey) {
             tapCount++
@@ -41,13 +40,20 @@ class UnicodeInputEngine : MyanmarInputEngine {
         }
         lastTapTime = currentTime
 
+        val cachedText = ic.getTextBeforeCursor(6, 0)?.toString() ?: ""
+        val textBefore1 = if (cachedText.isNotEmpty()) cachedText.last().toString() else ""
+
         if (activeDoubleTapMap.containsKey(text)) {
+
+            if (tapCount == 2 && textBefore1 != text) {
+                tapCount = 1
+            }
+
             if (tapCount == 2) {
                 val doubleTapText = activeDoubleTapMap[text]!!
                 var deleteCount = if (text == "ေ") 2 else 1
 
-                val textBefore2 = ic.getTextBeforeCursor(2, 0)?.toString() ?: ""
-                if (text == "ြ" && textBefore2.endsWith("\u200Cြ")) {
+                if (text == "ြ" && cachedText.endsWith("\u200Cြ")) {
                     deleteCount = 2
                 }
 
@@ -63,14 +69,13 @@ class UnicodeInputEngine : MyanmarInputEngine {
         }
 
         if (text == "ိ" || text == "ီ") {
-            val textBefore4 = ic.getTextBeforeCursor(4, 0)?.toString() ?: ""
             val misplacedChars = setOf('ု', 'ူ', 'ံ', '့', 'း')
             var count = 0
-            for (i in textBefore4.length - 1 downTo 0) {
-                if (misplacedChars.contains(textBefore4[i])) count++ else break
+            for (i in cachedText.length - 1 downTo 0) {
+                if (misplacedChars.contains(cachedText[i])) count++ else break
             }
             if (count > 0) {
-                val charsToMove = textBefore4.takeLast(count)
+                val charsToMove = cachedText.takeLast(count)
                 ic.deleteSurroundingText(count, 0)
                 ic.commitText(text + charsToMove, 1)
                 return
@@ -78,14 +83,13 @@ class UnicodeInputEngine : MyanmarInputEngine {
         }
 
         if (text == "ု" || text == "ူ") {
-            val textBefore4 = ic.getTextBeforeCursor(4, 0)?.toString() ?: ""
             val misplacedChars = setOf('ံ', '့', 'း')
             var count = 0
-            for (i in textBefore4.length - 1 downTo 0) {
-                if (misplacedChars.contains(textBefore4[i])) count++ else break
+            for (i in cachedText.length - 1 downTo 0) {
+                if (misplacedChars.contains(cachedText[i])) count++ else break
             }
             if (count > 0) {
-                val charsToMove = textBefore4.takeLast(count)
+                val charsToMove = cachedText.takeLast(count)
                 ic.deleteSurroundingText(count, 0)
                 ic.commitText(text + charsToMove, 1)
                 return
@@ -93,24 +97,23 @@ class UnicodeInputEngine : MyanmarInputEngine {
         }
 
         if (text == "ာ") {
-            val textBeforeCursor = ic.getTextBeforeCursor(6, 0)?.toString() ?: ""
             var shouldBeMaukcha = false
 
-            if (textBeforeCursor.isNotEmpty()) {
+            if (cachedText.isNotEmpty()) {
                 var hasMedial = false
                 var isStacked = false
                 var rootConsonant: String? = null
                 val medials = setOf("ျ", "ြ", "ွ", "ှ")
 
-                for (i in textBeforeCursor.length - 1 downTo 0) {
-                    val char = textBeforeCursor[i].toString()
+                for (i in cachedText.length - 1 downTo 0) {
+                    val char = cachedText[i].toString()
 
                     if (medials.contains(char)) {
                         hasMedial = true
                     } else if (myanmarConsonants.contains(char)) {
                         rootConsonant = char
-                        if (i > 0 && textBeforeCursor[i - 1] == '္') {
-                            val isKinsi = i > 1 && textBeforeCursor[i - 2] == '်'
+                        if (i > 0 && cachedText[i - 1] == '္') {
+                            val isKinsi = i > 1 && cachedText[i - 2] == '်'
                             if (!isKinsi) {
                                 isStacked = true
                             }
@@ -132,8 +135,22 @@ class UnicodeInputEngine : MyanmarInputEngine {
             return
         }
 
+        val medialsSet = setOf("ျ", "ြ", "ွ", "ှ", "္")
+        if (medialsSet.contains(text)) {
+            val misplacedVowels = setOf('ိ', 'ီ', 'ု', 'ူ', 'ေ', 'ဲ', 'ံ', '့', 'း', 'ာ', 'ါ')
+            var vowelCount = 0
+            for (i in cachedText.length - 1 downTo 0) {
+                if (misplacedVowels.contains(cachedText[i])) vowelCount++ else break
+            }
+            if (vowelCount > 0) {
+                val vowelsToMove = cachedText.takeLast(vowelCount)
+                ic.deleteSurroundingText(vowelCount, 0)
+                ic.commitText(text + vowelsToMove, 1)
+                return
+            }
+        }
+
         if (text == "ြ") {
-            val textBefore1 = ic.getTextBeforeCursor(1, 0)?.toString() ?: ""
             if (textBefore1 == "ျ") {
                 ic.commitText("\u200Cြ", 1)
                 return

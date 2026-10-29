@@ -12,7 +12,6 @@
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
 
-// Python Script ကနေ ထုတ်ပေးလိုက်တဲ့ 16-bytes Data Structure အတိုင်း အတိအကျ
 #pragma pack(push, 1)
 struct TrieNode {
     uint16_t character;
@@ -33,7 +32,6 @@ struct Dictionary {
 std::unordered_map<std::string, Dictionary> dicts;
 
 bool loadDict(AAssetManager* mgr, const std::string& lang, const std::string& filename) {
-    // AASSET_MODE_BUFFER ကိုသုံးခြင်းဖြင့် mmap ကို အလိုအလျောက် သုံးသွားပါမည် (RAM မစားပါ)
     AAsset* asset = AAssetManager_open(mgr, filename.c_str(), AASSET_MODE_BUFFER);
     if (!asset) {
         LOGE("Failed to open %s", filename.c_str());
@@ -60,8 +58,8 @@ Java_com_noxtan_noxboard_engines_NativeDictionaryEngine_initEngine(JNIEnv *env, 
     AAssetManager* mgr = AAssetManager_fromJava(env, assetManager);
     if (mgr == nullptr) return JNI_FALSE;
 
-    // Dictionary များကို Memory-map ဖြင့် လှမ်းချိတ်မည်
     loadDict(mgr, "MYANMAR", "dict_my.bin");
+    loadDict(mgr, "MYANMAR_PROVERBS", "proverbs_my.bin");
     loadDict(mgr, "ENGLISH", "dict_en.bin");
     loadDict(mgr, "THAI", "dict_th.bin");
 
@@ -72,7 +70,7 @@ struct SearchResult {
     std::u16string word;
     int32_t freq;
     bool operator<(const SearchResult& other) const {
-        return freq > other.freq; // Min-heap အတွက်
+        return freq > other.freq;
     }
 };
 
@@ -99,7 +97,6 @@ Java_com_noxtan_noxboard_engines_NativeDictionaryEngine_getSuggestions(JNIEnv *e
     int32_t curr_idx = 0;
     bool found = true;
 
-    // 1. Prefix ကို Binary Search ဖြင့် အရင်ရှာမည်
     for (size_t i = 0; i < prefix.length(); ++i) {
         uint16_t target_char = prefix[i];
         const TrieNode& node = nodes[curr_idx];
@@ -124,14 +121,13 @@ Java_com_noxtan_noxboard_engines_NativeDictionaryEngine_getSuggestions(JNIEnv *e
 
     std::vector<SearchResult> top_results;
 
-    // 2. တွေ့ခဲ့လျှင် Priority Queue (Best-First Search) ဖြင့် Frequency အများဆုံးများကို ဆွဲထုတ်မည်
     if (found) {
         struct QueueNode {
             int32_t idx;
             std::u16string str;
             int32_t max_freq;
             bool operator<(const QueueNode& other) const {
-                return max_freq < other.max_freq; // Max-heap
+                return max_freq < other.max_freq;
             }
         };
 
@@ -139,7 +135,7 @@ Java_com_noxtan_noxboard_engines_NativeDictionaryEngine_getSuggestions(JNIEnv *e
         q.push({curr_idx, prefix, nodes[curr_idx].freq});
 
         int visited = 0;
-        while(!q.empty() && visited < 3000) { // Limit iterations for ultra-fast response
+        while(!q.empty() && visited < 3000) {
             QueueNode curr = q.top();
             q.pop();
             visited++;
@@ -162,12 +158,10 @@ Java_com_noxtan_noxboard_engines_NativeDictionaryEngine_getSuggestions(JNIEnv *e
         }
     }
 
-    // 3. Frequency အများဆုံးကို အပေါ်ဆုံးရောက်အောင် ပြန်စီမည်
     std::sort(top_results.begin(), top_results.end(), [](const SearchResult& a, const SearchResult& b){
         return a.freq > b.freq;
     });
 
-    // 4. C++ String ကို Java String Array သို့ ပြောင်းပြီး ပြန်ပို့မည်
     jobjectArray result = env->NewObjectArray(top_results.size(), stringClass, nullptr);
     for (size_t i = 0; i < top_results.size(); ++i) {
         jstring jstr = env->NewString(reinterpret_cast<const jchar*>(top_results[i].word.c_str()), top_results[i].word.length());
@@ -181,11 +175,11 @@ Java_com_noxtan_noxboard_engines_NativeDictionaryEngine_getSuggestions(JNIEnv *e
 extern "C"
 JNIEXPORT void JNICALL
 Java_com_noxtan_noxboard_engines_NativeDictionaryEngine_destroyEngine(JNIEnv *env, jobject thiz) {
-for (auto& pair : dicts) {
-if (pair.second.asset) {
-AAsset_close(pair.second.asset);
-pair.second.asset = nullptr;
-}
-}
-dicts.clear();
+    for (auto& pair : dicts) {
+        if (pair.second.asset) {
+            AAsset_close(pair.second.asset);
+            pair.second.asset = nullptr;
+        }
+    }
+    dicts.clear();
 }

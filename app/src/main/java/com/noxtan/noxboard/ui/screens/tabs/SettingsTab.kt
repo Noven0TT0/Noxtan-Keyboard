@@ -1,69 +1,83 @@
 package com.noxtan.noxboard.ui.screens.tabs
 
-import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material.icons.filled.DeleteSweep
-import androidx.compose.material.icons.filled.PrivacyTip
-import androidx.compose.material.icons.filled.Spellcheck
-import androidx.compose.material.icons.filled.Vibration
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.noxtan.noxboard.NoxBoardPrefs
-import com.noxtan.noxboard.data.NoxDatabase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.animation.expandVertically
-import androidx.compose.animation.shrinkVertically
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.material.icons.automirrored.filled.ArrowForward
-import androidx.compose.material.icons.automirrored.filled.Assignment
-import androidx.compose.material.icons.automirrored.filled.Redo
-import androidx.compose.material.icons.automirrored.filled.Undo
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Assignment
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.ContentCut
 import androidx.compose.material.icons.filled.ContentPaste
+import androidx.compose.material.icons.filled.DeleteSweep
 import androidx.compose.material.icons.filled.Dialpad
 import androidx.compose.material.icons.filled.EmojiEmotions
-import androidx.compose.material.icons.filled.GridView
 import androidx.compose.material.icons.filled.KeyboardHide
 import androidx.compose.material.icons.filled.Language
 import androidx.compose.material.icons.filled.MoreHoriz
+import androidx.compose.material.icons.filled.OpenWith
+import androidx.compose.material.icons.filled.PrivacyTip
 import androidx.compose.material.icons.filled.Redo
 import androidx.compose.material.icons.filled.SelectAll
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Shield
+import androidx.compose.material.icons.filled.Spellcheck
 import androidx.compose.material.icons.filled.TouchApp
 import androidx.compose.material.icons.filled.Undo
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderDefaults
+import androidx.compose.material3.Switch
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.noxtan.noxboard.NoxBoardPrefs
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -76,12 +90,14 @@ fun SettingsTab() {
     var showClearDictDialog by remember { mutableStateOf(false) }
 
     var isSuggestionEnabled by remember { mutableStateOf(prefs.isSuggestionEnabled) }
+    var isProverbsSuggestionEnabled by remember { mutableStateOf(prefs.isProverbsSuggestionEnabled) }
     var isAutoCorrectionEnabled by remember { mutableStateOf(prefs.isAutoCorrectionEnabled) }
     var isNextWordPredictionEnabled by remember { mutableStateOf(prefs.isNextWordPredictionEnabled) }
     var isAutoCapitalizationEnabled by remember { mutableStateOf(prefs.isAutoCapitalizationEnabled) }
     var isDoubleSpacePeriodEnabled by remember { mutableStateOf(prefs.isDoubleSpacePeriodEnabled) }
     var isBlockOffensiveWordsEnabled by remember { mutableStateOf(prefs.isBlockOffensiveWordsEnabled) }
     var isIncognitoModeEnabled by remember { mutableStateOf(prefs.isIncognitoModeEnabled) }
+    var isCalculatorEnabled by remember { mutableStateOf(prefs.isCalculatorEnabled) }
 
     var isSpaceCursorControlEnabled by remember { mutableStateOf(prefs.isSpaceCursorControlEnabled) }
     var spaceDragDelay by remember { mutableFloatStateOf(prefs.spaceDragDelay) }
@@ -129,6 +145,19 @@ fun SettingsTab() {
                         Switch(checked = isSuggestionEnabled, onCheckedChange = { isSuggestionEnabled = it; prefs.isSuggestionEnabled = it })
                     }
 
+                    AnimatedVisibility(visible = isSuggestionEnabled) {
+                        Column(modifier = Modifier.fillMaxWidth()) {
+                            HorizontalDivider(modifier = Modifier.padding(top = 12.dp), color = MaterialTheme.colorScheme.surfaceVariant)
+                            Row(modifier = Modifier.fillMaxWidth().padding(top = 12.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
+                                Column(modifier = Modifier.weight(1f)) {
+                                    Text("Myanmar Proverbs", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                                    Text("Include Myanmar proverbs in suggestions", fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                }
+                                Switch(checked = isProverbsSuggestionEnabled, onCheckedChange = { isProverbsSuggestionEnabled = it; prefs.isProverbsSuggestionEnabled = it })
+                            }
+                        }
+                    }
+
                     AnimatedVisibility(visible = !isSuggestionEnabled) {
                         Column(modifier = Modifier.fillMaxWidth().padding(top = 12.dp)) {
                             Text("Shortcut Row", fontWeight = FontWeight.Bold, fontSize = 14.sp)
@@ -165,7 +194,7 @@ fun SettingsTab() {
                                     }
                                 }
 
-                                if (shortcutList.size < 8) {
+                                if (shortcutList.size < 6) {
                                     Box(
                                         modifier = Modifier
                                             .weight(1f)
@@ -230,6 +259,14 @@ fun SettingsTab() {
                             Text("Do not suggest potentially offensive words", fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                         Switch(checked = isBlockOffensiveWordsEnabled, onCheckedChange = { isBlockOffensiveWordsEnabled = it; prefs.isBlockOffensiveWordsEnabled = it })
+                    }
+                    HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp), color = MaterialTheme.colorScheme.surfaceVariant)
+                    Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text("Inline Calculator", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                            Text("Calculate math expressions as you type", fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        }
+                        Switch(checked = isCalculatorEnabled, onCheckedChange = { isCalculatorEnabled = it; prefs.isCalculatorEnabled = it })
                     }
                 }
             }
@@ -401,9 +438,10 @@ fun SettingsTab() {
                 val isShortcutEdit = currentEditingGesture.startsWith("SHORTCUT_")
                 val listToUse = if (isShortcutEdit) {
                     listOf(
-                        "VAULT" to "Vault", "CLIPBOARD" to "Clipboard", "EMOJI" to "Emoji",
+                        "CLIPBOARD" to "Clipboard", "HISTORY" to "Clipboard History",
                         "LEFT" to "Arrow Left", "RIGHT" to "Arrow Right", "UP" to "Arrow Up", "DOWN" to "Arrow Down",
-                        "CHANGE_LANGUAGE" to "Change Language", "TOOLS" to "Tools Menu",
+                        "CHANGE_LANGUAGE" to "Change Language",
+                        "FLOATING" to "Floating Keyboard", "RESIZE" to "Resize Keyboard", "ONE_HAND" to "One Hand Mode",
                         "HIDE" to "Hide Keyboard", "UNDO" to "Undo", "REDO" to "Redo",
                         "COPY" to "Copy", "PASTE" to "Paste", "CUT" to "Cut", "SELECT_ALL" to "Select All", "COPY_ALL" to "Copy All"
                     ) + (if (currentEditingGesture != "SHORTCUT_NEW") listOf("REMOVE" to "Remove Item") else emptyList())
@@ -413,7 +451,7 @@ fun SettingsTab() {
                         "PASTE" to "Paste", "CUT" to "Cut", "SELECT_ALL" to "Select All", "COPY_ALL" to "Copy All",
                         "CURSOR_LEFT_WORD" to "Move cursor left by word", "CURSOR_RIGHT_WORD" to "Move cursor right by word",
                         "CURSOR_START" to "Move to front", "CURSOR_END" to "Move to back",
-                        "EMOJI" to "Open Emoji Mode", "CLIPBOARD" to "Open Clipboard", "VAULT" to "Open Nox Vault", "TOOLS" to "Open Tools Menu", "HIDE" to "Hide Keyboard"
+                        "EMOJI" to "Open Emoji Mode", "CLIPBOARD" to "Open Clipboard", "TOOLS" to "Open Tools Menu", "HIDE" to "Hide Keyboard"
                     )
                 }
 
@@ -424,7 +462,7 @@ fun SettingsTab() {
                     ) {
                         listToUse.forEach { (actionId, actionName) ->
                             val isSelected = when {
-                                isShortcutEdit -> false
+                                isShortcutEdit -> shortcutList.contains(actionId) && actionId != "REMOVE"
                                 currentEditingGesture == "DUAL_UP" -> dualUp == actionId
                                 currentEditingGesture == "DUAL_DOWN" -> dualDown == actionId
                                 currentEditingGesture == "DUAL_LEFT" -> dualLeft == actionId
@@ -442,6 +480,11 @@ fun SettingsTab() {
                                     .fillMaxWidth()
                                     .clickable {
                                         if (isShortcutEdit) {
+                                            if (actionId != "REMOVE" && shortcutList.contains(actionId)) {
+                                                showActionPicker = false
+                                                return@clickable
+                                            }
+
                                             val newList = shortcutList.toMutableList()
                                             if (currentEditingGesture == "SHORTCUT_NEW") {
                                                 if (actionId != "REMOVE") newList.add(actionId)
@@ -578,15 +621,20 @@ fun getActionName(actionId: String): String {
         "CURSOR_LEFT_WORD" -> "Move left by word"; "CURSOR_RIGHT_WORD" -> "Move right by word"
         "CURSOR_START" -> "Move to front"; "CURSOR_END" -> "Move to back"
         "EMOJI" -> "Open Emoji Mode"; "CLIPBOARD" -> "Open Clipboard"
-        "VAULT" -> "Open Nox Vault"; "TOOLS" -> "Open Tools Menu"
+        "TOOLS" -> "Open Tools Menu"
         "HIDE" -> "Hide Keyboard"
+        "ONE_HAND" -> "One Hand Mode"
+        "HISTORY" -> "Clipboard History"
+        "FLOATING" -> "Floating Keyboard"
+        "RESIZE" -> "Resize Keyboard"
+
         else -> "None"
     }
 }
 
 fun getShortcutActionName(actionId: String): String {
     return when(actionId) {
-        "VAULT" -> "Vault"; "CLIPBOARD" -> "Clipboard"; "EMOJI" -> "Emoji"
+        "CLIPBOARD" -> "Clipboard"; "EMOJI" -> "Emoji"
         "LEFT" -> "Arrow Left"; "RIGHT" -> "Arrow Right"; "UP" -> "Arrow Up"; "DOWN" -> "Arrow Down"
         "HIDE" -> "Hide Keyboard"
         "TOOLS" -> "Tools Menu"
@@ -621,7 +669,6 @@ fun GestureActionRow(direction: String, actionName: String, onClick: () -> Unit)
 @Composable
 fun getActionIcon(action: String): androidx.compose.ui.graphics.vector.ImageVector {
     return when(action) {
-        "VAULT" -> androidx.compose.material.icons.Icons.Default.Shield
         "CLIPBOARD" -> androidx.compose.material.icons.Icons.Default.Assignment
         "EMOJI" -> androidx.compose.material.icons.Icons.Default.EmojiEmotions
         "LEFT" -> androidx.compose.material.icons.Icons.Default.ArrowBack
@@ -636,6 +683,11 @@ fun getActionIcon(action: String): androidx.compose.ui.graphics.vector.ImageVect
         "COPY_ALL" -> androidx.compose.material.icons.Icons.Default.ContentCopy
         "CHANGE_LANGUAGE" -> androidx.compose.material.icons.Icons.Default.Language
         "TOOLS" -> androidx.compose.material.icons.Icons.Default.Settings
+        "ONE_HAND" -> ImageVector.vectorResource(id = com.noxtan.noxboard.R.drawable.ic_one_hand)
+        "HISTORY" -> androidx.compose.material.icons.Icons.Default.Assignment
+        "FLOATING" -> ImageVector.vectorResource(id = com.noxtan.noxboard.R.drawable.ic_float)
+        "RESIZE" -> androidx.compose.material.icons.Icons.Default.OpenWith
+
         else -> androidx.compose.material.icons.Icons.Default.TouchApp
     }
 }

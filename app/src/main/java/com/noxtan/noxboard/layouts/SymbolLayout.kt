@@ -23,7 +23,7 @@ object SymbolLayout : BaseLayout() {
                 1f
             ))
             val row4 = mutableListOf<Key>()
-            row4.add(Key("=\\<", "?123", -5, 1.5f))
+            row4.add(Key("=\\<", "=\\<", -5, 1.5f))
             row4.addAll(createRow(
                 listOf("<", ">", "[", "]", "{", "}", "~"),
                 listOf("<", ">", "[", "]", "{", "}", "~"),
@@ -48,7 +48,7 @@ object SymbolLayout : BaseLayout() {
                 1f
             ))
             val row4 = mutableListOf<Key>()
-            row4.add(Key("?123", "=\\<", -5, 1.5f))
+            row4.add(Key("123", "123", -5, 1.5f))
             row4.addAll(createRow(
                 listOf("√", "π", "≠", "≤", "≥", "¡", "¿"),
                 listOf("√", "π", "≠", "≤", "≥", "¡", "¿"),

@@ -57,7 +57,6 @@ object ImageCompressor {
             Uri.fromFile(outputFile).toString()
         } catch (e: Exception) {
             e.printStackTrace()
-            com.noxtan.noxboard.utils.NoxLogger.logError("ImageCompressor", "Failed to compress/save image", e)
             null
         }
     }

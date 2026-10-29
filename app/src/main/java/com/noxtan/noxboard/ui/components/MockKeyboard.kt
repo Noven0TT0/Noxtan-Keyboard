@@ -2,13 +2,23 @@ package com.noxtan.noxboard.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardBackspace
 import androidx.compose.material.icons.filled.Language
 import androidx.compose.material.icons.filled.North
-import androidx.compose.material3.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,6 +36,7 @@ fun MockKeyboard(
     textColor: Color,
     specKeyColor: Color,
     specTextColor: Color,
+    sugBgColor: Color = bg,
     sugTextColor: Color = specTextColor,
     keyBorderColor: Color = Color.Transparent,
     specKeyBorderColor: Color = Color.Transparent,
@@ -43,7 +54,12 @@ fun MockKeyboard(
         Column(verticalArrangement = Arrangement.spacedBy((6 * scale).dp)) {
             Row(
                 horizontalArrangement = Arrangement.SpaceEvenly,
-                modifier = Modifier.fillMaxWidth().padding(bottom = (2 * scale).dp)
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape((6 * scale).dp))
+                    .background(sugBgColor)
+                    .padding(vertical = (4 * scale).dp)
             ) {
                 Text("Nox", color = sugTextColor, fontSize = (12 * scale).sp, fontWeight = FontWeight.Bold)
                 Text("Board", color = sugTextColor, fontSize = (12 * scale).sp, fontWeight = FontWeight.Bold)

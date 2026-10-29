@@ -30,7 +30,6 @@ android {
         }
     }
 
-    // ဒီအပိုင်းကို အသစ်ထည့်ပါ (buildTypes ရဲ့ အောက်၊ compileOptions ရဲ့ အပေါ်မှာ ထည့်ပါ)
     externalNativeBuild {
         cmake {
             path = file("src/main/cpp/CMakeLists.txt")

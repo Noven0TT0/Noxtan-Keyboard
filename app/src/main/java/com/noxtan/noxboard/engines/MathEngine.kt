@@ -11,6 +11,8 @@ data class MathResult(
 )
 
 object MathEngine {
+    private val mathExprRegex = Regex("([0-9၀-၉,]+(?:\\.[0-9၀-၉]+)?\\s*[+\\-*/×÷xX]\\s*)+[0-9၀-၉,]+(?:\\.[0-9၀-၉]+)?%?$")
+    private val percentRegex = Regex("^([0-9.]+)([+\\-*/])([0-9.]+)%$")
     private val myanmarToEngDigits = mapOf(
         '၀' to '0', '၁' to '1', '၂' to '2', '၃' to '3', '၄' to '4',
         '၅' to '5', '၆' to '6', '၇' to '7', '၈' to '8', '၉' to '9'
@@ -23,20 +25,22 @@ object MathEngine {
     fun evaluate(text: String): MathResult? {
         if (text.isBlank()) return null
 
-        val regex = Regex("([0-9၀-၉,]+(?:\\.[0-9၀-၉]+)?\\s*[+\\-*/×÷]\\s*)+[0-9၀-၉,]+(?:\\.[0-9၀-၉]+)?%?$")
-        val match = regex.find(text.trimEnd()) ?: return null
+        val match = mathExprRegex.find(text.trimEnd()) ?: return null
         val matchedExpr = match.value.trim()
 
         val isMyanmar = matchedExpr.any { it in '၀'..'၉' }
 
-        val normalized = matchedExpr.map { myanmarToEngDigits[it] ?: it }.joinToString("")
-            .replace(",", "")
-            .replace("×", "*")
-            .replace("÷", "/")
-            .replace(" ", "")
+        val normalized = matchedExpr.mapNotNull { ch ->
+            when (ch) {
+                ',', ' ' -> null
+                '×', 'x', 'X' -> '*'
+                '÷' -> '/'
+                else -> myanmarToEngDigits[ch] ?: ch
+            }
+        }.joinToString("")
 
         try {
-            val percentMatch = Regex("^([0-9.]+)([+\\-*/])([0-9.]+)%$").find(normalized)
+            val percentMatch = percentRegex.find(normalized)
             val resultValue: BigDecimal = if (percentMatch != null) {
                 val (aStr, op, bStr) = percentMatch.destructured
                 val a = BigDecimal(aStr)

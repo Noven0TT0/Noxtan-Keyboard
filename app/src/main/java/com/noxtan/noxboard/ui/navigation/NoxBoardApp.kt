@@ -10,7 +10,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -19,7 +18,7 @@ import com.noxtan.noxboard.KeyboardSetupHelper
 import com.noxtan.noxboard.ui.screens.KeyboardSettingsScreen
 import com.noxtan.noxboard.ui.screens.KeyboardSetupScreen
 
-enum class AppScreen { SETUP, SETTINGS, THEME_EDITOR, ABOUT, SIZE_POSITION }
+enum class AppScreen { SETUP, SETTINGS, THEME_EDITOR, ABOUT, SIZE_POSITION, OPEN_SOURCE }
 
 @Composable
 fun NoxBoardApp() {
@@ -82,8 +81,12 @@ fun NoxBoardApp() {
                 AppScreen.ABOUT -> {
                     com.noxtan.noxboard.ui.screens.AboutScreen(
                         onBack = { currentScreen = AppScreen.SETTINGS },
-                        onNavigateToLogs = { /* Logs Screen ရှိရင် ချိတ်ရန် */ },
-                        onNavigateToOpenSource = { /* Open Source Screen ရှိရင် ချိတ်ရန် */ }
+                        onNavigateToOpenSource = { currentScreen = AppScreen.OPEN_SOURCE }
+                    )
+                }
+                AppScreen.OPEN_SOURCE -> {
+                    com.noxtan.noxboard.ui.screens.OpenSourceLicensesScreen(
+                        onBack = { currentScreen = AppScreen.ABOUT }
                     )
                 }
                 AppScreen.SIZE_POSITION -> {
