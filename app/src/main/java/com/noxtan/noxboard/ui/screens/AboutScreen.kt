@@ -79,12 +79,7 @@ fun AboutScreen(
         onBack()
     }
 
-    val appVersion = try {
-        val pInfo = context.packageManager.getPackageInfo(context.packageName, 0)
-        pInfo.versionName ?: "1.0.0"
-    } catch (e: Exception) {
-        "1.0.0"
-    }
+    val appVersion = com.noxtan.noxboard.BuildConfig.VERSION_NAME
 
     Scaffold(
         topBar = {

@@ -69,7 +69,7 @@ fun KeyboardSettingsScreen(
                                     color = MaterialTheme.colorScheme.onBackground
                                 )
                                 Text(
-                                    text = "Version 1.0",
+                                    text = "Version ${com.noxtan.noxboard.BuildConfig.VERSION_NAME}",
                                     fontSize = 12.sp,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
